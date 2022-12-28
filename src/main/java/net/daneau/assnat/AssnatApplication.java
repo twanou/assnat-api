@@ -9,5 +9,4 @@ public class AssnatApplication {
     public static void main(String[] args) {
         SpringApplication.run(AssnatApplication.class, args);
     }
-
 }
