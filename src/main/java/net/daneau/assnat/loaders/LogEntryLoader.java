@@ -2,8 +2,8 @@ package net.daneau.assnat.loaders;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.daneau.assnat.client.documents.Intervention;
-import net.daneau.assnat.client.repositories.InterventionRepository;
+import net.daneau.assnat.client.documents.Subject;
+import net.daneau.assnat.client.repositories.SubjectRepository;
 import net.daneau.assnat.loaders.interventions.InterventionsLoader;
 import net.daneau.assnat.scrappers.AssNatLogEntryScraper;
 import net.daneau.assnat.scrappers.models.LogType;
@@ -22,10 +22,10 @@ public class LogEntryLoader {
 
     private final AssNatLogEntryScraper assNatLogEntryScraper;
     private final InterventionsLoader interventionsLoader;
-    private final InterventionRepository interventionRepository;
+    private final SubjectRepository subjectRepository;
 
     public void load() {
-        LocalDate latestInterventionDate = this.interventionRepository.findFirstByOrderByDateDesc().map(Intervention::getDate).orElse(LocalDate.MIN);
+        LocalDate latestInterventionDate = this.subjectRepository.findFirstByOrderByDateDesc().map(Subject::getDate).orElse(LocalDate.MIN);
         List<ScrapedLogEntry> logEntries = this.assNatLogEntryScraper.scrape();
         log.info("Début du chargement des journaux");
         logEntries.stream()

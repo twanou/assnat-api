@@ -1,7 +1,7 @@
 package net.daneau.assnat.loaders;
 
-import net.daneau.assnat.client.documents.Intervention;
-import net.daneau.assnat.client.repositories.InterventionRepository;
+import net.daneau.assnat.client.documents.Subject;
+import net.daneau.assnat.client.repositories.SubjectRepository;
 import net.daneau.assnat.loaders.interventions.InterventionsLoader;
 import net.daneau.assnat.scrappers.AssNatLogEntryScraper;
 import net.daneau.assnat.scrappers.models.LogType;
@@ -34,17 +34,17 @@ class LogEntryLoaderTest {
     @Mock
     private InterventionsLoader interventionsLoaderMock;
     @Mock
-    private InterventionRepository interventionRepositoryMock;
+    private SubjectRepository subjectRepositoryMock;
     @InjectMocks
     private LogEntryLoader logEntryLoader;
 
     @ParameterizedTest
     @NullSource
-    @MethodSource("interventions")
-    void load(Intervention intervention) {
+    @MethodSource("subjects")
+    void load(Subject subject) {
         ScrapedLogEntry firstEntryToLoad = ScrapedLogEntry.builder().date(LocalDate.of(1997, 1, 1)).type(LogType.ASSEMBLY).version(LogVersion.FINAL).build();
         ScrapedLogEntry secondEntryToLoad = ScrapedLogEntry.builder().date(LocalDate.of(2010, 1, 1)).type(LogType.ASSEMBLY).version(LogVersion.FINAL).build();
-        when(interventionRepositoryMock.findFirstByOrderByDateDesc()).thenReturn(Optional.ofNullable(intervention));
+        when(subjectRepositoryMock.findFirstByOrderByDateDesc()).thenReturn(Optional.ofNullable(subject));
         when(assNatLogEntryScraperMock.scrape()).thenReturn(List.of(
                 ScrapedLogEntry.builder().date(LocalDate.of(1980, 5, 20)).build(),
                 ScrapedLogEntry.builder().date(LocalDate.of(1996, 5, 14)).type(LogType.COMMITTEE).build(),
@@ -60,9 +60,9 @@ class LogEntryLoaderTest {
         order.verify(interventionsLoaderMock).load(secondEntryToLoad);
     }
 
-    private static Stream<Intervention> interventions() {
+    private static Stream<Subject> subjects() {
         return Stream.of(
-                Intervention.builder().date(LocalDate.of(1995, 10, 30)).build()
+                Subject.builder().date(LocalDate.of(1995, 10, 30)).build()
         );
     }
 }

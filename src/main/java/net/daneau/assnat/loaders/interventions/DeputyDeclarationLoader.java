@@ -1,10 +1,11 @@
 package net.daneau.assnat.loaders.interventions;
 
 import lombok.RequiredArgsConstructor;
-import net.daneau.assnat.client.documents.Intervention;
+import net.daneau.assnat.client.documents.Subject;
 import net.daneau.assnat.client.documents.subdocuments.Assignment;
-import net.daneau.assnat.client.documents.subdocuments.interventions.DeputyDeclaration;
-import net.daneau.assnat.client.repositories.InterventionRepository;
+import net.daneau.assnat.client.documents.subdocuments.Intervention;
+import net.daneau.assnat.client.documents.subdocuments.SubjectType;
+import net.daneau.assnat.client.repositories.SubjectRepository;
 import net.daneau.assnat.loaders.DeputyFinder;
 import net.daneau.assnat.scrappers.models.ScrapedLogEntry;
 import net.daneau.assnat.scrappers.models.ScrapedLogNode;
@@ -18,7 +19,7 @@ import java.util.stream.IntStream;
 @RequiredArgsConstructor
 class DeputyDeclarationLoader implements InterventionLoader {
 
-    private final InterventionRepository interventionRepository;
+    private final SubjectRepository subjectRepository;
     private final DeputyFinder deputyFinder;
 
     private static final String VICE_PRESIDENT = "vice-président";
@@ -27,19 +28,20 @@ class DeputyDeclarationLoader implements InterventionLoader {
     public void load(ScrapedLogEntry logEntry, ScrapedLogNode logNode) {
         for (ScrapedLogNode declaration : logNode.getChildren()) {
             Assignment assignment = deputyFinder.findByCompleteName(declaration.getChildren().get(0).getTitle()); // nom complet, ex M. Bob Tremblay
-            this.interventionRepository.save(
-                    Intervention.builder()
-                            .interventionData(
-                                    DeputyDeclaration.builder()
-                                            .title(declaration.getTitle())
-                                            .paragraphs(this.cleanParagraphs(declaration.getChildren().get(0).getParagraphs()))
-                                            .build())
+            this.subjectRepository.save(
+                    Subject.builder()
+                            .type(SubjectType.DEPUTY_DECLARATION)
+                            .title(declaration.getTitle())
                             .date(logEntry.getDate())
-                            .deputyId(assignment.getDeputyId())
-                            .partyId(assignment.getPartyId())
-                            .ridingId(assignment.getRidingId())
                             .legislature(logEntry.getLegislature())
                             .session(logEntry.getSession())
+                            .interventions(List.of(
+                                    Intervention.builder()
+                                            .deputyId(assignment.getDeputyId())
+                                            .partyId(assignment.getPartyId())
+                                            .ridingId(assignment.getRidingId())
+                                            .paragraphs(this.cleanParagraphs(declaration.getChildren().get(0).getParagraphs()))
+                                            .build()))
                             .build());
         }
     }
