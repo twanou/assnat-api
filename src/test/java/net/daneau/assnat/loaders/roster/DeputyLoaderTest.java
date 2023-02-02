@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -34,19 +33,18 @@ class DeputyLoaderTest {
 
         List<Deputy> results = this.deputyLoader.load(List.of(ScrapedDeputy.builder().firstName("Jacques").lastName("Parizeau").build()));
         verify(deputyRepositoryMock, never()).save(any());
-        assertSame(deputies, results);
+        assertEquals(deputies, results);
     }
 
     @Test
     void loadWithSave() {
         ScrapedDeputy scrapedDeputy = ScrapedDeputy.builder().firstName("Jacques").lastName("Parizeau").build();
-        Deputy deputy = Deputy.builder().firstName("Jacques").lastName("Parizeau").build();
-        List<Deputy> deputies = new ArrayList<>(List.of(Deputy.builder().firstName("Jacques").lastName("Croteau").build()));
-        when(deputyRepositoryMock.findAll()).thenReturn(deputies);
-        when(deputyRepositoryMock.save(deputy)).thenReturn(deputy);
+        Deputy newDeputy = Deputy.builder().firstName("Jacques").lastName("Parizeau").build();
+        Deputy deputyInDB = Deputy.builder().firstName("Jacques").lastName("Croteau").build();
+        when(deputyRepositoryMock.findAll()).thenReturn(new ArrayList<>(List.of(deputyInDB)));
+        when(deputyRepositoryMock.save(newDeputy)).thenReturn(newDeputy);
 
         List<Deputy> results = this.deputyLoader.load(List.of(scrapedDeputy));
-        assertSame(deputies, results);
-        assertEquals(deputy, deputies.get(1));
+        assertEquals(List.of(deputyInDB, newDeputy), results);
     }
 }

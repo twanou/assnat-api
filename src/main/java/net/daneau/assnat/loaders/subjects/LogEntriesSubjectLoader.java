@@ -1,10 +1,9 @@
-package net.daneau.assnat.loaders;
+package net.daneau.assnat.loaders.subjects;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.daneau.assnat.client.documents.Subject;
 import net.daneau.assnat.client.repositories.SubjectRepository;
-import net.daneau.assnat.loaders.interventions.InterventionsLoader;
 import net.daneau.assnat.scrappers.AssNatLogEntryScraper;
 import net.daneau.assnat.scrappers.models.LogType;
 import net.daneau.assnat.scrappers.models.LogVersion;
@@ -18,10 +17,10 @@ import java.util.List;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class LogEntryLoader {
+public class LogEntriesSubjectLoader {
 
     private final AssNatLogEntryScraper assNatLogEntryScraper;
-    private final InterventionsLoader interventionsLoader;
+    private final SubjectLoader subjectLoader;
     private final SubjectRepository subjectRepository;
 
     public void load() {
@@ -33,7 +32,7 @@ public class LogEntryLoader {
                 .filter(entry -> LogType.ASSEMBLY.equals(entry.getType()))
                 .filter(entry -> LogVersion.FINAL.equals(entry.getVersion()))
                 .sorted(Comparator.comparing(ScrapedLogEntry::getDate))
-                .forEachOrdered(this.interventionsLoader::load);
+                .forEachOrdered(entry -> this.subjectLoader.load(entry.getRelativeUrl(), entry.getLegislature(), entry.getSession()));
         log.info("Fin du chargement des journaux");
     }
 }

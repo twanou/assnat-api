@@ -5,7 +5,6 @@ import lombok.Value;
 import lombok.With;
 import net.daneau.assnat.client.documents.subdocuments.Assignment;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
@@ -13,7 +12,6 @@ import java.util.List;
 
 @Value
 @Builder
-@TypeAlias("ROSTER")
 @Document("rosters")
 public class Roster {
 

@@ -1,8 +1,7 @@
-package net.daneau.assnat.loaders;
+package net.daneau.assnat.loaders.subjects;
 
 import net.daneau.assnat.client.documents.Subject;
 import net.daneau.assnat.client.repositories.SubjectRepository;
-import net.daneau.assnat.loaders.interventions.InterventionsLoader;
 import net.daneau.assnat.scrappers.AssNatLogEntryScraper;
 import net.daneau.assnat.scrappers.models.LogType;
 import net.daneau.assnat.scrappers.models.LogVersion;
@@ -21,29 +20,26 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.inOrder;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class LogEntryLoaderTest {
+class LogEntriesSubjectLoaderTest {
     @Mock
     private AssNatLogEntryScraper assNatLogEntryScraperMock;
     @Mock
-    private InterventionsLoader interventionsLoaderMock;
+    private SubjectLoader subjectLoaderMock;
     @Mock
     private SubjectRepository subjectRepositoryMock;
     @InjectMocks
-    private LogEntryLoader logEntryLoader;
+    private LogEntriesSubjectLoader logEntriesSubjectLoader;
 
     @ParameterizedTest
     @NullSource
     @MethodSource("subjects")
     void load(Subject subject) {
-        ScrapedLogEntry firstEntryToLoad = ScrapedLogEntry.builder().date(LocalDate.of(1997, 1, 1)).type(LogType.ASSEMBLY).version(LogVersion.FINAL).build();
-        ScrapedLogEntry secondEntryToLoad = ScrapedLogEntry.builder().date(LocalDate.of(2010, 1, 1)).type(LogType.ASSEMBLY).version(LogVersion.FINAL).build();
+        ScrapedLogEntry firstEntryToLoad = ScrapedLogEntry.builder().date(LocalDate.of(1997, 1, 1)).relativeUrl("relativeUrl1").type(LogType.ASSEMBLY).version(LogVersion.FINAL).build();
+        ScrapedLogEntry secondEntryToLoad = ScrapedLogEntry.builder().date(LocalDate.of(2010, 1, 1)).relativeUrl("relativeUrl2").type(LogType.ASSEMBLY).version(LogVersion.FINAL).build();
         when(subjectRepositoryMock.findFirstByOrderByDateDesc()).thenReturn(Optional.ofNullable(subject));
         when(assNatLogEntryScraperMock.scrape()).thenReturn(List.of(
                 ScrapedLogEntry.builder().date(LocalDate.of(1980, 5, 20)).build(),
@@ -53,11 +49,10 @@ class LogEntryLoaderTest {
                 firstEntryToLoad
         ));
 
-        this.logEntryLoader.load();
-        verify(interventionsLoaderMock, times(2)).load(any(ScrapedLogEntry.class));
-        InOrder order = inOrder(interventionsLoaderMock);
-        order.verify(interventionsLoaderMock).load(firstEntryToLoad);
-        order.verify(interventionsLoaderMock).load(secondEntryToLoad);
+        this.logEntriesSubjectLoader.load();
+        InOrder order = inOrder(subjectLoaderMock);
+        order.verify(subjectLoaderMock).load(firstEntryToLoad.getRelativeUrl(), firstEntryToLoad.getLegislature(), firstEntryToLoad.getSession());
+        order.verify(subjectLoaderMock).load(secondEntryToLoad.getRelativeUrl(), secondEntryToLoad.getLegislature(), secondEntryToLoad.getSession());
     }
 
     private static Stream<Subject> subjects() {

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -44,6 +45,6 @@ public class AssNatLogEntryScraper {
                             .build()
             );
         }
-        return logEntries;
+        return Collections.unmodifiableList(logEntries);
     }
 }

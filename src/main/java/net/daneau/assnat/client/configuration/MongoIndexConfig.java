@@ -13,13 +13,13 @@ import org.springframework.data.mongodb.core.index.Index;
 public class MongoIndexConfig {
 
     private final MongoTemplate mongoTemplate;
-    
+
     @PostConstruct
     public void initIndexes() {
         mongoTemplate.indexOps(Subject.class)
                 .ensureIndex(
                         new Index()
-                                .on("interventions.deputyId", Sort.Direction.ASC)
+                                .on("subjectData.interventions.deputyId", Sort.Direction.ASC)
                                 .on("date", Sort.Direction.DESC)
                                 .named("interventions_deputyId_date")
                 );

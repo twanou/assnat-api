@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -34,19 +33,18 @@ class RidingLoaderTest {
 
         List<Riding> results = this.ridingLoader.load(List.of(ScrapedDeputy.builder().riding("Camille-Laurin").build()));
         verify(ridingRepositoryMock, never()).save(any());
-        assertSame(parties, results);
+        assertEquals(parties, results);
     }
 
     @Test
     void loadWithSave() {
         ScrapedDeputy scrapedDeputy = ScrapedDeputy.builder().riding("Camille-Laurin").build();
-        Riding riding = Riding.builder().name("Camille-Laurin").build();
-        List<Riding> ridings = new ArrayList<>(List.of(Riding.builder().name("Rosemont").build()));
-        when(ridingRepositoryMock.findAll()).thenReturn(ridings);
-        when(ridingRepositoryMock.save(riding)).thenReturn(riding);
+        Riding newRiding = Riding.builder().name("Camille-Laurin").build();
+        Riding ridingInDB = Riding.builder().name("Rosemont").build();
+        when(ridingRepositoryMock.findAll()).thenReturn(new ArrayList<>(List.of(ridingInDB)));
+        when(ridingRepositoryMock.save(newRiding)).thenReturn(newRiding);
 
         List<Riding> results = this.ridingLoader.load(List.of(scrapedDeputy));
-        assertSame(ridings, results);
-        assertEquals(riding, ridings.get(1));
+        assertEquals(List.of(ridingInDB, newRiding), results);
     }
 }
