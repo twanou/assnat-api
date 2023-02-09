@@ -19,7 +19,7 @@ public class MongoIndexConfig {
         mongoTemplate.indexOps(Subject.class)
                 .ensureIndex(
                         new Index()
-                                .on("subjectData.interventions.deputyId", Sort.Direction.ASC)
+                                .on("subjectDetails.interventions.deputyId", Sort.Direction.ASC)
                                 .on("date", Sort.Direction.DESC)
                                 .named("interventions_deputyId_date")
                 );

@@ -38,12 +38,12 @@ class DeputyFinderTest {
     @Test
     void findByCompleteName() {
         Deputy deputyParizeau = Deputy.builder().id("1").title("M.").firstName("Jacques").lastName("Parizeau").build();
-        Assignment assignmentParizeau = Assignment.builder().deputyId("1").partyId("2").ridingId("3").build();
+        Assignment assignmentParizeau = Assignment.builder().deputyId("1").partyId("2").districtId("3").build();
         when(rosterRepositoryMock.findByEndDate(null)).thenReturn(
                 Optional.of(Roster.builder()
                         .assignments(List.of(
                                 assignmentParizeau,
-                                Assignment.builder().deputyId("4").partyId("5").ridingId("6").build()
+                                Assignment.builder().deputyId("4").partyId("5").districtId("6").build()
                         ))
                         .build()));
         when(deputyRepositoryMock.findAllById(List.of("1", "4"))).thenReturn(List.of(
@@ -61,7 +61,7 @@ class DeputyFinderTest {
     @Test
     void findByCompleteNameNoCache() {
         when(rosterRepositoryMock.findByEndDate(null)).thenReturn(Optional.empty());
-        
+
         this.deputyFinder = new DeputyFinder(rosterRepositoryMock, deputyRepositoryMock, errorHandlerMock);
         assertThrows(LoadingException.class, () -> this.deputyFinder.findByCompleteName("M. Jacques Parizeau"));
     }

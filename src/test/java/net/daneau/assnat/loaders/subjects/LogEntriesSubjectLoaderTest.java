@@ -51,8 +51,8 @@ class LogEntriesSubjectLoaderTest {
 
         this.logEntriesSubjectLoader.load();
         InOrder order = inOrder(subjectLoaderMock);
-        order.verify(subjectLoaderMock).load(firstEntryToLoad.getRelativeUrl(), firstEntryToLoad.getLegislature(), firstEntryToLoad.getSession());
-        order.verify(subjectLoaderMock).load(secondEntryToLoad.getRelativeUrl(), secondEntryToLoad.getLegislature(), secondEntryToLoad.getSession());
+        order.verify(subjectLoaderMock).load(firstEntryToLoad.getRelativeUrl(), firstEntryToLoad.getDate(), firstEntryToLoad.getLegislature(), firstEntryToLoad.getSession());
+        order.verify(subjectLoaderMock).load(secondEntryToLoad.getRelativeUrl(), secondEntryToLoad.getDate(), secondEntryToLoad.getLegislature(), secondEntryToLoad.getSession());
     }
 
     private static Stream<Subject> subjects() {

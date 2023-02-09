@@ -32,7 +32,7 @@ public class LogEntriesSubjectLoader {
                 .filter(entry -> LogType.ASSEMBLY.equals(entry.getType()))
                 .filter(entry -> LogVersion.FINAL.equals(entry.getVersion()))
                 .sorted(Comparator.comparing(ScrapedLogEntry::getDate))
-                .forEachOrdered(entry -> this.subjectLoader.load(entry.getRelativeUrl(), entry.getLegislature(), entry.getSession()));
+                .forEachOrdered(entry -> this.subjectLoader.load(entry.getRelativeUrl(), entry.getDate(), entry.getLegislature(), entry.getSession()));
         log.info("Fin du chargement des journaux");
     }
 }
