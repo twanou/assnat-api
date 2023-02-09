@@ -2,745 +2,745 @@
   {
     "firstName": "Alice",
     "lastName": "Abou-Khalil",
-    "riding": "Fabre",
+    "district": "Fabre",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Simon",
     "lastName": "Allaire",
-    "riding": "Maskinongé",
+    "district": "Maskinongé",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Joël",
     "lastName": "Arseneau",
-    "riding": "Îles-de-la-Madeleine",
+    "district": "Îles-de-la-Madeleine",
     "party": "Parti québécois"
   },
   {
     "firstName": "Mario",
     "lastName": "Asselin",
-    "riding": "Vanier-Les Rivières",
+    "district": "Vanier-Les Rivières",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "André",
     "lastName": "Bachand",
-    "riding": "Richmond",
+    "district": "Richmond",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Frédéric",
     "lastName": "Beauchemin",
-    "riding": "Marguerite-Bourgeoys",
+    "district": "Marguerite-Bourgeoys",
     "party": "Parti libéral du Québec"
   },
   {
     "firstName": "Frantz",
     "lastName": "Benjamin",
-    "riding": "Viau",
+    "district": "Viau",
     "party": "Parti libéral du Québec"
   },
   {
     "firstName": "Daniel",
     "lastName": "Bernard",
-    "riding": "Rouyn-Noranda–Témiscamingue",
+    "district": "Rouyn-Noranda–Témiscamingue",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Gilles",
     "lastName": "Bélanger",
-    "riding": "Orford",
+    "district": "Orford",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Sonia",
     "lastName": "Bélanger",
-    "riding": "Prévost",
+    "district": "Prévost",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Pascal",
     "lastName": "Bérubé",
-    "riding": "Matane-Matapédia",
+    "district": "Matane-Matapédia",
     "party": "Parti québécois"
   },
   {
     "firstName": "Martine",
     "lastName": "Biron",
-    "riding": "Chutes-de-la-Chaudière",
+    "district": "Chutes-de-la-Chaudière",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Suzanne",
     "lastName": "Blais",
-    "riding": "Abitibi-Ouest",
+    "district": "Abitibi-Ouest",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Maïté",
     "lastName": "Blanchette Vézina",
-    "riding": "Rimouski",
+    "district": "Rimouski",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Catherine",
     "lastName": "Blouin",
-    "riding": "Bonaventure",
+    "district": "Bonaventure",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Audrey",
     "lastName": "Bogemans",
-    "riding": "Iberville",
+    "district": "Iberville",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Karine",
     "lastName": "Boivin Roy",
-    "riding": "Anjou–Louis-Riel",
+    "district": "Anjou–Louis-Riel",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "François",
     "lastName": "Bonnardel",
-    "riding": "Granby",
+    "district": "Granby",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Haroun",
     "lastName": "Bouazzi",
-    "riding": "Maurice-Richard",
+    "district": "Maurice-Richard",
     "party": "Québec solidaire"
   },
   {
     "firstName": "Jean",
     "lastName": "Boulet",
-    "riding": "Trois-Rivières",
+    "district": "Trois-Rivières",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Kariane",
     "lastName": "Bourassa",
-    "riding": "Charlevoix–Côte-de-Beaupré",
+    "district": "Charlevoix–Côte-de-Beaupré",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Joëlle",
     "lastName": "Boutin",
-    "riding": "Jean-Talon",
+    "district": "Jean-Talon",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Robert",
     "lastName": "Bussière",
-    "riding": "Gatineau",
+    "district": "Gatineau",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Madwa-Nika",
     "lastName": "Cadet",
-    "riding": "Bourassa-Sauvé",
+    "district": "Bourassa-Sauvé",
     "party": "Parti libéral du Québec"
   },
   {
     "firstName": "Éric",
     "lastName": "Caire",
-    "riding": "La Peltrie",
+    "district": "La Peltrie",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Lionel",
     "lastName": "Carmant",
-    "riding": "Taillon",
+    "district": "Taillon",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Linda",
     "lastName": "Caron",
-    "riding": "La Pinière",
+    "district": "La Pinière",
     "party": "Parti libéral du Québec"
   },
   {
     "firstName": "Vincent",
     "lastName": "Caron",
-    "riding": "Portneuf",
+    "district": "Portneuf",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Kateri",
     "lastName": "Champagne Jourdain",
-    "riding": "Duplessis",
+    "district": "Duplessis",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Isabelle",
     "lastName": "Charest",
-    "riding": "Brome-Missisquoi",
+    "district": "Brome-Missisquoi",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Benoit",
     "lastName": "Charette",
-    "riding": "Deux-Montagnes",
+    "district": "Deux-Montagnes",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Youri",
     "lastName": "Chassin",
-    "riding": "Saint-Jérôme",
+    "district": "Saint-Jérôme",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Enrico",
     "lastName": "Ciccone",
-    "riding": "Marquette",
+    "district": "Marquette",
     "party": "Parti libéral du Québec"
   },
   {
     "firstName": "Sylvie",
     "lastName": "D'Amours",
-    "riding": "Mirabel",
+    "district": "Mirabel",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Monsef",
     "lastName": "Derraji",
-    "riding": "Nelligan",
+    "district": "Nelligan",
     "party": "Parti libéral du Québec"
   },
   {
     "firstName": "Pascale",
     "lastName": "Déry",
-    "riding": "Repentigny",
+    "district": "Repentigny",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Amélie",
     "lastName": "Dionne",
-    "riding": "Rivière-du-Loup–Témiscouata",
+    "district": "Rivière-du-Loup–Témiscouata",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Shirley",
     "lastName": "Dorismond",
-    "riding": "Marie-Victorin",
+    "district": "Marie-Victorin",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Bernard",
     "lastName": "Drainville",
-    "riding": "Lévis",
+    "district": "Lévis",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Christian",
     "lastName": "Dubé",
-    "riding": "La Prairie",
+    "district": "La Prairie",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Pierre",
     "lastName": "Dufour",
-    "riding": "Abitibi-Est",
+    "district": "Abitibi-Est",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Virginie",
     "lastName": "Dufour",
-    "riding": "Mille-Îles",
+    "district": "Mille-Îles",
     "party": "Parti libéral du Québec"
   },
   {
     "firstName": "France-Élaine",
     "lastName": "Duranceau",
-    "riding": "Bertrand",
+    "district": "Bertrand",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Jean-Bernard",
     "lastName": "Émond",
-    "riding": "Richelieu",
+    "district": "Richelieu",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Pierre",
     "lastName": "Fitzgibbon",
-    "riding": "Terrebonne",
+    "district": "Terrebonne",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Andrés",
     "lastName": "Fontecilla",
-    "riding": "Laurier-Dorion",
+    "district": "Laurier-Dorion",
     "party": "Québec solidaire"
   },
   {
     "firstName": "André",
     "lastName": "Fortin",
-    "riding": "Pontiac",
+    "district": "Pontiac",
     "party": "Parti libéral du Québec"
   },
   {
     "firstName": "Christine",
     "lastName": "Fréchette",
-    "riding": "Sanguinet",
+    "district": "Sanguinet",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Yannick",
     "lastName": "Gagnon",
-    "riding": "Jonquière",
+    "district": "Jonquière",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Brigitte B.",
     "lastName": "Garceau",
-    "riding": "Robert-Baldwin",
+    "district": "Robert-Baldwin",
     "party": "Parti libéral du Québec"
   },
   {
     "firstName": "Marie-Belle",
     "lastName": "Gendron",
-    "riding": "Châteauguay",
+    "district": "Châteauguay",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Ruba",
     "lastName": "Ghazal",
-    "riding": "Mercier",
+    "district": "Mercier",
     "party": "Québec solidaire"
   },
   {
     "firstName": "Eric",
     "lastName": "Girard",
-    "riding": "Groulx",
+    "district": "Groulx",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Éric",
     "lastName": "Girard",
-    "riding": "Lac-Saint-Jean",
+    "district": "Lac-Saint-Jean",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Etienne",
     "lastName": "Grandmont",
-    "riding": "Taschereau",
+    "district": "Taschereau",
     "party": "Québec solidaire"
   },
   {
     "firstName": "Agnès",
     "lastName": "Grondin",
-    "riding": "Argenteuil",
+    "district": "Argenteuil",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Geneviève",
     "lastName": "Guilbault",
-    "riding": "Louis-Hébert",
+    "district": "Louis-Hébert",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Nancy",
     "lastName": "Guillemette",
-    "riding": "Roberval",
+    "district": "Roberval",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Céline",
     "lastName": "Haytayan",
-    "riding": "Laval-des-Rapides",
+    "district": "Laval-des-Rapides",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Geneviève",
     "lastName": "Hébert",
-    "riding": "Saint-François",
+    "district": "Saint-François",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "François",
     "lastName": "Jacques",
-    "riding": "Mégantic",
+    "district": "Mégantic",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Chantale",
     "lastName": "Jeannotte",
-    "riding": "Labelle",
+    "district": "Labelle",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Simon",
     "lastName": "Jolin-Barrette",
-    "riding": "Borduas",
+    "district": "Borduas",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Jonatan",
     "lastName": "Julien",
-    "riding": "Charlesbourg",
+    "district": "Charlesbourg",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Gregory",
     "lastName": "Kelley",
-    "riding": "Jacques-Cartier",
+    "district": "Jacques-Cartier",
     "party": "Parti libéral du Québec"
   },
   {
     "firstName": "Christine",
     "lastName": "Labrie",
-    "riding": "Sherbrooke",
+    "district": "Sherbrooke",
     "party": "Québec solidaire"
   },
   {
     "firstName": "Stéphanie",
     "lastName": "Lachance",
-    "riding": "Bellechasse",
+    "district": "Bellechasse",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Mathieu",
     "lastName": "Lacombe",
-    "riding": "Papineau",
+    "district": "Papineau",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Andrée",
     "lastName": "Laforest",
-    "riding": "Chicoutimi",
+    "district": "Chicoutimi",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Mario",
     "lastName": "Laframboise",
-    "riding": "Blainville",
+    "district": "Blainville",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Ian",
     "lastName": "Lafrenière",
-    "riding": "Vachon",
+    "district": "Vachon",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Sona",
     "lastName": "Lakhoyan Olivier",
-    "riding": "Chomedey",
+    "district": "Chomedey",
     "party": "Parti libéral du Québec"
   },
   {
     "firstName": "André",
     "lastName": "Lamontagne",
-    "riding": "Johnson",
+    "district": "Johnson",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Denis",
     "lastName": "Lamothe",
-    "riding": "Ungava",
+    "district": "Ungava",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Sonia",
     "lastName": "LeBel",
-    "riding": "Champlain",
+    "district": "Champlain",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Isabelle",
     "lastName": "Lecours",
-    "riding": "Lotbinière-Frontenac",
+    "district": "Lotbinière-Frontenac",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Lucie",
     "lastName": "Lecours",
-    "riding": "Les Plaines",
+    "district": "Les Plaines",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Alexandre",
     "lastName": "Leduc",
-    "riding": "Hochelaga-Maisonneuve",
+    "district": "Hochelaga-Maisonneuve",
     "party": "Québec solidaire"
   },
   {
     "firstName": "Eric",
     "lastName": "Lefebvre",
-    "riding": "Arthabaska",
+    "district": "Arthabaska",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "François",
     "lastName": "Legault",
-    "riding": "L'Assomption",
+    "district": "L'Assomption",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Mathieu",
     "lastName": "Lemay",
-    "riding": "Masson",
+    "district": "Masson",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Louis",
     "lastName": "Lemieux",
-    "riding": "Saint-Jean",
+    "district": "Saint-Jean",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Mathieu",
     "lastName": "Lévesque",
-    "riding": "Chapleau",
+    "district": "Chapleau",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Sylvain",
     "lastName": "Lévesque",
-    "riding": "Chauveau",
+    "district": "Chauveau",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Jennifer",
     "lastName": "Maccarone",
-    "riding": "Westmount–Saint-Louis",
+    "district": "Westmount–Saint-Louis",
     "party": "Parti libéral du Québec"
   },
   {
     "firstName": "Carole",
     "lastName": "Mallette",
-    "riding": "Huntingdon",
+    "district": "Huntingdon",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Vincent",
     "lastName": "Marissal",
-    "riding": "Rosemont",
+    "district": "Rosemont",
     "party": "Québec solidaire"
   },
   {
     "firstName": "Donald",
     "lastName": "Martel",
-    "riding": "Nicolet-Bécancour",
+    "district": "Nicolet-Bécancour",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Manon",
     "lastName": "Massé",
-    "riding": "Sainte-Marie–Saint-Jacques",
+    "district": "Sainte-Marie–Saint-Jacques",
     "party": "Québec solidaire"
   },
   {
     "firstName": "Désirée",
     "lastName": "McGraw",
-    "riding": "Notre-Dame-de-Grâce",
+    "district": "Notre-Dame-de-Grâce",
     "party": "Parti libéral du Québec"
   },
   {
     "firstName": "Yves",
     "lastName": "Montigny",
-    "riding": "René-Lévesque",
+    "district": "René-Lévesque",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "André Albert",
     "lastName": "Morin",
-    "riding": "Acadie",
+    "district": "Acadie",
     "party": "Parti libéral du Québec"
   },
   {
     "firstName": "Gabriel",
     "lastName": "Nadeau-Dubois",
-    "riding": "Gouin",
+    "district": "Gouin",
     "party": "Québec solidaire"
   },
   {
     "firstName": "Marie-Claude",
     "lastName": "Nichols",
-    "riding": "Vaudreuil",
+    "district": "Vaudreuil",
     "party": "Indépendant(e)"
   },
   {
     "firstName": "Marilyne",
     "lastName": "Picard",
-    "riding": "Soulanges",
+    "district": "Soulanges",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Isabelle",
     "lastName": "Poulet",
-    "riding": "Laporte",
+    "district": "Laporte",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Samuel",
     "lastName": "Poulin",
-    "riding": "Beauce-Sud",
+    "district": "Beauce-Sud",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Elisabeth",
     "lastName": "Prass",
-    "riding": "D'Arcy-McGee",
+    "district": "D'Arcy-McGee",
     "party": "Parti libéral du Québec"
   },
   {
     "firstName": "Caroline",
     "lastName": "Proulx",
-    "riding": "Berthier",
+    "district": "Berthier",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Luc",
     "lastName": "Provençal",
-    "riding": "Beauce-Nord",
+    "district": "Beauce-Nord",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Claude",
     "lastName": "Reid",
-    "riding": "Beauharnois",
+    "district": "Beauharnois",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Mathieu",
     "lastName": "Rivest",
-    "riding": "Côte-du-Sud",
+    "district": "Côte-du-Sud",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Marwah",
     "lastName": "Rizqy",
-    "riding": "Saint-Laurent",
+    "district": "Saint-Laurent",
     "party": "Parti libéral du Québec"
   },
   {
     "firstName": "Jean-François",
     "lastName": "Roberge",
-    "riding": "Chambly",
+    "district": "Chambly",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Filomena",
     "lastName": "Rotiroti",
-    "riding": "Jeanne-Mance–Viger",
+    "district": "Jeanne-Mance–Viger",
     "party": "Parti libéral du Québec"
   },
   {
     "firstName": "Chantal",
     "lastName": "Rouleau",
-    "riding": "Pointe-aux-Trembles",
+    "district": "Pointe-aux-Trembles",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Nathalie",
     "lastName": "Roy",
-    "riding": "Montarville",
+    "district": "Montarville",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Suzanne",
     "lastName": "Roy",
-    "riding": "Verchères",
+    "district": "Verchères",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Stéphane",
     "lastName": "Sainte-Croix",
-    "riding": "Gaspé",
+    "district": "Gaspé",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Valérie",
     "lastName": "Schmaltz",
-    "riding": "Vimont",
+    "district": "Vimont",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Sébastien",
     "lastName": "Schneeberger",
-    "riding": "Drummond–Bois-Francs",
+    "district": "Drummond–Bois-Francs",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Michelle",
     "lastName": "Setlakwe",
-    "riding": "Mont-Royal–Outremont",
+    "district": "Mont-Royal–Outremont",
     "party": "Parti libéral du Québec"
   },
   {
     "firstName": "Jean-François",
     "lastName": "Simard",
-    "riding": "Montmorency",
+    "district": "Montmorency",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Christopher",
     "lastName": "Skeete",
-    "riding": "Sainte-Rose",
+    "district": "Sainte-Rose",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Chantal",
     "lastName": "Soucy",
-    "riding": "Saint-Hyacinthe",
+    "district": "Saint-Hyacinthe",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "François",
     "lastName": "St-Louis",
-    "riding": "Joliette",
+    "district": "Joliette",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Paul",
     "lastName": "St-Pierre Plamondon",
-    "riding": "Camille-Laurin",
+    "district": "Camille-Laurin",
     "party": "Parti québécois"
   },
   {
     "firstName": "Marc",
     "lastName": "Tanguay",
-    "riding": "LaFontaine",
+    "district": "LaFontaine",
     "party": "Parti libéral du Québec"
   },
   {
     "firstName": "Marie-Louise",
     "lastName": "Tardif",
-    "riding": "Laviolette–Saint-Maurice",
+    "district": "Laviolette–Saint-Maurice",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Louis-Charles",
     "lastName": "Thouin",
-    "riding": "Rousseau",
+    "district": "Rousseau",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "François",
     "lastName": "Tremblay",
-    "riding": "Dubuc",
+    "district": "Dubuc",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Suzanne",
     "lastName": "Tremblay",
-    "riding": "Hull",
+    "district": "Hull",
     "party": "Coalition avenir Québec"
   },
   {
     "firstName": "Alejandra",
     "lastName": "Zaga Mendez",
-    "riding": "Verdun",
+    "district": "Verdun",
     "party": "Québec solidaire"
   },
   {
     "firstName": "Sol",
     "lastName": "Zanetti",
-    "riding": "Jean-Lesage",
+    "district": "Jean-Lesage",
     "party": "Québec solidaire"
   }
 ]

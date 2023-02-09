@@ -7,9 +7,9 @@ import java.util.List;
 
 @Value
 @Builder
-public class SubjectData {
-    SubjectDataType type;
+public class SubjectDetails {
+    SubjectType type;
     String title;
     @Builder.Default
-    List<Intervention> interventions = List.of();
+    List<InterventionDocument> interventions = List.of();
 }

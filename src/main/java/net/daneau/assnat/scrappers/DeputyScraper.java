@@ -40,7 +40,7 @@ public class DeputyScraper {
                     ScrapedDeputy.builder()
                             .firstName(StringUtils.strip(cells.get(0).getVisibleText().split(",")[1]))
                             .lastName(StringUtils.strip(cells.get(0).getVisibleText().split(",")[0]))
-                            .riding(cells.get(1).getVisibleText())
+                            .district(cells.get(1).getVisibleText())
                             .party(this.independenceCheck(cells.get(2).getVisibleText()))
                             .build()
             );

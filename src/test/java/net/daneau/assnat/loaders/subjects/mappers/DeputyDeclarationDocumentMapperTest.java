@@ -1,9 +1,9 @@
 package net.daneau.assnat.loaders.subjects.mappers;
 
 import net.daneau.assnat.client.documents.subdocuments.Assignment;
-import net.daneau.assnat.client.documents.subdocuments.Intervention;
-import net.daneau.assnat.client.documents.subdocuments.SubjectData;
-import net.daneau.assnat.client.documents.subdocuments.SubjectDataType;
+import net.daneau.assnat.client.documents.subdocuments.InterventionDocument;
+import net.daneau.assnat.client.documents.subdocuments.SubjectDetails;
+import net.daneau.assnat.client.documents.subdocuments.SubjectType;
 import net.daneau.assnat.loaders.DeputyFinder;
 import net.daneau.assnat.scrappers.models.ScrapedLogNode;
 import org.junit.jupiter.api.Test;
@@ -18,12 +18,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class DeputyDeclarationMapperTest {
-    
+class DeputyDeclarationDocumentMapperTest {
+
     @Mock
     private DeputyFinder deputyFinderMock;
     @InjectMocks
-    private DeputyDeclarationMapper deputyDeclarationMapper;
+    private DeputyDeclarationDocumentMapper deputyDeclarationDocumentMapper;
 
     @Test
     void map() {
@@ -39,20 +39,20 @@ class DeputyDeclarationMapperTest {
                 .build();
 
 
-        Assignment assignment = Assignment.builder().deputyId("1").partyId("2").ridingId("3").build();
-        SubjectData expectedResult = SubjectData.builder()
-                .type(SubjectDataType.DEPUTY_DECLARATION)
+        Assignment assignment = Assignment.builder().deputyId("1").partyId("2").districtId("3").build();
+        SubjectDetails expectedResult = SubjectDetails.builder()
+                .type(SubjectType.DEPUTY_DECLARATION)
                 .title(scrapedLogNode.getChildren().get(0).getTitle())
                 .interventions(List.of(
-                        Intervention.builder()
+                        InterventionDocument.builder()
                                 .deputyId(assignment.getDeputyId())
                                 .partyId(assignment.getPartyId())
-                                .ridingId(assignment.getRidingId())
+                                .districtId(assignment.getDistrictId())
                                 .paragraphs(List.of("Bonjour", "oui"))
                                 .build()))
                 .build();
         when(deputyFinderMock.findByCompleteName("M. Lucien Bouchard")).thenReturn(assignment);
-        List<SubjectData> subjects = this.deputyDeclarationMapper.map(scrapedLogNode);
+        List<SubjectDetails> subjects = this.deputyDeclarationDocumentMapper.map(scrapedLogNode);
         assertEquals(expectedResult, subjects.get(0));
     }
 }

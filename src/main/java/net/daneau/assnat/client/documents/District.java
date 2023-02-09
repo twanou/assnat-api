@@ -7,8 +7,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Value
 @Builder
-@Document("ridings")
-public class Riding {
+@Document("districts")
+public class District {
 
     @Id
     String id;

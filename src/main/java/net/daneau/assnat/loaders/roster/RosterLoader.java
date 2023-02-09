@@ -2,8 +2,8 @@ package net.daneau.assnat.loaders.roster;
 
 import lombok.RequiredArgsConstructor;
 import net.daneau.assnat.client.documents.Deputy;
+import net.daneau.assnat.client.documents.District;
 import net.daneau.assnat.client.documents.Party;
-import net.daneau.assnat.client.documents.Riding;
 import net.daneau.assnat.client.documents.Roster;
 import net.daneau.assnat.client.documents.subdocuments.Assignment;
 import net.daneau.assnat.client.repositories.RosterRepository;
@@ -29,7 +29,7 @@ public class RosterLoader {
     private final DeputyScraper deputyScraper;
     private final DeputyLoader deputyLoader;
     private final PartyLoader partyLoader;
-    private final RidingLoader ridingLoader;
+    private final DistrictLoader districtLoader;
     private final RosterRepository rosterRepository;
     private final ApplicationEventPublisher eventBus;
 
@@ -42,16 +42,16 @@ public class RosterLoader {
         if (newHash != currentRoster.map(Roster::getHash).orElse(0)) {
             List<Deputy> deputies = this.deputyLoader.load(scrapedDeputies);
             List<Party> parties = this.partyLoader.load(scrapedDeputies);
-            List<Riding> ridings = this.ridingLoader.load(scrapedDeputies);
+            List<District> districts = this.districtLoader.load(scrapedDeputies);
             List<Assignment> assignments = new ArrayList<>();
             for (ScrapedDeputy scrapedDeputy : scrapedDeputies) {
                 Deputy deputy = this.getDeputy(scrapedDeputy, deputies);
-                Riding riding = this.getRiding(scrapedDeputy, ridings);
+                District district = this.getDistrict(scrapedDeputy, districts);
                 Party party = this.getParty(scrapedDeputy, parties);
                 assignments.add(
                         Assignment.builder()
                                 .deputyId(deputy.getId())
-                                .ridingId(riding.getId())
+                                .districtId(district.getId())
                                 .partyId(party.getId())
                                 .build()
                 );
@@ -77,9 +77,9 @@ public class RosterLoader {
         return deputyResults.get(0);
     }
 
-    private Riding getRiding(ScrapedDeputy scrapedDeputy, List<Riding> ridings) {
-        return ridings.stream()
-                .filter(r -> StringUtils.equals(r.getName(), scrapedDeputy.getRiding()))
+    private District getDistrict(ScrapedDeputy scrapedDeputy, List<District> districts) {
+        return districts.stream()
+                .filter(r -> StringUtils.equals(r.getName(), scrapedDeputy.getDistrict()))
                 .findFirst()
                 .orElseThrow();
     }

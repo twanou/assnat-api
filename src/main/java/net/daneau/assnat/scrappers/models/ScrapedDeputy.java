@@ -11,6 +11,6 @@ public class ScrapedDeputy {
 
     String firstName;
     String lastName;
-    String riding;
+    String district;
     String party;
 }

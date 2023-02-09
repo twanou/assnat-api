@@ -1,8 +1,8 @@
 package net.daneau.assnat.loaders.roster;
 
 import net.daneau.assnat.client.documents.Deputy;
+import net.daneau.assnat.client.documents.District;
 import net.daneau.assnat.client.documents.Party;
-import net.daneau.assnat.client.documents.Riding;
 import net.daneau.assnat.client.documents.Roster;
 import net.daneau.assnat.client.documents.subdocuments.Assignment;
 import net.daneau.assnat.client.repositories.RosterRepository;
@@ -43,7 +43,7 @@ class RosterLoaderTest {
     @Mock
     private PartyLoader partyLoaderMock;
     @Mock
-    private RidingLoader ridingLoaderMock;
+    private DistrictLoader districtLoaderMock;
     @Mock
     private RosterRepository rosterRepositoryMock;
     @Mock
@@ -53,15 +53,15 @@ class RosterLoaderTest {
 
     @Test
     void load() {
-        List<ScrapedDeputy> scrapedDeputies = List.of(ScrapedDeputy.builder().firstName("Bernard").lastName("Landry").party("Parti Québecois").riding("Verchères").build());
+        List<ScrapedDeputy> scrapedDeputies = List.of(ScrapedDeputy.builder().firstName("Bernard").lastName("Landry").party("Parti Québecois").district("Verchères").build());
         Roster currentRoster = Roster.builder().hash(42).build();
         Deputy landryDeputy = Deputy.builder().id("deputyId").firstName("Bernard").lastName("Landry").build();
-        Riding landryRiding = Riding.builder().id("ridingId").name("Verchères").build();
+        District landryDistrict = District.builder().id("districtId").name("Verchères").build();
         Party landryParty = Party.builder().id("partyId").name("Parti Québecois").build();
         when(deputyScraperMock.scrape()).thenReturn(scrapedDeputies);
         when(rosterRepositoryMock.findByEndDate(null)).thenReturn(Optional.of(currentRoster));
         when(deputyLoaderMock.load(scrapedDeputies)).thenReturn(List.of(landryDeputy));
-        when(ridingLoaderMock.load(scrapedDeputies)).thenReturn(List.of(landryRiding));
+        when(districtLoaderMock.load(scrapedDeputies)).thenReturn(List.of(landryDistrict));
         when(partyLoaderMock.load(scrapedDeputies)).thenReturn(List.of(landryParty));
 
         this.rosterLoader.load();
@@ -69,7 +69,7 @@ class RosterLoaderTest {
         order.verify(rosterRepositoryMock).save(Roster.builder()
                 .hash(scrapedDeputies.hashCode())
                 .startDate(LocalDate.now())
-                .assignments(List.of(Assignment.builder().deputyId(landryDeputy.getId()).partyId(landryParty.getId()).ridingId(landryRiding.getId()).build()))
+                .assignments(List.of(Assignment.builder().deputyId(landryDeputy.getId()).partyId(landryParty.getId()).districtId(landryDistrict.getId()).build()))
                 .build());
         order.verify(eventBusMock).publishEvent(any(RosterUpdateEvent.class));
         verify(rosterRepositoryMock).save(currentRoster.withEndDate(LocalDate.now()));
@@ -78,14 +78,14 @@ class RosterLoaderTest {
 
     @Test
     void loadWithoutCurrentRoster() {
-        List<ScrapedDeputy> scrapedDeputies = List.of(ScrapedDeputy.builder().firstName("Bernard").lastName("Landry").party("Parti Québecois").riding("Verchères").build());
+        List<ScrapedDeputy> scrapedDeputies = List.of(ScrapedDeputy.builder().firstName("Bernard").lastName("Landry").party("Parti Québecois").district("Verchères").build());
         Deputy landryDeputy = Deputy.builder().id("deputyId").firstName("Bernard").lastName("Landry").build();
-        Riding landryRiding = Riding.builder().id("ridingId").name("Verchères").build();
+        District landryDistrict = District.builder().id("districtId").name("Verchères").build();
         Party landryParty = Party.builder().id("partyId").name("Parti Québecois").build();
         when(deputyScraperMock.scrape()).thenReturn(scrapedDeputies);
         when(rosterRepositoryMock.findByEndDate(null)).thenReturn(Optional.empty());
         when(deputyLoaderMock.load(scrapedDeputies)).thenReturn(List.of(landryDeputy));
-        when(ridingLoaderMock.load(scrapedDeputies)).thenReturn(List.of(landryRiding));
+        when(districtLoaderMock.load(scrapedDeputies)).thenReturn(List.of(landryDistrict));
         when(partyLoaderMock.load(scrapedDeputies)).thenReturn(List.of(landryParty));
 
         this.rosterLoader.load();
@@ -93,7 +93,7 @@ class RosterLoaderTest {
         order.verify(rosterRepositoryMock).save(Roster.builder()
                 .hash(scrapedDeputies.hashCode())
                 .startDate(LocalDate.now())
-                .assignments(List.of(Assignment.builder().deputyId(landryDeputy.getId()).partyId(landryParty.getId()).ridingId(landryRiding.getId()).build()))
+                .assignments(List.of(Assignment.builder().deputyId(landryDeputy.getId()).partyId(landryParty.getId()).districtId(landryDistrict.getId()).build()))
                 .build());
         order.verify(eventBusMock).publishEvent(any(RosterUpdateEvent.class));
         verify(rosterRepositoryMock, atMostOnce()).save(any(Roster.class));

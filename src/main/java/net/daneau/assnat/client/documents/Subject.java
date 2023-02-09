@@ -2,7 +2,7 @@ package net.daneau.assnat.client.documents;
 
 import lombok.Builder;
 import lombok.Value;
-import net.daneau.assnat.client.documents.subdocuments.SubjectData;
+import net.daneau.assnat.client.documents.subdocuments.SubjectDetails;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -18,5 +18,5 @@ public class Subject {
     LocalDate date;
     int legislature;
     int session;
-    SubjectData subjectData;
+    SubjectDetails subjectDetails;
 }
