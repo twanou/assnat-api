@@ -1,15 +1,15 @@
 package net.daneau.assnat.scrappers;
 
-import com.gargoylesoftware.htmlunit.html.DomElement;
-import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
 import lombok.RequiredArgsConstructor;
 import net.daneau.assnat.scrappers.configuration.AssNatWebClient;
 import net.daneau.assnat.scrappers.models.LogType;
 import net.daneau.assnat.scrappers.models.LogVersion;
 import net.daneau.assnat.scrappers.models.ScrapedLogEntry;
 import net.daneau.assnat.scrappers.utils.ScrapeUtils;
+import org.htmlunit.html.DomElement;
+import org.htmlunit.html.HtmlAnchor;
+import org.htmlunit.html.HtmlPage;
+import org.htmlunit.html.HtmlTableDataCell;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
