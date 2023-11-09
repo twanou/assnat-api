@@ -19,10 +19,10 @@ public class RosterService {
     private final RosterMapper rosterMapper;
     private final DirectoryService directoryService;
     private final RosterRepository rosterRepository;
-    
-    @Cacheable("cache")
+
+    @Cacheable("rosterCache")
     public List<Composition> getCurrentRoster() {
-        DirectoryDTO directoryDTO = directoryService.getDirectory();
+        DirectoryDTO directoryDTO = this.directoryService.getDirectory();
         Roster currentRoster = this.rosterRepository.findByEndDate(null).orElseThrow();
         return this.rosterMapper.toCompositionList(currentRoster, directoryDTO);
     }
