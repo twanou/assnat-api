@@ -39,7 +39,7 @@ public class AssNatLogScraper {
                 .build());
 
         for (HtmlAnchor anchor : anchors) {
-            int anchorMargin = this.getAnchorMargin(anchor);
+            float anchorMargin = this.getAnchorMargin(anchor);
             InternalLogNode parentNode = nodes.get(nodes.size() - 1);
             while (anchorMargin <= parentNode.margin) {
                 parentNode = parentNode.previous;
@@ -58,14 +58,14 @@ public class AssNatLogScraper {
 
     private void addParagraphs(List<InternalLogNode> internalLogNodes, List<HtmlParagraph> paragraphs) {
         Iterator<InternalLogNode> summaryNodeIterator = internalLogNodes.iterator();
+        InternalLogNode parent = summaryNodeIterator.next();
         InternalLogNode current = summaryNodeIterator.next();
-        InternalLogNode last = summaryNodeIterator.next();
         for (HtmlParagraph paragraph : paragraphs) {
-            if (this.isAnchorMatch(last.href, paragraph.getByXPath(".//a"))) {
-                current = last;
-                last = summaryNodeIterator.hasNext() ? summaryNodeIterator.next() : InternalLogNode.builder().build();
+            if (this.isAnchorMatch(current.href, paragraph.getByXPath(".//a"))) {
+                parent = current;
+                current = summaryNodeIterator.hasNext() ? summaryNodeIterator.next() : InternalLogNode.builder().build();
             } else {
-                current.paragraphs.add(paragraph.getVisibleText());
+                parent.paragraphs.add(paragraph.getVisibleText());
             }
         }
 
@@ -89,18 +89,20 @@ public class AssNatLogScraper {
         return anchors.stream().anyMatch(anchor -> StringUtils.contains(anchor.getNameAttribute(), href));
     }
 
-    private int getAnchorMargin(HtmlAnchor anchor) {
+    private float getAnchorMargin(HtmlAnchor anchor) {
         Node styleAttribute = anchor.getParentNode().getAttributes().getNamedItem("style");
-        String value = StringUtils.substringBetween(styleAttribute.getNodeValue(), "margin-left:", ";");
-        return ScrapeUtils.onlyDigitsToInt(value);
+        String marginTextValue = StringUtils.substringBetween(styleAttribute.getNodeValue(), "margin-left:", ";");
+        String textIndentTextValue = StringUtils.substringBetween(styleAttribute.getNodeValue(), "text-indent:", ";");
+        float margin = ScrapeUtils.extractFloat(marginTextValue);
+        float textIndent = textIndentTextValue != null ? ScrapeUtils.extractFloat(textIndentTextValue) : 0;
+        return margin + textIndent;
     }
-
 
     @Builder
     private static class InternalLogNode {
         public final String title;
         public final InternalLogNode previous;
-        public final int margin;
+        public final float margin;
         public final String href;
         public final ArrayList<InternalLogNode> children = new ArrayList<>();
         public final ArrayList<String> paragraphs = new ArrayList<>();

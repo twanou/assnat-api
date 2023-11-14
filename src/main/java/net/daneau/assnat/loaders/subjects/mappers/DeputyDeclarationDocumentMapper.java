@@ -10,7 +10,6 @@ import net.daneau.assnat.scrappers.models.ScrapedLogNode;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -23,23 +22,20 @@ public class DeputyDeclarationDocumentMapper implements SubjectDocumentTypeMappe
 
     @Override
     public List<SubjectDetails> map(ScrapedLogNode logNode) {
-        List<SubjectDetails> subjects = new ArrayList<>();
-        for (ScrapedLogNode declaration : logNode.getChildren()) {
-            Assignment assignment = deputyFinder.findByCompleteName(declaration.getChildren().get(0).getTitle()); // nom complet, ex M. Bob Tremblay
-            subjects.add(
-                    SubjectDetails.builder()
-                            .type(SubjectType.DEPUTY_DECLARATION)
-                            .title(declaration.getTitle())
-                            .interventions(List.of(
-                                    InterventionDocument.builder()
-                                            .deputyId(assignment.getDeputyId())
-                                            .partyId(assignment.getPartyId())
-                                            .districtId(assignment.getDistrictId())
-                                            .paragraphs(this.cleanParagraphs(declaration.getChildren().get(0).getParagraphs()))
-                                            .build()))
-                            .build());
-        }
-        return subjects;
+        return logNode.getChildren().stream().map(declaration -> {
+            Assignment assignment = this.deputyFinder.findByCompleteName(declaration.getChildren().get(0).getTitle()); // nom complet, ex M. Bob Tremblay
+            return SubjectDetails.builder()
+                    .type(SubjectType.DEPUTY_DECLARATION)
+                    .title(declaration.getTitle())
+                    .interventions(List.of(
+                            InterventionDocument.builder()
+                                    .deputyId(assignment.getDeputyId())
+                                    .partyId(assignment.getPartyId())
+                                    .districtId(assignment.getDistrictId())
+                                    .paragraphs(this.cleanParagraphs(declaration.getChildren().get(0).getParagraphs()))
+                                    .build()))
+                    .build();
+        }).toList();
     }
 
     @Override

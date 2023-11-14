@@ -9,6 +9,7 @@ public interface SubjectDocumentTypeMapper {
 
     String AFFAIRES_COURANTES = "Affaires courantes";
     String DECLARATIONS_DE_DEPUTES = "Déclarations de députés";
+    String QUESTIONS_REPONSES = "Questions et réponses orales";
 
     List<SubjectDetails> map(ScrapedLogNode logNode);
 

@@ -1,6 +1,7 @@
 package net.daneau.assnat.loaders;
 
 
+import jakarta.annotation.Nonnull;
 import net.daneau.assnat.client.documents.Deputy;
 import net.daneau.assnat.client.documents.Roster;
 import net.daneau.assnat.client.documents.subdocuments.Assignment;
@@ -37,7 +38,7 @@ public class DeputyFinder implements ApplicationListener<RosterUpdateEvent> {
     }
 
     @Override
-    public void onApplicationEvent(RosterUpdateEvent event) {
+    public void onApplicationEvent(@Nonnull RosterUpdateEvent event) {
         this.refreshCache();
     }
 
@@ -47,7 +48,7 @@ public class DeputyFinder implements ApplicationListener<RosterUpdateEvent> {
                 .deputies.stream()
                 .filter(deputy -> StringUtils.equals(formatCompleteName(deputy), completeName))
                 .toList();
-        this.errorHandler.assertSize(1, results, () -> new LoadingException("Zéro ou plusieurs députés trouvés : " + results));
+        this.errorHandler.assertSize(1, results, () -> new LoadingException("Zéro ou plusieurs députés trouvé  : " + completeName + " : " + results));
         Assignment assignment = this.cache.get().assignments.get(results.get(0).getId());
         this.errorHandler.assertNotNull(assignment, () -> new LoadingException("Aucune assignation pour ce député : " + results.get(0)));
         return assignment;
