@@ -7,6 +7,8 @@ import net.daneau.assnat.scrappers.models.ScrapedDeputy;
 import net.daneau.assnat.utils.ErrorHandler;
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.html.DomElement;
+import org.htmlunit.html.HtmlAnchor;
+import org.htmlunit.html.HtmlImage;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlTableDataCell;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,6 +44,7 @@ public class DeputyScraper {
                             .lastName(StringUtils.strip(cells.get(0).getVisibleText().split(",")[0]))
                             .district(cells.get(1).getVisibleText())
                             .party(this.independenceCheck(cells.get(2).getVisibleText()))
+                            //.image(this.getImage(cells.get(0)))
                             .build()
             );
         }
@@ -52,5 +55,11 @@ public class DeputyScraper {
 
     private String independenceCheck(String party) {
         return StringUtils.containsIgnoreCase(party, INDEPENDENT) ? INDEPENDENT_PARTY : party;
+    }
+
+    private HtmlImage getImage(HtmlTableDataCell cell) {
+        HtmlAnchor anchor = cell.getFirstByXPath(".//a");
+        HtmlPage deputyPage = this.webClient.getRelativePage(anchor.getHrefAttribute());
+        return deputyPage.getFirstByXPath("//img[@class='photoDepute']");
     }
 }

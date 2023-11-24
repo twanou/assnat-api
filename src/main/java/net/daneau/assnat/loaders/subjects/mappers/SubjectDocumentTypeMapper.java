@@ -47,6 +47,4 @@ public abstract class SubjectDocumentTypeMapper {
     protected abstract List<String> format(List<String> paragraphs);
 
     protected abstract SubjectType getSubjectType();
-
-
 }

@@ -32,7 +32,7 @@ public class AssNatLogEntryScraper {
         List<ScrapedLogEntry> logEntries = new ArrayList<>();
         for (DomElement row : rows) {
             List<HtmlTableDataCell> cells = row.getByXPath(".//td");
-            HtmlAnchor anchor = (HtmlAnchor) cells.get(0).getByXPath(".//a").get(0);
+            HtmlAnchor anchor = cells.get(0).getFirstByXPath(".//a");
             String[] session = cells.get(2).getVisibleText().split(",");
             logEntries.add(
                     ScrapedLogEntry.builder()

@@ -17,7 +17,7 @@ public class RosterLoaderRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        //this.rosterLoader.load();
+        this.rosterLoader.load();
         this.subjectLoader.load();
     }
 }
