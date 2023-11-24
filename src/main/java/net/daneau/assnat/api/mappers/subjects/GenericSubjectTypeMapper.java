@@ -30,7 +30,7 @@ public class GenericSubjectTypeMapper implements SubjectTypeMapper {
 
     @Override
     public EnumSet<SubjectType> supports() {
-        return EnumSet.of(SubjectType.DEPUTY_DECLARATION);
+        return EnumSet.of(SubjectType.DEPUTY_DECLARATION, SubjectType.QUESTIONS_ANSWERS);
     }
 
     private List<Intervention> mapInterventions(List<InterventionDocument> interventionDocuments, DirectoryDTO directoryDTO) {

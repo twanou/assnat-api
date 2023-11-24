@@ -34,8 +34,9 @@ class LogEntriesSubjectLoaderTest {
     @InjectMocks
     private LogEntriesSubjectLoader logEntriesSubjectLoader;
 
-    @ParameterizedTest
+
     @NullSource
+    @ParameterizedTest
     @MethodSource("subjects")
     void load(Subject subject) {
         ScrapedLogEntry firstEntryToLoad = ScrapedLogEntry.builder().date(LocalDate.of(1997, 1, 1)).relativeUrl("relativeUrl1").type(LogType.ASSEMBLY).version(LogVersion.FINAL).build();
