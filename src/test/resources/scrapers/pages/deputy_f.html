@@ -23,6 +23,49 @@
     <link type="text/css" href="/styles/Calendrier.min.css" rel="stylesheet" media="screen"/>
     <link href="/Images/favicon.ico" rel="shortcut icon"/>
 
+    <!-- Didomi -->
+    <script type="text/javascript">window.gdprAppliesGlobally = false;
+    (function () {
+        (function (e, r) {
+            var t = document.createElement("link");
+            t.rel = "preconnect";
+            t.as = "script";
+            var n = document.createElement("link");
+            n.rel = "dns-prefetch";
+            n.as = "script";
+            var i = document.createElement("link");
+            i.rel = "preload";
+            i.as = "script";
+            var o = document.createElement("script");
+            o.id = "spcloader";
+            o.type = "text/javascript";
+            o["async"] = true;
+            o.charset = "utf-8";
+            var a = "https://sdk.privacy-center.org/" + e + "/loader.js?target_type=notice&target=" + r;
+            if (window.didomiConfig && window.didomiConfig.user) {
+                var c = window.didomiConfig.user;
+                var s = c.country;
+                var d = c.region;
+                if (s) {
+                    a = a + "&country=" + s;
+                    if (d) {
+                        a = a + "&region=" + d
+                    }
+                }
+            }
+            t.href = "https://sdk.privacy-center.org/";
+            n.href = "https://sdk.privacy-center.org/";
+            i.href = a;
+            o.src = a;
+            var p = document.getElementsByTagName("script")[0];
+            p.parentNode.insertBefore(t, p);
+            p.parentNode.insertBefore(n, p);
+            p.parentNode.insertBefore(i, p);
+            p.parentNode.insertBefore(o, p)
+        })("196da249-e5c8-4975-84d3-4b76bf16efd6", "UgnH3adf")
+    })();</script>
+
+
     <!-- Feuilles de styles specifiques IE -->
 
     <!--[if lte IE 6]>
@@ -77,7 +120,7 @@
 
         var _nbAnneeArchiveActivite = '3';
         // Voir Calendrier.js pour _dtSetStartDate
-        var _dtSetEndDate = '2023-06-09';
+        var _dtSetEndDate = '2024-05-03';
         var intNombreAnneeArchiveActivite = 3;
         var langueCourante = 'fr';
 
@@ -124,6 +167,7 @@
         var libelleHeureFinA = 'à'
         var libelleDebutApresPeriodeCourante = 'début : après la période des affaires courantes de l\'Assemblée';
         var bulleAidePeriodeAffaireCourante = '<span class="btnInfoBulle sansControle"><a href="javascript:void(0)" class="sanssouligne"><img src="http://www.assnat.qc.ca/Images/btnInfoBulle.gif" title="Afficher l\'aide" alt="Afficher l\'aide"></a><span title="Début : après la période des affaires courantes de l\'Assemblée"></span></span>';
+        var bulleAideApresAvisTravauxCommissions = '<span class="btnInfoBulle sansControle"><a href="javascript:void(0)" class="sanssouligne"> <img src="http://www.assnat.qc.ca/Images/btnInfoBulle.gif" title="Afficher l\'aide" alt="Afficher l\'aide"></a><span title="Début : après les avis touchant les travaux des commissions"></span></span>'
         var libelleActiviteReporteeDateUlterieure = 'Activité reportée à une date ultérieure';
 
         var libelleCalAPartirDe = 'À partir de';
@@ -183,10 +227,6 @@
         // URL drapeau generique
         var _urlDrapeauGenerique = '/Images/Temp/icoDrapeaux.gif'
 
-        // Message pour sites externes
-        var _messageSiteExterne = "L'Assemblée n'assume aucune responsabilité quant au contenu des sites externes.";
-        var _arrDomainesInternes = ['172.16.48.120', '172.16.48.199', 'localhost', 'app1dev.assnat.intranet', 'wwwdev.assnat.qc.ca', 'wwwdev2.assnat.qc.ca', 'wwwfon.assnat.qc.ca', 'wwwfon2.assnat.qc.ca', 'wwwfor.assnat.qc.ca', 'wwwacc.assnat.qc.ca', 'wwwacc2.assnat.qc.ca', 'www.assnat.qc.ca', 'www2.assnat.qc.ca', 'assnat.qc.ca', 'WWW.bibliotheque.assnat.qc.ca', 'fondationbonenfant.qc.ca', 'sd10sri10v', 'www.parlementsauprimaire.com', 'www.paricilademocratie.com', 'boutique.assnat.qc.ca'];
-
         // Pour visionneuse: libelle 'Image' utilise dans slimbox2.js
         var lblVisionneuseTermeImage = "Image {x} de {y}";
 
@@ -195,9 +235,6 @@
 
         // Libellés pour fermer les bulles d'aide
         var lblBulleAideFermer = "[x] Fermer";
-
-        // URL pour la page de redirection javascript
-        var urlPageRedirectionJS = '/fr/redirection.html?d=';
 
         var urlBoutonCalendrier = '/Images/btnCalendrier.gif';
 
@@ -237,6 +274,16 @@
                 var href = $(e).attr('href');
                 if (href && href.search(/^http:/) == 0) {
                     $(e).attr('href', "https:" + href.substring(5));
+                }
+            })
+
+            $("img").each(function (i, e) {
+                var src = $(e).attr('src');
+                if (src && src.search(/^http:/) == 0) {
+                    $(e).attr('src', "https:" + src.substring(5));
+                }
+                if (src && src.search(/^https+:/) == 0) {
+                    $(e).attr('src', "https:" + src.substring(src.indexOf(":") + 1));
                 }
             })
         });
@@ -303,33 +350,22 @@
 
     <!-- Feuille de style pour le layout de la page -->
 
-    <link href="/styles/GabGauche-mHautDivA.min.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="/styles/GabGauche-mCentre-l.min.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="/styles/FicheDeputes.min.css" rel="stylesheet" type="text/css" media="screen"/>
 
 
     <!-- Placeholder: remplace automatiquement selon rubrique -->
     <title>
 
-        Députés - Assemblée nationale du Québec
+        Manon Massé - Assemblée nationale du Québec
 
     </title>
+    <meta property="og:title" content="Manon&nbsp;Massé - Assemblée nationale du Québec"/>
+    <meta property="og:description"
+          content="Députée de Sainte-Marie–Saint-Jacques, Québec solidaire, vice-présidente de la Commission des relations avec les citoyens, porte-parole du deuxième groupe d’opposition en matière de lutte contre l’itinérance, porte-parole du deuxième groupe d’opposition en matière de relations avec les Premières Nations et les Inuit, porte-parole du deuxième groupe d’opposition en matière de services sociaux en Déficience intellectuelle et TSA (DI-TSA), porte-parole du deuxième groupe d’opposition pour les communautés LGBTQ+."/>
 
-    <meta property="og:title" content="Députés - Assemblée nationale du Québec"/>
-    <meta property="og:description" content=""/>
     <meta property="og:image"
-          content="https://www.assnat.qc.ca/Media/Process.aspx?process=Original&amp;token=ZyMoxNwUn8ikQ+TRKYwPCjWrKwg+vIv9rjij7p3xLGTZDmLVSmJLoqe/vG7/YWzz&amp;asset=ANQ.Vigie.Bll.Image_19205"/>
-    <meta property="og:image"
-          content="https://www.assnat.qc.ca/Media/Process.aspx?process=Original&amp;token=ZyMoxNwUn8ikQ+TRKYwPCjWrKwg+vIv9rjij7p3xLGTZDmLVSmJLoqe/vG7/YWzz&amp;asset=ANQ.Vigie.Bll.Image_19207"/>
-    <meta property="og:image"
-          content="https://www.assnat.qc.ca/Media/Process.aspx?process=Original&amp;token=ZyMoxNwUn8ikQ+TRKYwPCjWrKwg+vIv9rjij7p3xLGTZDmLVSmJLoqe/vG7/YWzz&amp;asset=ANQ.Vigie.Bll.Image_19209"/>
-    <meta property="og:image"
-          content="https://www.assnat.qc.ca/Media/Process.aspx?process=Original&amp;token=ZyMoxNwUn8ikQ+TRKYwPCjWrKwg+vIv9rjij7p3xLGTZDmLVSmJLoqe/vG7/YWzz&amp;asset=ANQ.Vigie.Bll.Image_19211"/>
-    <meta property="og:image"
-          content="https://www.assnat.qc.ca/Media/Process.aspx?process=Original&amp;token=ZyMoxNwUn8ikQ+TRKYwPCjWrKwg+vIv9rjij7p3xLGTZDmLVSmJLoqe/vG7/YWzz&amp;asset=ANQ.Vigie.Bll.Image_19213"/>
-    <meta property="og:image"
-          content="https://www.assnat.qc.ca/Media/Process.aspx?process=Original&amp;token=ZyMoxNwUn8ikQ+TRKYwPCjWrKwg+vIv9rjij7p3xLGTZDmLVSmJLoqe/vG7/YWzz&amp;asset=ANQ.Vigie.Bll.Image_19215"/>
-    <meta property="og:image"
-          content="https://www.assnat.qc.ca/Media/Process.aspx?process=Original&amp;token=ZyMoxNwUn8ikQ+TRKYwPCjWrKwg+vIv9rjij7p3xLGTZDmLVSmJLoqe/vG7/YWzz&amp;asset=ANQ.Vigie.Bll.Image_19217"/>
-
+          content="https://www.assnat.qc.ca/Media/Process.aspx?process=Original&amp;token=ZyMoxNwUn8ikQ+TRKYwPCjWrKwg+vIv9rjij7p3xLGTZDmLVSmJLoqe/vG7/YWzz&amp;asset=ANQ.Vigie.Bll.Image_7751"/>
     <script type="text/javascript" src="/scripts/Recherche.min.js"></script>
     <style type="text/css">
         .ctl00_SousNavigationPlaceHolder_SousNavigation_Menu1_0 {
@@ -352,29 +388,28 @@
 </head>
 
 <!-- Placeholder: permet de specifier un tag body personnalise (default: <body>) -->
-
-<body id="Deputes">
+<body>
 
 
 <!-- Google Tag Manager (noscript) -->
 <noscript>
     <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5X47H2N" height="0" width="0"
-            style="display:none;visibility:hidden"></iframe>
+            style="display: none; visibility: hidden"></iframe>
 </noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-<form method="post" action="/fr/deputes/index.html" id="aspnetForm">
+<form method="post" action="/fr/deputes/masse-manon-15421/index.html" id="aspnetForm">
     <div>
         <input type="hidden" name="versionProgrammationEnCache" id="versionProgrammationEnCache" value="0"/>
         <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE"
-               value="/wEPDwUJMTA0NDI4OTczZBgBBTRjdGwwMCRTb3VzTmF2aWdhdGlvblBsYWNlSG9sZGVyJFNvdXNOYXZpZ2F0aW9uJE1lbnUxDw9kBQlEw6lwdXTDqXNkVZKU7T5Lrow3YLoYdoR0c1mks6A="/>
+               value="/wEPDwUJNjA1MDkzMDg0D2QWAmYPZBYCAgMQZGQWBAIKD2QWAgIJD2QWCgIID2QWDmYPFgQeBWNsYXNzBQVhY3RpZh4EaHJlZgVAaHR0cHM6Ly93d3cuYXNzbmF0LnFjLmNhL2ZyL2RlcHV0ZXMvbWFzc2UtbWFub24tMTU0MjEvaW5kZXguaHRtbGQCAQ8WAh8BBUVodHRwczovL3d3dy5hc3NuYXQucWMuY2EvZnIvZGVwdXRlcy9tYXNzZS1tYW5vbi0xNTQyMS9iaW9ncmFwaGllLmh0bWxkAgIPFgIfAQVIaHR0cHM6Ly93d3cuYXNzbmF0LnFjLmNhL2ZyL2RlcHV0ZXMvbWFzc2UtbWFub24tMTU0MjEvaW50ZXJ2ZW50aW9ucy5odG1sZAIDDxYCHwEFTmh0dHBzOi8vd3d3LmFzc25hdC5xYy5jYS9mci9kZXB1dGVzL21hc3NlLW1hbm9uLTE1NDIxL2NvbmZlcmVuY2VzRGVQcmVzc2UuaHRtbGQCBA8WAh8BBUdodHRwczovL3d3dy5hc3NuYXQucWMuY2EvZnIvZGVwdXRlcy9tYXNzZS1tYW5vbi0xNTQyMS9wcm9qZXRzRGVMb2kuaHRtbGQCBQ8WAh8BBUNodHRwczovL3d3dy5hc3NuYXQucWMuY2EvZnIvZGVwdXRlcy9tYXNzZS1tYW5vbi0xNTQyMS9kZXBlbnNlcy5odG1sZAIGDxYCHwEFRmh0dHBzOi8vd3d3LmFzc25hdC5xYy5jYS9mci9kZXB1dGVzL21hc3NlLW1hbm9uLTE1NDIxL2Nvb3Jkb25uZWVzLmh0bWxkAgkPDxYCHgdWaXNpYmxlZ2RkAgwPZBYGAgEPEGQQFU9GU2Vzc2lvbiBlbiBjb3VycyAtIDQzZSBsw6lnaXNsYXR1cmUsIDFyZSBzZXNzaW9uICgyOSBub3ZlbWJyZSAyMDIyIC0gKT40MmUgbMOpZ2lzbGF0dXJlLCAyZSBzZXNzaW9uICgxOSBvY3RvYnJlIDIwMjEgLSAyOCBhb8O7dCAyMDIyKUI0MmUgbMOpZ2lzbGF0dXJlLCAxcmUgc2Vzc2lvbiAoMjcgbm92ZW1icmUgMjAxOCAtIDEzIG9jdG9icmUgMjAyMSk7NDFlIGzDqWdpc2xhdHVyZSwgMXJlIHNlc3Npb24gKDIwIG1haSAyMDE0IC0gMjMgYW/Du3QgMjAxOCk9NDBlIGzDqWdpc2xhdHVyZSwgMXJlIHNlc3Npb24gKDMwIG9jdG9icmUgMjAxMiAtIDUgbWFycyAyMDE0KT4zOWUgbMOpZ2lzbGF0dXJlLCAyZSBzZXNzaW9uICgyMyBmw6l2cmllciAyMDExIC0gMSBhb8O7dCAyMDEyKUIzOWUgbMOpZ2lzbGF0dXJlLCAxcmUgc2Vzc2lvbiAoMTMgamFudmllciAyMDA5IC0gMjIgZsOpdnJpZXIgMjAxMSk8MzhlIGzDqWdpc2xhdHVyZSwgMXJlIHNlc3Npb24gKDggbWFpIDIwMDcgLSA1IG5vdmVtYnJlIDIwMDgpPjM3ZSBsw6lnaXNsYXR1cmUsIDJlIHNlc3Npb24gKDE0IG1hcnMgMjAwNiAtIDIxIGbDqXZyaWVyIDIwMDcpOjM3ZSBsw6lnaXNsYXR1cmUsIDFyZSBzZXNzaW9uICg0IGp1aW4gMjAwMyAtIDEwIG1hcnMgMjAwNik6MzZlIGzDqWdpc2xhdHVyZSwgMmUgc2Vzc2lvbiAoMjIgbWFycyAyMDAxIC0gMTIgbWFycyAyMDAzKTkzNmUgbMOpZ2lzbGF0dXJlLCAxcmUgc2Vzc2lvbiAoMiBtYXJzIDE5OTkgLSA5IG1hcnMgMjAwMSk9MzVlIGzDqWdpc2xhdHVyZSwgMmUgc2Vzc2lvbiAoMjUgbWFycyAxOTk2IC0gMjEgb2N0b2JyZSAxOTk4KT8zNWUgbMOpZ2lzbGF0dXJlLCAxcmUgc2Vzc2lvbiAoMjkgbm92ZW1icmUgMTk5NCAtIDEzIG1hcnMgMTk5Nik6MzRlIGzDqWdpc2xhdHVyZSwgM2Ugc2Vzc2lvbiAoMTcgbWFycyAxOTk0IC0gMTcganVpbiAxOTk0KTozNGUgbMOpZ2lzbGF0dXJlLCAyZSBzZXNzaW9uICgxOSBtYXJzIDE5OTIgLSAxMCBtYXJzIDE5OTQpPzM0ZSBsw6lnaXNsYXR1cmUsIDFyZSBzZXNzaW9uICgyOCBub3ZlbWJyZSAxOTg5IC0gMTggbWFycyAxOTkyKTkzM2UgbMOpZ2lzbGF0dXJlLCAyZSBzZXNzaW9uICg4IG1hcnMgMTk4OCAtIDkgYW/Du3QgMTk4OSk/MzNlIGzDqWdpc2xhdHVyZSwgMXJlIHNlc3Npb24gKDE2IGTDqWNlbWJyZSAxOTg1IC0gOCBtYXJzIDE5ODgpQDMyZSBsw6lnaXNsYXR1cmUsIDVlIHNlc3Npb24gKDE2IG9jdG9icmUgMTk4NCAtIDEwIG9jdG9icmUgMTk4NSk6MzJlIGzDqWdpc2xhdHVyZSwgNGUgc2Vzc2lvbiAoMjMgbWFycyAxOTgzIC0gMjAganVpbiAxOTg0KT0zMmUgbMOpZ2lzbGF0dXJlLCAzZSBzZXNzaW9uICg5IG5vdmVtYnJlIDE5ODEgLSAxMCBtYXJzIDE5ODMpQTMyZSBsw6lnaXNsYXR1cmUsIDJlIHNlc3Npb24gKDMwIHNlcHRlbWJyZSAxOTgxIC0gMiBvY3RvYnJlIDE5ODEpOjMyZSBsw6lnaXNsYXR1cmUsIDFyZSBzZXNzaW9uICgxOSBtYWkgMTk4MSAtIDE4IGp1aW4gMTk4MSk9MzFlIGzDqWdpc2xhdHVyZSwgNmUgc2Vzc2lvbiAoNSBub3ZlbWJyZSAxOTgwIC0gMTIgbWFycyAxOTgxKUAzMWUgbMOpZ2lzbGF0dXJlLCA1ZSBzZXNzaW9uICgyNCBvY3RvYnJlIDE5ODAgLSAyNCBvY3RvYnJlIDE5ODApOTMxZSBsw6lnaXNsYXR1cmUsIDRlIHNlc3Npb24gKDYgbWFycyAxOTc5IC0gMTgganVpbiAxOTgwKUIzMWUgbMOpZ2lzbGF0dXJlLCAzZSBzZXNzaW9uICgyMSBmw6l2cmllciAxOTc4IC0gMjAgZsOpdnJpZXIgMTk3OSk+MzFlIGzDqWdpc2xhdHVyZSwgMmUgc2Vzc2lvbiAoOCBtYXJzIDE5NzcgLSAyMiBkw6ljZW1icmUgMTk3NylFMzFlIGzDqWdpc2xhdHVyZSwgMXJlIHNlc3Npb24gKDE0IGTDqWNlbWJyZSAxOTc2IC0gMjMgZMOpY2VtYnJlIDE5NzYpPTMwZSBsw6lnaXNsYXR1cmUsIDRlIHNlc3Npb24gKDE2IG1hcnMgMTk3NiAtIDE4IG9jdG9icmUgMTk3Nik/MzBlIGzDqWdpc2xhdHVyZSwgM2Ugc2Vzc2lvbiAoMTggbWFycyAxOTc1IC0gMTkgZMOpY2VtYnJlIDE5NzUpPzMwZSBsw6lnaXNsYXR1cmUsIDJlIHNlc3Npb24gKDE0IG1hcnMgMTk3NCAtIDI4IGTDqWNlbWJyZSAxOTc0KUQzMGUgbMOpZ2lzbGF0dXJlLCAxcmUgc2Vzc2lvbiAoMjIgbm92ZW1icmUgMTk3MyAtIDIyIGTDqWNlbWJyZSAxOTczKT8yOWUgbMOpZ2lzbGF0dXJlLCA0ZSBzZXNzaW9uICgxNSBtYXJzIDE5NzMgLSAyNSBzZXB0ZW1icmUgMTk3Myk5MjllIGzDqWdpc2xhdHVyZSwgM2Ugc2Vzc2lvbiAoNyBtYXJzIDE5NzIgLSAxNCBtYXJzIDE5NzMpQzI5ZSBsw6lnaXNsYXR1cmUsIDJlIHNlc3Npb24gKDIzIGbDqXZyaWVyIDE5NzEgLSAyNCBkw6ljZW1icmUgMTk3MSk/MjllIGzDqWdpc2xhdHVyZSwgMXJlIHNlc3Npb24gKDkganVpbiAxOTcwIC0gMTkgZMOpY2VtYnJlIDE5NzApPjI4ZSBsw6lnaXNsYXR1cmUsIDVlIHNlc3Npb24gKDI0IGbDqXZyaWVyIDE5NzAgLSAxMiBtYXJzIDE5NzApQzI4ZSBsw6lnaXNsYXR1cmUsIDRlIHNlc3Npb24gKDI1IGbDqXZyaWVyIDE5NjkgLSAyMyBkw6ljZW1icmUgMTk2OSlDMjhlIGzDqWdpc2xhdHVyZSwgM2Ugc2Vzc2lvbiAoMjAgZsOpdnJpZXIgMTk2OCAtIDE4IGTDqWNlbWJyZSAxOTY4KUAyOGUgbMOpZ2lzbGF0dXJlLCAyZSBzZXNzaW9uICgyMCBvY3RvYnJlIDE5NjcgLSAyMCBvY3RvYnJlIDE5NjcpQDI4ZSBsw6lnaXNsYXR1cmUsIDFyZSBzZXNzaW9uICgxIGTDqWNlbWJyZSAxOTY2IC0gMTIgYW/Du3QgMTk2Nyk+MjdlIGzDqWdpc2xhdHVyZSwgNmUgc2Vzc2lvbiAoMjUgamFudmllciAxOTY2IC0gMTggYXZyaWwgMTk2NilAMjdlIGzDqWdpc2xhdHVyZSwgNWUgc2Vzc2lvbiAoMjIgb2N0b2JyZSAxOTY1IC0gMjMgb2N0b2JyZSAxOTY1KT0yN2UgbMOpZ2lzbGF0dXJlLCA0ZSBzZXNzaW9uICgyMSBqYW52aWVyIDE5NjUgLSA2IGFvw7t0IDE5NjUpQDI3ZSBsw6lnaXNsYXR1cmUsIDNlIHNlc3Npb24gKDE0IGphbnZpZXIgMTk2NCAtIDMxIGp1aWxsZXQgMTk2NCk8MjdlIGzDqWdpc2xhdHVyZSwgMmUgc2Vzc2lvbiAoMjEgYW/Du3QgMTk2MyAtIDIzIGFvw7t0IDE5NjMpQTI3ZSBsw6lnaXNsYXR1cmUsIDFyZSBzZXNzaW9uICgxNSBqYW52aWVyIDE5NjMgLSAxMSBqdWlsbGV0IDE5NjMpPjI2ZSBsw6lnaXNsYXR1cmUsIDJlIHNlc3Npb24gKDEwIG5vdmVtYnJlIDE5NjAgLSAxMCBqdWluIDE5NjEpRTI2ZSBsw6lnaXNsYXR1cmUsIDFyZSBzZXNzaW9uICgyMCBzZXB0ZW1icmUgMTk2MCAtIDIyIHNlcHRlbWJyZSAxOTYwKT4yNWUgbMOpZ2lzbGF0dXJlLCA0ZSBzZXNzaW9uICgxOCBub3ZlbWJyZSAxOTU5IC0gMTggbWFycyAxOTYwKT0yNWUgbMOpZ2lzbGF0dXJlLCAzZSBzZXNzaW9uICgxOSBub3ZlbWJyZSAxOTU4IC0gNSBtYXJzIDE5NTkpQjI1ZSBsw6lnaXNsYXR1cmUsIDJlIHNlc3Npb24gKDEzIG5vdmVtYnJlIDE5NTcgLSAyMSBmw6l2cmllciAxOTU4KUMyNWUgbMOpZ2lzbGF0dXJlLCAxcmUgc2Vzc2lvbiAoMTQgbm92ZW1icmUgMTk1NiAtIDIxIGbDqXZyaWVyIDE5NTcpQjI0ZSBsw6lnaXNsYXR1cmUsIDRlIHNlc3Npb24gKDE2IG5vdmVtYnJlIDE5NTUgLSAyMyBmw6l2cmllciAxOTU2KUEyMGUgbMOpZ2lzbGF0dXJlLCAxcmUgc2Vzc2lvbiAoNyBvY3RvYnJlIDE5MzYgLSAxMiBub3ZlbWJyZSAxOTM2KT4xOGUgbMOpZ2lzbGF0dXJlLCAyZSBzZXNzaW9uICgxMCBqYW52aWVyIDE5MzMgLSAxMyBhdnJpbCAxOTMzKUIxOGUgbMOpZ2lzbGF0dXJlLCAxcmUgc2Vzc2lvbiAoMyBub3ZlbWJyZSAxOTMxIC0gMTkgZsOpdnJpZXIgMTkzMik8MTdlIGzDqWdpc2xhdHVyZSwgMmUgc2Vzc2lvbiAoOCBqYW52aWVyIDE5MjkgLSA0IGF2cmlsIDE5MjkpPTE2ZSBsw6lnaXNsYXR1cmUsIDRlIHNlc3Npb24gKDExIGphbnZpZXIgMTkyNyAtIDEgYXZyaWwgMTkyNyk8MTZlIGzDqWdpc2xhdHVyZSwgM2Ugc2Vzc2lvbiAoNyBqYW52aWVyIDE5MjYgLSAyNCBtYXJzIDE5MjYpPjE2ZSBsw6lnaXNsYXR1cmUsIDFyZSBzZXNzaW9uICgxNyBqYW52aWVyIDE5MjMgLSAxNSBtYXJzIDE5MjQpQjE1ZSBsw6lnaXNsYXR1cmUsIDRlIHNlc3Npb24gKDI0IG9jdG9icmUgMTkyMiAtIDI5IGTDqWNlbWJyZSAxOTIyKT0xNWUgbMOpZ2lzbGF0dXJlLCAzZSBzZXNzaW9uICgxMCBqYW52aWVyIDE5MjIgLSAyMSBtYXJzIDE5MjIpPTE1ZSBsw6lnaXNsYXR1cmUsIDJlIHNlc3Npb24gKDExIGphbnZpZXIgMTkyMSAtIDE5IG1hcnMgMTkyMSlEMTVlIGzDqWdpc2xhdHVyZSwgMXJlIHNlc3Npb24gKDEwIGTDqWNlbWJyZSAxOTE5IC0gMTQgZsOpdnJpZXIgMTkyMCk9MTRlIGzDqWdpc2xhdHVyZSwgM2Ugc2Vzc2lvbiAoMjEgamFudmllciAxOTE5IC0gMTcgbWFycyAxOTE5KUExNGUgbMOpZ2lzbGF0dXJlLCAyZSBzZXNzaW9uICg0IGTDqWNlbWJyZSAxOTE3IC0gOSBmw6l2cmllciAxOTE4KUMxNGUgbMOpZ2lzbGF0dXJlLCAxcmUgc2Vzc2lvbiAoNyBub3ZlbWJyZSAxOTE2IC0gMjIgZMOpY2VtYnJlIDE5MTYpPTEzZSBsw6lnaXNsYXR1cmUsIDRlIHNlc3Npb24gKDExIGphbnZpZXIgMTkxNiAtIDE2IG1hcnMgMTkxNik7MTNlIGzDqWdpc2xhdHVyZSwgM2Ugc2Vzc2lvbiAoNyBqYW52aWVyIDE5MTUgLSA1IG1hcnMgMTkxNSlCMTNlIGzDqWdpc2xhdHVyZSwgMmUgc2Vzc2lvbiAoMTEgbm92ZW1icmUgMTkxMyAtIDE5IGbDqXZyaWVyIDE5MTQpQzEzZSBsw6lnaXNsYXR1cmUsIDFyZSBzZXNzaW9uICg1IG5vdmVtYnJlIDE5MTIgLSAyMSBkw6ljZW1icmUgMTkxMik8MTJlIGzDqWdpc2xhdHVyZSwgNGUg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"/>
     </div>
 
     <div>
 
-        <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="76280586"/>
+        <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="FF330E36"/>
         <input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION"
-               value="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"/>
+               value="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"/>
     </div>
     <div id="Wrap">
 
@@ -407,9 +442,6 @@
             </div>
             <div class="listeUtilitaires">
                 <ul>
-
-                    <li><a href="/en/deputes/index.html">English</a></li>
-
                     <li><a id="A2" href="https://www.assnat.qc.ca/carrieres">Carrières</a></li>
                     <li><a href="/fr/nous-joindre.html" id="ctl00_Utilitaires_A1">Nous joindre</a></li>
                     <li>
@@ -423,8 +455,7 @@
                         </div>
                     </li>
                     <li>
-                        <a href="/fr/aide/aide-recherche.html#javascript"
-                           onclick="LancerRechercheAvancee();return false;">Recherche avancée</a>
+                        <a onclick="LancerRechercheAvancee();return false;">Recherche avancée</a>
                     </li>
                 </ul>
             </div>
@@ -441,20 +472,6 @@
                 var urlRechercheAvancee = '/fr/recherche/recherche-avancee.html';
                 window.location = urlRechercheAvancee + "?EstNouvelleRecherche=true";
             }
-
-
-            $(document).ready(
-                function () {
-                    // Masquer le bouton Envoyer a un ami dans certaines pages
-
-                    var Recherche = '';
-                    var EnvoyerAmi = '';
-
-                    if (Recherche + EnvoyerAmi != '')
-                        $("#EnvoyerAmi").addClass("cacherUnElement");
-                }
-            );
-
 
         </script>
 
@@ -485,31 +502,31 @@
                         <div class='menuHoverEnfant'>
 
                             <ul>
-                                <li><a href="http://www.assnat.qc.ca/fr/lien/10006.html">La présidente</a></li>
-                                <li><a href="http://www.assnat.qc.ca/fr/lien/10002.html#listeDeputes">Liste des députés
+                                <li><a href="https://www.assnat.qc.ca/fr/lien/10006.html">La présidente</a></li>
+                                <li><a href="https://www.assnat.qc.ca/fr/lien/10002.html#listeDeputes">Liste des députés
                                     en fonction</a></li>
-                                <li><a href="http://www.assnat.qc.ca/fr/lien/11861.html">Les députés depuis 1764</a>
+                                <li><a href="https://www.assnat.qc.ca/fr/lien/11861.html">Les députés depuis 1764</a>
                                 </li>
-                                <li><a href="http://www.assnat.qc.ca/fr/lien/10002.html#listeDeputes">Coordonnées des
+                                <li><a href="https://www.assnat.qc.ca/fr/lien/10002.html#listeDeputes">Coordonnées des
                                     députés</a></li>
-                                <li><a href="http://www.assnat.qc.ca/fr/lien/10042.html">La fonction de député</a></li>
-                                <li><a href="http://www.assnat.qc.ca/fr/lien/10014.html">Fonctions parlementaires des
+                                <li><a href="https://www.assnat.qc.ca/fr/lien/10042.html">La fonction de député</a></li>
+                                <li><a href="https://www.assnat.qc.ca/fr/lien/10014.html">Fonctions parlementaires des
                                     députés</a></li>
-                                <li><a href="http://www.assnat.qc.ca/fr/lien/10020.html">Composition des commissions</a>
-                                </li>
-                                <li><a href="http://www.assnat.qc.ca/fr/lien/10028.html">Membres du Bureau de
+                                <li><a href="https://www.assnat.qc.ca/fr/lien/10020.html">Composition des
+                                    commissions</a></li>
+                                <li><a href="https://www.assnat.qc.ca/fr/lien/10028.html">Membres du Bureau de
                                     l'Assemblée</a></li>
-                                <li><a href="http://www.assnat.qc.ca/fr/lien/10052.html">Indemnités et allocations</a>
+                                <li><a href="https://www.assnat.qc.ca/fr/lien/10052.html">Indemnités et allocations</a>
                                 </li>
-                                <li><a href="http://www.assnat.qc.ca/fr/deputes/cerclefemmes/index.html">Cercle des
+                                <li><a href="https://www.assnat.qc.ca/fr/deputes/cerclefemmes/index.html">Cercle des
                                     femmes parlementaires</a></li>
-                                <li><a href="http://www.assnat.qc.ca/fr/lien/12661.html">Cercle des jeunes
+                                <li><a href="https://www.assnat.qc.ca/fr/lien/12661.html">Cercle des jeunes
                                     parlementaires</a></li>
-                                <li><a href="http://www.assnat.qc.ca/fr/lien/10965.html">Cercle des ex-parlementaires de
-                                    l’Assemblée nationale du Québec</a></li>
-                                <li><a href="http://www.assnat.qc.ca/fr/lien/12603.html">Fondation
+                                <li><a href="https://www.assnat.qc.ca/fr/lien/10965.html">Cercle des ex-parlementaires
+                                    de l’Assemblée nationale du Québec</a></li>
+                                <li><a href="https://www.assnat.qc.ca/fr/lien/12603.html">Fondation
                                     Jean-Charles-Bonenfant </a></li>
-                                <li><a href="http://www.assnat.qc.ca/fr/lien/12605.html">Fondation des parlementaires
+                                <li><a href="https://www.assnat.qc.ca/fr/lien/12605.html">Fondation des parlementaires
                                     québécois Cultures à partager </a></li>
                             </ul>
 
@@ -522,44 +539,45 @@
                         <div class='menuHoverEnfant'>
 
                             <ul>
-                                <li><a href="http://www.assnat.qc.ca/fr/lien/12119.html">Calendrier hebdomadaire des
+                                <li><a href="https://www.assnat.qc.ca/fr/lien/12119.html">Calendrier hebdomadaire des
                                     travaux</a></li>
-                                <li><a href="http://www.assnat.qc.ca/fr/lien/12213.html">Journal des débats</a></li>
-                                <li><a href="http://www.assnat.qc.ca/fr/lien/11867.html">Index du Journal des débats</a>
-                                </li>
-                                <li><a href="http://www.assnat.qc.ca/fr/lien/10114.html#procedure">Règlement et autres
+                                <li><a href="https://www.assnat.qc.ca/fr/lien/12213.html">Journal des débats</a></li>
+                                <li><a href="https://www.assnat.qc.ca/fr/lien/11867.html">Index du Journal des
+                                    débats</a></li>
+                                <li><a href="https://www.assnat.qc.ca/fr/lien/10114.html#procedure">Règlement et autres
                                     règles de procédure de l'Assemblée nationale</a></li>
-                                <li><a href="http://www.assnat.qc.ca/fr/lien/10114.html#procedure">Propos non
+                                <li><a href="https://www.assnat.qc.ca/fr/lien/10114.html#procedure">Propos non
                                     parlementaires</a></li>
-                                <li><a href="http://www.assnat.qc.ca/fr/lien/10044.html">Assister aux travaux</a></li>
+                                <li><a href="https://www.assnat.qc.ca/fr/lien/10044.html">Assister aux travaux</a></li>
                             </ul>
                             <ul>
-                                <li><strong><a href="http://www.assnat.qc.ca/fr/lien/10118.html">Travaux de
+                                <li><strong><a href="https://www.assnat.qc.ca/fr/lien/10118.html">Travaux de
                                     l'Assemblée</a></strong>
                                     <ul>
-                                        <li><a href="http://www.assnat.qc.ca/fr/lien/10118.html">Toutes les séances</a>
+                                        <li><a href="https://www.assnat.qc.ca/fr/lien/10118.html">Toutes les séances</a>
                                         </li>
-                                        <li><a href="http://www.assnat.qc.ca/fr/lien/10198.html">Documents déposés</a>
+                                        <li><a href="https://www.assnat.qc.ca/fr/lien/10198.html">Documents déposés</a>
                                         </li>
-                                        <li><a href="http://www.assnat.qc.ca/fr/lien/10192.html">Projets de loi</a></li>
-                                        <li><a href="http://www.assnat.qc.ca/fr/lien/12215.html">Cheminement des projets
-                                            de loi</a></li>
-                                        <li><a href="http://www.assnat.qc.ca/fr/lien/12779.html">Registre des votes par
-                                            appel nominal</a></li>
+                                        <li><a href="https://www.assnat.qc.ca/fr/lien/10192.html">Projets de loi</a>
+                                        </li>
+                                        <li><a href="https://www.assnat.qc.ca/fr/lien/12215.html">Cheminement des
+                                            projets de loi</a></li>
+                                        <li><a href="https://www.assnat.qc.ca/fr/lien/12779.html">Registre des votes</a>
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>
                             <ul>
-                                <li><strong><a href="http://www.assnat.qc.ca/fr/lien/10126.html">Travaux des
+                                <li><strong><a href="https://www.assnat.qc.ca/fr/lien/10126.html">Travaux des
                                     commissions</a></strong>
                                     <ul>
-                                        <li><a href="http://www.assnat.qc.ca/fr/lien/10126.html">Liste des
+                                        <li><a href="https://www.assnat.qc.ca/fr/lien/10126.html">Liste des
                                             commissions</a></li>
-                                        <li><a href="http://www.assnat.qc.ca/fr/lien/11185.html">Mandats en cours</a>
+                                        <li><a href="https://www.assnat.qc.ca/fr/lien/11185.html">Mandats en cours</a>
                                         </li>
-                                        <li><a href="http://www.assnat.qc.ca/fr/lien/10198.html">Documents déposés</a>
+                                        <li><a href="https://www.assnat.qc.ca/fr/lien/10198.html">Documents déposés</a>
                                         </li>
-                                        <li><a href="http://www.assnat.qc.ca/fr/lien/10140.html">Rapports et documents
+                                        <li><a href="https://www.assnat.qc.ca/fr/lien/10140.html">Rapports et documents
                                             de réflexion</a></li>
                                     </ul>
                                 </li>
@@ -574,43 +592,37 @@
                         <div class='menuHoverEnfant'>
 
                             <ul>
-                                <li><strong><a href="http://www.assnat.qc.ca/fr/lien/10999.html">Pétitions</a></strong>
+                                <li><strong><a href="https://www.assnat.qc.ca/fr/lien/10999.html">Pétitions</a></strong>
                                     <ul>
-                                        <li><a href="http://www.assnat.qc.ca/fr/lien/11001.html">Signer une pétition
+                                        <li><a href="https://www.assnat.qc.ca/fr/lien/11001.html">Signer une pétition
                                             électronique</a></li>
-                                        <li><a href="http://www.assnat.qc.ca/fr/lien/11003.html">Consulter une pétition
+                                        <li><a href="https://www.assnat.qc.ca/fr/lien/11003.html">Consulter une pétition
                                             présentée à l'Assemblée</a></li>
-                                        <li><a href="http://www.assnat.qc.ca/fr/lien/10108.html">Lancer une pétition</a>
-                                        </li>
+                                        <li><a href="https://www.assnat.qc.ca/fr/lien/10108.html">Lancer une
+                                            pétition</a></li>
                                         <li>
-                                            <a href="http://www.assnat.qc.ca/fr/exprimez-votre-opinion/petition/cheminement-petition">Cheminement
+                                            <a href="https://www.assnat.qc.ca/fr/exprimez-votre-opinion/petition/cheminement-petition">Cheminement
                                                 d'une pétition</a></li>
                                     </ul>
                                 </li>
                             </ul>
                             <ul>
-                                <li><strong><a href="http://www.assnat.qc.ca/tablecitoyenne">Table
-                                    citoyenne</a></strong></li>
-                            </ul>
-                            <ul>
-                                <li><strong><a href="http://www.assnat.qc.ca/fr/lien/10901.html">Consultations
+                                <li><strong><a href="https://www.assnat.qc.ca/fr/lien/10901.html">Consultations
                                     publiques</a></strong>
                                     <ul>
-                                        <li><a href="http://www.assnat.qc.ca/fr/lien/10901.html#CommentParticiper">Comment
+                                        <li><a href="https://www.assnat.qc.ca/fr/lien/10901.html#CommentParticiper">Comment
                                             participer à une consultation</a></li>
-                                        <li><a href="http://www.assnat.qc.ca/fr/lien/10126.html">Liste des consultations
-                                            publiques</a></li>
-                                        <li><a href="http://www.assnat.qc.ca/fr/lien/10995.html">Participer à une
-                                            consultation en ligne</a></li>
+                                        <li><a href="https://www.assnat.qc.ca/fr/lien/10126.html">Liste des
+                                            consultations publiques</a></li>
                                     </ul>
                                 </li>
                             </ul>
                             <ul>
-                                <li><strong><a href="http://www.assnat.qc.ca/fr/lien/10997.html">Commenter un sujet à
+                                <li><strong><a href="https://www.assnat.qc.ca/fr/lien/10997.html">Commenter un sujet à
                                     l'étude</a></strong></li>
                             </ul>
                             <ul>
-                                <li><strong><a href="http://www.assnat.qc.ca/fr/lien/10110.html">Présenter un projet de
+                                <li><strong><a href="https://www.assnat.qc.ca/fr/lien/10110.html">Présenter un projet de
                                     loi d'intérêt privé</a></strong></li>
                             </ul>
 
@@ -622,37 +634,37 @@
                         <div class='menuHoverEnfant'>
 
                             <ul>
-                                <li><a href="http://www.assnat.qc.ca/fr/lien/12541.html"><strong>En direct et
+                                <li><a href="https://www.assnat.qc.ca/fr/lien/12541.html"><strong>En direct et
                                     webdiffusions à venir</strong></a></li>
-                                <li><a href="http://www.assnat.qc.ca/fr/lien/12543.html"><strong>Archives des travaux et
-                                    activités parlementaires</strong></a>
+                                <li><a href="https://www.assnat.qc.ca/fr/lien/12543.html"><strong>Archives des travaux
+                                    et activités parlementaires</strong></a>
                                     <ul>
-                                        <li><a href="http://www.assnat.qc.ca/fr/lien/12545.html">Travaux de
+                                        <li><a href="https://www.assnat.qc.ca/fr/lien/12545.html">Travaux de
                                             l'Assemblée </a></li>
-                                        <li><a href="http://www.assnat.qc.ca/fr/lien/12559.html">Travaux des
+                                        <li><a href="https://www.assnat.qc.ca/fr/lien/12559.html">Travaux des
                                             commissions</a></li>
-                                        <li><a href="http://www.assnat.qc.ca/fr/lien/12547.html">Activités de
+                                        <li><a href="https://www.assnat.qc.ca/fr/lien/12547.html">Activités de
                                             presse </a></li>
-                                        <li><a href="http://www.assnat.qc.ca/fr/lien/12549.html">Activités spéciales et
+                                        <li><a href="https://www.assnat.qc.ca/fr/lien/12549.html">Activités spéciales et
                                             institutionnelles</a></li>
-                                        <li><a href="http://www.assnat.qc.ca/fr/lien/12551.html">Députés</a></li>
+                                        <li><a href="https://www.assnat.qc.ca/fr/lien/12551.html">Députés</a></li>
                                     </ul>
                                 </li>
                             </ul>
                             <ul>
-                                <li><a href="http://www.assnat.qc.ca/fr/lien/12553.html"><strong>Le Canal de
+                                <li><a href="https://www.assnat.qc.ca/fr/lien/12553.html"><strong>Le Canal de
                                     l'Assemblée</strong></a></li>
                             </ul>
                             <ul>
-                                <li><a href="http://www.assnat.qc.ca/fr/lien/12555.html"><strong>Émissions et capsules
+                                <li><a href="https://www.assnat.qc.ca/fr/lien/12555.html"><strong>Émissions et capsules
                                     promotionnelles</strong></a></li>
                             </ul>
                             <ul>
-                                <li><a href="http://www.assnat.qc.ca/fr/lien/12561.html"><strong>Espace
+                                <li><a href="https://www.assnat.qc.ca/fr/lien/12561.html"><strong>Espace
                                     jeunesse</strong></a></li>
                             </ul>
                             <ul>
-                                <li><a href="http://www.assnat.qc.ca/fr/lien/11183.html"><strong>Commander un
+                                <li><a href="https://www.assnat.qc.ca/fr/lien/11183.html"><strong>Commander un
                                     extrait</strong></a></li>
                             </ul>
 
@@ -842,7 +854,8 @@
 
 
         <div id="FilAriane" class="FilAriane">
-            <span id="ctl00_FilAriane_FilAriane1_SiteMapPath1"><span><a href="/fr/index.html">Accueil</a></span><span> &gt; </span><span>D&#233;put&#233;s</span></span>
+            <span id="ctl00_FilAriane_FilAriane1_SiteMapPath1"><span><a href="/fr/index.html">Accueil</a></span><span> &gt; </span><span><a
+                    href="/fr/deputes/index.html">D&#233;put&#233;s</a></span><span> &gt; </span><span>Manon Mass&#233;</span></span>
         </div>
 
 
@@ -916,7 +929,7 @@
                             </li>
                             <li>
                                 <a href="/fr/deputes/statistiques-deputes.html" class="">
-                                    Statistiques sur les députés</a>
+                                    Portrait statistique des parlementaires</a>
                             </li>
                             <li>
                                 <a href="/fr/deputes/cerclefemmes/index.html" class="">
@@ -970,7 +983,7 @@
                     <div class="my-skinnable-select" id="choixDepute" data-champ="EtatDepute">
                         <select name="ctl00$ColGauche$RechercheDeputes$ddlChoixEtatDepute"
                                 id="ctl00_ColGauche_RechercheDeputes_ddlChoixEtatDepute"
-                                title="Dans le cas d’anciens députés, la recherche porte sur les ex-députés faisant partie du Parlement du Québec depuis 1792."
+                                title="Dans le cas d’anciens députés, la recherche porte sur les ex-députés faisant partie du Parlement du Québec depuis 1764."
                                 class="choixDepute BulleInfo">
                             <option value="DeputesEnFonctions">D&#233;put&#233;s en fonction</option>
                             <option value="AncienDeputes">Anciens d&#233;put&#233;s</option>
@@ -1120,6 +1133,7 @@
                                 id="ctl00_ColGauche_RechercheDeputes_ddlChoixPartiPolitique">
                             <option selected="selected" value="-1">Tous les partis</option>
                             <option value="79" title="Coalition avenir Québec">Coalition avenir Qu&#233;bec</option>
+                            <option value="7" title="Indépendant">Ind&#233;pendant</option>
                             <option value="75" title="Indépendante">Ind&#233;pendante</option>
                             <option value="23" title="Parti libéral du Québec">Parti lib&#233;ral du Qu&#233;bec
                             </option>
@@ -1356,6 +1370,14 @@
 
             <!-- PlaceHolder: permet d'afficher une accroche (defaut: vide) -->
 
+            <div id="ctl00_Accroche_pnlMomentDissolution" style="position: relative;">
+
+                <div style="position: absolute; top: -42px;">
+
+                </div>
+
+            </div>
+
 
             <!-- PlaceHolder: conteneur pour tout le contenu excepte la navigation -->
 
@@ -1400,21 +1422,21 @@
 
                             <li>
                                 <a target="_blank"
-                                   href='http://www.facebook.com/sharer/sharer.php?u=http://www.assnat.qc.ca%2ffr%2fdeputes%2findex.html'
+                                   href='http://www.facebook.com/sharer/sharer.php?u=http://www.assnat.qc.ca%2ffr%2fdeputes%2fmasse-manon-15421%2findex.html'
                                    class="nePasRediriger">
                                     <img alt="Partager par Facebook" title="Partager par Facebook"
                                          src='/Images/icones/partageFacebook.gif'/></a>
                             </li>
                             <li>
                                 <a target="_blank"
-                                   href='http://twitter.com/home?status=http://www.assnat.qc.ca%2ffr%2fdeputes%2findex.html'
+                                   href='http://twitter.com/home?status=http://www.assnat.qc.ca%2ffr%2fdeputes%2fmasse-manon-15421%2findex.html'
                                    class="nePasRediriger">
                                     <img alt="Partager par Twitter" title="Partager par Twitter"
                                          src='/Images/icones/partageTwitter.gif'/></a>
                             </li>
                             <li>
                                 <a target="_blank"
-                                   href='http://www.linkedin.com/cws/share?url=http://www.assnat.qc.ca%2ffr%2fdeputes%2findex.html'
+                                   href='http://www.linkedin.com/cws/share?url=http://www.assnat.qc.ca%2ffr%2fdeputes%2fmasse-manon-15421%2findex.html'
                                    class="nePasRediriger">
                                     <img alt="Partager par LinkedIn" title="Partager par LinkedIn"
                                          src='/Images/icones/partageLinkedin.gif'/></a>
@@ -1451,7 +1473,7 @@
             </div>
 
             <!-- Note sur les titres H1: dans ce gabarit, il y a 2 emplacements possibles pour le H1. Le cas
-						 le plus usuel est généré par défaut. Si necessaire, overrider dans la page ASPX -->
+                 le plus usuel est généré par défaut. Si necessaire, overrider dans la page ASPX -->
 
             <!-- PlaceHolder: permet d'afficher le titre sur les 2 colonnes. Cas plus rare. (default: vide) -->
 
@@ -1464,48 +1486,220 @@
 
                     <!-- PlaceHolder: permet d'afficher le titre sur 1 colonne. Cas usuel. (default: s'affiche) -->
 
-                    <h1>Députés</h1>
-
 
                     <!-- PlaceHolder: contenu principal de la page (defaut: vide) -->
 
+                    <script type="text/javascript">
+                        var nombreResultatsTotal = 1;
+                    </script>
+                    <input type="hidden" id="listeDocumentTravaux" value="-"/>
 
-                    <p>L'Assemblée nationale est composée de 125 personnes&nbsp;: chacune est&nbsp;élue dans une
-                        circonscription électorale selon le mode de scrutin majoritaire uninominal à un tour.&nbsp;Les
-                        dernières élections ont eu lieu le <strong>3&nbsp;octobre&nbsp;2022</strong>.</p>
-                    <p>Depuis le 1<sup>er</sup> décembre 2022, la composition de l'Assemblée est la suivante&nbsp;:</p>
+                    <img alt="Manon Massé" title="Manon Massé"
+                         src="https://www.assnat.qc.ca/Media/Process.aspx?asset=ANQ.Vigie.Bll.Image_7751&amp;process=Original&amp;token=ZyMoxNwUn8ikQ+TRKYwPCjWrKwg+vIv9rjij7p3xLGTZDmLVSmJLoqe/vG7/YWzz"
+                         class="photoDepute"/>
+
+
+                    <div class="enteteFicheDepute">
+
+                        <script type="text/javascript">
+                            var nomDepute = "Massé";
+                        </script>
+                        <h1>Manon&nbsp;<span class="nomDepute">Massé</span></h1>
+
+
+                        <ul>
+
+
+                            <li>Députée de Sainte-Marie–Saint-Jacques</li>
+
+
+                            <li>Québec solidaire</li>
+
+
+                            <li>Vice-présidente de la Commission des relations avec les citoyens</li>
+
+                            <li>Porte-parole du deuxième groupe d’opposition en matière de lutte contre l’itinérance
+                            </li>
+
+                            <li>Porte-parole du deuxième groupe d’opposition en matière de relations avec les Premières
+                                Nations et les Inuit
+                            </li>
+
+                            <li>Porte-parole du deuxième groupe d’opposition en matière de services sociaux en
+                                Déficience intellectuelle et TSA (DI-TSA)
+                            </li>
+
+                            <li>Porte-parole du deuxième groupe d’opposition pour les communautés LGBTQ+</li>
+
+
+                        </ul>
+
+
+                    </div>
+                    <div class="clear">&nbsp;</div>
+
                     <ul>
-                        <li>Coalition avenir Québec&nbsp;: 90 députés<br/>
-                            <!--&nbsp;&nbsp;&nbsp;Ce parti forme le gouvernement.--></li>
-                        <li>Parti libéral du Québec&nbsp;: 19 députés<br/>
-                            <!--&nbsp;&nbsp;&nbsp;Ce parti forme l'opposition officielle.--></li>
-                        <li>Québec solidaire&nbsp;:&nbsp;11 députés<br/>
-                            <!--&nbsp;&nbsp;&nbsp;Ce parti forme le deuxième groupe d'opposition.--></li>
-                        <li>Parti québécois&nbsp;: 3 députés<br/>
-                            <!--&nbsp;&nbsp;&nbsp;Ce parti forme le troisième groupe d'opposition.--></li>
-                        <li>Indépendant : 1 <!--
-<ul>
-<li>Parti conservateur du Québec : 1</li>
-<li>Autres : 4</li>
-</ul>
---></li>
-                        <li>Circonscription vacante&nbsp;: 1 (Saint-Henri–Sainte-Anne)</li>
+                        <li><a href='/fr/video-audio/archives-parlementaires/deputes/AudioVideo-53663.html'>Vidéo de
+                            présentation</a></li>
                     </ul>
-                    <!--
-<p>Veuillez noter qu'un dépouillement judiciaire est en cours dans la circonscription électorale de Beauce-Nord.&nbsp;</p>
--->
-                    <p><a href="https://assnat.qc.ca/fr/deputes/bureau-saint-henri-sainte-anne.html">Coordonnées du
-                        bureau de la circonscription de Saint-Henri–Sainte-Anne</a></p>
-                    <p>Pour consulter la fiche biographique d'un député, cliquer sur son nom dans la liste des députés
-                        en fonction.</p>
-                    <p>Pour en savoir plus sur&nbsp;:</p>
+
+
+                    <div id="ctl00_ColCentre_ContenuColonneGauche_onglets" class="tabulationFicheDepute">
+
+                        <ul class="ui-tabs-nav">
+                            <li class="premier ui-tabs-selected">
+                                <a href="https://www.assnat.qc.ca/fr/deputes/masse-manon-15421/index.html"
+                                   id="ctl00_ColCentre_ContenuColonneGauche_index" class="actif">Fonctions</a>
+                            </li>
+                            <li>
+                                <a href="https://www.assnat.qc.ca/fr/deputes/masse-manon-15421/biographie.html"
+                                   id="ctl00_ColCentre_ContenuColonneGauche_biographie"
+                                   class="ancreNommee">Biographie</a>
+                            </li>
+                            <li>
+                                <a href="https://www.assnat.qc.ca/fr/deputes/masse-manon-15421/interventions.html"
+                                   id="ctl00_ColCentre_ContenuColonneGauche_interventions" class="ancreNommee">Interventions</a>
+                            </li>
+                            <li>
+                                <a href="https://www.assnat.qc.ca/fr/deputes/masse-manon-15421/conferencesDePresse.html"
+                                   id="ctl00_ColCentre_ContenuColonneGauche_conferencesDePresse" class="ancreNommee">Activités
+                                    de presse</a>
+                            </li>
+                            <li>
+                                <a href="https://www.assnat.qc.ca/fr/deputes/masse-manon-15421/projetsDeLoi.html"
+                                   id="ctl00_ColCentre_ContenuColonneGauche_projetsDeLoi" class="ancreNommee">Projets de
+                                    loi</a>
+                            </li>
+
+                            <li>
+                                <a href="https://www.assnat.qc.ca/fr/deputes/masse-manon-15421/depenses.html"
+                                   id="ctl00_ColCentre_ContenuColonneGauche_depenses" class="ancreNommee">Dépenses</a>
+                            </li>
+
+                            <li>
+                                <a href="https://www.assnat.qc.ca/fr/deputes/masse-manon-15421/coordonnees.html"
+                                   id="ctl00_ColCentre_ContenuColonneGauche_coordonnees"
+                                   class="ancreNommee">Coordonnées</a>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                    <a id="bouton-gauche" href="#"><img id="fleche-navigation-gauche" src='/Images/flecheGactive.gif'/></a>
+                    <a id="bouton-droite" href="#"><img id="fleche-navigation-droite" src='/Images/flecheDactive.gif'/></a>
+
+                    <div class="clear">
+                    </div>
+
+
+                    <h2>Fonctions politiques, parlementaires et ministérielles</h2>
+
+
+                    <h3>Réélue députée de la circonscription de Sainte-Marie–Saint-Jacques aux élections générales du 3
+                        octobre 2022</h3>
                     <ul>
-                        <li><a href="http://www.assnat.qc.ca/fr/lien/10042.html#modedescrutin">le mode de scrutin
-                            majoritaire uninominal à un tour </a></li>
-                        <li><a href="http://www.assnat.qc.ca/fr/lien/10042.html">la&nbsp;fonction de député</a></li>
+                        <h4>Fonctions actuelles</h4>
+
+                        <li>Vice-présidente de la Commission des relations avec les citoyens depuis le 6 décembre 2022
+                        </li>
+
+                        <li>Porte-parole du deuxième groupe d’opposition en matière de lutte contre l’itinérance depuis
+                            le 27 octobre 2022
+                        </li>
+
+                        <li>Porte-parole du deuxième groupe d’opposition en matière de relations avec les Premières
+                            Nations et les Inuit depuis le 27 octobre 2022
+                        </li>
+
+                        <li>Porte-parole du deuxième groupe d’opposition en matière de services sociaux en Déficience
+                            intellectuelle et TSA (DI-TSA) depuis le 27 octobre 2022
+                        </li>
+
+                        <li>Porte-parole du deuxième groupe d’opposition pour les communautés LGBTQ+ depuis le 27
+                            octobre 2022
+                        </li>
+
+
+                        <h4>Fonctions précédentes</h4>
+
+                        <li>Porte-parole du deuxième groupe d’opposition en matière de santé mentale du 27 octobre 2022
+                            au 28 mars 2023
+                        </li>
+
+                        <li>Porte-parole du deuxième groupe d’opposition en matière de solidarité sociale et d’action
+                            communautaire du 27 octobre 2022 au 28 mars 2023
+                        </li>
+
                     </ul>
-                    <p><a href="http://www.assnat.qc.ca/fr/lien/11861.html">Pour consulter la liste des députés depuis
-                        1764</a></p>
+
+
+                    <h3>Réélue députée de la circonscription de Sainte-Marie–Saint-Jacques aux élections générales du 1
+                        octobre 2018</h3>
+                    <ul>
+
+                        <li>Membre de la Commission de l’agriculture, des pêcheries, de l’énergie et des ressources
+                            naturelles du 14 septembre 2021 au 28 août 2022
+                        </li>
+
+                        <li>Porte-parole du deuxième groupe d’opposition en matière d’énergie et de ressources
+                            naturelles du 25 août 2021 au 28 août 2022
+                        </li>
+
+                        <li>Porte-parole du deuxième groupe d’opposition en matière de condition féminine du 25 août
+                            2021 au 28 août 2022
+                        </li>
+
+                        <li>Porte-parole du deuxième groupe d’opposition en matière de transition verte du 25 août 2021
+                            au 28 août 2022
+                        </li>
+
+                        <li>Porte-parole du deuxième groupe d’opposition pour la jeunesse du 25 août 2021 au 28 août
+                            2022
+                        </li>
+
+                        <li>Porte-parole du deuxième groupe d’opposition pour les dossiers LGBTQ+ du 25 août 2021 au 28
+                            août 2022
+                        </li>
+
+                        <li>Porte-parole du deuxième groupe d’opposition en matière de transition verte et de
+                            changements climatiques du 29 janvier 2021 au 25 août 2021
+                        </li>
+
+                        <li>Cheffe du deuxième groupe d’opposition du 21 mars 2019 au 1 août 2021</li>
+
+                        <li>Porte-parole du deuxième groupe d’opposition en matière d’affaires autochtones du 21 mars
+                            2019 au 28 août 2022
+                        </li>
+
+                        <li>Porte-parole du deuxième groupe d’opposition en matière de changements climatiques du 21
+                            mars 2019 au 29 janvier 2021
+                        </li>
+
+                        <li>Porte-parole du deuxième groupe d’opposition pour la réforme du mode de scrutin du 21 mars
+                            2019 au 12 août 2019
+                        </li>
+
+                        <li>Porte-parole du troisième groupe d’opposition en matière d’affaires autochtones du 23
+                            octobre 2018 au 20 mars 2019
+                        </li>
+
+                        <li>Porte-parole du troisième groupe d’opposition en matière de changements climatiques du 23
+                            octobre 2018 au 20 mars 2019
+                        </li>
+
+                        <li>Porte-parole du troisième groupe d’opposition pour la réforme du mode de scrutin du 23
+                            octobre 2018 au 20 mars 2019
+                        </li>
+
+                        <li>Cheffe du troisième groupe d’opposition du 10 octobre 2018 au 20 mars 2019</li>
+
+                    </ul>
+
+                    <h3>Élue députée de la circonscription de Sainte-Marie–Saint-Jacques aux élections générales du 7
+                        avril 2014</h3>
+                    <ul>
+
+                    </ul>
 
 
                 </div>
@@ -1514,157 +1708,11 @@
 
                     <!-- PlaceHolder: contenu secondaire de la page (defaut: vide) -->
 
-
-                    <h2>Cercle des ex-parlementaires de l’Assemblée nationale du Québec</h2>
-                    <p>Cette association regroupe les anciens députés de l’Assemblée nationale. Elle fait la promotion
-                        des institutions parlementaires du Québec et diffuse de l’information sur le
-                        parlementarisme.</p>
-                    <p><a href="http://www.assnat.qc.ca/fr/lien/10965.html">Consulter le site du Cercle des
-                        ex-parlementaires de l’Assemblée nationale du Québec</a>.</p>
-
-
                 </div>
 
             </div>
 
             <!-- PlaceHolder: permet d'afficher du texte en dessous des colonnes -->
-
-
-            <div class="clear"></div>
-
-
-            <div class="hr">
-                <hr/>
-            </div>
-            <a name="listeDeputes"></a>
-
-            <h3 class="headerCouleur">Liste des députés en fonction</h3>
-
-
-            <ul class="listeIconesHorizontale">
-                <li class="icoPDF">
-                    <a href="/fr/deputes/rapport-liste-depute.html">Télécharger la liste complète des coordonnées des
-                        députés (PDF)</a>
-                </li>
-            </ul>
-            <br/>
-
-            <table id="ListeDeputes" class="tableTriable">
-                <caption>Liste des députés en fonction</caption>
-
-
-                <thead>
-                <tr>
-                    <th scope="col" class="premiereColonne colonneNom header">
-                        Nom
-                    </th>
-                    <th scope="col" class="header">
-                        Circonscription
-                    </th>
-                    <th scope="col" class="header">
-                        Allégeance politique
-                    </th>
-
-
-                    <th scope="col">Courriel</th>
-
-                </tr>
-                </thead>
-
-
-                <tbody>
-                <tr>
-                    <td>
-                        <a href="src/test/resources/scrapers/pages/deputy_m.html">Bonnardel,&nbsp;François&nbsp;</a>
-                    </td>
-                    <td>
-                        Granby
-                    </td>
-                    <td>
-                        Coalition avenir Québec
-                    </td>
-                    <td>
-                        <ul class="listeIconesHorizontale">
-                            <li class="icoCourriel"><a href="mailto:Francois.Bonnardel.GRAN@assnat.qc.ca"
-                                                       class="nePasRediriger">Courriel</a></li>
-                        </ul>  <!-- -->
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="src/test/resources/scrapers/pages/deputy_f.html">Massé,&nbsp;Manon&nbsp;</a>
-                    </td>
-                    <td>
-                        Sainte-Marie–Saint-Jacques
-                    </td>
-                    <td>
-                        Québec solidaire
-                    </td>
-                    <td>
-                        <ul class="listeIconesHorizontale">
-                            <li class="icoCourriel"><a href="mailto:Manon.Masse.SMSJ@assnat.qc.ca"
-                                                       class="nePasRediriger">Courriel</a></li>
-                        </ul>  <!-- -->
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <a href="src/test/resources/scrapers/pages/deputy_m.html">Beauchemin,&nbsp;Frédéric&nbsp;</a>
-                    </td>
-                    <td>
-                        Marguerite-Bourgeoys
-                    </td>
-                    <td>
-                        Indépendant
-                    </td>
-                    <td>
-                        <ul class="listeIconesHorizontale">
-                            <li class="icoCourriel"><a href="mailto:Frederic.Beauchemin.MABO@assnat.qc.ca"
-                                                       class="nePasRediriger">Courriel</a></li>
-                        </ul>  <!-- -->
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="src/test/resources/scrapers/pages/deputy_f.html">Nichols,&nbsp;Marie-Claude&nbsp;</a>
-                    </td>
-                    <td>
-                        Vaudreuil
-                    </td>
-                    <td>
-                        Indépendante
-                    </td>
-                    <td>
-                        <ul class="listeIconesHorizontale">
-                            <li class="icoCourriel"><a href="mailto:Marie-Claude.Nichols.VAUD@assnat.qc.ca"
-                                                       class="nePasRediriger">Courriel</a></li>
-                        </ul>  <!-- -->
-                    </td>
-                </tr>
-                </tbody>
-
-
-            </table>
-
-
-            <script type="text/javascript">
-                //<![CDATA[
-
-                $(document).ready(trierTable);
-
-                function trierTable() {
-                    $("#ListeDeputes").tablesorter({
-                        widthFixed: true,
-                        textExtraction: 'complex',
-                        widgets: ['zebra'],
-                        sortList: [[0, 0]],
-                        headers: {3: {sorter: false}}
-                    });
-                }
-
-                //]]>
-            </script>
 
 
             <!-- PlaceHolder: contenu en complement de la page -->
@@ -1676,6 +1724,9 @@
         <div class="ColDroite colonne"></div>
 
         <div class="clear" id="ClearPiedPage"></div>
+
+        <!-- Bandeau lorsque la langue est différente que français -->
+
 
         <!-- PiedDePage: affiche le contenu du pied de page -->
 
@@ -1705,35 +1756,24 @@
                 <li><a href="/fr/propos-site/index.html">À propos du site</a></li>
                 <li><a href="/fr/propos-site/droits-propriete-intellectuelle.html">Conditions d'utilisation</a></li>
                 <li><a href="https://m.assnat.qc.ca">Mobile</a></li>
+
+
+                <li><a href="/en/deputes/masse-manon-15421/index.html">English</a></li>
+
+
             </ul>
+
             <br/>
             <span class="NonVisible">
 
+                <ul>
+
+                <li class="Premier">Date de la dernière modification : 3 octobre 2022 </li>
+
+                </ul>
+
     </span>
         </div>
-
-
-        <script type="text/javascript">
-            var isPiwikActiver = 'True';
-            var PiwikIdSite = '3';
-            if (isPiwikActiver == "True") {
-                var u = (("https:" == document.location.protocol) ? "https" : "http") + "://stats.assnat.qc.ca/piwik/";
-                var _paq = _paq || [];
-                _paq.push(["trackPageView"]);
-                _paq.push(["enableLinkTracking"]);
-
-                (function () {
-                    _paq.push(["setTrackerUrl", u + "piwik.php"]);
-                    _paq.push(["setSiteId", PiwikIdSite]);
-                    var d = document, g = d.createElement("script"), s = d.getElementsByTagName("script")[0];
-                    g.type = "text/javascript";
-                    g.defer = true;
-                    g.async = true;
-                    g.src = u + "piwik.js";
-                    s.parentNode.insertBefore(g, s);
-                })();
-            }
-        </script>
     </div>
 </form>
 

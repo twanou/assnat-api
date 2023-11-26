@@ -19,7 +19,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.function.Supplier;
 
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -30,18 +32,24 @@ class DeputyScraperTest {
     @Spy
     private AssNatWebClient assNatWebClientSpy = new AssNatWebClient("file://");
     private DeputyScraper deputyScraper;
-    private static final String DEPUTY_PAGE = new File("src/test/resources/scrapers/pages/deputies.html").getAbsolutePath();
+    private static final String DEPUTIES_PAGE = "src/test/resources/scrapers/pages/deputies.html";
     private static final String JSON_EXPECTED_RESULTS = "src/test/resources/scrapers/results/deputies.json";
 
     @BeforeEach
     void setup() {
-        this.deputyScraper = new DeputyScraper(DEPUTY_PAGE, assNatWebClientSpy, errorHandlerMock);
+        this.deputyScraper = new DeputyScraper(DEPUTIES_PAGE, assNatWebClientSpy, errorHandlerMock);
     }
 
     @Test
     void scrape() throws IOException {
+        doAnswer(invocation -> {
+            Object[] args = invocation.getArguments();
+            args[0] = new File((String) args[0]).getAbsolutePath();
+            return invocation.callRealMethod();
+        }).when(assNatWebClientSpy).getRelativePage(anyString());
+
         List<ScrapedDeputy> scrapedDeputies = this.deputyScraper.scrape();
-        verify(assNatWebClientSpy).getRelativePage(DEPUTY_PAGE);
+
         verify(errorHandlerMock).assertSize(eq(scrapedDeputies.size()), eq(scrapedDeputies), ArgumentMatchers.<Supplier<ScrapingException>>any());
         TestUtils.assertFileEquals(JSON_EXPECTED_RESULTS, scrapedDeputies, new TypeReference<>() {
         });
