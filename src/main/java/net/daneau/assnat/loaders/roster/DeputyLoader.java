@@ -27,10 +27,8 @@ class DeputyLoader {
                 deputies.add(
                         this.deputyRepository.save(
                                 Deputy.builder()
-                                        .title(scrapedDeputy.getTitle())
                                         .firstName(scrapedDeputy.getFirstName())
                                         .lastName(scrapedDeputy.getLastName())
-                                        .functions(scrapedDeputy.getFunctions())
                                         .build()));
             }
         }

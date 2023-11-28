@@ -55,8 +55,6 @@ public class RosterLoader {
                                 .partyId(party.getId())
                                 .build()
                 );
-                //File file = new File("images/" + deputy.getId() + ".jpg");
-                //scrapedDeputy.getImage().saveAs(file);
             }
             this.rosterRepository.save(
                     Roster.builder()

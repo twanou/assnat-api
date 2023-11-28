@@ -1,11 +1,9 @@
 package net.daneau.assnat.scrappers.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
 import lombok.extern.jackson.Jacksonized;
-import org.htmlunit.html.HtmlImage;
 
 import java.util.List;
 
@@ -20,7 +18,9 @@ public class ScrapedDeputy {
     String district;
     String party;
     List<String> functions;
-    @JsonIgnore
+    /**
+     * Photo encodée en base64
+     */
     @EqualsAndHashCode.Exclude
-    HtmlImage image;
+    String photo;
 }
