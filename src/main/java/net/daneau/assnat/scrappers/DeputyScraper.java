@@ -46,7 +46,6 @@ public class DeputyScraper {
         HtmlPage page = this.webClient.getRelativePage(relativeUrl);
         List<DomElement> rows = page.getByXPath("//table[@id='ListeDeputes']//tbody//tr");
         List<ScrapedDeputy> deputies = new ArrayList<>();
-        int x = 0;
         for (DomElement row : rows) {
             List<HtmlTableDataCell> cells = row.getByXPath(".//td");
             HtmlPage deputyPage = this.getDeputyPage(cells.get(0));
@@ -62,7 +61,6 @@ public class DeputyScraper {
                             .photo(this.getPhotoBase64(deputyPage))
                             .build()
             );
-            log.info("depute " + x++);
         }
         log.info("Fin scraping députés");
         this.errorHandler.assertSize(rows.size(), deputies, () -> new ScrapingException("Nombre de député invalide"));
