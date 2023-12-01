@@ -18,6 +18,7 @@ import org.htmlunit.html.HtmlTableDataCell;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.io.InputStream;
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -92,7 +93,8 @@ public class DeputyScraper {
     private String getPhotoBase64(HtmlPage deputyPage) {
         HtmlImage htmlImage = deputyPage.getFirstByXPath("//img[@class='photoDepute']");
         try {
-            return Base64.getEncoder().encodeToString(IOUtils.toByteArray(htmlImage.getWebResponse(true).getContentAsStream()));
+            InputStream deputyImageStream = htmlImage.getWebResponse(true).getContentAsStream();
+            return Base64.getEncoder().encodeToString(IOUtils.toByteArray(deputyImageStream));
         } catch (Exception e) {
             throw new ScrapingException("Impossible d'extraire la photo", e);
         }
