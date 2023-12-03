@@ -9,6 +9,7 @@ import net.daneau.assnat.utils.ErrorHandler;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -31,6 +32,7 @@ class DeputyFinderTest {
     private DeputyRepository deputyRepositoryMock;
     @Mock
     private ErrorHandler errorHandlerMock;
+    @InjectMocks
     private DeputyFinder deputyFinder;
 
     @Test
@@ -44,7 +46,6 @@ class DeputyFinderTest {
                 deputyParizeau,
                 Deputy.builder().id("4").title("M.").firstName("René").lastName("Lévesque").build()
         ));
-        this.deputyFinder = new DeputyFinder(assignmentRepositoryMock, deputyRepositoryMock, errorHandlerMock);
 
         Assignment assignment = this.deputyFinder.findByCompleteName("M. Jacques Parizeau");
         verify(errorHandlerMock).assertSize(eq(1), eq(List.of(deputyParizeau)), ArgumentMatchers.<Supplier<LoadingException>>any());

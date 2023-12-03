@@ -11,5 +11,5 @@ public interface AssignmentRepository extends MongoRepository<Assignment, String
 
     List<Assignment> findByEndDate(LocalDate endDate);
 
-    Optional<Assignment> findByDeputyIdAndDistrictIdAndPartyIdAndEndDate(String deputyId, String districtId, String partyId, LocalDate endDate);
+    Optional<Assignment> findByDeputyIdAndEndDate(String deputyId, LocalDate endDate);
 }

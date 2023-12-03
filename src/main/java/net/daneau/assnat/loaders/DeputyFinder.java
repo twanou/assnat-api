@@ -2,6 +2,7 @@ package net.daneau.assnat.loaders;
 
 
 import jakarta.annotation.Nonnull;
+import lombok.RequiredArgsConstructor;
 import net.daneau.assnat.client.documents.Assignment;
 import net.daneau.assnat.client.documents.Deputy;
 import net.daneau.assnat.client.repositories.AssignmentRepository;
@@ -20,6 +21,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class DeputyFinder implements ApplicationListener<AssignmentUpdateEvent> {
 
     private final AssignmentRepository assignmentRepository;
@@ -29,19 +31,15 @@ public class DeputyFinder implements ApplicationListener<AssignmentUpdateEvent> 
 
     private static final String COMPLETE_NAME_FORMAT = "%s %s %s";
 
-    public DeputyFinder(AssignmentRepository assignmentRepository, DeputyRepository deputyRepository, ErrorHandler errorHandler) {
-        this.assignmentRepository = assignmentRepository;
-        this.deputyRepository = deputyRepository;
-        this.errorHandler = errorHandler;
-        this.refreshCache();
-    }
-
     @Override
     public void onApplicationEvent(@Nonnull AssignmentUpdateEvent event) {
         this.refreshCache();
     }
 
     public Assignment findByCompleteName(String completeName) {
+        if (this.cache.isEmpty()) {
+            this.refreshCache();
+        }
         List<Deputy> results = this.cache
                 .orElseThrow(() -> new LoadingException("La cache de députés n'a pas été initialisée."))
                 .deputies.stream()
@@ -54,10 +52,10 @@ public class DeputyFinder implements ApplicationListener<AssignmentUpdateEvent> 
     }
 
     private void refreshCache() {
-        this.cache = this.buildCache();
+        this.cache = this.initCache();
     }
 
-    private Optional<Cache> buildCache() {
+    private Optional<Cache> initCache() {
         List<Assignment> currentAssignments = this.assignmentRepository.findByEndDate(null);
         if (currentAssignments.isEmpty()) {
             return Optional.empty();

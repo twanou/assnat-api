@@ -35,6 +35,7 @@ public class AssignmentLoader {
         List<ScrapedDeputy> scrapedDeputies = this.deputyScraper.scrape();
         List<Assignment> currentAssignments = this.assignmentRepository.findByEndDate(null);
 
+        boolean isUpdated = false;
         List<Deputy> deputies = List.of();
         List<Party> parties = List.of();
         List<District> districts = List.of();
@@ -48,7 +49,7 @@ public class AssignmentLoader {
                 Deputy deputy = this.getDeputy(scrapedDeputy, deputies);
                 District district = this.getDistrict(scrapedDeputy, districts);
                 Party party = this.getParty(scrapedDeputy, parties);
-                Optional<Assignment> oldAssignment = this.assignmentRepository.findByDeputyIdAndDistrictIdAndPartyIdAndEndDate(deputy.getId(), district.getId(), party.getId(), null);
+                Optional<Assignment> oldAssignment = this.assignmentRepository.findByDeputyIdAndEndDate(deputy.getId(), null);
                 oldAssignment.ifPresent(old -> this.assignmentRepository.save(old.withEndDate(LocalDate.now())));
                 this.assignmentRepository.save(
                         Assignment.builder()
@@ -60,9 +61,12 @@ public class AssignmentLoader {
                                 .functions(scrapedDeputy.getFunctions())
                                 .build()
                 );
+                isUpdated = true;
             }
         }
-        this.eventBus.publishEvent(new AssignmentUpdateEvent(this));
+        if (isUpdated) {
+            this.eventBus.publishEvent(new AssignmentUpdateEvent(this));
+        }
     }
 
     private Deputy getDeputy(ScrapedDeputy scrapedDeputy, List<Deputy> deputies) {

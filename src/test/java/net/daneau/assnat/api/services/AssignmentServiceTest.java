@@ -53,17 +53,18 @@ class AssignmentServiceTest {
     @Test
     void getAllAssignments() {
         Map<String, Depute> deputeMap = Map.of("1", Depute.builder().build());
-        Map<String, Parti> partiMap = Map.of("1", Parti.builder().build());
-        Map<String, Circonscription> circonscriptionMap = Map.of("1", Circonscription.builder().build());
+        Map<String, Parti> partiMap = Map.of("3", Parti.builder().build());
+        Map<String, Circonscription> circonscriptionMap = Map.of("2", Circonscription.builder().build());
         when(deputyServiceMock.getDeputies()).thenReturn(deputeMap);
         when(districtServiceMock.getDistricts()).thenReturn(circonscriptionMap);
         when(partyServiceMock.getParties()).thenReturn(partiMap);
-        Assignment assignment = Assignment.builder().id("0").deputyId("1").districtId("1").partyId("1").build();
+        Assignment assignment = Assignment.builder().id("0").deputyId("1").districtId("2").partyId("3").functions(List.of("depute")).build();
         when(assignmentRepositoryMock.findAll()).thenReturn(List.of(assignment));
 
         Map<String, Affectation> response = this.assignmentService.getAllAssignments();
         assertEquals(deputeMap.get("1").getId(), response.get("0").getDepute().getId());
-        assertEquals(partiMap.get("1").getId(), response.get("0").getParti().getId());
-        assertEquals(circonscriptionMap.get("1").getId(), response.get("0").getCirconscription().getId());
+        assertEquals(partiMap.get("3").getId(), response.get("0").getParti().getId());
+        assertEquals(circonscriptionMap.get("2").getId(), response.get("0").getCirconscription().getId());
+        assertEquals(assignment.getFunctions().get(0), response.get("0").getFonctions().get(0));
     }
 }

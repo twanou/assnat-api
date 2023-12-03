@@ -23,12 +23,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.atMostOnce;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class AssignmentLoaderTest {
@@ -59,7 +55,7 @@ class AssignmentLoaderTest {
         Party landryParty = Party.builder().id("partyId").name("Parti Québecois").build();
         when(deputyScraperMock.scrape()).thenReturn(scrapedDeputies);
         when(assignmentRepositoryMock.findByEndDate(null)).thenReturn(currentAssignments);
-        when(assignmentRepositoryMock.findByDeputyIdAndDistrictIdAndPartyIdAndEndDate("deputyId", "districtId", "partyId", null)).thenReturn(Optional.of(Assignment.builder().hash(1).build()));
+        when(assignmentRepositoryMock.findByDeputyIdAndEndDate("deputyId", null)).thenReturn(Optional.of(Assignment.builder().hash(1).build()));
         when(deputyLoaderMock.load(scrapedDeputies)).thenReturn(List.of(landryDeputy));
         when(districtLoaderMock.load(scrapedDeputies)).thenReturn(List.of(landryDistrict));
         when(partyLoaderMock.load(scrapedDeputies)).thenReturn(List.of(landryParty));
@@ -105,5 +101,16 @@ class AssignmentLoaderTest {
         order.verify(eventBusMock).publishEvent(any(AssignmentUpdateEvent.class));
         verify(assignmentRepositoryMock, atMostOnce()).save(any(Assignment.class));
         verify(errorHandlerMock).assertLessThan(eq(2), eq(List.of(landryDeputy)), argThat(s -> s.get() instanceof LoadingException));
+    }
+
+    @Test
+    void loadNoUpdate() {
+        List<ScrapedDeputy> scrapedDeputies = List.of(ScrapedDeputy.builder().firstName("René").build());
+        List<Assignment> currentAssignments = List.of(Assignment.builder().hash(538951214).build());
+        when(deputyScraperMock.scrape()).thenReturn(scrapedDeputies);
+        when(assignmentRepositoryMock.findByEndDate(null)).thenReturn(currentAssignments);
+        this.assignmentLoader.load();
+        verify(eventBusMock, never()).publishEvent(any(AssignmentUpdateEvent.class));
+        verify(assignmentRepositoryMock, never()).save(any(Assignment.class));
     }
 }
