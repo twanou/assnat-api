@@ -7,7 +7,7 @@ import net.daneau.assnat.client.documents.Assignment;
 import net.daneau.assnat.client.documents.Deputy;
 import net.daneau.assnat.client.repositories.AssignmentRepository;
 import net.daneau.assnat.client.repositories.DeputyRepository;
-import net.daneau.assnat.loaders.events.AssignmentUpdateEvent;
+import net.daneau.assnat.loaders.events.ClearCacheEvent;
 import net.daneau.assnat.loaders.exceptions.LoadingException;
 import net.daneau.assnat.utils.ErrorHandler;
 import org.apache.commons.lang3.StringUtils;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class DeputyFinder implements ApplicationListener<AssignmentUpdateEvent> {
+public class DeputyFinder implements ApplicationListener<ClearCacheEvent> {
 
     private final AssignmentRepository assignmentRepository;
     private final DeputyRepository deputyRepository;
@@ -32,7 +32,7 @@ public class DeputyFinder implements ApplicationListener<AssignmentUpdateEvent> 
     private static final String COMPLETE_NAME_FORMAT = "%s %s %s";
 
     @Override
-    public void onApplicationEvent(@Nonnull AssignmentUpdateEvent event) {
+    public void onApplicationEvent(@Nonnull ClearCacheEvent event) {
         this.refreshCache();
     }
 

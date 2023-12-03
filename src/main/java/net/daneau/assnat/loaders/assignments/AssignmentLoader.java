@@ -1,18 +1,17 @@
 package net.daneau.assnat.loaders.assignments;
 
 import lombok.RequiredArgsConstructor;
+import net.daneau.assnat.cache.AssnatCacheManager;
 import net.daneau.assnat.client.documents.Assignment;
 import net.daneau.assnat.client.documents.Deputy;
 import net.daneau.assnat.client.documents.District;
 import net.daneau.assnat.client.documents.Party;
 import net.daneau.assnat.client.repositories.AssignmentRepository;
-import net.daneau.assnat.loaders.events.AssignmentUpdateEvent;
 import net.daneau.assnat.loaders.exceptions.LoadingException;
 import net.daneau.assnat.scrappers.DeputyScraper;
 import net.daneau.assnat.scrappers.models.ScrapedDeputy;
 import net.daneau.assnat.utils.ErrorHandler;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -29,7 +28,7 @@ public class AssignmentLoader {
     private final PartyLoader partyLoader;
     private final DistrictLoader districtLoader;
     private final AssignmentRepository assignmentRepository;
-    private final ApplicationEventPublisher eventBus;
+    private final AssnatCacheManager assnatCacheManager;
 
     public void load() {
         List<ScrapedDeputy> scrapedDeputies = this.deputyScraper.scrape();
@@ -65,7 +64,7 @@ public class AssignmentLoader {
             }
         }
         if (isUpdated) {
-            this.eventBus.publishEvent(new AssignmentUpdateEvent(this));
+            this.assnatCacheManager.clearAllCaches();
         }
     }
 

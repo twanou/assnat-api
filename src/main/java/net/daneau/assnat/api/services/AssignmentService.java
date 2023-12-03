@@ -5,6 +5,7 @@ import net.daneau.assnat.api.models.commons.Affectation;
 import net.daneau.assnat.api.models.commons.Circonscription;
 import net.daneau.assnat.api.models.commons.Depute;
 import net.daneau.assnat.api.models.commons.Parti;
+import net.daneau.assnat.cache.CacheKey;
 import net.daneau.assnat.client.documents.Assignment;
 import net.daneau.assnat.client.repositories.AssignmentRepository;
 import org.springframework.cache.annotation.Cacheable;
@@ -24,12 +25,12 @@ public class AssignmentService {
     private final PartyService partyService;
     private final AssignmentRepository assignmentRepository;
 
-    @Cacheable("currentAssignmentsCache")
+    @Cacheable(CacheKey.Constants.CURRENT_ASSIGNMENTS)
     public Collection<Affectation> getCurrentAssignments() {
         return this.getAssignments(this.assignmentRepository.findByEndDate(null)).values();
     }
 
-    @Cacheable("assignmentsCache")
+    @Cacheable(CacheKey.Constants.ALL_ASSIGNMENTS)
     public Map<String, Affectation> getAllAssignments() {
         return this.getAssignments(this.assignmentRepository.findAll());
     }
