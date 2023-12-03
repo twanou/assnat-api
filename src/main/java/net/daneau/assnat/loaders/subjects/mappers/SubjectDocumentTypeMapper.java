@@ -1,7 +1,7 @@
 package net.daneau.assnat.loaders.subjects.mappers;
 
 import lombok.RequiredArgsConstructor;
-import net.daneau.assnat.client.documents.subdocuments.Assignment;
+import net.daneau.assnat.client.documents.Assignment;
 import net.daneau.assnat.client.documents.subdocuments.InterventionDocument;
 import net.daneau.assnat.client.documents.subdocuments.SubjectDetails;
 import net.daneau.assnat.client.documents.subdocuments.SubjectType;
@@ -27,9 +27,7 @@ public abstract class SubjectDocumentTypeMapper {
                             .map(intervention -> {
                                 Assignment assignment = this.deputyFinder.findByCompleteName(intervention.getTitle()); // nom complet, ex M. Bob Tremblay
                                 return InterventionDocument.builder()
-                                        .deputyId(assignment.getDeputyId())
-                                        .partyId(assignment.getPartyId())
-                                        .districtId(assignment.getDistrictId())
+                                        .assignmentId(assignment.getId())
                                         .paragraphs(this.format(intervention.getParagraphs()))
                                         .build();
                             }).toList();

@@ -17,7 +17,8 @@ public class ScrapedDeputy {
     String lastName;
     String district;
     String party;
-    List<String> functions;
+    @Builder.Default
+    List<String> functions = List.of();
     /**
      * Photo encodée en base64
      */

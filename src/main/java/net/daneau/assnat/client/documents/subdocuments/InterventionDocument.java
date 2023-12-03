@@ -13,11 +13,7 @@ import java.util.List;
 public class InterventionDocument {
 
     @Field(targetType = FieldType.OBJECT_ID)
-    String deputyId;
-    @Field(targetType = FieldType.OBJECT_ID)
-    String districtId;
-    @Field(targetType = FieldType.OBJECT_ID)
-    String partyId;
+    String assignmentId;
     @Builder.Default
     List<String> paragraphs = List.of();
 }

@@ -2,12 +2,12 @@ package net.daneau.assnat.loaders;
 
 
 import jakarta.annotation.Nonnull;
+import lombok.RequiredArgsConstructor;
+import net.daneau.assnat.client.documents.Assignment;
 import net.daneau.assnat.client.documents.Deputy;
-import net.daneau.assnat.client.documents.Roster;
-import net.daneau.assnat.client.documents.subdocuments.Assignment;
+import net.daneau.assnat.client.repositories.AssignmentRepository;
 import net.daneau.assnat.client.repositories.DeputyRepository;
-import net.daneau.assnat.client.repositories.RosterRepository;
-import net.daneau.assnat.loaders.events.RosterUpdateEvent;
+import net.daneau.assnat.loaders.events.AssignmentUpdateEvent;
 import net.daneau.assnat.loaders.exceptions.LoadingException;
 import net.daneau.assnat.utils.ErrorHandler;
 import org.apache.commons.lang3.StringUtils;
@@ -21,28 +21,25 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Component
-public class DeputyFinder implements ApplicationListener<RosterUpdateEvent> {
+@RequiredArgsConstructor
+public class DeputyFinder implements ApplicationListener<AssignmentUpdateEvent> {
 
-    private final RosterRepository rosterRepository;
+    private final AssignmentRepository assignmentRepository;
     private final DeputyRepository deputyRepository;
     private final ErrorHandler errorHandler;
     private Optional<Cache> cache = Optional.empty();
 
     private static final String COMPLETE_NAME_FORMAT = "%s %s %s";
 
-    public DeputyFinder(RosterRepository rosterRepository, DeputyRepository deputyRepository, ErrorHandler errorHandler) {
-        this.rosterRepository = rosterRepository;
-        this.deputyRepository = deputyRepository;
-        this.errorHandler = errorHandler;
-        this.refreshCache();
-    }
-
     @Override
-    public void onApplicationEvent(@Nonnull RosterUpdateEvent event) {
+    public void onApplicationEvent(@Nonnull AssignmentUpdateEvent event) {
         this.refreshCache();
     }
 
     public Assignment findByCompleteName(String completeName) {
+        if (this.cache.isEmpty()) {
+            this.refreshCache();
+        }
         List<Deputy> results = this.cache
                 .orElseThrow(() -> new LoadingException("La cache de députés n'a pas été initialisée."))
                 .deputies.stream()
@@ -59,11 +56,11 @@ public class DeputyFinder implements ApplicationListener<RosterUpdateEvent> {
     }
 
     private Optional<Cache> buildCache() {
-        Optional<Roster> currentRoster = this.rosterRepository.findByEndDate(null);
-        if (currentRoster.isEmpty()) {
+        List<Assignment> currentAssignments = this.assignmentRepository.findByEndDate(null);
+        if (currentAssignments.isEmpty()) {
             return Optional.empty();
         }
-        Map<String, Assignment> assignments = currentRoster.get().getAssignments().stream().collect(Collectors.toMap(Assignment::getDeputyId, Function.identity()));
+        Map<String, Assignment> assignments = currentAssignments.stream().collect(Collectors.toMap(Assignment::getDeputyId, Function.identity()));
         List<Deputy> deputies = this.deputyRepository.findAllById(assignments.values().stream().map(Assignment::getDeputyId).toList());
         return Optional.of(new Cache(assignments, deputies));
     }
@@ -72,6 +69,7 @@ public class DeputyFinder implements ApplicationListener<RosterUpdateEvent> {
         return String.format(COMPLETE_NAME_FORMAT, deputy.getTitle(), deputy.getFirstName(), deputy.getLastName());
     }
 
-    private record Cache(Map<String, Assignment> assignments, List<Deputy> deputies) {
+    private record Cache(Map<String, Assignment> assignments,
+                         List<Deputy> deputies) {
     }
 }
