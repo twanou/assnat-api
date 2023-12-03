@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Profile("!test")
 @RequiredArgsConstructor
-public class RosterLoaderRunner implements CommandLineRunner {
+public class LoadRunner implements CommandLineRunner {
 
     private final AssignmentLoader assignmentLoader;
     private final LogEntriesSubjectLoader subjectLoader;

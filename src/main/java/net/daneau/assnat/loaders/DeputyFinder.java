@@ -52,10 +52,10 @@ public class DeputyFinder implements ApplicationListener<AssignmentUpdateEvent> 
     }
 
     private void refreshCache() {
-        this.cache = this.initCache();
+        this.cache = this.buildCache();
     }
 
-    private Optional<Cache> initCache() {
+    private Optional<Cache> buildCache() {
         List<Assignment> currentAssignments = this.assignmentRepository.findByEndDate(null);
         if (currentAssignments.isEmpty()) {
             return Optional.empty();

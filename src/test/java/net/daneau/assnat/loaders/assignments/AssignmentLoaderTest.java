@@ -78,7 +78,7 @@ class AssignmentLoaderTest {
     }
 
     @Test
-    void loadWithoutCurrentRoster() {
+    void loadWithoutCurrentAssignments() {
         List<ScrapedDeputy> scrapedDeputies = List.of(ScrapedDeputy.builder().firstName("Bernard").lastName("Landry").party("Parti Québecois").district("Verchères").build());
         Deputy landryDeputy = Deputy.builder().id("deputyId").firstName("Bernard").lastName("Landry").build();
         District landryDistrict = District.builder().id("districtId").name("Verchères").build();

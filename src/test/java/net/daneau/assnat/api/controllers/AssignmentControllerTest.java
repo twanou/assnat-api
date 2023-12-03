@@ -23,7 +23,7 @@ class AssignmentControllerTest {
     private AssignmentController assignmentController;
 
     @Test
-    void getCurrentRoster() {
+    void getCurrentAssignments() {
         List<Affectation> affectations = List.of(Affectation.builder().build());
         when(assignmentServiceMock.getCurrentAssignments()).thenReturn(affectations);
         AffectationReponse response = this.assignmentController.getCurrentAssignments();
