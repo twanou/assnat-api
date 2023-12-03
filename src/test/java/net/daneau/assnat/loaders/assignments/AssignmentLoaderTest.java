@@ -1,11 +1,11 @@
 package net.daneau.assnat.loaders.assignments;
 
+import net.daneau.assnat.cache.AssnatCacheManager;
 import net.daneau.assnat.client.documents.Assignment;
 import net.daneau.assnat.client.documents.Deputy;
 import net.daneau.assnat.client.documents.District;
 import net.daneau.assnat.client.documents.Party;
 import net.daneau.assnat.client.repositories.AssignmentRepository;
-import net.daneau.assnat.loaders.events.AssignmentUpdateEvent;
 import net.daneau.assnat.loaders.exceptions.LoadingException;
 import net.daneau.assnat.scrappers.DeputyScraper;
 import net.daneau.assnat.scrappers.models.ScrapedDeputy;
@@ -17,7 +17,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.context.ApplicationEventPublisher;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -42,7 +41,7 @@ class AssignmentLoaderTest {
     @Mock
     private AssignmentRepository assignmentRepositoryMock;
     @Mock
-    private ApplicationEventPublisher eventBusMock;
+    private AssnatCacheManager assnatCacheManagerMock;
     @InjectMocks
     private AssignmentLoader assignmentLoader;
 
@@ -61,7 +60,7 @@ class AssignmentLoaderTest {
         when(partyLoaderMock.load(scrapedDeputies)).thenReturn(List.of(landryParty));
 
         this.assignmentLoader.load();
-        InOrder order = Mockito.inOrder(assignmentRepositoryMock, eventBusMock);
+        InOrder order = Mockito.inOrder(assignmentRepositoryMock, assnatCacheManagerMock);
         verify(assignmentRepositoryMock).save(Assignment.builder()
                 .hash(1)
                 .endDate(LocalDate.now())
@@ -73,7 +72,7 @@ class AssignmentLoaderTest {
                 .partyId(landryParty.getId())
                 .districtId(landryDistrict.getId())
                 .build());
-        order.verify(eventBusMock).publishEvent(any(AssignmentUpdateEvent.class));
+        order.verify(assnatCacheManagerMock).clearAllCaches();
         verify(errorHandlerMock).assertLessThan(eq(2), eq(List.of(landryDeputy)), argThat(s -> s.get() instanceof LoadingException));
     }
 
@@ -90,7 +89,7 @@ class AssignmentLoaderTest {
         when(partyLoaderMock.load(scrapedDeputies)).thenReturn(List.of(landryParty));
 
         this.assignmentLoader.load();
-        InOrder order = Mockito.inOrder(assignmentRepositoryMock, eventBusMock);
+        InOrder order = Mockito.inOrder(assignmentRepositoryMock, assnatCacheManagerMock);
         order.verify(assignmentRepositoryMock).save(Assignment.builder()
                 .hash(scrapedDeputies.get(0).hashCode())
                 .startDate(LocalDate.now())
@@ -98,7 +97,7 @@ class AssignmentLoaderTest {
                 .partyId(landryParty.getId())
                 .districtId(landryDistrict.getId())
                 .build());
-        order.verify(eventBusMock).publishEvent(any(AssignmentUpdateEvent.class));
+        order.verify(assnatCacheManagerMock).clearAllCaches();
         verify(assignmentRepositoryMock, atMostOnce()).save(any(Assignment.class));
         verify(errorHandlerMock).assertLessThan(eq(2), eq(List.of(landryDeputy)), argThat(s -> s.get() instanceof LoadingException));
     }
@@ -110,7 +109,7 @@ class AssignmentLoaderTest {
         when(deputyScraperMock.scrape()).thenReturn(scrapedDeputies);
         when(assignmentRepositoryMock.findByEndDate(null)).thenReturn(currentAssignments);
         this.assignmentLoader.load();
-        verify(eventBusMock, never()).publishEvent(any(AssignmentUpdateEvent.class));
+        verify(assnatCacheManagerMock, never()).clearAllCaches();
         verify(assignmentRepositoryMock, never()).save(any(Assignment.class));
     }
 }
