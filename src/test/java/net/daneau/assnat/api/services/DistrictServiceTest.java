@@ -1,4 +1,4 @@
-package net.daneau.assnat.api.services.directory;
+package net.daneau.assnat.api.services;
 
 import net.daneau.assnat.api.models.commons.Circonscription;
 import net.daneau.assnat.client.documents.District;
@@ -28,7 +28,7 @@ class DistrictServiceTest {
         District district = District.builder().id("id").name("super compté").build();
         when(districtRepositoryMock.findAll()).thenReturn(List.of(district));
 
-        Map<String, Circonscription> districtMap = this.districtServiceMock.getCirconscriptions();
+        Map<String, Circonscription> districtMap = this.districtServiceMock.getDistricts();
         assertEquals(district.getId(), districtMap.get(district.getId()).getId());
         assertEquals(district.getName(), districtMap.get(district.getId()).getNom());
     }

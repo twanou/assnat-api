@@ -1,4 +1,4 @@
-package net.daneau.assnat.api.services.directory;
+package net.daneau.assnat.api.services;
 
 import net.daneau.assnat.api.models.commons.Parti;
 import net.daneau.assnat.client.documents.Party;

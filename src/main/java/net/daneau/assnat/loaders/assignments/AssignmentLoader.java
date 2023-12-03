@@ -1,13 +1,12 @@
-package net.daneau.assnat.loaders.roster;
+package net.daneau.assnat.loaders.assignments;
 
 import lombok.RequiredArgsConstructor;
+import net.daneau.assnat.client.documents.Assignment;
 import net.daneau.assnat.client.documents.Deputy;
 import net.daneau.assnat.client.documents.District;
 import net.daneau.assnat.client.documents.Party;
-import net.daneau.assnat.client.documents.Roster;
-import net.daneau.assnat.client.documents.subdocuments.Assignment;
-import net.daneau.assnat.client.repositories.RosterRepository;
-import net.daneau.assnat.loaders.events.RosterUpdateEvent;
+import net.daneau.assnat.client.repositories.AssignmentRepository;
+import net.daneau.assnat.loaders.events.AssignmentUpdateEvent;
 import net.daneau.assnat.loaders.exceptions.LoadingException;
 import net.daneau.assnat.scrappers.DeputyScraper;
 import net.daneau.assnat.scrappers.models.ScrapedDeputy;
@@ -17,55 +16,53 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class RosterLoader {
+public class AssignmentLoader {
 
     private final ErrorHandler errorHandler;
     private final DeputyScraper deputyScraper;
     private final DeputyLoader deputyLoader;
     private final PartyLoader partyLoader;
     private final DistrictLoader districtLoader;
-    private final RosterRepository rosterRepository;
+    private final AssignmentRepository assignmentRepository;
     private final ApplicationEventPublisher eventBus;
 
     public void load() {
         List<ScrapedDeputy> scrapedDeputies = this.deputyScraper.scrape();
-        Optional<Roster> currentRoster = this.rosterRepository.findByEndDate(null);
+        List<Assignment> currentAssignments = this.assignmentRepository.findByEndDate(null);
 
-        int newHash = scrapedDeputies.hashCode();
+        List<Deputy> deputies = List.of();
+        List<Party> parties = List.of();
+        List<District> districts = List.of();
 
-        if (newHash != currentRoster.map(Roster::getHash).orElse(0)) {
-            List<Deputy> deputies = this.deputyLoader.load(scrapedDeputies);
-            List<Party> parties = this.partyLoader.load(scrapedDeputies);
-            List<District> districts = this.districtLoader.load(scrapedDeputies);
-            List<Assignment> assignments = new ArrayList<>();
-            for (ScrapedDeputy scrapedDeputy : scrapedDeputies) {
+        for (ScrapedDeputy scrapedDeputy : scrapedDeputies) {
+            if (currentAssignments.stream().noneMatch(assignment -> assignment.getHash() == scrapedDeputy.hashCode())) {
+                deputies = deputies.isEmpty() ? this.deputyLoader.load(scrapedDeputies) : deputies;
+                parties = parties.isEmpty() ? this.partyLoader.load(scrapedDeputies) : parties;
+                districts = districts.isEmpty() ? this.districtLoader.load(scrapedDeputies) : districts;
+
                 Deputy deputy = this.getDeputy(scrapedDeputy, deputies);
                 District district = this.getDistrict(scrapedDeputy, districts);
                 Party party = this.getParty(scrapedDeputy, parties);
-                assignments.add(
+                Optional<Assignment> oldAssignment = this.assignmentRepository.findByDeputyIdAndDistrictIdAndPartyIdAndEndDate(deputy.getId(), district.getId(), party.getId(), null);
+                oldAssignment.ifPresent(old -> this.assignmentRepository.save(old.withEndDate(LocalDate.now())));
+                this.assignmentRepository.save(
                         Assignment.builder()
+                                .startDate(LocalDate.now())
+                                .hash(scrapedDeputy.hashCode())
                                 .deputyId(deputy.getId())
                                 .districtId(district.getId())
                                 .partyId(party.getId())
+                                .functions(scrapedDeputy.getFunctions())
                                 .build()
                 );
             }
-            this.rosterRepository.save(
-                    Roster.builder()
-                            .hash(newHash)
-                            .startDate(LocalDate.now())
-                            .assignments(assignments)
-                            .build()
-            );
-            currentRoster.ifPresent(roster -> this.rosterRepository.save(roster.withEndDate(LocalDate.now())));
-            this.eventBus.publishEvent(new RosterUpdateEvent(this));
         }
+        this.eventBus.publishEvent(new AssignmentUpdateEvent(this));
     }
 
     private Deputy getDeputy(ScrapedDeputy scrapedDeputy, List<Deputy> deputies) {

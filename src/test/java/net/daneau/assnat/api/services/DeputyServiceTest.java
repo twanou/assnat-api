@@ -1,4 +1,4 @@
-package net.daneau.assnat.api.services.directory;
+package net.daneau.assnat.api.services;
 
 import net.daneau.assnat.api.models.commons.Depute;
 import net.daneau.assnat.client.documents.Deputy;
@@ -28,7 +28,7 @@ class DeputyServiceTest {
         Deputy deputy = Deputy.builder().id("id").firstName("boby").lastName("nault").title("M.").build();
         when(deputyRepositoryMock.findAll()).thenReturn(List.of(deputy));
 
-        Map<String, Depute> deputeMap = this.deputyServiceMock.getDeputes();
+        Map<String, Depute> deputeMap = this.deputyServiceMock.getDeputies();
         assertEquals(deputy.getId(), deputeMap.get(deputy.getId()).getId());
         assertEquals(deputy.getTitle(), deputeMap.get(deputy.getId()).getTitre());
         assertEquals(deputy.getFirstName(), deputeMap.get(deputy.getId()).getPrenom());

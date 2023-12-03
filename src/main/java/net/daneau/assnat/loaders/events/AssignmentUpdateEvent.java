@@ -2,9 +2,9 @@ package net.daneau.assnat.loaders.events;
 
 import org.springframework.context.ApplicationEvent;
 
-public class RosterUpdateEvent extends ApplicationEvent {
+public class AssignmentUpdateEvent extends ApplicationEvent {
 
-    public RosterUpdateEvent(Object source) {
+    public AssignmentUpdateEvent(Object source) {
         super(source);
     }
 }

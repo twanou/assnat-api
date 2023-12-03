@@ -1,9 +1,6 @@
 package net.daneau.assnat.api.mappers.subjects;
 
-import net.daneau.assnat.api.models.commons.Circonscription;
-import net.daneau.assnat.api.models.commons.Depute;
-import net.daneau.assnat.api.models.commons.DirectoryDTO;
-import net.daneau.assnat.api.models.commons.Parti;
+import net.daneau.assnat.api.models.commons.Affectation;
 import net.daneau.assnat.api.models.subjects.SujetDetails;
 import net.daneau.assnat.api.models.subjects.SujetType;
 import net.daneau.assnat.client.documents.subdocuments.InterventionDocument;
@@ -34,29 +31,22 @@ class GenericSubjectTypeMapperTest {
     @Test
     void map() {
         when(typeMapper.map(SubjectType.DEPUTY_DECLARATION)).thenReturn(SujetType.DECLARATION_DEPUTE);
-        DirectoryDTO directoryDTO = DirectoryDTO.builder()
-                .circonscriptions(Map.of("districtId", Circonscription.builder().build()))
-                .deputies(Map.of("deputyId", Depute.builder().build()))
-                .partis(Map.of("partyId", Parti.builder().build()))
-                .build();
+        Map<String, Affectation> affectations = Map.of("assignmentId", Affectation.builder().build());
+
         SubjectDetails subjectDetails = SubjectDetails.builder()
                 .type(SubjectType.DEPUTY_DECLARATION)
                 .title("title")
                 .interventions(List.of(InterventionDocument.builder()
-                        .districtId("districtId")
-                        .partyId("partyId")
-                        .deputyId("deputyId")
+                        .assignmentId("assignmentId")
                         .paragraphs(List.of("bla bla bla", "bla bla bla"))
                         .build()))
                 .build();
 
-        SujetDetails sujetDetails = this.genericSubjectTypeMapper.map(subjectDetails, directoryDTO);
+        SujetDetails sujetDetails = this.genericSubjectTypeMapper.map(subjectDetails, affectations);
         assertEquals(subjectDetails.getTitle(), sujetDetails.getTitre());
         assertEquals(subjectDetails.getInterventions().get(0).getParagraphs(), sujetDetails.getInterventions().get(0).getParagraphes());
         assertEquals(SujetType.DECLARATION_DEPUTE, sujetDetails.getType());
-        assertSame(directoryDTO.getDeputies().get("deputyId"), sujetDetails.getInterventions().get(0).getDepute());
-        assertSame(directoryDTO.getPartis().get("partyId"), sujetDetails.getInterventions().get(0).getParti());
-        assertSame(directoryDTO.getCirconscriptions().get("districtId"), sujetDetails.getInterventions().get(0).getCirconscription());
+        assertSame(affectations.get("assignmentId"), sujetDetails.getInterventions().get(0).getAffectation());
     }
 
     @Test

@@ -1,12 +1,11 @@
-package net.daneau.assnat.loaders.roster;
+package net.daneau.assnat.loaders.assignments;
 
+import net.daneau.assnat.client.documents.Assignment;
 import net.daneau.assnat.client.documents.Deputy;
 import net.daneau.assnat.client.documents.District;
 import net.daneau.assnat.client.documents.Party;
-import net.daneau.assnat.client.documents.Roster;
-import net.daneau.assnat.client.documents.subdocuments.Assignment;
-import net.daneau.assnat.client.repositories.RosterRepository;
-import net.daneau.assnat.loaders.events.RosterUpdateEvent;
+import net.daneau.assnat.client.repositories.AssignmentRepository;
+import net.daneau.assnat.loaders.events.AssignmentUpdateEvent;
 import net.daneau.assnat.loaders.exceptions.LoadingException;
 import net.daneau.assnat.scrappers.DeputyScraper;
 import net.daneau.assnat.scrappers.models.ScrapedDeputy;
@@ -32,7 +31,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class RosterLoaderTest {
+class AssignmentLoaderTest {
 
     @Mock
     private ErrorHandler errorHandlerMock;
@@ -45,34 +44,40 @@ class RosterLoaderTest {
     @Mock
     private DistrictLoader districtLoaderMock;
     @Mock
-    private RosterRepository rosterRepositoryMock;
+    private AssignmentRepository assignmentRepositoryMock;
     @Mock
     private ApplicationEventPublisher eventBusMock;
     @InjectMocks
-    private RosterLoader rosterLoader;
+    private AssignmentLoader assignmentLoader;
 
     @Test
     void load() {
-        List<ScrapedDeputy> scrapedDeputies = List.of(ScrapedDeputy.builder().firstName("Bernard").lastName("Landry").party("Parti Québecois").district("Verchères").build());
-        Roster currentRoster = Roster.builder().hash(42).build();
+        List<ScrapedDeputy> scrapedDeputies = List.of(ScrapedDeputy.builder().firstName("Bernard").lastName("Landry").party("Parti Québecois").district("Verchères").build(), ScrapedDeputy.builder().firstName("René").build());
+        List<Assignment> currentAssignments = List.of(Assignment.builder().hash(538951214).build());
         Deputy landryDeputy = Deputy.builder().id("deputyId").firstName("Bernard").lastName("Landry").build();
         District landryDistrict = District.builder().id("districtId").name("Verchères").build();
         Party landryParty = Party.builder().id("partyId").name("Parti Québecois").build();
         when(deputyScraperMock.scrape()).thenReturn(scrapedDeputies);
-        when(rosterRepositoryMock.findByEndDate(null)).thenReturn(Optional.of(currentRoster));
+        when(assignmentRepositoryMock.findByEndDate(null)).thenReturn(currentAssignments);
+        when(assignmentRepositoryMock.findByDeputyIdAndDistrictIdAndPartyIdAndEndDate("deputyId", "districtId", "partyId", null)).thenReturn(Optional.of(Assignment.builder().hash(1).build()));
         when(deputyLoaderMock.load(scrapedDeputies)).thenReturn(List.of(landryDeputy));
         when(districtLoaderMock.load(scrapedDeputies)).thenReturn(List.of(landryDistrict));
         when(partyLoaderMock.load(scrapedDeputies)).thenReturn(List.of(landryParty));
 
-        this.rosterLoader.load();
-        InOrder order = Mockito.inOrder(rosterRepositoryMock, eventBusMock);
-        order.verify(rosterRepositoryMock).save(Roster.builder()
-                .hash(scrapedDeputies.hashCode())
-                .startDate(LocalDate.now())
-                .assignments(List.of(Assignment.builder().deputyId(landryDeputy.getId()).partyId(landryParty.getId()).districtId(landryDistrict.getId()).build()))
+        this.assignmentLoader.load();
+        InOrder order = Mockito.inOrder(assignmentRepositoryMock, eventBusMock);
+        verify(assignmentRepositoryMock).save(Assignment.builder()
+                .hash(1)
+                .endDate(LocalDate.now())
                 .build());
-        order.verify(eventBusMock).publishEvent(any(RosterUpdateEvent.class));
-        verify(rosterRepositoryMock).save(currentRoster.withEndDate(LocalDate.now()));
+        verify(assignmentRepositoryMock).save(Assignment.builder()
+                .hash(scrapedDeputies.get(0).hashCode())
+                .startDate(LocalDate.now())
+                .deputyId(landryDeputy.getId())
+                .partyId(landryParty.getId())
+                .districtId(landryDistrict.getId())
+                .build());
+        order.verify(eventBusMock).publishEvent(any(AssignmentUpdateEvent.class));
         verify(errorHandlerMock).assertLessThan(eq(2), eq(List.of(landryDeputy)), argThat(s -> s.get() instanceof LoadingException));
     }
 
@@ -83,20 +88,22 @@ class RosterLoaderTest {
         District landryDistrict = District.builder().id("districtId").name("Verchères").build();
         Party landryParty = Party.builder().id("partyId").name("Parti Québecois").build();
         when(deputyScraperMock.scrape()).thenReturn(scrapedDeputies);
-        when(rosterRepositoryMock.findByEndDate(null)).thenReturn(Optional.empty());
+        when(assignmentRepositoryMock.findByEndDate(null)).thenReturn(List.of());
         when(deputyLoaderMock.load(scrapedDeputies)).thenReturn(List.of(landryDeputy));
         when(districtLoaderMock.load(scrapedDeputies)).thenReturn(List.of(landryDistrict));
         when(partyLoaderMock.load(scrapedDeputies)).thenReturn(List.of(landryParty));
 
-        this.rosterLoader.load();
-        InOrder order = Mockito.inOrder(rosterRepositoryMock, eventBusMock);
-        order.verify(rosterRepositoryMock).save(Roster.builder()
-                .hash(scrapedDeputies.hashCode())
+        this.assignmentLoader.load();
+        InOrder order = Mockito.inOrder(assignmentRepositoryMock, eventBusMock);
+        order.verify(assignmentRepositoryMock).save(Assignment.builder()
+                .hash(scrapedDeputies.get(0).hashCode())
                 .startDate(LocalDate.now())
-                .assignments(List.of(Assignment.builder().deputyId(landryDeputy.getId()).partyId(landryParty.getId()).districtId(landryDistrict.getId()).build()))
+                .deputyId(landryDeputy.getId())
+                .partyId(landryParty.getId())
+                .districtId(landryDistrict.getId())
                 .build());
-        order.verify(eventBusMock).publishEvent(any(RosterUpdateEvent.class));
-        verify(rosterRepositoryMock, atMostOnce()).save(any(Roster.class));
+        order.verify(eventBusMock).publishEvent(any(AssignmentUpdateEvent.class));
+        verify(assignmentRepositoryMock, atMostOnce()).save(any(Assignment.class));
         verify(errorHandlerMock).assertLessThan(eq(2), eq(List.of(landryDeputy)), argThat(s -> s.get() instanceof LoadingException));
     }
 }

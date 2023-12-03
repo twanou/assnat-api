@@ -1,4 +1,4 @@
-package net.daneau.assnat.api.services.directory;
+package net.daneau.assnat.api.services;
 
 import lombok.RequiredArgsConstructor;
 import net.daneau.assnat.api.models.commons.Depute;
@@ -11,11 +11,11 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-class DeputyService {
+public class DeputyService {
 
     private final DeputyRepository deputyRepository;
 
-    Map<String, Depute> getDeputes() {
+    public Map<String, Depute> getDeputies() {
         return this.deputyRepository.findAll()
                 .stream()
                 .collect(Collectors.toUnmodifiableMap(Deputy::getId,

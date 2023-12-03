@@ -1,4 +1,4 @@
-package net.daneau.assnat.loaders.roster;
+package net.daneau.assnat.loaders.assignments;
 
 import lombok.RequiredArgsConstructor;
 import net.daneau.assnat.client.documents.Deputy;
@@ -27,8 +27,10 @@ class DeputyLoader {
                 deputies.add(
                         this.deputyRepository.save(
                                 Deputy.builder()
+                                        .title(scrapedDeputy.getTitle())
                                         .firstName(scrapedDeputy.getFirstName())
                                         .lastName(scrapedDeputy.getLastName())
+                                        .photo(scrapedDeputy.getPhoto())
                                         .build()));
             }
         }

@@ -1,4 +1,4 @@
-package net.daneau.assnat.api.services.directory;
+package net.daneau.assnat.api.services;
 
 import lombok.RequiredArgsConstructor;
 import net.daneau.assnat.api.models.commons.Circonscription;
@@ -11,11 +11,11 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-class DistrictService {
+public class DistrictService {
 
     private final DistrictRepository districtRepository;
 
-    Map<String, Circonscription> getCirconscriptions() {
+    public Map<String, Circonscription> getDistricts() {
         return this.districtRepository.findAll()
                 .stream()
                 .collect(Collectors.toUnmodifiableMap(District::getId,

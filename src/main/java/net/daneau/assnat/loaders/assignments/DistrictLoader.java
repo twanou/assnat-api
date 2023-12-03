@@ -1,4 +1,4 @@
-package net.daneau.assnat.loaders.roster;
+package net.daneau.assnat.loaders.assignments;
 
 import lombok.RequiredArgsConstructor;
 import net.daneau.assnat.client.documents.District;
@@ -22,7 +22,7 @@ class DistrictLoader {
             List<District> districtResults = districts.stream()
                     .filter(district -> StringUtils.equals(district.getName(), scrapedDeputy.getDistrict()))
                     .toList();
-            if (districtResults.size() == 0) {
+            if (districtResults.isEmpty()) {
                 districts.add(
                         this.districtRepository.save(
                                 District.builder()

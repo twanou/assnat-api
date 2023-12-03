@@ -1,4 +1,4 @@
-package net.daneau.assnat.loaders.roster;
+package net.daneau.assnat.loaders.assignments;
 
 import net.daneau.assnat.client.documents.Deputy;
 import net.daneau.assnat.client.repositories.DeputyRepository;

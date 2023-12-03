@@ -1,4 +1,4 @@
-package net.daneau.assnat.loaders.roster;
+package net.daneau.assnat.loaders.assignments;
 
 import lombok.RequiredArgsConstructor;
 import net.daneau.assnat.client.documents.Party;
@@ -22,7 +22,7 @@ class PartyLoader {
             List<Party> partyResults = parties.stream()
                     .filter(party -> StringUtils.equals(party.getName(), scrapedDeputy.getParty()))
                     .toList();
-            if (partyResults.size() == 0) {
+            if (partyResults.isEmpty()) {
                 parties.add(
                         this.partyRepository.save(
                                 Party.builder()
