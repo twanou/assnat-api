@@ -1,8 +1,8 @@
-package net.daneau.assnat.scrappers;
+package net.daneau.assnat.scrapers;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import net.daneau.assnat.scrappers.configuration.AssNatWebClient;
-import net.daneau.assnat.scrappers.models.ScrapedLogNode;
+import net.daneau.assnat.scrapers.configuration.AssNatWebClient;
+import net.daneau.assnat.scrapers.models.ScrapedLogNode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

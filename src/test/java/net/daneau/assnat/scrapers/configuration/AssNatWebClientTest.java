@@ -1,4 +1,4 @@
-package net.daneau.assnat.scrappers.configuration;
+package net.daneau.assnat.scrapers.configuration;
 
 import org.htmlunit.WebClient;
 import org.htmlunit.html.HtmlPage;

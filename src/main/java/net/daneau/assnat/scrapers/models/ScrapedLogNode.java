@@ -1,4 +1,4 @@
-package net.daneau.assnat.scrappers.models;
+package net.daneau.assnat.scrapers.models;
 
 import lombok.Builder;
 import lombok.Value;
@@ -13,6 +13,7 @@ public class ScrapedLogNode {
 
 
     String title;
+    String href;
     @Builder.Default
     List<String> paragraphs = List.of();
     @Builder.Default

@@ -2,10 +2,10 @@ package net.daneau.assnat.loaders.subjects;
 
 import net.daneau.assnat.client.documents.Subject;
 import net.daneau.assnat.client.repositories.SubjectRepository;
-import net.daneau.assnat.scrappers.AssNatLogEntryScraper;
-import net.daneau.assnat.scrappers.models.LogType;
-import net.daneau.assnat.scrappers.models.LogVersion;
-import net.daneau.assnat.scrappers.models.ScrapedLogEntry;
+import net.daneau.assnat.scrapers.AssNatLogEntryScraper;
+import net.daneau.assnat.scrapers.models.LogType;
+import net.daneau.assnat.scrapers.models.LogVersion;
+import net.daneau.assnat.scrapers.models.ScrapedLogEntry;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;

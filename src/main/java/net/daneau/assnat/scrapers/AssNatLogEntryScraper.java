@@ -1,11 +1,11 @@
-package net.daneau.assnat.scrappers;
+package net.daneau.assnat.scrapers;
 
 import lombok.RequiredArgsConstructor;
-import net.daneau.assnat.scrappers.configuration.AssNatWebClient;
-import net.daneau.assnat.scrappers.models.LogType;
-import net.daneau.assnat.scrappers.models.LogVersion;
-import net.daneau.assnat.scrappers.models.ScrapedLogEntry;
-import net.daneau.assnat.scrappers.utils.ScrapeUtils;
+import net.daneau.assnat.scrapers.configuration.AssNatWebClient;
+import net.daneau.assnat.scrapers.models.LogType;
+import net.daneau.assnat.scrapers.models.LogVersion;
+import net.daneau.assnat.scrapers.models.ScrapedLogEntry;
+import net.daneau.assnat.scrapers.utils.ScrapeUtils;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.HtmlAnchor;
 import org.htmlunit.html.HtmlPage;

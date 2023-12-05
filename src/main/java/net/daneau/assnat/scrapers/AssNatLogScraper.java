@@ -1,11 +1,11 @@
-package net.daneau.assnat.scrappers;
+package net.daneau.assnat.scrapers;
 
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
-import net.daneau.assnat.scrappers.configuration.AssNatWebClient;
-import net.daneau.assnat.scrappers.exceptions.ScrapingException;
-import net.daneau.assnat.scrappers.models.ScrapedLogNode;
-import net.daneau.assnat.scrappers.utils.ScrapeUtils;
+import net.daneau.assnat.scrapers.configuration.AssNatWebClient;
+import net.daneau.assnat.scrapers.exceptions.ScrapingException;
+import net.daneau.assnat.scrapers.models.ScrapedLogNode;
+import net.daneau.assnat.scrapers.utils.ScrapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.html.HtmlAnchor;
 import org.htmlunit.html.HtmlPage;
@@ -28,7 +28,7 @@ public class AssNatLogScraper {
         HtmlPage page = this.webClient.getRelativePage(relativeUrl);
         ArrayList<InternalLogNode> internalLogNodes = this.buildSummary(page.getByXPath("//div[@class='tableMatieresJournal']//a"));
         this.addParagraphs(internalLogNodes, page.getByXPath("//contenu//p"));
-        return this.toLogNode(internalLogNodes.get(0));
+        return this.toLogNode(internalLogNodes.get(0), relativeUrl);
     }
 
     private ArrayList<InternalLogNode> buildSummary(List<HtmlAnchor> anchors) {
@@ -48,7 +48,7 @@ public class AssNatLogScraper {
                     .title(anchor.getVisibleText().replace("\n", " "))
                     .previous(nodes.get(nodes.size() - 1))
                     .margin(anchorMargin)
-                    .href(anchor.getHrefAttribute().substring(1))
+                    .href(anchor.getHrefAttribute())
                     .build();
             parentNode.children.add(newNode);
             nodes.add(newNode);
@@ -74,19 +74,20 @@ public class AssNatLogScraper {
         }
     }
 
-    private ScrapedLogNode toLogNode(InternalLogNode internalLogNode) {
+    private ScrapedLogNode toLogNode(InternalLogNode internalLogNode, String relativeUrl) {
         return ScrapedLogNode.builder()
                 .title(internalLogNode.title)
+                .href(relativeUrl + (internalLogNode.href != null ? internalLogNode.href : ""))
                 .paragraphs(Collections.unmodifiableList(internalLogNode.paragraphs))
                 .children(internalLogNode.children
                         .stream()
-                        .map(this::toLogNode)
+                        .map(node -> this.toLogNode(node, relativeUrl))
                         .toList())
                 .build();
     }
 
     private boolean isAnchorMatch(String href, List<HtmlAnchor> anchors) {
-        return anchors.stream().anyMatch(anchor -> StringUtils.contains(anchor.getNameAttribute(), href));
+        return anchors.stream().anyMatch(anchor -> StringUtils.contains(href, anchor.getNameAttribute()));
     }
 
     private float getAnchorMargin(HtmlAnchor anchor) {
