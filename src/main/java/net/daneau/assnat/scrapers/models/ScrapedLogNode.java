@@ -13,7 +13,8 @@ public class ScrapedLogNode {
 
 
     String title;
-    String href;
+    String pageId;
+    String anchor;
     @Builder.Default
     List<String> paragraphs = List.of();
     @Builder.Default

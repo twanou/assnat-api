@@ -77,7 +77,8 @@ public class AssNatLogScraper {
     private ScrapedLogNode toLogNode(InternalLogNode internalLogNode, String relativeUrl) {
         return ScrapedLogNode.builder()
                 .title(internalLogNode.title)
-                .href(relativeUrl + (internalLogNode.href != null ? internalLogNode.href : ""))
+                .pageId(this.getPageId(relativeUrl))
+                .anchor(internalLogNode.href)
                 .paragraphs(Collections.unmodifiableList(internalLogNode.paragraphs))
                 .children(internalLogNode.children
                         .stream()
@@ -97,6 +98,12 @@ public class AssNatLogScraper {
         float margin = ScrapeUtils.extractFloat(marginTextValue);
         float textIndent = textIndentTextValue != null ? ScrapeUtils.extractFloat(textIndentTextValue) : 0;
         return margin + textIndent;
+    }
+
+    private String getPageId(String relativeUrl) {
+        int beginIndex = Math.max(relativeUrl.lastIndexOf("\\"), relativeUrl.lastIndexOf("/")) + 1; // on gère le \ pour les fichiers locaux.
+        int endIndex = relativeUrl.lastIndexOf(".html");
+        return relativeUrl.substring(beginIndex, endIndex);
     }
 
     @Builder
