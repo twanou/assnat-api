@@ -35,6 +35,7 @@ public class SubjectLoader {
                     .orElse(List.of())
                     .stream()
                     .map(data -> Subject.builder()
+                            .pageId(this.getPageId(relativeUrl))
                             .date(date)
                             .subjectDetails(data)
                             .legislature(legislature)
@@ -56,5 +57,11 @@ public class SubjectLoader {
                     .orElse(null);
         }
         return Optional.ofNullable(currentNode);
+    }
+
+    private String getPageId(String relativeUrl) {
+        int beginIndex = relativeUrl.lastIndexOf("/") + 1;
+        int endIndex = relativeUrl.lastIndexOf(".html");
+        return relativeUrl.substring(beginIndex, endIndex);
     }
 }
