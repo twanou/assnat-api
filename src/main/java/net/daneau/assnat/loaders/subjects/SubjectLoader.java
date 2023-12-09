@@ -5,8 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import net.daneau.assnat.client.documents.Subject;
 import net.daneau.assnat.client.repositories.SubjectRepository;
 import net.daneau.assnat.loaders.subjects.mappers.SubjectDocumentTypeMapper;
-import net.daneau.assnat.scrappers.AssNatLogScraper;
-import net.daneau.assnat.scrappers.models.ScrapedLogNode;
+import net.daneau.assnat.scrapers.AssNatLogScraper;
+import net.daneau.assnat.scrapers.models.ScrapedLogNode;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 

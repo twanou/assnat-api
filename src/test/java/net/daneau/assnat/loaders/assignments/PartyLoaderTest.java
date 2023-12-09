@@ -2,7 +2,7 @@ package net.daneau.assnat.loaders.assignments;
 
 import net.daneau.assnat.client.documents.Party;
 import net.daneau.assnat.client.repositories.PartyRepository;
-import net.daneau.assnat.scrappers.models.ScrapedDeputy;
+import net.daneau.assnat.scrapers.models.ScrapedDeputy;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

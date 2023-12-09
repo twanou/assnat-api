@@ -1,4 +1,4 @@
-package net.daneau.assnat.scrappers.utils;
+package net.daneau.assnat.scrapers.utils;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -19,7 +19,7 @@ public class ScrapeUtils {
 
     public static float extractFloat(String str) {
         Matcher matcher = FLOAT_PATTERN.matcher(str);
-        if(matcher.find()) {
+        if (matcher.find()) {
             return Float.parseFloat(matcher.group());
         }
         throw new IllegalArgumentException();

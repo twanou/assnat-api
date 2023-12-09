@@ -1,6 +1,6 @@
-package net.daneau.assnat.scrappers.configuration;
+package net.daneau.assnat.scrapers.configuration;
 
-import net.daneau.assnat.scrappers.exceptions.ScrapingException;
+import net.daneau.assnat.scrapers.exceptions.ScrapingException;
 import org.htmlunit.Page;
 import org.htmlunit.WebClient;
 import org.springframework.beans.factory.annotation.Value;

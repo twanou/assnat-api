@@ -3,7 +3,7 @@ package net.daneau.assnat.loaders.assignments;
 import lombok.RequiredArgsConstructor;
 import net.daneau.assnat.client.documents.District;
 import net.daneau.assnat.client.repositories.DistrictRepository;
-import net.daneau.assnat.scrappers.models.ScrapedDeputy;
+import net.daneau.assnat.scrapers.models.ScrapedDeputy;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 

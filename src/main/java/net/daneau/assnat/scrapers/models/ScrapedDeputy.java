@@ -1,4 +1,4 @@
-package net.daneau.assnat.scrappers.models;
+package net.daneau.assnat.scrapers.models;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;

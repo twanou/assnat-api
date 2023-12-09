@@ -1,4 +1,4 @@
-package net.daneau.assnat.scrappers.exceptions;
+package net.daneau.assnat.scrapers.exceptions;
 
 public class ScrapingException extends RuntimeException {
 
