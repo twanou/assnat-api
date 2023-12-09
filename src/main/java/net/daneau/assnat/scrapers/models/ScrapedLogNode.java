@@ -11,9 +11,7 @@ import java.util.List;
 @Jacksonized
 public class ScrapedLogNode {
 
-
     String title;
-    String pageId;
     String anchor;
     @Builder.Default
     List<String> paragraphs = List.of();

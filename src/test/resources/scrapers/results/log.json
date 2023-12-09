@@ -1,6 +1,6 @@
 {
   "title": "Journal des débats",
-  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html",
+  "anchor": null,
   "paragraphs": [
     "(Neuf heures quarante minutes)",
     "Le Vice-Président (M. Lévesque) : Alors, bon mercredi matin, chers collègues. Je vous invite, s'il vous plaît, à bien vouloir vous asseoir."
@@ -8,24 +8,24 @@
   "children": [
     {
       "title": "Affaires courantes",
-      "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176623",
+      "anchor": "#_Toc150176623",
       "paragraphs": [],
       "children": [
         {
           "title": "Déclarations de députés",
-          "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176624",
+          "anchor": "#_Toc150176624",
           "paragraphs": [
             "Alors, nous en sommes à la rubrique Déclarations de députés. Et, comme première déclaration, aujourd'hui, je reconnais Mme la députée de Rivière-du-Loup—Témiscouata."
           ],
           "children": [
             {
               "title": "Souligner le 50e anniversaire du Centre local de développement de la région de Rivière-du-Loup",
-              "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176625",
+              "anchor": "#_Toc150176625",
               "paragraphs": [],
               "children": [
                 {
                   "title": "Mme Amélie Dionne",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176626",
+                  "anchor": "#_Toc150176626",
                   "paragraphs": [
                     "Mme Dionne : Merci, M. le Président. Aujourd'hui, je tiens à souligner les 50 ans du Centre local de développement de la région de Rivière-du-Loup, un partenaire essentiel pour notre vitalité économique et sociale. Je tiens... Mais, par-dessus tout, je tiens à saluer le travail et le dévouement des équipes passées et présentes. Avec nous, aujourd'hui, dans les tribunes, nous avons l'honneur d'accueillir M. René Gingras, président, Mme Marie-Josée Huot, directrice, M. Louis-Marie Bastille, administrateur, et M. Guy Dumont, conseiller. Mention spéciale à Mme Marie-Josée Huot, qui cumule 25 ans de passion et d'engagement à la direction de l'organisme. Sachez que vous faites toute la différence pour nos entrepreneurs.",
                     "En terminant, M. le Président, je tiens à féliciter toute l'équipe, qui a remporté le prix développement économique local, équipe MRC, au congrès de l'Association des professionnels en développement économique.",
@@ -39,12 +39,12 @@
             },
             {
               "title": "Souligner le 50e anniversaire du Centre de la petite enfance populaire Saint-Michel inc.",
-              "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176627",
+              "anchor": "#_Toc150176627",
               "paragraphs": [],
               "children": [
                 {
                   "title": "M. Frantz Benjamin",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176628",
+                  "anchor": "#_Toc150176628",
                   "paragraphs": [
                     "M. Benjamin : Merci, M. le Président. Une belle histoire que celle du CPE populaire de Saint-Michel, qui a commencé en 1972.",
                     "C'est avant tout l'histoire de femmes entrepreneures qui, avec l'aide du CLSC de Saint-Michel, mettront sur pied une garderie pour répondre aux besoins des familles de Saint-Michel. La garderie deviendra plus tard la coopérative, puis le CPE populaire Saint-Michel, par la suite.",
@@ -59,12 +59,12 @@
             },
             {
               "title": "Rendre hommage à M. Claude Hardy",
-              "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176629",
+              "anchor": "#_Toc150176629",
               "paragraphs": [],
               "children": [
                 {
                   "title": "Mme Geneviève Hébert",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176630",
+                  "anchor": "#_Toc150176630",
                   "paragraphs": [
                     "Mme Hébert : M. le Président, né en 1949, M. Claude Hardy s'est établi à Sherbrooke en 1990.",
                     "Il a été 15 ans préposé aux bénéficiaires à l'hôpital et au centre d'hébergement d'Youville après y avoir été sept ans bénévole. Son bénévolat, bien, il a débuté dans les années 60 comme responsable des relations publiques d'un corps de tambours et clairons. Ensuite, il s'est occupé d'une troupe de chanteurs, musiciens, il a fait de l'animation scoute.",
@@ -79,12 +79,12 @@
             },
             {
               "title": "Souligner le 50e anniversaire du Centre Saint-Pierre",
-              "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176631",
+              "anchor": "#_Toc150176631",
               "paragraphs": [],
               "children": [
                 {
                   "title": "Mme Manon Massé",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176632",
+                  "anchor": "#_Toc150176632",
                   "paragraphs": [
                     "Mme Massé : Merci, M. le Président. Acteur de changement depuis 50 ans, le Centre Saint-Pierre est un lieu au coeur de ma circonscription qui accueille, forme et accompagne les organisations et les personnes qui s'engagent pour un Québec plus juste.",
                     "Si les murs du centre pouvaient parler, ils témoigneraient de l'effervescence des idées et des actions que les mouvements sociaux au Québec ont mis en oeuvre dans les dernières décennies pour plus de justice sociale. Créé alors que le Faubourg à m'lasse se voyait chamboulé par l'arrivée de la Cité des ondes, le centre a toujours conservé le même leitmotiv : donner une voix aux sans-voix. Je suis heureuse de savoir qu'il continue de se tourner vers l'avenir et sera présent pour nous aider à faire face aux défis présents.",
@@ -98,12 +98,12 @@
             },
             {
               "title": "Souligner le 10e anniversaire de la campagne de sensibilisation et de financement Noeudvembre",
-              "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176633",
+              "anchor": "#_Toc150176633",
               "paragraphs": [],
               "children": [
                 {
                   "title": "M. Mathieu Lemay",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176634",
+                  "anchor": "#_Toc150176634",
                   "paragraphs": [
                     "M. Lemay : M. le Président, nous sommes déjà le 1er novembre, et l'organisme Procure lance sa campagne de sensibilisation et de financement annuelle pour lutter contre le cancer de la prostate. D'ailleurs, cette année marque le 10e anniversaire de Noeudvembre.",
                     "Cette campagne a permis d'amasser jusqu'à maintenant 5 millions pour lutter contre cette maladie et elle contribue au financement de la recherche. Il s'agit d'une somme considérable. Et pourtant il y a encore beaucoup de travail à faire.",
@@ -117,12 +117,12 @@
             },
             {
               "title": "Souligner le Mois national de sensibilisation à l'adoption",
-              "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176635",
+              "anchor": "#_Toc150176635",
               "paragraphs": [],
               "children": [
                 {
                   "title": "Mme Jennifer Maccarone",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176636",
+                  "anchor": "#_Toc150176636",
                   "paragraphs": [
                     "Mme Maccarone : Merci, M. le Président. Je suis heureuse de prendre la parole ce matin pour souligner le début du Mois national de la sensibilisation à l'adoption, un mois significatif pour de nombreuses familles québécoises et qui nous permet de mettre en lumière la réalité de l'adoption, de la demande à la complexité du processus et des enjeux jusqu'au bonheur et aux belles histoires qu'elle peut créer.",
                     "Chaque année, au Québec, c'est près de 250 enfants pour qui les services du directeur de la protection de la jeunesse doivent planifier un parcours de vie alternatif. L'adoption internationale est chiffrée à une cinquantaine par année. Le Mois national de la sensibilisation à l'adoption est une occasion pour nous de reconnaître l'importance de l'adoption et de tout ce qu'elle apporte à notre société. C'est également une opportunité de briser les stéréotypes, de promouvoir l'inclusion et de rappeler que la famille peut prendre de nombreuses formes.",
@@ -135,12 +135,12 @@
             },
             {
               "title": "Rendre hommage à Mme Louise Thouin",
-              "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176637",
+              "anchor": "#_Toc150176637",
               "paragraphs": [],
               "children": [
                 {
                   "title": "Mme Kariane Bourassa",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176638",
+                  "anchor": "#_Toc150176638",
                   "paragraphs": [
                     "Mme Bourassa : Merci, M. le Président. Vous savez, trouver des bénévoles et tout un défi pour nos organismes communautaires. C'est pour ça que je veux prendre cette minute pour souligner l'apport social d'une personne extraordinaire de notre communauté, Mme Louise Thouin.",
                     "Elle a été nommée, jeudi dernier, Bénévole de l'année lors du Gala Reconnaissance de la Côte-de-Beaupré. Il est facile de comprendre pourquoi. Mme Thouin est une véritable force motrice pour la municipalité de Saint-Ferréol-les-Neiges. Elle est impliquée dans de nombreux projets, tels qu'Entraid'Don!, le café Saint-Fé, qui favorise les échanges intergénérationnels, le Troc'Don — c'est une friperie gratuite — elle dirige le C.A. d'un office municipal d'habitation, en plus d'avoir été longtemps conseillère municipale. Elle est de toutes les causes. Donc, lorsqu'on parle de bienfaisance, d'événements communautaires, elle est toujours présente pour les plus vulnérables. Et, en plus, elle est bien entourée, elle a six filles et sept petits-garçons, et elle trouve le temps de s'impliquer dans sa communauté.",
@@ -153,12 +153,12 @@
             },
             {
               "title": "Souligner le 50e anniversaire de l'organisme Le Groupe de personnes handicapées Les Alcyons inc.",
-              "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176639",
+              "anchor": "#_Toc150176639",
               "paragraphs": [],
               "children": [
                 {
                   "title": "M. Pascal Bérubé",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176640",
+                  "anchor": "#_Toc150176640",
                   "paragraphs": [
                     "M. Bérubé : M. le Président, aujourd'hui, je souhaite souligner le 50e anniversaire de l'organisme Les Alcyons de Mont-Joli.",
                     "Bien ancré dans la communauté mitissienne, l'organisme offre tout au long de l'année une série d'activités et d'ateliers pour les personnes handicapées et agit en soutien aux proches aidants.",
@@ -174,12 +174,12 @@
             },
             {
               "title": "Souligner le 275e anniversaire de la ville de Saint-Hyacinthe",
-              "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176641",
+              "anchor": "#_Toc150176641",
               "paragraphs": [],
               "children": [
                 {
                   "title": "Mme Chantal Soucy",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176642",
+                  "anchor": "#_Toc150176642",
                   "paragraphs": [
                     "Mme Soucy : Merci, M. le Président. L'année 2023 marque le 275e anniversaire de la ville de Saint-Hyacinthe.",
                     "Pour l'occasion, la talentueuse équipe du Centre d'histoire de Saint-Hyacinthe a publié un livre : Saint-Hyacinthe : 275 ans à tisser la trame de notre histoire. Cet ouvrage relate sous plusieurs facettes la riche histoire d'une ville qui se démarque dans les domaines des affaires, des arts, des sports et encore plus.",
@@ -193,12 +193,12 @@
             },
             {
               "title": "Souligner le 30e anniversaire de l'organisme Services Kam-Aide inc.",
-              "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176643",
+              "anchor": "#_Toc150176643",
               "paragraphs": [],
               "children": [
                 {
                   "title": "M. Mathieu Rivest",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176644",
+                  "anchor": "#_Toc150176644",
                   "paragraphs": [
                     "M. Rivest : Merci, M. le Président. L'organisme Kam-Aide propose des services d'aide à domicile pour les personnes âgées ou en perte d'autonomie depuis 30 ans.",
                     "En effet, depuis maintenant trois décennies, Kam-Aide est un pilier essentiel du Grand Kamouraska. Aujourd'hui, nous devons rendre hommage à tous ceux qui ont contribué au succès de l'organisation. Que ce soit le conseil d'administration, les membres du personnel, les partenaires, chacun d'entre eux ont joué un rôle primordial dans la réalisation de la mission de Kam-Aide.",
@@ -214,12 +214,12 @@
             },
             {
               "title": "Souligner le 100e anniversaire des Chevaliers de Colomb du conseil de Roberval n° 2442",
-              "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176645",
+              "anchor": "#_Toc150176645",
               "paragraphs": [],
               "children": [
                 {
                   "title": "Mme Nancy Guillemette",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176646",
+                  "anchor": "#_Toc150176646",
                   "paragraphs": [
                     "Mme Guillemette : Merci, M. le Président. Les Chevaliers de Colomb du conseil 2442 de Roberval fêtent cette année leur 100e anniversaire, 400 membres sous la gouverne du grand chevalier, M. Germain Martel, des membres engagés qui prônent l'entraide et la solidarité, toujours prêts à aider les plus démunis de notre communauté, des bénévoles qui ont le coeur sur la main. Familles, jeunes, aînés, tout le monde bénéficie de votre générosité. Depuis nombre d'années, en décembre, entre autres, ils mènent avec conviction la guignolée des chevaliers, qui permet à notre Saint-Vincent-de-Paul d'offrir des paniers de nourriture pour Noël à plusieurs familles.",
                     "Bien ancrés dans notre milieu depuis 100 ans, vous faites partie de notre histoire, de notre culture. Vous nous avez aidés, supportés et avez contribué à rendre notre société meilleure. Vous faites une grande différence dans la vie de bien des gens. Au nom de toute la communauté et en mon nom personnel, merci.",
@@ -231,12 +231,12 @@
             },
             {
               "title": "Souligner le 25e anniversaire de l'entreprise d'économie sociale Amélys",
-              "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176647",
+              "anchor": "#_Toc150176647",
               "paragraphs": [],
               "children": [
                 {
                   "title": "Mme Isabelle Poulet",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176648",
+                  "anchor": "#_Toc150176648",
                   "paragraphs": [
                     "Mme Poulet : Merci, M. le Président. Il me fait grand plaisir de souligner le 25e anniversaire d'Amélys, une entreprise d'économie sociale située dans ma circonscription.",
                     "L'organisation s'est donné pour mission d'offrir des services d'entretien ménager, d'assistance aux personnes, de répit aux proches aidants ainsi que la distribution alimentaire en résidence, et ce, afin d'augmenter la qualité de vie aux personnes aînées et en perte d'autonomie.",
@@ -260,7 +260,7 @@
         },
         {
           "title": "Présentation de projets de loi",
-          "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176649",
+          "anchor": "#_Toc150176649",
           "paragraphs": [
             "À la rubrique Présentation de projets de loi, M. le leader du gouvernement.",
             "M. Jolin-Barrette : Bonjour, Mme la Présidente. Je vous demande d'appeler l'article a du feuilleton, s'il vous plaît."
@@ -268,14 +268,14 @@
           "children": [
             {
               "title": "Projet de loi n° 38 — Loi modifiant la Loi sur la gouvernance et la gestion des ressources informationnelles des organismes publics et des entreprises du gouvernement et d'autres dispositions législatives",
-              "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176650",
+              "anchor": "#_Toc150176650",
               "paragraphs": [
                 "La Présidente : Oui. À l'article a du feuilleton, M. le ministre de la Cybersécurité et du Numérique présente le projet de loi n° 38, Loi modifiant la Loi sur la gouvernance et la gestion des ressources informationnelles des organismes publics et des entreprises du gouvernement et d'autres dispositions législatives. M. le ministre."
               ],
               "children": [
                 {
                   "title": "M. Éric Caire",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176651",
+                  "anchor": "#_Toc150176651",
                   "paragraphs": [
                     "M. Caire : Merci, Mme la Présidente. Donc, ce projet de loi apporte diverses modifications à la Loi sur la gouvernance et la gestion des ressources informationnelles des organismes publics et des entreprises du gouvernement ainsi qu'à la Loi sur le ministère de la Cybersécurité et du Numérique.",
                     "Le projet de loi précise notamment que le ministre de la Cybersécurité et du Numérique assume le leadership de la transformation numérique et de la cybersécurité de l'administration publique. Il lui donne aussi la fonction d'assurer la cohérence et l'harmonisation des actions gouvernementales dans les domaines de la cybersécurité et du numérique et il prévoit qu'il doit être associé à l'élaboration des mesures ainsi qu'aux décisions ministérielles dans ces domaines. En ce qui concerne les organismes publics, il établit expressément leur obligation d'appliquer les orientations, les stratégies, les politiques, les standards, les directives, les règles ou les indications d'application pris en vertu de la Loi sur la gouvernance et la gestion des ressources informationnelles des organismes publics et des entreprises du gouvernement et prévoit que la responsabilité du respect de cette obligation incombe au plus haut dirigeant de l'organisme.",
@@ -293,7 +293,7 @@
                 },
                 {
                   "title": "Mise aux voix",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176652",
+                  "anchor": "#_Toc150176652",
                   "paragraphs": [
                     "La Présidente : Et est-ce que l'Assemblée accepte d'être saisie de ce projet de loi?",
                     "Des voix : Adopté.",
@@ -307,7 +307,7 @@
         },
         {
           "title": "Dépôt de documents",
-          "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176653",
+          "anchor": "#_Toc150176653",
           "paragraphs": [
             "À la rubrique Dépôt de documents, Mme la ministre de l'Immigration, de la Francisation et de l'Intégration.",
             "Mme Fréchette : Oui, Mme la Présidente. Permettez-moi de déposer le plan d'immigration du Québec 2024 et les orientations pluriannuelles 2024 et 2025 de la planification de l'immigration au Québec pour les années 2024 et 2025. Merci.",
@@ -325,19 +325,19 @@
         },
         {
           "title": "Questions et réponses orales",
-          "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176654",
+          "anchor": "#_Toc150176654",
           "paragraphs": [
             "Alors, nous en sommes maintenant rendus à la période de questions et de réponses orales, et je reconnais, pour sa question principale, le chef de l'opposition officielle."
           ],
           "children": [
             {
               "title": "Négociation des conventions collectives dans la fonction publique",
-              "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176655",
+              "anchor": "#_Toc150176655",
               "paragraphs": [],
               "children": [
                 {
                   "title": "M. Marc Tanguay",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176656",
+                  "anchor": "#_Toc150176656",
                   "paragraphs": [
                     "M. Tanguay : Mme la Présidente, le gouvernement est incapable de livrer les services essentiels, services de base auxquels les Québécoises et Québécois ont droit. On parle ici des services en santé, en services sociaux, en éducation.",
                     "Le gouvernement n'est pas un bon employeur. Le gouvernement fait face à un exode des travailleurs et des travailleuses. Aujourd'hui, il manque 45 000 personnes dans le système de santé. Aujourd'hui, il manque 16 000 personnes en éducation. Le premier ministre a dit : Jugez-moi sur les résultats. Bien, j'en ai un, résultat, pour lui : 95 %. Ça, c'est la proportion des travailleurs et travailleuses dans nos réseaux qui sont à bout et qui ont déclaré vouloir partir en grève parce que les offres du gouvernement ne sont pas au rendez-vous, 420 000 travailleurs et travailleuses en santé, services sociaux et en éducation.",
@@ -349,7 +349,7 @@
                 },
                 {
                   "title": "M. François Legault",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176657",
+                  "anchor": "#_Toc150176657",
                   "paragraphs": [
                     "M. Legault : Oui, Mme la Présidente. D'abord, c'est important de rappeler les faits. Dans la dernière négociation de conventions collectives, on a augmenté les salaires des enseignants de 16 % à 18 %. C'était la première fois qu'on faisait des augmentations de salaire différenciées. On a augmenté les salaires, aussi, des préposés aux bénéficiaires de 18 %. On a mis en place des formations accélérées. On a formé, d'abord, un groupe de 10 000. Il en reste 8 000, actuellement. On est en train d'en former un autre 5 000, Mme la Présidente. Dans la proposition qui est sur la table, actuellement, on offre aux infirmières de nuit à temps plein une augmentation de salaire de 17,3 %.",
                     "Donc, on préfère aller avec des offres différenciées justement pour être capables de bien améliorer les services aux citoyens, entre autres en incitant des gens à appliquer sur les postes qui ne sont pas comblés.",
@@ -361,7 +361,7 @@
                 },
                 {
                   "title": "M. Marc Tanguay",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176658",
+                  "anchor": "#_Toc150176658",
                   "paragraphs": [
                     "M. Tanguay : Sûrement autre chose, Mme la Présidente, que d'avoir le résultat de se faire dire, lundi passé, dimanche passé, que c'était, les offres, dérisoire, insultant et que la FIQ se dit déçue et en colère.",
                     "Ça fait un an que vous négociez, vous avez augmenté d'à peine un peu plus de 1 %. Je le sais, que ça a un impact sur les finances publiques, mais vous n'avez pas le choix de vous entendre.",
@@ -372,7 +372,7 @@
                 },
                 {
                   "title": "M. François Legault",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176659",
+                  "anchor": "#_Toc150176659",
                   "paragraphs": [
                     "M. Legault : Oui, bien, Mme la Présidente, je le répète, on offre, actuellement, une augmentation de la masse salariale de 14,8 % sur cinq ans, alors qu'on évalue que l'inflation pour ces cinq années-là va être de 12,7 %.",
                     "Maintenant, je repose ma question. On sait que 1 % de plus, c'est 600 millions. On sait aussi que le gouvernement du Québec est déjà en situation déficitaire. Donc, que propose le Parti libéral?",
@@ -382,7 +382,7 @@
                 },
                 {
                   "title": "M. Marc Tanguay",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176660",
+                  "anchor": "#_Toc150176660",
                   "paragraphs": [
                     "M. Tanguay : Là, Mme la Présidente, là, je vais choisir mon mot, c'est épouvantable. Le premier ministre vient de dire : Le Québec est en situation déficitaire. Quand vous êtes arrivés au pouvoir, Mme la Présidente, vous aviez 7 milliards de dollars dans les coffres. Vous avez décidé d'envoyer des chèques, qui sont dépensés, des chèques de 500 $, puis de 400 $, 600 $, qui ont coûté au Trésor public 6,7 milliards de dollars. Puis aujourd'hui vous n'avez plus d'argent pour nos travailleurs, travailleuses?",
                     "Voyons donc, Mme la Présidente. C'est ça, l'administration caquiste?",
@@ -394,7 +394,7 @@
                 },
                 {
                   "title": "M. François Legault",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176661",
+                  "anchor": "#_Toc150176661",
                   "paragraphs": [
                     "M. Legault : Oui. Mme la Présidente, je suis quand même surpris du commentaire du chef du Parti libéral. D'abord, il nous dit que, les chèques qu'on a donnés, 500 $ à tout le monde, on n'aurait pas dû les donner. Il vient dire aussi que, les chèques de 400 $ pour les personnes qui gagnent entre 50 000 $ et 100 000 $ et les chèques de 600 $ pour les personnes qui gagnent moins de 50 000 $, on n'aurait pas dû les donner. Mme la Présidente, actuellement, les Québécois souffrent à cause de l'augmentation des prix. On les a aidés puis on regarde comment on peut les aider encore plus...",
                     "La Présidente : En terminant.",
@@ -406,7 +406,7 @@
                 },
                 {
                   "title": "M. Marc Tanguay",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176662",
+                  "anchor": "#_Toc150176662",
                   "paragraphs": [
                     "M. Tanguay : Mme la Présidente, personne de sérieux ne va applaudir à ce que le gouvernement a fait en envoyant 6,7 milliards, des chèques à des gens qui gagnaient 80 000 $, 90 000 $, 95 000 $, personne ne va vous dire ça. On a toujours plaidé, Mme la Présidente, pour des mesures ciblées, qui n'auraient pas engagé 6,7 milliards de dollars qu'aujourd'hui il n'a plus. Il dit : Le Québec est en déficit. Aïe! Ça va bien. Là, la semaine prochaine, c'est les infirmières, également, qui vont se porter en grève.",
                     "Il y a un exode de nos travailleurs et travailleuses, puis la population n'a pas les services à cause de votre mauvaise gestion.",
@@ -416,7 +416,7 @@
                 },
                 {
                   "title": "M. François Legault",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176663",
+                  "anchor": "#_Toc150176663",
                   "paragraphs": [
                     "M. Legault : Oui. Mme la Présidente, encore très surpris de ce que je viens d'entendre. Rappelons la mesure, les chèques qu'on a envoyés en décembre dernier : 400 $ pour les personnes qui gagnent entre 50 000 $ et 100 000 $, 600 $ pour les personnes qui gagnent moins de 50 000 $. Ce que vient de dire le chef de l'opposition officielle, c'est que la classe moyenne ne méritait pas d'être aidée. C'est ça, le nouveau Parti libéral du Québec.",
                     "La Présidente : En question principale, je reconnais le député de Pontiac. La parole est à vous, on vous écoute."
@@ -427,12 +427,12 @@
             },
             {
               "title": "Conditions de travail du personnel soignant",
-              "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176664",
+              "anchor": "#_Toc150176664",
               "paragraphs": [],
               "children": [
                 {
                   "title": "M. André Fortin",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176665",
+                  "anchor": "#_Toc150176665",
                   "paragraphs": [
                     "M. Fortin : Mme la Présidente, le ministre de la Santé nous répète à gauche et à droite que la carte maîtresse de son casse-tête santé — ça, c'est son terme, «casse-tête», ce n'est pas le nôtre — la pièce maîtresse, c'est l'attraction de la main-d'oeuvre. Il présente son plan santé, bien, ça dépend de sa capacité d'attirer de la main-d'oeuvre. Il présente un plan de rattrapage en chirurgie, ça dépend de sa capacité à recruter de la main-d'oeuvre. Il veut ouvrir des résidences, des services à domicile, ça dépend de sa capacité à garder sa main-d'oeuvre.",
                     "Bien, pour attirer des professionnels de la santé, là, il faut leur offrir les meilleures conditions de travail. Au cours des prochaines années, des cinq prochaines années, il a besoin de 12 000 infirmières, 15 000 préposés, 3 300 travailleurs sociaux. Sans des bonnes conditions de travail, là, il n'y en aura pas plus, des travailleurs de la santé. Puis, sans des bonnes conditions de travail, bien, son fameux casse-tête va devenir un château de cartes.",
@@ -443,7 +443,7 @@
                 },
                 {
                   "title": "M. Christian Dubé",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176666",
+                  "anchor": "#_Toc150176666",
                   "paragraphs": [
                     "M. Dubé : Mme la Présidente, je pense qu'on a beaucoup d'enjeux, aujourd'hui, dans nos conventions collectives, qui viennent des précédents gouvernements. Il y a des choses qui ont été données en convention collective, qui sont reconnues, qui n'auraient jamais dû être données, avec laquelle... avec ces conditions-là avec lesquelles on est pris maintenant.",
                     "Le premier ministre a très bien répondu que, lorsque... depuis qu'on est au gouvernement, on a pris l'approche des offres différenciées, qui ont été un grand succès pour nous sortir de certains de nos problèmes, dont les préposés aux bénéficiaires. On l'a fait aussi... Et on veut le faire avec les infirmières, comme le fait ma collègue.",
@@ -454,7 +454,7 @@
                 },
                 {
                   "title": "M. André Fortin",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176667",
+                  "anchor": "#_Toc150176667",
                   "paragraphs": [
                     "M. Fortin : La réalité, c'est que, quand ils présentent des offres comme celles-là, ils le savent, qu'elles ne seront pas acceptées. Ils le savent, que ça va mener à des jours de grève. Ils le savent, qu'il va y avoir des impacts sur le réseau. Ils le savent, qu'ils vont priver des Québécois de services. Ils le savent très bien, là, que, la semaine prochaine, dès le premier jour de grève, il va y avoir 346 patients qui vont voir leurs chirurgies annulées, reportées, 346 Québécois. C'est des gens qui attendent un remplacement de la hanche, un remplacement de leur genou, une cataracte. C'est eux qui vont faire les frais de cette offre-là.",
                     "Des voix : ...",
@@ -465,7 +465,7 @@
                 },
                 {
                   "title": "Mme Sonia LeBel",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176668",
+                  "anchor": "#_Toc150176668",
                   "paragraphs": [
                     "Mme LeBel : Merci, Mme la Présidente. Écoutez, je suis tout à fait d'accord avec le fait qu'on a des enjeux, présentement, de main-d'oeuvre, mais on a surtout des enjeux de maximiser la main-d'oeuvre actuelle pour être capables d'avoir une meilleure force de travail sur le terrain. Et comment on veut le faire? C'est avec des mesures, justement, ciblées. On met sur la table 14,8 % d'augmentation, qui vaut 8 milliards de dollars année après année, après année dans le budget de la province. Je pense qu'on est... c'est une offre qui est extrêmement sérieuse et qui démontre notre volonté de régler.",
                     "Mais, vous savez, moi, je ne peux pas régler toute seule. Et, quand les syndicats me demandent encore des baisses de ratios, plus de congés, plus de vacances, la diminution du nombre d'heures de travail et des libérations syndicales, je ne vois pas en quoi je peux...",
@@ -477,7 +477,7 @@
                 },
                 {
                   "title": "M. André Fortin",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176669",
+                  "anchor": "#_Toc150176669",
                   "paragraphs": [
                     "M. Fortin : La seule réponse que le premier ministre puis le ministre de la Santé ont à offrir, c'est : Nous, on fait des offres différenciées, puis tout le monde d'autre est contre. Moi, je n'ai pas vu personne qui était contre les offres différenciées, Mme la Présidente. C'était même dans notre programme, d'avoir des offres différentes pour les gens de l'Outaouais, parce qu'on n'arrête pas de perdre notre monde à l'Ontario.",
                     "Qu'est-ce qu'il y a dans cette offre-là, là, qui va garder le personnel en Outaouais? Qu'est-ce qui va donner plus de ressources aux gens de chez nous pour ne pas qu'ils soient envoyés... pour ne pas qu'ils soient recrutés à tous les jours par l'Ontario?",
@@ -487,7 +487,7 @@
                 },
                 {
                   "title": "Mme Sonia LeBel",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176670",
+                  "anchor": "#_Toc150176670",
                   "paragraphs": [
                     "Mme LeBel : Les offres différenciées, c'est justement des façons de voir comment on peut trouver... dans le domaine de la santé plus particulièrement, parce que c'est celui-là que vise mon collègue, mais c'est vrai également dans le domaine de l'éducation, c'est une façon, Mme la Présidente, de voir comment on peut faire en sorte de convaincre notre personnel d'aller travailler dans les endroits défavorables. Le premier ministre le dit souvent, on ne manque pas d'infirmières le mercredi, mais le dimanche, en fin de soirée, c'est très difficile.",
                     "Alors, ce qu'on a mis sur la table comme offre différenciée, pour lesquelles les syndicats n'adhèrent pas pour l'instant, c'est plus d'argent pour les infirmières qui vont accepter de venir travailler dans nos quarts de travail. Présentement, une infirmière clinicienne à l'urgence qui accepte de venir travailler la fin de semaine pourrait gagner jusqu'à 145 000 $, avec notre offre.",
@@ -499,12 +499,12 @@
             },
             {
               "title": "Impact de la grève sur les services aux aînés",
-              "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176671",
+              "anchor": "#_Toc150176671",
               "paragraphs": [],
               "children": [
                 {
                   "title": "Mme Linda Caron",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176672",
+                  "anchor": "#_Toc150176672",
                   "paragraphs": [
                     "Mme Caron : Merci, Mme la Présidente. Je me lève aujourd'hui pour les aînés du Québec. Les négociations qui perdurent aujourd'hui vont faire mal aux aînés demain. Les aînés sont déjà sur des listes d'attente qui sont assez longues, merci : 4 656 personnes en attente d'une place en CHSLD, 2 300 qui sont hospitalisées pour rien, en attente d'une place en milieu de vie, majoritairement des aînés, 51 appels d'offres qui sont annulés pour construire des nouvelles places en ressource intermédiaire, principalement pour des aînés, et plus 20 000 personnes qui attendent un premier service à domicile. Bref, des aînés qui ont besoin de soins et de services et qui n'en ont déjà pas, et ils n'ont surtout pas besoin d'une grève.",
                     "Ma question est la suivante : J'aimerais savoir ce que la ministre responsable des Aînés fait concrètement aujourd'hui pour éviter cette grève et cette perte de services aux aînés.",
@@ -514,7 +514,7 @@
                 },
                 {
                   "title": "Mme Sonia Bélanger",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176673",
+                  "anchor": "#_Toc150176673",
                   "paragraphs": [
                     "Mme Bélanger : Mme la Présidente, concernant la grève, bien, moi, je me fie au professionnalisme des employés qui travaillent dans les maisons des aînés, dans les CHSLD puis dans les services de soutien à domicile, puis il y a des services essentiels qui sont prévus, qui sont convenus, et je suis confiante que ça va bien se passer. J'ai passé ma vie dans le réseau de la santé et des services sociaux et je sais très bien que les professionnels sont engagés à donner des services de qualité, et j'espère que c'est ce qui se passera dans les prochaines journées.",
                     "Concernant ce que la ministre des Aînés fait pour s'assurer de libérer des places puis d'améliorer notre système de santé, bien, c'est drôle, je n'ai pas eu de question, Mme la Présidente, sur les maisons des aînés. Je suis à l'ouverture de 10 maisons des aînés, et, d'ici Noël, il y en aura huit supplémentaires. Bien, les gens sourient, c'est drôle, mais les maisons des aînés, Mme la Présidente, ça vient répondre aux besoins de nos aînés. Et on va y arriver.",
@@ -526,7 +526,7 @@
                 },
                 {
                   "title": "Mme Linda Caron",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176674",
+                  "anchor": "#_Toc150176674",
                   "paragraphs": [
                     "Mme Caron : Mme la Présidente, respectueusement, je dirais que c'est à l'opposition de choisir les questions qu'elle pose au gouvernement.",
                     "Maintenant, on connaît déjà la date, on connaît... on sait que, si le 6 novembre il n'y a rien qui se passe, on aura droit à une première séquence de grève, et les aînés vont en souffrir. Je veux savoir ce que fait la ministre... En fait, je voulais savoir ce qu'elle faisait, concrètement. Je comprends qu'elle espère que ça va bien se passer. Je me serais attendue à des démarches auprès de sa collègue du Conseil du trésor pour éviter une rupture de services.",
@@ -536,7 +536,7 @@
                 },
                 {
                   "title": "Mme Sonia Bélanger",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176675",
+                  "anchor": "#_Toc150176675",
                   "paragraphs": [
                     "Mme Bélanger : Bien, écoutez, je pense que, Mme la Présidente, c'est un travail d'équipe, là. Bien sûr que j'ai parlé avec ma collègue ministre du Conseil du trésor. Bien sûr que je travaille avec mon collègue ministre de la Santé et avec mon collègue ministre délégué aux Services sociaux, bien sûr. Bien sûr qu'on travaille tous ensemble, ce n'est pas fait en vase clos, là. Il y a une stratégie gouvernementale, puis on communique, on travaille ensemble.",
                     "Moi, je suis en train de dire, dans le fond, à la députée de La Pinière, que j'ai confiance aux employés qui travaillent auprès des aînés. J'ai confiance, il y a des services essentiels qui ont été convenus, j'ai confiance que ça va être respecté. Il faut faire attention...",
@@ -551,7 +551,7 @@
                 },
                 {
                   "title": "Mme Linda Caron",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176676",
+                  "anchor": "#_Toc150176676",
                   "paragraphs": [
                     "Mme Caron : Mme la Présidente, les aînés et les proches aidants sont déjà accablés par des listes d'attente qui n'en finissent plus, ils sont confrontés à ça tous les jours. Ils voient le 6 novembre qui arrive à grands pas.",
                     "La ministre responsable des Aînés, elle est responsable de la santé et du bien-être des aînés, alors, concrètement, sa collaboration avec ses collègues et ses démarches pour éviter aux aînés de souffrir, s'il y a une rupture de services, quelles sont-elles?",
@@ -561,7 +561,7 @@
                 },
                 {
                   "title": "Mme Sonia LeBel",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176677",
+                  "anchor": "#_Toc150176677",
                   "paragraphs": [
                     "Mme LeBel : Je vais réitérer, Mme la Présidente, que je pense qu'à ce moment-ci il faut rassurer la population. Dans le domaine de la santé, il y a des services essentiels, et ils vont être maintenus, ils vont être respectés, j'en suis certaine.",
                     "Maintenant, il faut comprendre que l'offre qui est sur la table, qui a été avancée par le gouvernement et bonifiée dimanche passé, c'est une offre extrêmement sérieuse. Une offre différenciée, c'est une offre complexe, Mme la Présidente, qui a différentes mesures pour différents secteurs, dont les préposés aux bénéficiaires, dont les infirmières qui donnent des soins, justement, à nos aînés. Et je suis quand même perplexe, quand, moins de 30 minutes après le dépôt d'une offre qui demande une analyse, des réflexions, une lecture approfondie, on est capable de la décrier avec autant de véhémence.",
@@ -576,12 +576,12 @@
             },
             {
               "title": "Conditions de travail des employés de la fonction publique",
-              "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176678",
+              "anchor": "#_Toc150176678",
               "paragraphs": [],
               "children": [
                 {
                   "title": "M. Gabriel Nadeau-Dubois",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176679",
+                  "anchor": "#_Toc150176679",
                   "paragraphs": [
                     "M. Nadeau-Dubois : Merci, Mme la Présidente. Le premier ministre dit souvent qu'il veut marquer l'histoire. Bien là, il est en voie de réussir. Des mandats de grève aussi forts dans le secteur public, au Québec, ça fait 40 ans qu'on n'a pas vu ça. Même les libéraux, avec leur austérité, leurs réformes, n'avaient pas réussi à semer autant de colère, de colère chez les femmes et les hommes qui travaillent fort pour nous autres dans nos écoles puis nos hôpitaux.",
                     "Dimanche, le premier ministre avait l'occasion d'apaiser cette colère-là, la colère de celles et de ceux que lui-même appelait, il n'y a pas si longtemps, ses anges gardiens, mais le premier ministre est tellement obsédé par sa guéguerre avec les syndicats, il veut tellement régler ses comptes qu'il a perdu de vue l'essentiel. Ce qui est en jeu dans la négociation, ce n'est pas l'orgueil de l'un ou de l'autre, c'est l'intégrité même de nos services publics, c'est la capacité de l'État québécois à remplir ses missions fondamentales : soigner, éduquer, prendre soin de notre monde. Si le premier ministre n'arrive pas à offrir des bonnes conditions de travail et des bons salaires, bien, les gens qui font ce travail-là vont continuer à s'en aller, ils vont continuer à aller travailler ailleurs, et on va tous et toutes être perdants, au Québec.",
@@ -592,7 +592,7 @@
                 },
                 {
                   "title": "M. François Legault",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176680",
+                  "anchor": "#_Toc150176680",
                   "paragraphs": [
                     "M. Legault : Oui. Mme la Présidente, actuellement, tous les Québécois souffrent de l'augmentation des prix, entre autres le coût des loyers, l'épicerie, puis on essaie d'aider, de façon équitable, l'ensemble des Québécois.",
                     "Mme la Présidente, actuellement, on offre aux 500 000 employés de l'État une augmentation de la masse salariale de 14,8 % sur cinq ans, alors qu'on prévoit que l'inflation va être de 12,7 %. C'est sûr que moi, je serais le premier à vouloir offrir plus, mais il faut comprendre, là, que le Québec, déjà, là, puis on va le voir dans la mise à jour, est en déficit.",
@@ -604,7 +604,7 @@
                 },
                 {
                   "title": "M. Gabriel Nadeau-Dubois",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176681",
+                  "anchor": "#_Toc150176681",
                   "paragraphs": [
                     "M. Nadeau-Dubois : Le premier ministre, là, avez-vous remarqué, avez-vous remarqué, il parle juste de capacité de payer quand c'est le temps de donner des meilleurs salaires au monde ordinaire. Quand vient le temps de signer un chèque pour une start-up suédoise, là, woups! on n'en entend plus parler, de la capacité de payer.",
                     "En fait, Mme la Présidente, là, la capacité de payer, là, c'est juste les beaux mots que le premier ministre utilise, mais ce qu'il veut dire, c'est : Vous ne le méritez pas.",
@@ -616,7 +616,7 @@
                 },
                 {
                   "title": "M. François Legault",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176682",
+                  "anchor": "#_Toc150176682",
                   "paragraphs": [
                     "M. Legault : Mme la Présidente, je pense que le chef de Québec solidaire vient de démontrer pourquoi il ne sera jamais premier ministre du Québec, parce qu'il mélange des incitatifs à des entreprises avec des augmentations de salaire. Pour lui, c'est la même chose.",
                     "Mme la Présidente, dans la filière batterie, on est en train d'inciter des entreprises à investir 30 milliards au Québec, à offrir des salaires plus élevés aux Québécois. On est en train, actuellement, d'attirer des joueurs importants, comme GM, Ford.",
@@ -628,7 +628,7 @@
                 },
                 {
                   "title": "M. Gabriel Nadeau-Dubois",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176683",
+                  "anchor": "#_Toc150176683",
                   "paragraphs": [
                     "M. Nadeau-Dubois : Le premier ministre vient de démontrer pourquoi les mandats de grève passent à 95 %. C'est pour... C'est à cause de cette attitude-là, la sienne, que les gens veulent faire la grève, pas à cause des discours de la présidente de la FTQ puis de la CSN. En ce moment, la personne qui donne envie aux gens de faire la grève, c'est le premier ministre. Ce n'est pas mêlant, Mme la Présidente, pour donner au monde le goût de faire la grève, là, le premier ministre, il est meilleur que Michel Chartrand.",
                     "La Présidente : En réponse, le premier ministre."
@@ -637,7 +637,7 @@
                 },
                 {
                   "title": "M. François Legault",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176684",
+                  "anchor": "#_Toc150176684",
                   "paragraphs": [
                     "M. Legault : Mme la Présidente, on peut toujours compter sur le chef de Québec solidaire pour faire des bonnes jokes. Une joke n'attend pas l'autre. Mme la Présidente, la réalité, là, c'est qu'on offre actuellement une augmentation de 14,8 %, ce qui est deux points de plus que l'inflation, malgré une situation déficitaire. Puis tout ce que Québec solidaire a à proposer, c'est de financer ça avec des nouvelles taxes orange, des nouvelles taxes orange sur les camionnettes familiales. C'est pour ça, même, que les candidates à la chefferie...",
                     "La Présidente : En terminant.",
@@ -650,12 +650,12 @@
             },
             {
               "title": "Protection des droits des locataires aînés",
-              "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176685",
+              "anchor": "#_Toc150176685",
               "paragraphs": [],
               "children": [
                 {
                   "title": "Mme Manon Massé",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176686",
+                  "anchor": "#_Toc150176686",
                   "paragraphs": [
                     "Mme Massé : Merci, Mme la Présidente. Un peu comme tout le monde, j'ai un petit peu de difficultés à suivre la ministre de l'Habitation. Ça fait depuis le début de son projet de loi qu'elle nous dit : Faites des propositions. Mon collègue de Laurier-Dorion fait juste ça, des propositions : serrer la vis à Airbnb, un moratoire sur les évictions, des vraies compensations aux évincés, un suivi des rénovictions au TAL. Bref, on fait proposition sur proposition pour aider le monde qui ne sont pas bien, bien riches, en plein milieu d'une crise du coût de la vie, et la ministre, elle ne veut rien savoir.",
                     "C'est très décevant, mais je ne perds pas espoir. Je ne perds pas espoir parce que je pense qu'on peut arriver à s'entendre, entre autres sur la question de la protection des aînés. La ministre n'a pas bloqué nos amendements sur la loi Françoise David, qui vise à les protéger, les aînés.",
@@ -666,7 +666,7 @@
                 },
                 {
                   "title": "Mme France-Élaine Duranceau",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176687",
+                  "anchor": "#_Toc150176687",
                   "paragraphs": [
                     "Mme Duranceau : Merci, Mme la Présidente. Alors, effectivement, on a commencé l'étude détaillée du projet de loi n° 31. Puis je tiens à remercier les oppositions. On a eu un départ chaotique, mais là, effectivement, tout va très bien, et il y a une belle collaboration. Et je suis un peu déçue d'entendre, par contre, que je ne retiens aucune proposition, parce qu'au contraire on évalue certaines propositions qui ont été faites, dont celles mentionnées, là, par ma collègue de Sainte-Marie—Saint-Jacques.",
                     "Je tiens, par ailleurs, à préciser qu'on a adopté des articles qui étaient fort pertinents en matière de protection des aînés mais aussi de l'ensemble des Québécois, à l'égard des évictions, donc, des mesures très dissuasives à l'endroit de gens qui seraient peu scrupuleux et qui mettraient à la porte des locataires. Alors, on met le fardeau de la preuve sur leurs épaules. Ensuite de ça, on impose des compensations financières qui sont plus importantes pour que tout se fasse dans les règles de l'art et avec un respect des gens qui doivent être déplacés.",
@@ -679,7 +679,7 @@
                 },
                 {
                   "title": "Mme Manon Massé",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176688",
+                  "anchor": "#_Toc150176688",
                   "paragraphs": [
                     "Mme Massé : La ministre nous parle toujours de : Il faut faire l'équilibre entre les propriétaires et les locataires. En fait, c'est comme si elle me disait : David puis Goliath sont parties égales. Ce n'est pas l'état de fait, il y a... Allez voir, d'ailleurs, les gens de Mont-Carmel, qui vont vous rappeler qu'ils ne se sentent pas bien, bien l'égal d'Henry Zavriyev, là, devant leur situation.",
                     "Alors, moi, oui, j'entends, il y a des petits pas, mais j'ai l'impression, Mme la Présidente, que la ministre s'est arrêtée comme en plein milieu du chemin. Est-ce que ça, c'est être en équilibre?",
@@ -689,7 +689,7 @@
                 },
                 {
                   "title": "Mme France-Élaine Duranceau",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176689",
+                  "anchor": "#_Toc150176689",
                   "paragraphs": [
                     "Mme Duranceau : Mme la Présidente, là, on est à la troisième journée de l'étude détaillée, là, alors je suis dans le milieu du chemin, effectivement, là. Je continue. Puis je continue avec les oppositions, puis on avance. Je pense qu'il y a des bonnes discussions.",
                     "Puis je pense que ce serait important d'arrêter toujours le David contre Goliath, justement, là, parce que, si on se remet... puis on prend un peu de recul, là, dans 85 % des cas, là, les locataires et les locateurs, ils s'entendent bien. Puis, dans l'ensemble du Québec, ça va relativement bien. On a des cas d'espèce qui font les journaux, qui sont amplement relatés par les oppositions, puis qui me touchent, moi aussi, là, puis que je ne trouve pas glorieux, puis c'est sur ces cas-là qu'on travaille. Mais je pense qu'il ne faut pas dépeindre l'ensemble de la situation comme noire et...",
@@ -701,7 +701,7 @@
                 },
                 {
                   "title": "Mme Manon Massé",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176690",
+                  "anchor": "#_Toc150176690",
                   "paragraphs": [
                     "Mme Massé : ...cas d'espèce, le dernier dénombrement des personnes itinérantes, là, ils nous ont dit qu'une personne sur quatre de 50 ans et plus qui sont dans la rue, c'est parce qu'ils ont été expulsés de leurs logements. Ce n'est pas un cas d'espèce, ça. 26 %.",
                     "Est-ce qu'on va travailler main dans la main? Il y a une possibilité de protéger les aînés avec une amélioration de la loi Françoise David. Est-ce que la ministre va enfin dire oui?",
@@ -711,7 +711,7 @@
                 },
                 {
                   "title": "Mme France-Élaine Duranceau",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176691",
+                  "anchor": "#_Toc150176691",
                   "paragraphs": [
                     "Mme Duranceau : Merci, Mme la Présidente. Alors, effectivement, c'est une situation qui me touche, ça. C'est pour ça qu'on a dit qu'on l'étudiait, votre proposition, O.K.? Ça fait que, ça, on va être clair sur ça. Je pense que c'est... la crise du logement, le coût de la vie qui a augmenté, il y a un ensemble de facteurs qui font qu'il y a des gens aînés qui, avant, pouvaient conserver leurs logements et qui, là, se retrouvent dans une situation d'itinérance, qui n'est absolument pas souhaitable. Il y a différentes façons d'aider. Il pourrait y avoir la loi, mais il y a aussi tout le Programme de supplément au loyer, qu'on regarde, pour assouplir, pour être sûrs de répondre aux besoins. Et j'ai ma collègue la députée de Labelle qui va d'ailleurs entreprendre...",
                     "La Présidente : En terminant.",
@@ -724,12 +724,12 @@
             },
             {
               "title": "Financement du transport collectif",
-              "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176692",
+              "anchor": "#_Toc150176692",
               "paragraphs": [],
               "children": [
                 {
                   "title": "M. Etienne Grandmont",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176693",
+                  "anchor": "#_Toc150176693",
                   "paragraphs": [
                     "M. Grandmont : Mme la Présidente, se déplacer de Sainte-Julie à Saint-Bruno, c'est deux villes très, très proches l'une de l'autre, ça prend 10 minutes en voiture, ça prend 15 minutes en vélo, ça prend 1 h 30 min en transport en commun. Prendre le transport en commun dans la couronne sud de Montréal, c'est déjà un parcours du combattant, puis la table est mise pour que ça empire dans les prochaines années.",
                     "La CMM nous dit que les coupes historiques dans le financement des transports en commun vont couper les heures d'ouverture du métro de Montréal, mais, ce matin, je veux entendre la ministre sur la couronne sud. C'est un demi-million de personnes, la Rive-Sud, la couronne sud. C'est des cégeps, des campus universitaires, des hôpitaux. C'est plusieurs circonscriptions caquistes qui risquent de perdre des services qui sont bons pour leur... qui sont bon pour la population, et ça, aux bons soins du gouvernement.",
@@ -740,7 +740,7 @@
                 },
                 {
                   "title": "Mme Geneviève Guilbault",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176694",
+                  "anchor": "#_Toc150176694",
                   "paragraphs": [
                     "Mme Guilbault : Oui, merci beaucoup, Mme la Présidente. Merci à Québec solidaire. Je pense, c'est la première fois en six ans qu'ils s'intéressent à autre chose que des grands centres urbains à Québec ou à Montréal. Alors, ça va me faire plaisir de répondre sur les couronnes sud de Montréal, parce qu'effectivement ce sont des gens avec qui on est en relation continuelle, puis vous vous en doutez bien, Mme la Présidente, d'ailleurs, je pense, de par votre propre circonscription.",
                     "• (10 h 40) •",
@@ -754,7 +754,7 @@
                 },
                 {
                   "title": "M. Etienne Grandmont",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176695",
+                  "anchor": "#_Toc150176695",
                   "paragraphs": [
                     "M. Grandmont : Merci, Mme la Présidente. Bien, je vais informer la ministre que ça ne va pas très bien non plus sur la Rive-Nord de Montréal. Le portrait n'est vraiment pas plus réjouissant. Le ministre de l'Économie nous dit qu'il veut réduire de moitié le nombre de voitures, mais il n'y a pas plus de transport en commun qui est offert actuellement.",
                     "Comment les gens de Terrebonne vont voyager, eux, sans voiture dans leur circonscription? Comment le ministre de l'Économie va expliquer ça à ses électeurs, qu'on réduit le nombre de voitures mais qu'on n'augmente pas le transport en commun sur leur territoire?",
@@ -764,7 +764,7 @@
                 },
                 {
                   "title": "Mme Geneviève Guilbault",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176696",
+                  "anchor": "#_Toc150176696",
                   "paragraphs": [
                     "Mme Guilbault : Oui. Alors donc, c'est ça, mon tableau, Mme la Présidente, avant d'aborder les couronnes nord, qui sont aussi très importantes. Vous voyez, ici, là, j'ai mis la part du gouvernement en bleu pour être certaine que tout le monde voit bien et... et donc, c'est ça, il est à l'endroit. Donc, le gouvernement en bleu. Alors, j'aimerais ça que Québec solidaire regarde bien comme il faut ce tableau-là. On peut leur en fournir une copie. Je veux dire, ça ne peut pas être plus clair, là. Même Québec solidaire devrait réaliser puis comprendre que la part du gouvernement, la part monétaire, budgétaire du gouvernement en investissement en transport collectif au Québec est non seulement la plus haute par rapport au précédent gouvernement libéral...",
                     "La Présidente : En terminant.",
@@ -776,7 +776,7 @@
                 },
                 {
                   "title": "M. Etienne Grandmont",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176697",
+                  "anchor": "#_Toc150176697",
                   "paragraphs": [
                     "M. Grandmont : C'est bien beau, montrer des tableaux puis lancer des chiffres, mais les projets n'atterrissent pas. Puis, l'offre de transport collectif, les opérations, on a un problème, actuellement, là. Les maires et les mairesses de toutes ces circonscriptions, de toutes ces municipalités-là le disent et le répètent. Les maires entendent... Les maires et les mairesses n'entendent rien, nada, silence radio de la part de la ministre. Ce sont des maires et des mairesses qui se trouvent... qui se tournent vers leurs députés caquistes mais qui se font dire par la CAQ : On ne peut pas vous aider, on ne va pas vous aider.",
                     "Est-ce que c'est comme ça que la CAQ travaille pour les Rive-Sud et Rive-Nord de Montréal?",
@@ -786,7 +786,7 @@
                 },
                 {
                   "title": "Mme Geneviève Guilbault",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176698",
+                  "anchor": "#_Toc150176698",
                   "paragraphs": [
                     "Mme Guilbault : Alors, on nous dit, là : Ça a diminué. Mme la Présidente, 2023 n'est pas finie, et il y a des offres qui sont en train de se faire, il y aura une mise à jour budgétaire. Alors, cette colonne-là est appelée à augmenter encore. Et je ferai un tableau à jour après la mise à jour budgétaire pour le bénéfice des collègues.",
                     "Donc, Mme la Présidente, que ce soient les couronnes nord ou les couronnes sud, je m'entends avec le collègue sur le fait que ça prend de l'offre sur les couronnes, de l'offre de transport collectif. C'est pour ça que, quand on nous arrive avec des demandes à la CMM où, disons, l'organisation des services pourrait être optimisée à la faveur de plus de services en dehors du... en dehors de l'île de Montréal, on est d'accord, Mme la Présidente. C'est pour ça qu'on est en discussion. On va s'arranger pour que non seulement on puisse continuer de financer...",
@@ -804,12 +804,12 @@
             },
             {
               "title": "Pénurie d'éducatrices en service de garde",
-              "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176699",
+              "anchor": "#_Toc150176699",
               "paragraphs": [],
               "children": [
                 {
                   "title": "M. Sol Zanetti",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176700",
+                  "anchor": "#_Toc150176700",
                   "paragraphs": [
                     "M. Zanetti : Merci, Mme la Présidente. Imaginez un couple de jeunes qui veulent se lancer dans la vie. Lundi, le gars a vu l'annonce de la CAQ sur les formations dans la construction. Ça l'intéresse. Parfait. Il s'est inscrit. Il va commencer en janvier à être payé 25 $ de l'heure pour étudier en charpenterie-menuiserie. C'est une bonne nouvelle. Sa blonde, elle, elle a toujours rêvé d'être éducatrice à la petite enfance. Elle s'est inscrite au D.E.C. puis elle aussi, elle va commencer ses études en janvier. Est-ce qu'elle va gagner 25 $ de l'heure? Non. Une fois qualifiée, ça va lui prendre six ans pour arriver à ce salaire-là.",
                     "Il manque 18 000 éducatrices et éducateurs à la petite enfance au Québec. La ministre de la Famille peut-elle s'engager à déployer les mêmes ressources pour recruter en éducation à l'enfance qu'en construction?",
@@ -819,7 +819,7 @@
                 },
                 {
                   "title": "Mme Suzanne Roy",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176701",
+                  "anchor": "#_Toc150176701",
                   "paragraphs": [
                     "Mme Roy (Verchères) : Merci, Mme la Présidente. Alors, il y a des opérations importantes pour du recrutement, justement, d'éducatrices à la petite enfance, et elle va se voir offrir une bourse, jusqu'à 9 000 $, pour pouvoir aller étudier et faire son D.E.C. à la petite enfance. On va permettre d'avoir... de travailler en même temps que les études, d'avoir un parcours travail-études. On va faire de la reconnaissance des acquis pour, justement, reconnaître toute l'expérience qui a été acquise. On va offrir de la formation en A.E.C. On va soutenir nos éducatrices justement pour pouvoir remplir le plein d'éducatrices. Parce qu'actuellement ce qu'on est en train de faire, au Québec, c'est du jamais-vu depuis 25 ans. On est en train de créer des places partout au Québec. C'est plus de 20 500 places subventionnées depuis le début du grand chantier. Donc, c'est du jamais-vu. Et, oui, bien sûr, on augmente nos efforts...",
                     "La Présidente : En terminant.",
@@ -830,7 +830,7 @@
                 },
                 {
                   "title": "M. Sol Zanetti",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176702",
+                  "anchor": "#_Toc150176702",
                   "paragraphs": [
                     "M. Zanetti : Mme la Présidente, pour compléter le réseau d'ici deux ans, ça va prendre 9 000 éducatrices de plus par année. C'est plus que le double que le meilleur résultat de la ministre jusqu'ici.",
                     "Est-ce qu'elle peut reconnaître qu'il va falloir en faire beaucoup, beaucoup plus pour compléter le réseau d'ici deux ans?",
@@ -840,7 +840,7 @@
                 },
                 {
                   "title": "Mme Suzanne Roy",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176703",
+                  "anchor": "#_Toc150176703",
                   "paragraphs": [
                     "Mme Roy (Verchères) : Merci, Mme la Présidente. Oui, on continue nos efforts avec les programmes COUD, justement, pour s'assurer d'augmenter le nombre d'éducatrices, de donner le goût aux jeunes d'aller vers cette profession extraordinaire, qui travaille pour l'avenir du Québec, pour nos enfants, ce que nous avons de plus précieux. Donc, on continue nos efforts. Mais, évidemment, quand quelqu'un s'inscrit pour un D.E.C., il faut prendre le temps que ça se fasse. Mais nous allons continuer à travailler tous les jours et de façon récurrente pour s'assurer, justement, de développer le réseau et d'intervenir, justement, pour soutenir les familles du Québec.",
                     "La Présidente : En terminant.",
@@ -851,7 +851,7 @@
                 },
                 {
                   "title": "M. Sol Zanetti",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176704",
+                  "anchor": "#_Toc150176704",
                   "paragraphs": [
                     "M. Zanetti : Merci, Mme la Présidente. Moi, j'aimerais bien savoir ce que fait la ministre de la Condition féminine dans ce dossier-là. D'un côté, on a un milieu majoritairement féminin, d'un autre côté un milieu majoritairement masculin, et on donne aux hommes tout de suite en partant ce qu'on va donner aux femmes après minimum six ans.",
                     "Est-ce que la ministre de la Condition féminine trouve ça juste?",
@@ -861,7 +861,7 @@
                 },
                 {
                   "title": "Mme Suzanne Roy",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176705",
+                  "anchor": "#_Toc150176705",
                   "paragraphs": [
                     "Mme Roy (Verchères) : Alors, merci, Mme la Présidente. Je pense qu'il est important de rappeler que notre gouvernement est intervenu de façon extrêmement importante particulièrement chez les professions majoritairement femmes, hein, qu'on pense aux enseignants, aux enseignantes, qu'on pense aux infirmières, qu'on pense aux éducatrices, où il y a eu un rattrapage.",
                     "Il y a actuellement des négociations. Le processus de négociation va suivre son cours. Mais de ramener ça en disant que... Au contraire, je pense que, s'il y a un gouvernement qui est intervenu au niveau des professions plus féminines et qui a travaillé à augmenter...",
@@ -875,12 +875,12 @@
             },
             {
               "title": "Projet de tramway à Québec",
-              "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176706",
+              "anchor": "#_Toc150176706",
               "paragraphs": [],
               "children": [
                 {
                   "title": "M. Pascal Paradis",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176707",
+                  "anchor": "#_Toc150176707",
                   "paragraphs": [
                     "M. Paradis : Mme la Présidente, dans le dossier du tramway à Québec, comme dans une grande majorité des dossiers de transport ou d'infrastructures sous ce gouvernement, tout est compliqué, c'est difficile de faire aboutir. Le premier ministre a déclaré récemment que la ville de Québec a besoin d'un projet de transport lourd. On vient tout juste d'apprendre, ce matin, que la ville de Québec a pris une décision responsable, celle de ne pas faire un tramway à n'importe quel prix. Elle propose des solutions pour arriver à livrer un projet à des coûts raisonnables.",
                     "Tout au long de la campagne dans Jean-Talon, on l'a dit à de nombreuses reprises, le gouvernement manque de transparence dans ce dossier. On est présentement à la croisée des chemins. Aujourd'hui, la ville demande au gouvernement de la soutenir. On offre à nouveau à la ministre des Transports et de la Mobilité durable l'opportunité d'être transparente.",
@@ -891,7 +891,7 @@
                 },
                 {
                   "title": "Mme Geneviève Guilbault",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176708",
+                  "anchor": "#_Toc150176708",
                   "paragraphs": [
                     "Mme Guilbault : Oui, merci, Mme la Présidente. Bien, quand le député de Jean-Talon commence en disant que, dans le dossier de tramway, ça a toujours été compliqué, je veux juste lui rappeler que c'est la ville de Québec qui gère le dossier de tramway. Donc, je tiens pour acquis que ses commentaires ne s'adressent pas au gouvernement. Alors, peut-être, peut-être tenir ça en compte.",
                     "• (10 h 50) •",
@@ -906,7 +906,7 @@
                 },
                 {
                   "title": "M. Pascal Paradis",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176709",
+                  "anchor": "#_Toc150176709",
                   "paragraphs": [
                     "M. Paradis : Oui, il y a des nouvelles, ce matin, mais la ministre sait qu'on est, au bas mot, à 8 milliards depuis juillet dernier. Jamais elle n'a fait de mise à jour sur le projet, sur sa stratégie, donc une transparence sur sa pensée sur le projet. Je lui offre, Mme la Présidente, une nouvelle fois ce matin l'opportunité d'être transparente.",
                     "La ville de Québec, qui, oui, est maître d'oeuvre du projet, demande l'appui du gouvernement dans sa nouvelle proposition. La balle est dans le camp de la ministre, à qui on demande du leadership constructif.",
@@ -917,7 +917,7 @@
                 },
                 {
                   "title": "Mme Geneviève Guilbault",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176710",
+                  "anchor": "#_Toc150176710",
                   "paragraphs": [
                     "Mme Guilbault : Bien, Mme la Présidente, je sais que le collègue vient d'arriver, alors moi, je vais lui offrir une nouvelle chance de comprendre comment les projets fonctionnent. Il nous dit qu'on n'a pas fait de mise à jour et, dans la même phrase, il reconnaît lui-même que ce n'est pas nous qui gérons le projet. On a passé 20 minutes... Il peut peut-être demander au député de Taschereau de lui expliquer comment ça fonctionne, parce que lui et moi, on a passé beaucoup de temps...",
                     "Des voix : ...",
@@ -936,7 +936,7 @@
                 },
                 {
                   "title": "M. Pascal Paradis",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176711",
+                  "anchor": "#_Toc150176711",
                   "paragraphs": [
                     "M. Paradis : Alors, je comprends que la ministre préfère s'attaquer aux personnes plutôt que de répondre à la question de la main tendue...",
                     "Des voix : ...",
@@ -948,7 +948,7 @@
                 },
                 {
                   "title": "Mme Geneviève Guilbault",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176712",
+                  "anchor": "#_Toc150176712",
                   "paragraphs": [
                     "Mme Guilbault : Bien, je vais dire ce que j'ai fait depuis cet été. Quand le Parti québécois et le Parti libéral demandaient, pendant l'élection de Jean-Talon, demandaient impertinemment au gouvernement de se substituer au maire de Québec pour faire des mises à jour basées sur des chiffres préliminaires, même pas officiels, la CAQ a protégé le maire en disant : Il a raison de ne pas dévoiler parce que les appels d'offres sont confidentiels, il faut respecter les processus, et, le moment venu, le maire de Québec fera sa mise à jour, au moment qu'il jugera opportun, qui est manifestement ce matin. C'est ça que la CAQ a fait, comme tout le reste des avancées qu'on avait à faire à travers les processus du PQI pour que le projet avance, tout en respectant l'autonomie puis la maîtrise d'oeuvre de la ville de Québec. C'est ce que la CAQ a fait, c'est comme ça qu'on gère les projets majeurs au gouvernement, Mme la Présidente.",
                     "La Présidente : En question principale, je reconnais maintenant la députée de Chomedey. La parole est à vous."
@@ -959,12 +959,12 @@
             },
             {
               "title": "Financement du parc du Mont-Sainte-Anne",
-              "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176713",
+              "anchor": "#_Toc150176713",
               "paragraphs": [],
               "children": [
                 {
                   "title": "Mme Sona Lakhoyan Olivier",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176714",
+                  "anchor": "#_Toc150176714",
                   "paragraphs": [
                     "Mme Lakhoyan Olivier : Merci, Mme la Présidente. Le 16 octobre dernier, Alliance Affaires Côte-de-Beaupré ainsi que la MRC de la Côte-de-Beaupré ont fait une sortie publique pour demander au gouvernement du Québec d'investir dans le Mont-Sainte-Anne, un joyau touristique et économique pour la région de la Capitale-Nationale. Dès le lendemain, le ministre de l'Économie a fermé la porte à une aide financière, causant beaucoup de déception dans la région. Or, lors de l'étude des crédits budgétaires de son ministère, il avait déclaré qu'il partage l'opinion des gens qui disent que cette montagne-là mérite d'avoir des investissements, qu'elle n'a pas eus. Clairement, le ministre se contredit dans ses propos.",
                     "Encore un dossier qui n'avance pas dans la Capitale-Nationale, et la saison touristique d'hiver approche. C'est quoi, le plan du gouvernement pour le Mont-Sainte-Anne?",
@@ -974,7 +974,7 @@
                 },
                 {
                   "title": "M. Pierre Fitzgibbon",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176715",
+                  "anchor": "#_Toc150176715",
                   "paragraphs": [
                     "M. Fitzgibbon : Oui. Bien, Mme la Présidente, la santé des centres de ski, évidemment, c'est important pour le Québec, mais, en même temps, il faut faire attention dans le contexte budgétaire dans lequel nous sommes présentement.",
                     "Ce que j'ai dit publiquement, c'est qu'aujourd'hui d'accorder des sommes importantes au Mont-Sainte-Anne, sans considération à ce que la population s'attend du gouvernement, n'était pas responsable. Conséquemment, j'ai dit très clairement que, pour l'instant, il n'y avait pas de projet spécifique pour le Mont-Sainte-Anne mais que nous regardions, au gouvernement, pour avoir un programme pour tous les centres de ski, qui serait responsable dans le contexte économique du Québec, et qu'on aurait une annonce à faire, potentiellement, pour aider non pas seulement le Mont-Sainte-Anne, mais tous les centres de ski qui auraient besoin d'assistance, au gouvernement, pour changer leur équipement, pour permettre aux Québécois de pratiquer ce sport-là, mais dans un contexte, encore une fois, qui va être respectueux du contexte budgétaire.",
@@ -988,7 +988,7 @@
         },
         {
           "title": "Motions sans préavis",
-          "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176716",
+          "anchor": "#_Toc150176716",
           "paragraphs": [
             "Comme il n'y a pas de votes reportés, nous allons passer à la rubrique Motions sans préavis. Pour ce faire, je cède la place à la première vice-présidente de l'Assemblée nationale. Merci et bonne fin de journée.",
             "La Vice-Présidente (Mme Soucy) : Donc, nous allons poursuivre nos travaux.",
@@ -997,7 +997,7 @@
           "children": [
             {
               "title": "Souligner l'importance de sensibiliser davantage la population aux enjeux vécus par les personnes en situation d'immunosuppression",
-              "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176717",
+              "anchor": "#_Toc150176717",
               "paragraphs": [
                 "M. Arseneau : Merci, Mme la Présidente. Je sollicite le consentement des membres de cette Assemblée afin de présenter, conjointement avec le ministre de la Santé, le député de Pontiac, le député de Saint-Henri—Sainte-Anne, le député de Marguerite-Bourgeoys et la députée de Vaudreuil, la motion suivante :",
                 "«Que l'Assemblée nationale reconnaisse que les personnes immunosupprimées sont vulnérables en tout temps face aux bactéries, aux virus et à leurs variants;",
@@ -1010,7 +1010,7 @@
               "children": [
                 {
                   "title": "Mise aux voix",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176718",
+                  "anchor": "#_Toc150176718",
                   "paragraphs": [
                     "La Vice-Présidente (Mme Soucy) : Merci. Cette motion est-elle adoptée? Motion adoptée.",
                     "Maintenant, nous allons poursuivre avec un membre du groupe formant le gouvernement. Alors, Mme la ministre des Transports et de la Mobilité durable."
@@ -1021,7 +1021,7 @@
             },
             {
               "title": "Souligner le 40e anniversaire d'Opération Nez rouge",
-              "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176719",
+              "anchor": "#_Toc150176719",
               "paragraphs": [
                 "Mme Guilbault : Merci, Mme la Présidente. Je sollicite le consentement de cette Assemblée afin de présenter la motion suivante conjointement avec le député de l'Acadie, le député de Taschereau, le député des Îles-de-la-Madeleine, la députée de Vaudreuil et le député de Marguerite-Bourgeoys :",
                 "«Que l'Assemblée [nationale] souligne le 40e anniversaire de l'Opération Nez rouge;",
@@ -1035,7 +1035,7 @@
               "children": [
                 {
                   "title": "Mise aux voix",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176720",
+                  "anchor": "#_Toc150176720",
                   "paragraphs": [
                     "La Vice-Présidente (Mme Soucy) : Cette motion est-elle adoptée? Motion adoptée.",
                     "Donc, nous allons poursuivre avec un membre du groupe formant l'opposition officielle. Mme la députée de Bourassa-Sauvé, la parole est à vous."
@@ -1046,7 +1046,7 @@
             },
             {
               "title": "Demander au gouvernement de reconduire le financement du programme Parlez-moi d'une langue!",
-              "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176721",
+              "anchor": "#_Toc150176721",
               "paragraphs": [
                 "Mme Cadet : Merci, Mme la Présidente. Je sollicite le consentement de cette Assemblée afin de présenter la motion suivante conjointement avec le ministre de la Langue française, la députée de Mercier, le député de Matane-Matapédia, la députée de Vaudreuil et le député de Marguerite-Bourgeoys :",
                 "«Que l'Assemblée nationale prenne acte que depuis plus de 25 ans, le programme Parlez-moi d'une langue! permet à des centaines de conférenciers de rencontrer chaque année des dizaines de milliers d'étudiants dans les établissements d'enseignement collégial et universitaire ou d'éducation aux adultes afin de partager l'importance de la langue française et de réaffirmer le désir de parler, d'écrire et de vivre en français;",
@@ -1062,7 +1062,7 @@
               "children": [
                 {
                   "title": "Mise aux voix",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176722",
+                  "anchor": "#_Toc150176722",
                   "paragraphs": [
                     "La Vice-Présidente (Mme Soucy) : Cette motion est-elle...",
                     "Une voix : ...",
@@ -1100,7 +1100,7 @@
         },
         {
           "title": "Avis touchant les travaux des commissions",
-          "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176723",
+          "anchor": "#_Toc150176723",
           "paragraphs": [
             "Nous sommes maintenant à la rubrique Avis touchant les travaux des commissions. M. le leader du gouvernement.",
             "M. Lévesque (Chapleau) : Oui, merci beaucoup, Mme la Présidente.",
@@ -1117,7 +1117,7 @@
     },
     {
       "title": "Affaires du jour",
-      "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176724",
+      "anchor": "#_Toc150176724",
       "paragraphs": [
         "La période des affaires courantes étant terminée, nous allons maintenant passer aux affaires du jour. Et je cède la parole à M. le leader du gouvernement pour nous indiquer la suite.",
         "M. Lévesque (Chapleau) : Oui, merci beaucoup, Mme la Présidente. Je vous demanderais de bien vouloir appeler l'article 10 du feuilleton, s'il vous plaît.",
@@ -1128,12 +1128,12 @@
       "children": [
         {
           "title": "Projet de loi n° 36 — Loi sur le recouvrement du coût des soins de santé et des dommages-intérêts liés aux opioïdes",
-          "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176725",
+          "anchor": "#_Toc150176725",
           "paragraphs": [],
           "children": [
             {
               "title": "Adoption",
-              "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176726",
+              "anchor": "#_Toc150176726",
               "paragraphs": [
                 "M. le ministre responsable des Services sociaux propose l'adoption du projet de loi n° 36, Loi sur le recouvrement du coût des soins en santé et des dommages et intérêts liés aux opioïdes.",
                 "Y a-t-il des interventions?",
@@ -1143,7 +1143,7 @@
               "children": [
                 {
                   "title": "M. Lionel Carmant",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176727",
+                  "anchor": "#_Toc150176727",
                   "paragraphs": [
                     "M. Carmant : Merci beaucoup, Mme la Présidente. Il y a deux semaines, je me levais dans cette Chambre pour déposer le projet de loi sur le recouvrement du coût des soins de santé et des dommages-intérêts liés aux opioïdes. Aujourd'hui, on a adopté le projet de loi n° 36, un projet de loi important, qui nous permet de mettre en place les mécanismes pour non seulement se joindre à cette action collective de la Colombie-Britannique, mais aussi à rendre imputables, au nom de tous les Québécois qui ont souffert et leurs familles, ces entreprises pharmaceutiques qui ont causé tant de dommages, Mme la Présidente.",
                     "Dans un premier temps, j'aimerais remercier les personnes qu'on a eu la chance d'entendre lors des consultations. Du nombre, on comptait, par exemple, l'Association des intervenants en dépendance du Québec, l'INSPQ, la Dre Marie-Ève Goyer et l'organisme Spectre de rue, que je remercie pour leur temps et leur apport. Leur expertise a été très éclairante au niveau du projet de loi comme tel, mais également pour notre compréhension de la crise actuelle et ses pistes de solution. J'aimerais aussi prendre le temps de saluer tous les collègues qui ont participé à l'étude de ce projet de loi. La collaboration a été fantastique, et on a prouvé qu'en travaillant tout le monde ensemble on peut faire avancer rapidement des projets importants. Un merci spécial à la présidente de la commission, la députée des Plaines, pour son travail formidable à la tête des travaux parlementaires. Merci beaucoup.",
@@ -1167,7 +1167,7 @@
                 },
                 {
                   "title": "Mme Manon Massé",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176728",
+                  "anchor": "#_Toc150176728",
                   "paragraphs": [
                     "Mme Massé : Merci, Mme la Présidente. En effet, ce projet de loi là a été rondement, mais il était surtout extrêmement nécessaire. Le Québec avait besoin de joindre sa voix aux autres provinces du Canada pour aller récupérer l'argent qui dort dans les profits monstrueux que font les pharmaceutiques. Et ce qu'on va découvrir en regardant ce recours collectif là aller, c'est que ça se fait sur le dos du monde. Ça s'est fait sur le dos du monde en partie, et ça, c'est totalement inacceptable.",
                     "Donc, aujourd'hui, pour moi, de prendre la parole au niveau de l'adoption de ce projet de loi là, c'est fondamental, parce que les opioïdes tuent, on le sait. On le sait depuis longtemps. Et d'ailleurs on a eu d'excellentes consultations où des gens vraiment investis dans le milieu, je pense notamment à Me Louis Letellier et à Sandhia aussi, de l'association des intervenants et intervenantes en dépendance du Québec, qui sont venus nous donner l'heure juste sur qu'est-ce que ça veut dire de vivre avec une dépendance. Même chose pour la Dre Marie-Ève Goyer, qui a vraiment nourri, pour moi, en tout cas, ma compréhension de pourquoi les dépendances, ce ne sont pas des crimes, ce sont des problèmes de santé. Et dans ce sens-là, je pense que là où a lieu le crime, si vous voulez mon point de vue, Mme la Présidente, quand on pense à ces pharmaceutiques qui ont volontairement omis des choses qui ont fait en sorte que des gens ont développé des dépendances, c'est que c'est de ce côté-là, le crime. Il est vraiment de ce côté-là, le crime.",
@@ -1193,7 +1193,7 @@
                 },
                 {
                   "title": "Mise aux voix",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176729",
+                  "anchor": "#_Toc150176729",
                   "paragraphs": [
                     "La Vice-Présidente (Mme Soucy) : Merci, Mme la députée. Est-ce qu'il y a des interventions? Donc, le projet de loi n° 36, Loi sur le recouvrement du coût des soins de santé et des dommages-intérêts liés aux opioïdes, est-il adopté?",
                     "Des voix : Adopté.",
@@ -1212,12 +1212,12 @@
         },
         {
           "title": "Affaires inscrites par les députés de l'opposition",
-          "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176730",
+          "anchor": "#_Toc150176730",
           "paragraphs": [],
           "children": [
             {
               "title": "Motion proposant que l'Assemblée demande au gouvernement de renoncer aux modifications proposées aux frais de scolarité imposés aux étudiants canadiens non-résidents du Québec",
-              "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176731",
+              "anchor": "#_Toc150176731",
               "paragraphs": [
                 "Nous sommes rendus aux affaires inscrites par les députés de l'opposition. À l'article 42 du feuilleton, aux affaires inscrites par les députés de l'opposition, Mme la députée de Saint-Laurent présente la motion suivante :",
                 "«Que l'Assemblée nationale prenne acte que les modifications proposées aux frais de scolarité des étudiants canadiens hors Québec auront pour effet de diminuer les retombées économiques générées par leur présence au Québec, de nuire au développement de certaines universités québécoises et de favoriser l'essor des universités ailleurs au Canada, notamment à Toronto;",
@@ -1229,7 +1229,7 @@
               "children": [
                 {
                   "title": "Mme Marwah Rizqy",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176732",
+                  "anchor": "#_Toc150176732",
                   "paragraphs": [
                     "Mme Rizqy : Merci beaucoup, M. le Président. Le 27 septembre dernier, on pouvait entendre le ministre des Finances, au CORIM, dire la chose suivante : Il y a un écart de richesse entre le Québec et l'Ontario. Non, en fait, il y a un écart de richesse entre Montréal et Toronto, parce que, ah! pour la première fois, l'Université de Toronto a devancé McGill. Ça, c'était le 27 septembre au CORIM, devant un parquet de gens du Québec. On voyait qu'il reprenait le propos du premier ministre qui, à chaque fois, nous parle de l'écart de richesse avec l'Ontario puis à quel point que c'est important de le rattraper. Alors, moi, je n'arrive pas à comprendre comment on peut avoir un ministre des Finances dire qu'il se désole de voir l'Université de Toronto avoir damé le pion à McGill, notre université, et, deux semaines et demie plus tard, entendre la ministre de l'Enseignement supérieur faire la plus grande jambette de l'histoire à McGill ainsi qu'à Concordia et à Bishop's. Je ne comprends pas.",
                     "La seule chose que je peux constater, c'est que cette volte-face ou ce changement de discours est une conséquence directe à la partielle dans Jean-Talon. Je comprends qu'il y a eu une onde de choc pour le gouverneur caquiste, qui s'attendait à gagner un 90e député, et qu'au lendemain de cette dégelée ils ont essayé de revenir en selle avec le troisième lien. Quand ils ont vu que tout le monde riait d'eux, ils se sont tournés puis ils ont décidé : Aïe! qu'est-ce qu'on va faire pour reprendre le flambeau nationaliste? Aïe! on va frapper sur nos universités, solidement. Bien là, ils se décident de faire une conférence de presse, qui n'était pas du tout attendue par le réseau universitaire. Savez-vous pourquoi elle n'était pas attendue, M. le Président? C'est qu'en ce moment, six différents comités qui travaillent, au niveau universitaire, ça n'a jamais été dans aucun ordre du jour, cette annonce-là, jamais. La ministre est arrivée Gros-Jean comme devant avec cela.",
@@ -1265,7 +1265,7 @@
                 },
                 {
                   "title": "Mme Pascale Déry",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176733",
+                  "anchor": "#_Toc150176733",
                   "paragraphs": [
                     "Mme Déry : Oui. Merci beaucoup, M. le Président. Alors, je voudrais remercier ma collègue la députée de Saint-Laurent de me donner l'occasion d'expliquer les mesures annoncées et de corriger le tir aussi sur certains faits qui ont été mentionnés. D'abord, je crois qu'il est pertinent de remettre tout ça dans le contexte qui nous a menés à cette annonce-là, ce nouveau modèle de tarification, donc, pour les étudiants internationaux et les étudiants canadiens non-résidents du Québec.",
                     "Lors de ma nomination en tant que ministre, il y a un an, il y a des éléments qui ont retenu mon attention et qui ont soulevé des questions. Je regardais la grille tarifaire des étudiants non québécois à l'université. Le ministère de l'Enseignement supérieur finance depuis très, très longtemps, à la hauteur de plus de 100 millions par année, des étudiants canadiens qui viennent chez nous suivre des programmes universitaires en anglais, particulièrement à Montréal, et qui, pour la plupart, retournent dans leur province travailler, donc, après leur diplomation.",
@@ -1288,7 +1288,7 @@
                 },
                 {
                   "title": "Mme Christine Labrie",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176734",
+                  "anchor": "#_Toc150176734",
                   "paragraphs": [
                     "Mme Labrie : Merci, M. le Président. Je vais le partager avec un collègue. Je veux m'exprimer par rapport à la réalité de l'Université Bishop's, qui est fortement atteinte par l'annonce de la ministre.",
                     "Je me suis informée auprès du ministère de l'Enseignement supérieur s'il y avait eu une étude d'impact de la mesure annoncée, et puis on est toujours en attente de cette demande d'accès à l'information, mais, pour l'instant, on ne nous a transmis aucun document qui ressemblerait à une étude d'impact qui aurait été faite du côté du ministère pour évaluer ce qui se passe suite à cette mesure.",
@@ -1307,7 +1307,7 @@
                 },
                 {
                   "title": "M. Mario Asselin",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176735",
+                  "anchor": "#_Toc150176735",
                   "paragraphs": [
                     "M. Asselin : Merci beaucoup, M. le Président. Alors, tout d'abord, je veux prendre le temps de saluer Mme la ministre pour son intervention d'aujourd'hui. Elle a su faire la lumière sur ce sujet qui a fait beaucoup couler d'encre dans les dernières semaines et qui touche plusieurs personnes de différentes façons. Alors, je veux aussi saluer mes collègues du gouvernement et aussi la députée de Saint-Laurent et mes autres collègues. On est contents que la députée de Saint-Laurent ait suscité notre présence en Chambre.",
                     "Alors, avant de commencer, je veux vous dire à quel point je suis content d'être ici, compte tenu de mon rôle d'adjoint parlementaire à la ministre de l'Enseignement supérieur. C'est plus que mon devoir de venir intervenir sur ce débat, compte tenu de la fierté que j'ai d'avoir été choisi dans ces fonctions-là.",
@@ -1335,7 +1335,7 @@
                 },
                 {
                   "title": "M. Pascal Bérubé",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176736",
+                  "anchor": "#_Toc150176736",
                   "paragraphs": [
                     "M. Bérubé : Merci, M. le Président. À mon tour, au nom du Parti québécois, de m'exprimer sur cette motion du Parti libéral du Québec, qui m'interpelle comme citoyen, comme député, comme ancien vice-président de la Fédération étudiante universitaire du Québec.",
                     "Alors, la motion, à sa face même, telle que présentée, est contradictoire. Elle reproche au gouvernement, avec raison, de ne pas avoir réalisé d'étude d'impact de sa décision. Mais la motion elle-même, sans aucune étude, que je sache, prédit que la mesure va nuire au développement de certaines universités et favoriser les universités ailleurs au Canada. Quelle étude d'impact permet d'affirmer ça? Je ne le sais pas. Mais ça semblait important pour les libéraux, rapidement, de se rendre en Estrie en disant : On est là. Manifestement, il y avait peut-être d'autres éléments qui motivaient leur présence, mais certainement pas une étude.",
@@ -1353,7 +1353,7 @@
                 },
                 {
                   "title": "M. Yannick Gagnon",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176737",
+                  "anchor": "#_Toc150176737",
                   "paragraphs": [
                     "M. Gagnon : Bonjour, M. le Président. Je trouve ça intéressant de parler, M. le Président, d'un mot fort, une mesure... une mesure, pardon, d'incitatif, une mesure incitative, quand on la décortique puis qu'on regarde qu'est-ce qu'il y a précisément, une mesure incitative au nom des régions. Et aujourd'hui c'est un député des régions qui vous parle. Alors, c'est une mesure incitative au nom des régions, c'est essentiel.",
                     "Et la mesure incitative, elle vise à favoriser l'attraction d'étudiants internationaux en région. Et ça prend du courage, M. le Président, parce que, pour bénéficier de la bourse qu'on va parler... que je vais vous parler pendant les prochaines minutes, bien, notre gouvernement a eu le souci de dire une chose : Pour bénéficier de la bourse d'exemption pour les étudiants francophones internationaux du MES, il faut être à l'extérieur de la communauté métropolitaine, et ça, ça, M. le Président, ça signifie prendre soin de nos régions. Et, quand on dit «prendre soin de nos régions», qu'est-ce que ça va faire, cette bourse d'exemption là, pour les étudiants francophones? Bien, qu'est-ce que ça va faire, deux petits mots tout simples pour un gars de région : nous aider, M. le Président. Et, quand on dit «nous aider», je vais le détailler. Nous aider comment? Au final, c'est de répondre aux besoins de main-d'oeuvre des entreprises de chez nous, et c'est ça que je salue, M. le Président.",
@@ -1381,7 +1381,7 @@
                 },
                 {
                   "title": "Mme Madwa-Nika Cadet",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176738",
+                  "anchor": "#_Toc150176738",
                   "paragraphs": [
                     "Mme Cadet : Merci, M. le Président. D'abord, j'aimerais saluer les étudiants de l'UEQ et de la CADEUL qui sont avec nous aujourd'hui dans les tribunes. Je me permets...",
                     "Des voix : ...",
@@ -1407,7 +1407,7 @@
                 },
                 {
                   "title": "M. Alexandre Leduc",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176739",
+                  "anchor": "#_Toc150176739",
                   "paragraphs": [
                     "M. Leduc : Merci, M. le Président. Je vais commencer par saluer les gens qui sont dans les gradins, du mouvement étudiant, notamment, un mouvement que j'ai bien connu pour y avoir participé dans mes jeunes années.",
                     "Je vais devoir lire trois amendements que nous déposons, à Québec solidaire.",
@@ -1446,7 +1446,7 @@
                 },
                 {
                   "title": "M. Samuel Poulin",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176740",
+                  "anchor": "#_Toc150176740",
                   "paragraphs": [
                     "M. Poulin : Merci beaucoup, M. le Président. C'est un plaisir de vous retrouver cet après-midi afin d'échanger ensemble de jeunesse, d'éducation, de l'avenir de notre réseau universitaire québécois. À mon tour de saluer les représentants de divers groupes de mouvements étudiants qui sont avec nous cet après-midi. Je veux vous remercier — oui, on peut les applaudir à nouveau, certainement, certainement — et vous féliciter aussi pour votre implication dans vos universités, dans le mouvement étudiant. On est à une ère où on parle beaucoup d'implication citoyenne, de responsabilité citoyenne également. Alors, d'être étudiant, de décider de prendre plusieurs heures par semaine pour s'impliquer pour l'avenir des jeunes au Québec, je trouve ça touchant, je trouve ça important. De venir passer du temps aussi au salon bleu de l'Assemblée nationale pour nous écouter, je trouve ça impressionnant. Alors, merci d'être là et merci pour votre implication. Sachons, M. le Président, qu'il y a beaucoup plus de choses qui nous rejoignent dans la vie que des choses qui nous séparent, y compris avec le mouvement étudiant.",
                     "Vous me permettrez également aussi de souligner que notre gouvernement est présentement dans une consultation jeunesse qui est fort importante, qui se termine ce jeudi à Québec le 2 novembre. Je vois la députée de Bourassa-Sauvé. Nous étions ensemble du côté de Montréal. Je sais que j'ai plusieurs collègues du gouvernement, je vois la députée d'Iberville, le député de Jonquière, entre autres, qui ont... la députée, aussi, de Laviolette—Saint-Maurice, qui ont participé de façon active aux consultations jeunesse qui se tiennent présentement, qui vont nous permettre de renouveler le prochain plan d'action jeunesse de notre gouvernement.",
@@ -1482,7 +1482,7 @@
                 },
                 {
                   "title": "Mme Marwah Rizqy (réplique)",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176741",
+                  "anchor": "#_Toc150176741",
                   "paragraphs": [
                     "Mme Rizqy : Non, mais, sincèrement, là, je suis obligée de lire Hal Newman, La dernière ambulance, il avait fait le gazouillis suivant : «Je trouve fascinant que les anciens dirigeants du mouvement étudiant [du] carré rouge restent désormais largement silencieux car, après tout, seuls les étudiants universitaires anglais sont ciblés par le gouvernement.» Québec pas vraiment solidaire. Ça, c'était il y a six jours.",
                     "Aujourd'hui, les amendements : «Qu'elle demande au gouvernement caquiste de réformer la méthode de financement des universités francophones et anglophones afin qu'elle corresponde au poids démographique respectif de chaque groupe.»",
@@ -1521,7 +1521,7 @@
                 },
                 {
                   "title": "Vote reporté",
-                  "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176742",
+                  "anchor": "#_Toc150176742",
                   "paragraphs": [
                     "Le Vice-Président (M. Benjamin) : Alors, conformément à la demande du leader du gouvernement, le vote sur la motion de Mme la députée de Saint-Laurent sera tenu à la période des affaires courantes de demain. M. le leader."
                   ],
@@ -1535,7 +1535,7 @@
     },
     {
       "title": "Ajournement",
-      "href": "C:\\Users\\twanou\\Desktop\\projets\\assnat\\src\\test\\resources\\scrapers\\pages\\log.html#_Toc150176743",
+      "anchor": "#_Toc150176743",
       "paragraphs": [
         "M. Lévesque (Chapleau) : Oui. Merci beaucoup, M. le Président. À ce stade-ci de nos travaux, je vous demanderais de bien vouloir ajourner nos travaux à demain, s'il vous plaît.",
         "Le Vice-Président (M. Benjamin) : Alors, en conséquence, nous ajournons nos travaux à demain, jeudi le 2 novembre 2023, à 9 h 40.",
