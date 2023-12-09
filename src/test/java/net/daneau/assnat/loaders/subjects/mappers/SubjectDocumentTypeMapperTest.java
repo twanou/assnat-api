@@ -29,12 +29,18 @@ class SubjectDocumentTypeMapperTest {
     void map() {
         ScrapedLogNode scrapedLogNode = ScrapedLogNode.builder()
                 .title("Déclarations des députés")
+                .anchor("#anchor")
                 .children(List.of(ScrapedLogNode.builder()
                         .title("Souligner quelque chose d'important")
-                        .children(List.of(ScrapedLogNode.builder()
-                                .title("M. Lucien Bouchard")
-                                .paragraphs(List.of("M. Bouchard : Bonjour", "oui", "Vice-Président : merci lulu", "bon passons à autre chose"))
-                                .build()))
+                        .children(List.of(
+                                ScrapedLogNode.builder()
+                                        .title("M. Lucien Bouchard")
+                                        .paragraphs(List.of("M. Bouchard : Bonjour", "oui", "Vice-Président : merci lulu", "bon passons à autre chose"))
+                                        .build(),
+                                ScrapedLogNode.builder()
+                                        .title("Document déposé")
+                                        .build()
+                        ))
                         .build()))
                 .build();
 
@@ -42,6 +48,7 @@ class SubjectDocumentTypeMapperTest {
         SubjectDetails expectedResult = SubjectDetails.builder()
                 .type(SubjectType.DEPUTY_DECLARATION)
                 .title(scrapedLogNode.getChildren().get(0).getTitle())
+                .anchor(scrapedLogNode.getChildren().get(0).getAnchor())
                 .interventions(List.of(
                         InterventionDocument.builder()
                                 .assignmentId(assignment.getId())

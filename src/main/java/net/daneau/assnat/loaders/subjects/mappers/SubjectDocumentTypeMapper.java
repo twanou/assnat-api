@@ -16,6 +16,7 @@ public abstract class SubjectDocumentTypeMapper {
     protected String AFFAIRES_COURANTES = "Affaires courantes";
     protected String DECLARATIONS_DE_DEPUTES = "Déclarations de députés";
     protected String QUESTIONS_REPONSES = "Questions et réponses orales";
+    private final List<String> IGNORED_TITLES = List.of("Document déposé");
     private final DeputyFinder deputyFinder;
 
     public List<SubjectDetails> map(ScrapedLogNode logNode) {
@@ -24,6 +25,7 @@ public abstract class SubjectDocumentTypeMapper {
                 .map(subject -> {
                     List<InterventionDocument> interventionDocuments = subject.getChildren()
                             .stream()
+                            .filter(intervention -> !IGNORED_TITLES.contains(intervention.getTitle()))
                             .map(intervention -> {
                                 Assignment assignment = this.deputyFinder.findByCompleteName(intervention.getTitle()); // nom complet, ex M. Bob Tremblay
                                 return InterventionDocument.builder()
@@ -35,6 +37,7 @@ public abstract class SubjectDocumentTypeMapper {
                     return SubjectDetails.builder()
                             .type(this.getSubjectType())
                             .title(subject.getTitle())
+                            .anchor(subject.getAnchor())
                             .interventions(interventionDocuments)
                             .build();
                 }).toList();
