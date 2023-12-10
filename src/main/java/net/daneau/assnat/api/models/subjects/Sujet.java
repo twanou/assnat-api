@@ -11,5 +11,6 @@ public class Sujet {
     LocalDate date;
     int legislature;
     int session;
+    String url;
     SujetDetails details;
 }

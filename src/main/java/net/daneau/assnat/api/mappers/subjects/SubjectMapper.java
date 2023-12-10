@@ -18,8 +18,10 @@ import java.util.stream.Collectors;
 public class SubjectMapper {
 
     private final Map<SubjectType, SubjectTypeMapper> subjectMappers;
+    private final AssnatLinkBuilder assnatLinkBuilder;
 
-    public SubjectMapper(List<SubjectTypeMapper> subjectMappersList) {
+    public SubjectMapper(List<SubjectTypeMapper> subjectMappersList, AssnatLinkBuilder assnatLinkBuilder) {
+        this.assnatLinkBuilder = assnatLinkBuilder;
         this.subjectMappers = Collections.unmodifiableMap(
                 subjectMappersList.stream()
                         .flatMap(m -> m.supports().stream().map(t -> new AbstractMap.SimpleEntry<>(t, m)))
@@ -42,6 +44,7 @@ public class SubjectMapper {
                     .date(subject.getDate())
                     .legislature(subject.getLegislature())
                     .session(subject.getSession())
+                    .url(this.assnatLinkBuilder.getUrl(subject.getLegislature(), subject.getSession(), subject.getDate(), subject.getPageId(), subject.getSubjectDetails().getAnchor()))
                     .details(this.subjectMappers.get(subject.getSubjectDetails().getType()).map(subject.getSubjectDetails(), affectations))
                     .build();
             sujets.add(sujet);
