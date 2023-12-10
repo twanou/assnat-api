@@ -52,6 +52,9 @@ class SubjectDocumentTypeMapperTest {
                 .interventions(List.of(
                         InterventionDocument.builder()
                                 .assignmentId(assignment.getId())
+                                .districtId(assignment.getDistrictId())
+                                .partyId(assignment.getPartyId())
+                                .deputyId(assignment.getDeputyId())
                                 .paragraphs(scrapedLogNode.getChildren().get(0).getChildren().get(0).getParagraphs())
                                 .build()))
                 .build();
