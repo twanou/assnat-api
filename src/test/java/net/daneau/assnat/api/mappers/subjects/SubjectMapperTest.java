@@ -49,6 +49,7 @@ class SubjectMapperTest {
         SubjectMapper subjectMapper = new SubjectMapper(List.of(subjectTypeMapperMock), assnatLinkBuilderMock);
         List<Sujet> sujets = subjectMapper.toSujetsList(subjects, affectations);
         assertEquals(subjects.get(0).getSession(), sujets.get(0).getSession());
+        assertEquals(subjects.get(0).getId(), sujets.get(0).getId());
         assertEquals(subjects.get(0).getLegislature(), sujets.get(0).getLegislature());
         assertEquals(subjects.get(0).getDate(), sujets.get(0).getDate());
         assertEquals("url", sujets.get(0).getUrl());

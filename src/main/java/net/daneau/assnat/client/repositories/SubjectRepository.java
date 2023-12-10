@@ -13,13 +13,15 @@ import java.util.stream.Collectors;
 public interface SubjectRepository extends MongoRepository<Subject, String> {
 
     Optional<Subject> findFirstByOrderByDateDesc();
-    
 
     @Query("{'subjectDetails.interventions':{ $elemMatch: { 'deputyId': { $in: ?0}}}}")
     List<Subject> findSubjectsByDeputyObjectIds(Set<ObjectId> ids);
 
     default List<Subject> findSubjectsByDeputyIds(Set<String> ids) {
-        return this.findSubjectsByDeputyObjectIds(ids.stream().map(ObjectId::new).collect(Collectors.toSet()));
+        return this.findSubjectsByDeputyObjectIds(ids.stream()
+                .filter(ObjectId::isValid)
+                .map(ObjectId::new)
+                .collect(Collectors.toSet()));
     }
 }
 

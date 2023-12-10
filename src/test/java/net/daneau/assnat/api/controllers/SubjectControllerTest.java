@@ -24,6 +24,14 @@ class SubjectControllerTest {
     private SubjectController subjectController;
 
     @Test
+    void getSubjectsByDeputyIds() {
+        List<Sujet> sujets = List.of(Sujet.builder().build());
+        when(subjectServiceMock.getSubjectsByDeputyIds(Set.of("1", "2"))).thenReturn(sujets);
+        SujetReponse response = this.subjectController.getSubjectsByDeputyIds(Set.of("1", "2"));
+        assertEquals(response.getSujets(), sujets);
+    }
+
+    @Test
     void getSubjects() {
         List<Sujet> sujets = List.of(Sujet.builder().build());
         when(subjectServiceMock.getSubjects(Set.of("1", "2"))).thenReturn(sujets);

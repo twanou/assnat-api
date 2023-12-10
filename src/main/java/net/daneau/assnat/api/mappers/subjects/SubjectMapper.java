@@ -41,6 +41,7 @@ public class SubjectMapper {
         List<Sujet> sujets = new ArrayList<>();
         for (Subject subject : subjects) {
             Sujet sujet = Sujet.builder()
+                    .id(subject.getId())
                     .date(subject.getDate())
                     .legislature(subject.getLegislature())
                     .session(subject.getSession())
