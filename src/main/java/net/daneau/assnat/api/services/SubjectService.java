@@ -18,8 +18,13 @@ public class SubjectService {
     private final AssignmentService assignmentService;
     private final SubjectMapper subjectMapper;
 
-    public List<Sujet> getSubjects(Set<String> deputyIds) {
+    public List<Sujet> getSubjectsByDeputyIds(Set<String> deputyIds) {
         List<Subject> subjects = this.subjectRepository.findSubjectsByDeputyIds(deputyIds);
+        return this.subjectMapper.toSujetsList(subjects, this.assignmentService.getAllAssignments());
+    }
+
+    public List<Sujet> getSubjects(Set<String> ids) {
+        List<Subject> subjects = this.subjectRepository.findAllById(ids);
         return this.subjectMapper.toSujetsList(subjects, this.assignmentService.getAllAssignments());
     }
 }
