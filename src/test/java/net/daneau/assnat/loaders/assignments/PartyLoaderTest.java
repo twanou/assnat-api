@@ -28,19 +28,19 @@ class PartyLoaderTest {
 
     @Test
     void loadWithoutSave() {
-        List<Party> parties = List.of(Party.builder().name("Parti Québecois").build());
+        List<Party> parties = List.of(Party.builder().name("Parti Québecois").acronym("PQ").build());
         when(partyRepositoryMock.findAll()).thenReturn(parties);
 
-        List<Party> results = this.partyLoader.load(List.of(ScrapedDeputy.builder().party("Parti Québecois").build()));
+        List<Party> results = this.partyLoader.load(List.of(ScrapedDeputy.builder().party("Parti Québecois").partyAcronym("PQ").build()));
         verify(partyRepositoryMock, never()).save(any());
         assertEquals(parties, results);
     }
 
     @Test
     void loadWithSave() {
-        ScrapedDeputy scrapedDeputy = ScrapedDeputy.builder().party("Parti Québecois").build();
-        Party newParty = Party.builder().name("Parti Québecois").build();
-        Party partyInDB = Party.builder().name("Parti Libéral").build();
+        ScrapedDeputy scrapedDeputy = ScrapedDeputy.builder().party("Parti Québecois").partyAcronym("PQ").build();
+        Party newParty = Party.builder().name("Parti Québecois").acronym("PQ").build();
+        Party partyInDB = Party.builder().name("Parti Libéral").acronym("PLQ").build();
         when(partyRepositoryMock.findAll()).thenReturn(new ArrayList<>(List.of(partyInDB)));
         when(partyRepositoryMock.save(newParty)).thenReturn(newParty);
 

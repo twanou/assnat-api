@@ -27,6 +27,7 @@ class PartyLoader {
                         this.partyRepository.save(
                                 Party.builder()
                                         .name(scrapedDeputy.getParty())
+                                        .acronym(scrapedDeputy.getPartyAcronym())
                                         .build()));
             }
         }

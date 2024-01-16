@@ -21,10 +21,12 @@ import org.springframework.stereotype.Component;
 import java.io.InputStream;
 import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -37,6 +39,7 @@ public class DeputyScraper {
     private final ErrorHandler errorHandler;
 
     private static final String INDEPENDENT = "Indépendant";
+    private static final String INDEPENDENT_ACRONYM = "Ind.";
     private static final String INDEPENDENT_PARTY = "Indépendant(e)";
     private static final String DEPUTEE = "Députée";
     private static final String M = "M.";
@@ -51,13 +54,15 @@ public class DeputyScraper {
             List<HtmlTableDataCell> cells = row.getByXPath(".//td");
             HtmlPage deputyPage = this.getDeputyPage(cells.get(0));
             List<String> functions = this.getFunctions(deputyPage);
+            String party = cells.get(2).getVisibleText();
             deputies.add(
                     ScrapedDeputy.builder()
                             .title(this.getTitle(functions))
                             .firstName(StringUtils.strip(cells.get(0).getVisibleText().split(",")[1]))
                             .lastName(StringUtils.strip(cells.get(0).getVisibleText().split(",")[0]))
                             .district(cells.get(1).getVisibleText())
-                            .party(this.independenceCheck(cells.get(2).getVisibleText()))
+                            .party(this.independenceCheck(party) ? INDEPENDENT_PARTY : party)
+                            .partyAcronym(this.independenceCheck(party) ? INDEPENDENT_ACRONYM : this.getPartyAcronym(party))
                             .functions(functions)
                             .photo(this.getPhotoBase64(deputyPage))
                             .build()
@@ -69,8 +74,16 @@ public class DeputyScraper {
         return Collections.unmodifiableList(deputies);
     }
 
-    private String independenceCheck(String party) {
-        return StringUtils.containsIgnoreCase(party, INDEPENDENT) ? INDEPENDENT_PARTY : party;
+    private boolean independenceCheck(String party) {
+        return StringUtils.containsIgnoreCase(party, INDEPENDENT);
+    }
+
+    private String getPartyAcronym(String party) {
+        String acronym = Arrays.stream(party.split(" "))
+                .filter(s -> s.length() > 3)
+                .map(s -> s.substring(0, 1))
+                .collect(Collectors.joining());
+        return StringUtils.upperCase(acronym);
     }
 
     private HtmlPage getDeputyPage(HtmlTableDataCell cell) {

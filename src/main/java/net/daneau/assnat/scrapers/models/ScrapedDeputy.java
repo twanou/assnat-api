@@ -17,6 +17,7 @@ public class ScrapedDeputy {
     String lastName;
     String district;
     String party;
+    String partyAcronym;
     @Builder.Default
     List<String> functions = List.of();
     /**
