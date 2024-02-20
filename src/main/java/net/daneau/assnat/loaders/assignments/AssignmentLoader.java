@@ -57,6 +57,7 @@ public class AssignmentLoader {
                                 .deputyId(deputy.getId())
                                 .districtId(district.getId())
                                 .partyId(party.getId())
+                                .photo(scrapedDeputy.getPhoto())
                                 .functions(scrapedDeputy.getFunctions())
                                 .build()
                 );

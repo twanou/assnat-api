@@ -37,7 +37,7 @@ class DeputyFinderTest {
 
     @Test
     void findByCompleteName() {
-        Deputy deputyParizeau = Deputy.builder().id("1").title("M.").firstName("Jacques").lastName("Parizeau").photo("photo").build();
+        Deputy deputyParizeau = Deputy.builder().id("1").title("M.").firstName("Jacques").lastName("Parizeau").build();
         Assignment assignmentParizeau = Assignment.builder().deputyId("1").partyId("2").districtId("3").build();
         when(assignmentRepositoryMock.findByEndDate(null)).thenReturn(List.of(
                 assignmentParizeau,

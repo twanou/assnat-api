@@ -30,7 +30,6 @@ class DeputyLoader {
                                         .title(scrapedDeputy.getTitle())
                                         .firstName(scrapedDeputy.getFirstName())
                                         .lastName(scrapedDeputy.getLastName())
-                                        .photo(scrapedDeputy.getPhoto())
                                         .build()));
             }
         }
