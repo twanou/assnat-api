@@ -19,7 +19,7 @@ import java.util.Set;
 @CrossOrigin
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/sujets")
+@RequestMapping("${api.subjects.path}")
 public class SubjectController {
 
     private final SubjectService subjectService;

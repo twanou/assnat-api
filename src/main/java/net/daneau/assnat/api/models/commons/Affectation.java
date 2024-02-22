@@ -12,5 +12,6 @@ public class Affectation {
     Depute depute;
     Parti parti;
     Circonscription circonscription;
+    String photoUrl;
     List<String> fonctions;
 }

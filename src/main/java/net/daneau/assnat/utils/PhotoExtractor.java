@@ -30,7 +30,7 @@ public class PhotoExtractor {
     private final DeputyRepository deputyRepository;
     private final DistrictRepository districtRepository;
     private final PartyRepository partyRepository;
-    private final PhotoFileNameGenerator photoFileNameGenerator;
+    private final PhotoUtils photoUtils;
     private static final String PATH = "photos/%s.jpg";
 
     public void extract() throws IOException {
@@ -44,7 +44,7 @@ public class PhotoExtractor {
             Deputy deputy = deputies.get(assignment.getDeputyId());
             District district = districts.get(assignment.getDistrictId());
             Party party = parties.get(assignment.getPartyId());
-            String fileName = this.photoFileNameGenerator.generate(deputy.getFirstName(), deputy.getLastName(), district.getName(), party.getName());
+            String fileName = this.photoUtils.getUniqueId(deputy.getFirstName(), deputy.getLastName(), district.getName(), party.getName());
 
             if (seen.add(fileName)) {
                 byte[] decodedBytes = Base64.getDecoder().decode(assignment.getPhoto());

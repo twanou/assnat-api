@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/affectations")
+@RequestMapping("${api.assignments.path}")
 public class AssignmentController {
 
     private final AssignmentService assignmentService;
