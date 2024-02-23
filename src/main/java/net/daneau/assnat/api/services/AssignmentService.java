@@ -8,6 +8,7 @@ import net.daneau.assnat.api.models.commons.Parti;
 import net.daneau.assnat.cache.CacheKey;
 import net.daneau.assnat.client.documents.Assignment;
 import net.daneau.assnat.client.repositories.AssignmentRepository;
+import net.daneau.assnat.utils.PhotoUtils;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,7 @@ public class AssignmentService {
     private final DeputyService deputyService;
     private final DistrictService districtService;
     private final PartyService partyService;
+    private final PhotoUtils photoUtils;
     private final AssignmentRepository assignmentRepository;
 
     @Cacheable(CacheKey.Constants.CURRENT_ASSIGNMENTS)
@@ -47,7 +49,19 @@ public class AssignmentService {
                                 .depute(deputes.get(assignment.getDeputyId()))
                                 .parti(partis.get(assignment.getPartyId()))
                                 .circonscription(circonscriptions.get(assignment.getDistrictId()))
+                                .photoUrl(this.getPhotoUrl(
+                                        deputes.get(assignment.getDeputyId()),
+                                        circonscriptions.get(assignment.getDistrictId()),
+                                        partis.get(assignment.getPartyId()))
+                                )
                                 .fonctions(assignment.getFunctions())
                                 .build()));
+    }
+
+    private String getPhotoUrl(Depute depute, Circonscription circonscription, Parti parti) {
+        return this.photoUtils.getPhotoUrl(depute.getPrenom(),
+                depute.getNom(),
+                circonscription.getNom(),
+                parti.getNom());
     }
 }

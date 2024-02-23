@@ -28,6 +28,7 @@ public class Assignment {
     String districtId;
     @Field(targetType = FieldType.OBJECT_ID)
     String partyId;
+    String photo;
     @Builder.Default
     List<String> functions = List.of();
 }
