@@ -2,6 +2,7 @@ package net.daneau.assnat.client.repositories;
 
 import net.daneau.assnat.client.documents.Subject;
 import org.bson.types.ObjectId;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
@@ -15,13 +16,13 @@ public interface SubjectRepository extends MongoRepository<Subject, String> {
     Optional<Subject> findFirstByOrderByDateDesc();
 
     @Query(value = "{'subjectDetails.interventions':{ $elemMatch: { 'deputyId': { $in: ?0}}}}", sort = "{ date : -1 }")
-    List<Subject> findSubjectsByDeputyObjectIds(Set<ObjectId> ids);
+    List<Subject> findSubjectsByDeputyObjectIds(Set<ObjectId> ids, Pageable pageable);
 
-    default List<Subject> findSubjectsByDeputyIds(Set<String> ids) {
+    default List<Subject> findSubjectsByDeputyIds(Set<String> ids, Pageable pageable) {
         return this.findSubjectsByDeputyObjectIds(ids.stream()
                 .filter(ObjectId::isValid)
                 .map(ObjectId::new)
-                .collect(Collectors.toSet()));
+                .collect(Collectors.toSet()), pageable);
     }
 }
 

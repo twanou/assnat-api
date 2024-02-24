@@ -26,8 +26,8 @@ class SubjectControllerTest {
     @Test
     void getSubjectsByDeputyIds() {
         List<Sujet> sujets = List.of(Sujet.builder().build());
-        when(subjectServiceMock.getSubjectsByDeputyIds(Set.of("1", "2"))).thenReturn(sujets);
-        SujetReponse response = this.subjectController.getSubjectsByDeputyIds(Set.of("1", "2"));
+        when(subjectServiceMock.getSubjectsByDeputyIds(Set.of("1", "2"), 0, 25)).thenReturn(sujets);
+        SujetReponse response = this.subjectController.getSubjectsByDeputyIds(Set.of("1", "2"), 0, 25);
         assertEquals(response.getSujets(), sujets);
     }
 

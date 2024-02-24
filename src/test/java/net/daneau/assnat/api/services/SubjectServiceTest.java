@@ -10,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 import java.util.Map;
@@ -37,11 +38,11 @@ class SubjectServiceTest {
         List<Subject> subjects = List.of(Subject.builder().build());
         List<Sujet> sujets = List.of(Sujet.builder().build());
         Map<String, Affectation> affectations = Map.of();
-        when(subjectRepositoryMock.findSubjectsByDeputyIds(ids)).thenReturn(subjects);
+        when(subjectRepositoryMock.findSubjectsByDeputyIds(ids, PageRequest.of(0, 25))).thenReturn(subjects);
         when(assignmentServiceMock.getAllAssignments()).thenReturn(affectations);
         when(subjectMapperMock.toSujetsList(same(subjects), same(affectations))).thenReturn(sujets);
 
-        List<Sujet> response = this.subjectService.getSubjectsByDeputyIds(ids);
+        List<Sujet> response = this.subjectService.getSubjectsByDeputyIds(ids, 0, 25);
         assertSame(sujets, response);
     }
 
