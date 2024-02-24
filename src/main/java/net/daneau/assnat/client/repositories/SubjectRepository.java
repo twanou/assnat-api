@@ -14,7 +14,7 @@ public interface SubjectRepository extends MongoRepository<Subject, String> {
 
     Optional<Subject> findFirstByOrderByDateDesc();
 
-    @Query("{'subjectDetails.interventions':{ $elemMatch: { 'deputyId': { $in: ?0}}}}")
+    @Query(value = "{'subjectDetails.interventions':{ $elemMatch: { 'deputyId': { $in: ?0}}}}", sort = "{ date : -1 }")
     List<Subject> findSubjectsByDeputyObjectIds(Set<ObjectId> ids);
 
     default List<Subject> findSubjectsByDeputyIds(Set<String> ids) {
