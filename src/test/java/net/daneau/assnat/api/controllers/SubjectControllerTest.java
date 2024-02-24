@@ -3,6 +3,7 @@ package net.daneau.assnat.api.controllers;
 import net.daneau.assnat.api.models.subjects.Sujet;
 import net.daneau.assnat.api.models.subjects.responses.SujetReponse;
 import net.daneau.assnat.api.services.SubjectService;
+import net.daneau.assnat.loaders.services.LoadingService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -20,6 +22,8 @@ class SubjectControllerTest {
 
     @Mock
     private SubjectService subjectServiceMock;
+    @Mock
+    private LoadingService loadingServiceMock;
     @InjectMocks
     private SubjectController subjectController;
 
@@ -29,6 +33,7 @@ class SubjectControllerTest {
         when(subjectServiceMock.getSubjectsByDeputyIds(Set.of("1", "2"), 0, 25)).thenReturn(sujets);
         SujetReponse response = this.subjectController.getSubjectsByDeputyIds(Set.of("1", "2"), 0, 25);
         assertEquals(response.getSujets(), sujets);
+        verify(loadingServiceMock).load();
     }
 
     @Test

@@ -23,16 +23,23 @@ public class LogEntriesSubjectLoader {
     private final SubjectLoader subjectLoader;
     private final SubjectRepository subjectRepository;
 
-    public void load() {
+    public void load(Runnable prerequisiteTask) {
         LocalDate latestInterventionDate = this.subjectRepository.findFirstByOrderByDateDesc().map(Subject::getDate).orElse(LocalDate.MIN);
         List<ScrapedLogEntry> logEntries = this.assNatLogEntryScraper.scrape();
-        log.info("Début du chargement des journaux");
-        logEntries.stream()
+
+        List<ScrapedLogEntry> filteredLogEntries = logEntries.stream()
                 .filter(entry -> entry.getDate().isAfter(latestInterventionDate))
                 .filter(entry -> LogType.ASSEMBLY.equals(entry.getType()))
                 .filter(entry -> LogVersion.FINAL.equals(entry.getVersion()))
                 .sorted(Comparator.comparing(ScrapedLogEntry::getDate))
-                .forEachOrdered(entry -> this.subjectLoader.load(entry.getRelativeUrl(), entry.getDate(), entry.getLegislature(), entry.getSession()));
-        log.info("Fin du chargement des journaux");
+                .toList();
+        
+        if (!filteredLogEntries.isEmpty()) {
+            prerequisiteTask.run();
+            log.info("Début du chargement des journaux");
+            filteredLogEntries.forEach(entry -> this.subjectLoader.load(entry.getRelativeUrl(), entry.getDate(), entry.getLegislature(), entry.getSession()));
+            log.info("Fin du chargement des journaux");
+        }
+
     }
 }

@@ -21,6 +21,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -31,6 +32,8 @@ class LogEntriesSubjectLoaderTest {
     private SubjectLoader subjectLoaderMock;
     @Mock
     private SubjectRepository subjectRepositoryMock;
+    @Mock
+    private Runnable runnableMock;
     @InjectMocks
     private LogEntriesSubjectLoader logEntriesSubjectLoader;
 
@@ -50,10 +53,11 @@ class LogEntriesSubjectLoaderTest {
                 firstEntryToLoad
         ));
 
-        this.logEntriesSubjectLoader.load();
+        this.logEntriesSubjectLoader.load(runnableMock);
         InOrder order = inOrder(subjectLoaderMock);
         order.verify(subjectLoaderMock).load(firstEntryToLoad.getRelativeUrl(), firstEntryToLoad.getDate(), firstEntryToLoad.getLegislature(), firstEntryToLoad.getSession());
         order.verify(subjectLoaderMock).load(secondEntryToLoad.getRelativeUrl(), secondEntryToLoad.getDate(), secondEntryToLoad.getLegislature(), secondEntryToLoad.getSession());
+        verify(runnableMock).run();
     }
 
     private static Stream<Subject> subjects() {
