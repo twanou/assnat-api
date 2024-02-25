@@ -1,9 +1,10 @@
 package net.daneau.assnat.utils;
 
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.ResourcePatternUtils;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ResourceUtils;
 
-import java.io.File;
 import java.util.HashSet;
 
 @Component
@@ -12,10 +13,12 @@ public class PhotoDirectory {
     private final HashSet<String> photos = new HashSet<>();
 
     public PhotoDirectory() {
+        DefaultResourceLoader resourceLoader = new DefaultResourceLoader();
         try {
-            File fileResource = ResourceUtils.getFile("classpath:static/photos");
-            for (File file : fileResource.listFiles()) {
-                this.photos.add(file.getName().split("\\.")[0]);
+            Resource[] resources = ResourcePatternUtils.getResourcePatternResolver(resourceLoader)
+                    .getResources("classpath:static/photos/*.jpg");
+            for (Resource resource : resources) {
+                this.photos.add(resource.getFilename().split("\\.")[0]);
             }
         } catch (Exception e) {
             throw new IllegalStateException("Erreur lors de la lecture des photos");
