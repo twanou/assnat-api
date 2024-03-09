@@ -8,6 +8,10 @@ import org.springframework.data.mongodb.core.convert.DefaultDbRefResolver;
 import org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper;
 import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
+import org.springframework.data.mongodb.core.mapping.event.BeforeConvertCallback;
+import quebec.salonbleu.assnat.client.documents.UuidDocument;
+
+import java.util.UUID;
 
 @Configuration
 public class MongoDocumentConfig {
@@ -19,5 +23,10 @@ public class MongoDocumentConfig {
         MappingMongoConverter mappingConverter = new MappingMongoConverter(dbRefResolver, context);
         mappingConverter.setTypeMapper(new DefaultMongoTypeMapper(null));
         return mappingConverter;
+    }
+
+    @Bean
+    public BeforeConvertCallback<UuidDocument> beforeSaveCallback() {
+        return (entity, collection) -> entity.getId() == null ? entity.withId(UUID.randomUUID()) : entity;
     }
 }

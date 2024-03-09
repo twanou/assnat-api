@@ -4,11 +4,13 @@ import lombok.Builder;
 import lombok.Value;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Value
 @Builder
 public class Sujet {
-    String id;
+    
+    UUID id;
     LocalDate date;
     int legislature;
     int session;

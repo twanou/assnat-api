@@ -1,12 +1,13 @@
 package quebec.salonbleu.assnat.api.services;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import quebec.salonbleu.assnat.api.models.commons.Depute;
 import quebec.salonbleu.assnat.client.documents.Deputy;
 import quebec.salonbleu.assnat.client.repositories.DeputyRepository;
-import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -15,7 +16,7 @@ public class DeputyService {
 
     private final DeputyRepository deputyRepository;
 
-    public Map<String, Depute> getDeputies() {
+    public Map<UUID, Depute> getDeputies() {
         return this.deputyRepository.findAll()
                 .stream()
                 .collect(Collectors.toUnmodifiableMap(Deputy::getId,

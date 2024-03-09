@@ -1,8 +1,10 @@
 package quebec.salonbleu.assnat.client.repositories;
 
-import quebec.salonbleu.assnat.client.documents.Deputy;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import quebec.salonbleu.assnat.client.documents.Deputy;
 
-public interface DeputyRepository extends MongoRepository<Deputy, String> {
+import java.util.UUID;
+
+public interface DeputyRepository extends MongoRepository<Deputy, UUID> {
 
 }

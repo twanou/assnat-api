@@ -1,6 +1,9 @@
 package quebec.salonbleu.assnat.api.services;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
 import quebec.salonbleu.assnat.api.models.commons.Affectation;
 import quebec.salonbleu.assnat.api.models.commons.Circonscription;
 import quebec.salonbleu.assnat.api.models.commons.Depute;
@@ -9,13 +12,11 @@ import quebec.salonbleu.assnat.cache.CacheKey;
 import quebec.salonbleu.assnat.client.documents.Assignment;
 import quebec.salonbleu.assnat.client.repositories.AssignmentRepository;
 import quebec.salonbleu.assnat.utils.PhotoUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,14 +38,14 @@ public class AssignmentService {
     }
 
     @Cacheable(CacheKey.Constants.ALL_ASSIGNMENTS)
-    public Map<String, Affectation> getAllAssignments() {
+    public Map<UUID, Affectation> getAllAssignments() {
         return this.getAssignments(this.assignmentRepository.findAll());
     }
 
-    private Map<String, Affectation> getAssignments(List<Assignment> assignments) {
-        Map<String, Depute> deputes = this.deputyService.getDeputies();
-        Map<String, Circonscription> circonscriptions = this.districtService.getDistricts();
-        Map<String, Parti> partis = this.partyService.getParties();
+    private Map<UUID, Affectation> getAssignments(List<Assignment> assignments) {
+        Map<UUID, Depute> deputes = this.deputyService.getDeputies();
+        Map<UUID, Circonscription> circonscriptions = this.districtService.getDistricts();
+        Map<UUID, Parti> partis = this.partyService.getParties();
 
         return assignments
                 .stream()

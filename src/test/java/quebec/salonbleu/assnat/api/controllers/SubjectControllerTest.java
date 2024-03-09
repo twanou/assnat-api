@@ -8,6 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import quebec.salonbleu.assnat.api.models.subjects.Sujet;
 import quebec.salonbleu.assnat.api.models.subjects.responses.SujetReponse;
 import quebec.salonbleu.assnat.api.services.SubjectService;
+import test.utils.TestUUID;
 
 import java.util.List;
 import java.util.Set;
@@ -26,16 +27,16 @@ class SubjectControllerTest {
     @Test
     void getSubjectsByDeputyIds() {
         List<Sujet> sujets = List.of(Sujet.builder().build());
-        when(subjectServiceMock.getSubjectsByDeputyIds(Set.of("1", "2"), 0, 25)).thenReturn(sujets);
-        SujetReponse response = this.subjectController.getSubjectsByDeputyIds(Set.of("1", "2"), 0, 25);
+        when(subjectServiceMock.getSubjectsByDeputyIds(Set.of(TestUUID.ID1, TestUUID.ID2), 0, 25)).thenReturn(sujets);
+        SujetReponse response = this.subjectController.getSubjectsByDeputyIds(Set.of(TestUUID.ID1, TestUUID.ID2), 0, 25);
         assertEquals(response.getSujets(), sujets);
     }
 
     @Test
     void getSubjects() {
         List<Sujet> sujets = List.of(Sujet.builder().build());
-        when(subjectServiceMock.getSubjects(Set.of("1", "2"))).thenReturn(sujets);
-        SujetReponse response = this.subjectController.getSubjects(Set.of("1", "2"));
+        when(subjectServiceMock.getSubjects(Set.of(TestUUID.ID1, TestUUID.ID2))).thenReturn(sujets);
+        SujetReponse response = this.subjectController.getSubjects(Set.of(TestUUID.ID1, TestUUID.ID2));
         assertEquals(response.getSujets(), sujets);
     }
 }
