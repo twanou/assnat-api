@@ -8,6 +8,7 @@ import java.util.List;
 @Value
 @Builder
 public class SubjectDetails {
+    
     SubjectType type;
     String title;
     String anchor;

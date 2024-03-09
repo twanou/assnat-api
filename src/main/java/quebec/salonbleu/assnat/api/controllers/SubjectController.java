@@ -2,7 +2,6 @@ package quebec.salonbleu.assnat.api.controllers;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +16,7 @@ import quebec.salonbleu.assnat.api.models.subjects.responses.SujetReponse;
 import quebec.salonbleu.assnat.api.services.SubjectService;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Validated
 @CrossOrigin
@@ -28,16 +28,16 @@ public class SubjectController {
     private final SubjectService subjectService;
 
     @GetMapping
-    public SujetReponse getSubjectsByDeputyIds(@RequestParam @Size(min = 1, max = 125) Set<@NotBlank String> deputeIds,
-                                               @RequestParam(required = false) @NotNull @Min(0) Integer page,
-                                               @RequestParam(required = false) @NotNull @Min(5) @Max(25) Integer taille) {
+    public SujetReponse getSubjectsByDeputyIds(@RequestParam @Size(min = 1, max = 125) Set<UUID> deputeIds,
+                                               @RequestParam @NotNull @Min(0) Integer page,
+                                               @RequestParam @NotNull @Min(5) @Max(25) Integer taille) {
         return SujetReponse.builder()
                 .sujets(this.subjectService.getSubjectsByDeputyIds(deputeIds, page, taille))
                 .build();
     }
 
     @GetMapping("/{ids}")
-    public SujetReponse getSubjects(@PathVariable @Size(min = 1, max = 5) Set<@NotBlank String> ids) {
+    public SujetReponse getSubjects(@PathVariable @Size(min = 1, max = 5) Set<UUID> ids) {
         return SujetReponse.builder()
                 .sujets(this.subjectService.getSubjects(ids))
                 .build();

@@ -3,6 +3,9 @@ package quebec.salonbleu.assnat.loaders;
 
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.ApplicationListener;
+import org.springframework.stereotype.Component;
 import quebec.salonbleu.assnat.client.documents.Assignment;
 import quebec.salonbleu.assnat.client.documents.Deputy;
 import quebec.salonbleu.assnat.client.repositories.AssignmentRepository;
@@ -10,13 +13,11 @@ import quebec.salonbleu.assnat.client.repositories.DeputyRepository;
 import quebec.salonbleu.assnat.loaders.events.ClearCacheEvent;
 import quebec.salonbleu.assnat.loaders.exceptions.LoadingException;
 import quebec.salonbleu.assnat.utils.ErrorHandler;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.context.ApplicationListener;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -60,7 +61,7 @@ public class DeputyFinder implements ApplicationListener<ClearCacheEvent> {
         if (currentAssignments.isEmpty()) {
             return Optional.empty();
         }
-        Map<String, Assignment> assignments = currentAssignments.stream().collect(Collectors.toMap(Assignment::getDeputyId, Function.identity()));
+        Map<UUID, Assignment> assignments = currentAssignments.stream().collect(Collectors.toMap(Assignment::getDeputyId, Function.identity()));
         List<Deputy> deputies = this.deputyRepository.findAllById(assignments.values().stream().map(Assignment::getDeputyId).toList());
         return Optional.of(new Cache(assignments, deputies));
     }
@@ -69,7 +70,7 @@ public class DeputyFinder implements ApplicationListener<ClearCacheEvent> {
         return String.format(COMPLETE_NAME_FORMAT, deputy.getTitle(), deputy.getFirstName(), deputy.getLastName());
     }
 
-    private record Cache(Map<String, Assignment> assignments,
+    private record Cache(Map<UUID, Assignment> assignments,
                          List<Deputy> deputies) {
     }
 }

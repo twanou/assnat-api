@@ -1,10 +1,10 @@
 package quebec.salonbleu.assnat.api.mappers.subjects;
 
+import org.springframework.stereotype.Component;
 import quebec.salonbleu.assnat.api.models.commons.Affectation;
 import quebec.salonbleu.assnat.api.models.subjects.Sujet;
 import quebec.salonbleu.assnat.client.documents.Subject;
 import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectType;
-import org.springframework.stereotype.Component;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
@@ -37,7 +38,7 @@ public class SubjectMapper {
         }
     }
 
-    public List<Sujet> toSujetsList(Iterable<Subject> subjects, Map<String, Affectation> affectations) {
+    public List<Sujet> toSujetsList(Iterable<Subject> subjects, Map<UUID, Affectation> affectations) {
         List<Sujet> sujets = new ArrayList<>();
         for (Subject subject : subjects) {
             Sujet sujet = Sujet.builder()

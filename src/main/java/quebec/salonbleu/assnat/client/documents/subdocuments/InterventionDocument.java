@@ -2,24 +2,19 @@ package quebec.salonbleu.assnat.client.documents.subdocuments;
 
 import lombok.Builder;
 import lombok.Value;
-import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.data.mongodb.core.mapping.FieldType;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @Value
 @Builder
 public class InterventionDocument {
 
-    @Field(targetType = FieldType.OBJECT_ID)
-    String assignmentId;
-    @Field(targetType = FieldType.OBJECT_ID)
-    String deputyId;
-    @Field(targetType = FieldType.OBJECT_ID)
-    String districtId;
-    @Field(targetType = FieldType.OBJECT_ID)
-    String partyId;
+    UUID assignmentId;
+    UUID deputyId;
+    UUID districtId;
+    UUID partyId;
     @Builder.Default
     List<String> paragraphs = List.of();
 }
