@@ -1,8 +1,8 @@
 package quebec.salonbleu.assnat.loaders.subjects.mappers;
 
+import org.springframework.stereotype.Component;
 import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectType;
 import quebec.salonbleu.assnat.loaders.DeputyFinder;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 

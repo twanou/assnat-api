@@ -1,9 +1,9 @@
 package quebec.salonbleu.assnat.loaders.subjects.mappers;
 
-import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectType;
-import quebec.salonbleu.assnat.loaders.DeputyFinder;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
+import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectType;
+import quebec.salonbleu.assnat.loaders.DeputyFinder;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -25,7 +25,7 @@ public class DeputyDeclarationDocumentMapper extends SubjectDocumentTypeMapper {
     @Override
     protected List<String> format(List<String> paragraphs) {
         return IntStream.range(0, this.getEndRange(paragraphs)) // On ignore à partir du moment que le VP se met à parler
-                .mapToObj(i -> i == 0 ? this.removeDeputyName(paragraphs.get(i)) : paragraphs.get(i)) // retrait du nom du député au début du premier paragraphe
+                .mapToObj(paragraphs::get)
                 .toList();
     }
 
@@ -41,9 +41,5 @@ public class DeputyDeclarationDocumentMapper extends SubjectDocumentTypeMapper {
             }
         }
         return paragraphs.size();
-    }
-
-    private String removeDeputyName(String paragraph) {
-        return StringUtils.strip(paragraph.split(":")[1]);
     }
 }
