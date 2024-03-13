@@ -1,6 +1,7 @@
 package quebec.salonbleu.assnat.loaders.subjects.mappers;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import quebec.salonbleu.assnat.client.documents.Assignment;
 import quebec.salonbleu.assnat.client.documents.subdocuments.InterventionDocument;
 import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectDetails;
@@ -9,6 +10,7 @@ import quebec.salonbleu.assnat.loaders.DeputyFinder;
 import quebec.salonbleu.assnat.scrapers.models.ScrapedLogNode;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 @RequiredArgsConstructor
 public abstract class SubjectDocumentTypeMapper {
@@ -33,7 +35,7 @@ public abstract class SubjectDocumentTypeMapper {
                                         .deputyId(assignment.getDeputyId())
                                         .partyId(assignment.getPartyId())
                                         .districtId(assignment.getDistrictId())
-                                        .paragraphs(this.format(intervention.getParagraphs()))
+                                        .paragraphs(this.baseFormat(intervention.getParagraphs()))
                                         .build();
                             }).toList();
 
@@ -51,4 +53,17 @@ public abstract class SubjectDocumentTypeMapper {
     protected abstract List<String> format(List<String> paragraphs);
 
     protected abstract SubjectType getSubjectType();
+
+    private List<String> baseFormat(List<String> paragraphs) {
+        List<String> formattedParagraphs = IntStream.range(0, paragraphs.size())
+                .mapToObj(i -> i == 0 ? this.removeDeputyName(paragraphs.get(i)) : paragraphs.get(i))
+                .filter(s -> !(StringUtils.startsWith(s, "•") && StringUtils.endsWith(s, "•")))
+                .toList();
+        return this.format(formattedParagraphs);
+    }
+
+    private String removeDeputyName(String paragraph) {
+        String[] splitResult = StringUtils.split(paragraph, ":", 2);
+        return splitResult.length == 2 ? StringUtils.strip(splitResult[1]) : paragraph;
+    }
 }
