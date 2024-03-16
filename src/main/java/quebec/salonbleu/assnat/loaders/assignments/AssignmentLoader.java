@@ -16,7 +16,6 @@ import quebec.salonbleu.assnat.utils.ErrorHandler;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -39,34 +38,52 @@ public class AssignmentLoader {
         List<Party> parties = List.of();
         List<District> districts = List.of();
 
-        for (ScrapedDeputy scrapedDeputy : scrapedDeputies) {
-            if (currentAssignments.stream().noneMatch(assignment -> assignment.getHash() == scrapedDeputy.hashCode())) {
-                deputies = deputies.isEmpty() ? this.deputyLoader.load(scrapedDeputies) : deputies;
-                parties = parties.isEmpty() ? this.partyLoader.load(scrapedDeputies) : parties;
-                districts = districts.isEmpty() ? this.districtLoader.load(scrapedDeputies) : districts;
+        for (ScrapedDeputy scrapedDeputy : this.getScrapedDeputiesNotInAssignment(scrapedDeputies, currentAssignments)) {
+            deputies = deputies.isEmpty() ? this.deputyLoader.load(scrapedDeputies) : deputies;
+            parties = parties.isEmpty() ? this.partyLoader.load(scrapedDeputies) : parties;
+            districts = districts.isEmpty() ? this.districtLoader.load(scrapedDeputies) : districts;
 
-                Deputy deputy = this.getDeputy(scrapedDeputy, deputies);
-                District district = this.getDistrict(scrapedDeputy, districts);
-                Party party = this.getParty(scrapedDeputy, parties);
-                Optional<Assignment> oldAssignment = this.assignmentRepository.findByDeputyIdAndEndDate(deputy.getId(), null);
-                oldAssignment.ifPresent(old -> this.assignmentRepository.save(old.withEndDate(LocalDate.now())));
-                this.assignmentRepository.save(
-                        Assignment.builder()
-                                .startDate(LocalDate.now())
-                                .hash(scrapedDeputy.hashCode())
-                                .deputyId(deputy.getId())
-                                .districtId(district.getId())
-                                .partyId(party.getId())
-                                .photo(scrapedDeputy.getPhoto())
-                                .functions(scrapedDeputy.getFunctions())
-                                .build()
-                );
-                isUpdated = true;
-            }
+            Deputy deputy = this.getDeputy(scrapedDeputy, deputies);
+            District district = this.getDistrict(scrapedDeputy, districts);
+            Party party = this.getParty(scrapedDeputy, parties);
+
+            this.assignmentRepository.save(
+                    Assignment.builder()
+                            .startDate(LocalDate.now())
+                            .hash(scrapedDeputy.hashCode())
+                            .deputyId(deputy.getId())
+                            .districtId(district.getId())
+                            .partyId(party.getId())
+                            .photo(scrapedDeputy.getPhoto())
+                            .functions(scrapedDeputy.getFunctions())
+                            .build()
+            );
+            isUpdated = true;
         }
+
+        for (Assignment assignment : this.getAssignmentNotInScrapedDeputies(scrapedDeputies, currentAssignments)) {
+            this.assignmentRepository.save(assignment.withEndDate(LocalDate.now()));
+        }
+
         if (isUpdated) {
             this.assnatCacheManager.clearAllCaches();
         }
+    }
+
+    private List<ScrapedDeputy> getScrapedDeputiesNotInAssignment(List<ScrapedDeputy> scrapedDeputies, List<Assignment> assignments) {
+        return scrapedDeputies.stream()
+                .filter(scrapedDeputy -> assignments
+                        .stream()
+                        .noneMatch(assignment -> assignment.getHash() == scrapedDeputy.hashCode()))
+                .toList();
+    }
+
+    private List<Assignment> getAssignmentNotInScrapedDeputies(List<ScrapedDeputy> scrapedDeputies, List<Assignment> assignments) {
+        return assignments.stream()
+                .filter(assignment -> scrapedDeputies
+                        .stream()
+                        .noneMatch(scrapedDeputy -> scrapedDeputy.hashCode() == assignment.getHash()))
+                .toList();
     }
 
     private Deputy getDeputy(ScrapedDeputy scrapedDeputy, List<Deputy> deputies) {
