@@ -5,12 +5,9 @@ import quebec.salonbleu.assnat.client.documents.Assignment;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 public interface AssignmentRepository extends MongoRepository<Assignment, UUID> {
 
     List<Assignment> findByEndDate(LocalDate endDate);
-
-    Optional<Assignment> findByDeputyIdAndEndDate(UUID deputyId, LocalDate endDate);
 }

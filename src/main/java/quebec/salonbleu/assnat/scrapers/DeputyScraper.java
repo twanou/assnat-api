@@ -2,10 +2,6 @@ package quebec.salonbleu.assnat.scrapers;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import quebec.salonbleu.assnat.scrapers.configuration.AssNatWebClient;
-import quebec.salonbleu.assnat.scrapers.exceptions.ScrapingException;
-import quebec.salonbleu.assnat.scrapers.models.ScrapedDeputy;
-import quebec.salonbleu.assnat.utils.ErrorHandler;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.html.DomElement;
@@ -17,6 +13,10 @@ import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlTableDataCell;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import quebec.salonbleu.assnat.scrapers.configuration.AssNatWebClient;
+import quebec.salonbleu.assnat.scrapers.exceptions.ScrapingException;
+import quebec.salonbleu.assnat.scrapers.models.ScrapedDeputy;
+import quebec.salonbleu.assnat.utils.ErrorHandler;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -59,8 +59,8 @@ public class DeputyScraper {
                             .title(this.getTitle(functions))
                             .firstName(StringUtils.strip(cells.get(0).getVisibleText().split(",")[1]))
                             .lastName(StringUtils.strip(cells.get(0).getVisibleText().split(",")[0]))
-                            .district(cells.get(1).getVisibleText())
-                            .party(this.independenceCheck(party) ? INDEPENDENT_PARTY : party)
+                            .district(StringUtils.strip(cells.get(1).getVisibleText()))
+                            .party(this.independenceCheck(party) ? INDEPENDENT_PARTY : StringUtils.strip(party))
                             .partyAcronym(this.independenceCheck(party) ? INDEPENDENT_ACRONYM : this.getPartyAcronym(party))
                             .functions(functions)
                             .photo(this.getPhotoBase64(deputyPage))
