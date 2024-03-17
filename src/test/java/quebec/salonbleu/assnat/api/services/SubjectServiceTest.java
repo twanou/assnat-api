@@ -13,11 +13,14 @@ import quebec.salonbleu.assnat.client.documents.Subject;
 import quebec.salonbleu.assnat.client.repositories.SubjectRepository;
 import test.utils.TestUUID;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.ArgumentMatchers.same;
 import static org.mockito.Mockito.when;
@@ -60,5 +63,13 @@ class SubjectServiceTest {
 
         List<Sujet> response = this.subjectService.getSubjects(ids);
         assertSame(sujets, response);
+    }
+
+    @Test
+    void getLastUpdate() {
+        when(subjectRepositoryMock.findFirstByOrderByDateDesc()).thenReturn(Optional.of(Subject.builder().date(LocalDate.now()).build()));
+
+        LocalDate response = this.subjectService.getLastUpdate();
+        assertEquals(LocalDate.now(), response);
     }
 }

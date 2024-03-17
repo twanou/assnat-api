@@ -1,11 +1,5 @@
 package quebec.salonbleu.assnat.loaders.subjects;
 
-import quebec.salonbleu.assnat.client.documents.Subject;
-import quebec.salonbleu.assnat.client.repositories.SubjectRepository;
-import quebec.salonbleu.assnat.scrapers.AssNatLogEntryScraper;
-import quebec.salonbleu.assnat.scrapers.models.LogType;
-import quebec.salonbleu.assnat.scrapers.models.LogVersion;
-import quebec.salonbleu.assnat.scrapers.models.ScrapedLogEntry;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -14,6 +8,13 @@ import org.mockito.InOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import quebec.salonbleu.assnat.cache.AssnatCacheManager;
+import quebec.salonbleu.assnat.client.documents.Subject;
+import quebec.salonbleu.assnat.client.repositories.SubjectRepository;
+import quebec.salonbleu.assnat.scrapers.AssNatLogEntryScraper;
+import quebec.salonbleu.assnat.scrapers.models.LogType;
+import quebec.salonbleu.assnat.scrapers.models.LogVersion;
+import quebec.salonbleu.assnat.scrapers.models.ScrapedLogEntry;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -21,7 +22,6 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import static org.mockito.Mockito.inOrder;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -34,6 +34,8 @@ class LogEntriesSubjectLoaderTest {
     private SubjectRepository subjectRepositoryMock;
     @Mock
     private Runnable runnableMock;
+    @Mock
+    private AssnatCacheManager assnatCacheManagerMock;
     @InjectMocks
     private LogEntriesSubjectLoader logEntriesSubjectLoader;
 
@@ -54,10 +56,11 @@ class LogEntriesSubjectLoaderTest {
         ));
 
         this.logEntriesSubjectLoader.load(runnableMock);
-        InOrder order = inOrder(subjectLoaderMock);
+        InOrder order = inOrder(runnableMock, subjectLoaderMock, assnatCacheManagerMock);
+        order.verify(runnableMock).run();
         order.verify(subjectLoaderMock).load(firstEntryToLoad.getRelativeUrl(), firstEntryToLoad.getDate(), firstEntryToLoad.getLegislature(), firstEntryToLoad.getSession());
         order.verify(subjectLoaderMock).load(secondEntryToLoad.getRelativeUrl(), secondEntryToLoad.getDate(), secondEntryToLoad.getLegislature(), secondEntryToLoad.getSession());
-        verify(runnableMock).run();
+        order.verify(assnatCacheManagerMock).clearSubjectCaches();
     }
 
     private static Stream<Subject> subjects() {
