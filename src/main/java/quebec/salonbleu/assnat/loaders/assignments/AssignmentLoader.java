@@ -15,7 +15,9 @@ import quebec.salonbleu.assnat.scrapers.models.ScrapedDeputy;
 import quebec.salonbleu.assnat.utils.ErrorHandler;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
@@ -31,41 +33,43 @@ public class AssignmentLoader {
 
     public void load() {
         List<ScrapedDeputy> scrapedDeputies = this.deputyScraper.scrape();
-        List<Assignment> currentAssignments = this.assignmentRepository.findByEndDate(null);
+        this.assertNoDuplicateScrapedDeputies(scrapedDeputies);
 
-        boolean isUpdated = false;
+        List<Assignment> currentAssignments = this.assignmentRepository.findByEndDate(null);
+        List<ScrapedDeputy> newScrapedDeputies = this.getScrapedDeputiesNotInAssignment(scrapedDeputies, currentAssignments);
+        List<Assignment> oldAssignments = this.getAssignmentNotInScrapedDeputies(scrapedDeputies, currentAssignments);
+
         List<Deputy> deputies = List.of();
         List<Party> parties = List.of();
         List<District> districts = List.of();
+        if (!newScrapedDeputies.isEmpty()) {
+            deputies = this.deputyLoader.load(scrapedDeputies);
+            parties = this.partyLoader.load(scrapedDeputies);
+            districts = this.districtLoader.load(scrapedDeputies);
+        }
 
-        for (ScrapedDeputy scrapedDeputy : this.getScrapedDeputiesNotInAssignment(scrapedDeputies, currentAssignments)) {
-            deputies = deputies.isEmpty() ? this.deputyLoader.load(scrapedDeputies) : deputies;
-            parties = parties.isEmpty() ? this.partyLoader.load(scrapedDeputies) : parties;
-            districts = districts.isEmpty() ? this.districtLoader.load(scrapedDeputies) : districts;
-
-            Deputy deputy = this.getDeputy(scrapedDeputy, deputies);
-            District district = this.getDistrict(scrapedDeputy, districts);
-            Party party = this.getParty(scrapedDeputy, parties);
-
+        for (ScrapedDeputy newScrapedDeputy : newScrapedDeputies) {
+            Deputy deputy = this.getDeputy(newScrapedDeputy, deputies);
+            District district = this.getDistrict(newScrapedDeputy, districts);
+            Party party = this.getParty(newScrapedDeputy, parties);
             this.assignmentRepository.save(
                     Assignment.builder()
                             .startDate(LocalDate.now())
-                            .hash(scrapedDeputy.hashCode())
+                            .hash(newScrapedDeputy.hashCode())
                             .deputyId(deputy.getId())
                             .districtId(district.getId())
                             .partyId(party.getId())
-                            .photo(scrapedDeputy.getPhoto())
-                            .functions(scrapedDeputy.getFunctions())
+                            .photo(newScrapedDeputy.getPhoto())
+                            .functions(newScrapedDeputy.getFunctions())
                             .build()
             );
-            isUpdated = true;
         }
 
-        for (Assignment assignment : this.getAssignmentNotInScrapedDeputies(scrapedDeputies, currentAssignments)) {
-            this.assignmentRepository.save(assignment.withEndDate(LocalDate.now()));
+        for (Assignment oldAssignment : oldAssignments) {
+            this.assignmentRepository.save(oldAssignment.withEndDate(LocalDate.now()));
         }
 
-        if (isUpdated) {
+        if (!newScrapedDeputies.isEmpty() || !oldAssignments.isEmpty()) {
             this.assnatCacheManager.clearAllCaches();
         }
     }
@@ -91,7 +95,6 @@ public class AssignmentLoader {
                 .filter(d -> StringUtils.equals(d.getFirstName(), scrapedDeputy.getFirstName()))
                 .filter(d -> StringUtils.equals(d.getLastName(), scrapedDeputy.getLastName()))
                 .toList();
-        this.errorHandler.assertLessThan(2, deputyResults, () -> new LoadingException("+ de 2 députés avec le même nom!"));
         return deputyResults.get(0);
     }
 
@@ -107,5 +110,15 @@ public class AssignmentLoader {
                 .filter(p -> StringUtils.equals(p.getName(), scrapedDeputy.getParty()))
                 .findFirst()
                 .orElseThrow();
+    }
+
+    private void assertNoDuplicateScrapedDeputies(List<ScrapedDeputy> scrapedDeputies) {
+        Set<ScrapedDeputy> elements = new HashSet<>();
+        List<ScrapedDeputy> results = scrapedDeputies.stream()
+                .filter(n -> !elements.add(n))
+                .toList();
+
+        //On verra ce qu'on fait si ça arrive!
+        this.errorHandler.assertSize(0, results, () -> new LoadingException("Deux députés avec le même nom."));
     }
 }
