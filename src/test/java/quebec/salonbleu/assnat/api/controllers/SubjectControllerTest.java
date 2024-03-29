@@ -30,10 +30,12 @@ class SubjectControllerTest {
         List<Sujet> sujets = List.of(Sujet.builder().build());
         when(subjectServiceMock.getSubjectsByDeputyIds(Set.of(TestUUID.ID1, TestUUID.ID2), 0, 25)).thenReturn(sujets);
         when(subjectServiceMock.getLastUpdate()).thenReturn(LocalDate.now());
+        when(subjectServiceMock.getNextUpdates()).thenReturn(List.of(LocalDate.now()));
 
         SujetReponse response = this.subjectController.getSubjectsByDeputyIds(Set.of(TestUUID.ID1, TestUUID.ID2), 0, 25);
         assertEquals(response.getSujets(), sujets);
         assertEquals(LocalDate.now(), response.getDerniereMaj());
+        assertEquals(List.of(LocalDate.now()), response.getFuturesMaj());
     }
 
     @Test
@@ -41,9 +43,11 @@ class SubjectControllerTest {
         List<Sujet> sujets = List.of(Sujet.builder().build());
         when(subjectServiceMock.getSubjects(Set.of(TestUUID.ID1, TestUUID.ID2))).thenReturn(sujets);
         when(subjectServiceMock.getLastUpdate()).thenReturn(LocalDate.now());
+        when(subjectServiceMock.getNextUpdates()).thenReturn(List.of(LocalDate.now()));
 
         SujetReponse response = this.subjectController.getSubjects(Set.of(TestUUID.ID1, TestUUID.ID2));
         assertEquals(sujets, response.getSujets());
         assertEquals(LocalDate.now(), response.getDerniereMaj());
+        assertEquals(List.of(LocalDate.now()), response.getFuturesMaj());
     }
 }

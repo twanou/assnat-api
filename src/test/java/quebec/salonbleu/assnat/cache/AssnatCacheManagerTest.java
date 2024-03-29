@@ -12,6 +12,7 @@ import quebec.salonbleu.assnat.loaders.events.ClearCacheEvent;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -29,18 +30,21 @@ class AssnatCacheManagerTest {
 
     @Test
     void clearAssignmentCaches() {
-        when(cacheManagerMock.getCache(CacheKey.ALL_ASSIGNMENTS.name())).thenReturn(null);
+        when(cacheManagerMock.getCache(CacheKey.ALL_ASSIGNMENTS.name())).thenReturn(cacheMock);
         when(cacheManagerMock.getCache(CacheKey.CURRENT_ASSIGNMENTS.name())).thenReturn(cacheMock);
+
         this.assnatCacheManager.clearAssignmentCaches();
-        verify(cacheMock).clear();
+        verify(cacheMock, times(2)).clear();
         verify(applicationEventPublisherMock).publishEvent(any(ClearCacheEvent.class));
     }
 
     @Test
     void clearSubjectCaches() {
         when(cacheManagerMock.getCache(CacheKey.LAST_UPDATE.name())).thenReturn(cacheMock);
+        when(cacheManagerMock.getCache(CacheKey.NEXT_UPDATE.name())).thenReturn(cacheMock);
+
         this.assnatCacheManager.clearSubjectCaches();
-        verify(cacheMock).clear();
+        verify(cacheMock, times(2)).clear();
         verify(applicationEventPublisherMock, never()).publishEvent(any());
     }
 }

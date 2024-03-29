@@ -14,4 +14,6 @@ public class SujetReponse {
     @Builder.Default
     List<Sujet> sujets = List.of();
     LocalDate derniereMaj;
+    @Builder.Default
+    List<LocalDate> futuresMaj = List.of();
 }
