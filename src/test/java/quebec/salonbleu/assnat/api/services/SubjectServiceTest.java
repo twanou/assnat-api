@@ -12,7 +12,7 @@ import quebec.salonbleu.assnat.api.models.commons.Affectation;
 import quebec.salonbleu.assnat.api.models.subjects.Sujet;
 import quebec.salonbleu.assnat.client.documents.Subject;
 import quebec.salonbleu.assnat.client.documents.UpcomingLog;
-import quebec.salonbleu.assnat.client.repositories.SubjectRepository;
+import quebec.salonbleu.assnat.client.repositories.SubjectSpringRepository;
 import quebec.salonbleu.assnat.client.repositories.UpcomingLogRepository;
 import test.utils.TestUUID;
 
@@ -32,7 +32,7 @@ import static org.mockito.Mockito.when;
 class SubjectServiceTest {
 
     @Mock
-    private SubjectRepository subjectRepositoryMock;
+    private SubjectSpringRepository subjectSpringRepositoryMock;
     @Mock
     private UpcomingLogRepository upcomingLogRepositoryMock;
     @Mock
@@ -48,7 +48,7 @@ class SubjectServiceTest {
         List<Subject> subjects = List.of(Subject.builder().build());
         List<Sujet> sujets = List.of(Sujet.builder().build());
         Map<UUID, Affectation> affectations = Map.of();
-        when(subjectRepositoryMock.findSubjectsByDeputyIds(ids, PageRequest.of(0, 25))).thenReturn(subjects);
+        when(subjectSpringRepositoryMock.findSubjectsByDeputyIds(ids, PageRequest.of(0, 25))).thenReturn(subjects);
         when(assignmentServiceMock.getAllAssignments()).thenReturn(affectations);
         when(subjectMapperMock.toSujetsList(same(subjects), same(affectations))).thenReturn(sujets);
 
@@ -62,7 +62,7 @@ class SubjectServiceTest {
         List<Subject> subjects = List.of(Subject.builder().build());
         List<Sujet> sujets = List.of(Sujet.builder().build());
         Map<UUID, Affectation> affectations = Map.of();
-        when(subjectRepositoryMock.findAllById(ids)).thenReturn(subjects);
+        when(subjectSpringRepositoryMock.findAllById(ids)).thenReturn(subjects);
         when(assignmentServiceMock.getAllAssignments()).thenReturn(affectations);
         when(subjectMapperMock.toSujetsList(same(subjects), same(affectations))).thenReturn(sujets);
 
@@ -72,7 +72,7 @@ class SubjectServiceTest {
 
     @Test
     void getLastUpdate() {
-        when(subjectRepositoryMock.findFirstByOrderByDateDesc()).thenReturn(Optional.of(Subject.builder().date(LocalDate.now()).build()));
+        when(subjectSpringRepositoryMock.findFirstByOrderByDateDesc()).thenReturn(Optional.of(Subject.builder().date(LocalDate.now()).build()));
 
         LocalDate response = this.subjectService.getLastUpdate();
         assertEquals(LocalDate.now(), response);

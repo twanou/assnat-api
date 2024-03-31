@@ -1,16 +1,16 @@
 package quebec.salonbleu.assnat.loaders.subjects;
 
-import quebec.salonbleu.assnat.client.documents.Subject;
-import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectDetails;
-import quebec.salonbleu.assnat.client.repositories.SubjectRepository;
-import quebec.salonbleu.assnat.loaders.subjects.mappers.SubjectDocumentTypeMapper;
-import quebec.salonbleu.assnat.scrapers.AssNatLogScraper;
-import quebec.salonbleu.assnat.scrapers.models.ScrapedLogNode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import quebec.salonbleu.assnat.client.documents.Subject;
+import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectDetails;
+import quebec.salonbleu.assnat.client.repositories.SubjectSpringRepository;
+import quebec.salonbleu.assnat.loaders.subjects.mappers.SubjectDocumentTypeMapper;
+import quebec.salonbleu.assnat.scrapers.AssNatLogScraper;
+import quebec.salonbleu.assnat.scrapers.models.ScrapedLogNode;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -28,7 +28,7 @@ class SubjectLoaderTest {
     @Mock
     private SubjectDocumentTypeMapper subjectDocumentTypeMapperMatchMock;
     @Mock
-    private SubjectRepository subjectRepositoryMock;
+    private SubjectSpringRepository subjectSpringRepositoryMock;
     @Mock
     private AssNatLogScraper assNatLogScraperMock;
     private SubjectLoader subjectLoader;
@@ -37,7 +37,7 @@ class SubjectLoaderTest {
     void setup() {
         when(subjectDocumentTypeMapperMatchMock.supports()).thenReturn(List.of("1", "2"));
         when(subjectDocumentTypeMapperNoMatchMock.supports()).thenReturn(List.of("1", "2", "3", "4"));
-        this.subjectLoader = new SubjectLoader(List.of(subjectDocumentTypeMapperMatchMock, subjectDocumentTypeMapperNoMatchMock), subjectRepositoryMock, assNatLogScraperMock);
+        this.subjectLoader = new SubjectLoader(List.of(subjectDocumentTypeMapperMatchMock, subjectDocumentTypeMapperNoMatchMock), subjectSpringRepositoryMock, assNatLogScraperMock);
     }
 
     @Test
@@ -62,6 +62,6 @@ class SubjectLoaderTest {
         when(assNatLogScraperMock.scrape("/relativeUrl/123456.html")).thenReturn(scrapedLogNode);
         this.subjectLoader.load("/relativeUrl/123456.html", expectedSubject.getDate(), expectedSubject.getLegislature(), expectedSubject.getSession());
         verify(subjectDocumentTypeMapperNoMatchMock, never()).map(any());
-        verify(subjectRepositoryMock).saveAll(List.of(expectedSubject));
+        verify(subjectSpringRepositoryMock).saveAll(List.of(expectedSubject));
     }
 }

@@ -11,7 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import quebec.salonbleu.assnat.cache.AssnatCacheManager;
 import quebec.salonbleu.assnat.client.documents.Subject;
 import quebec.salonbleu.assnat.client.documents.UpcomingLog;
-import quebec.salonbleu.assnat.client.repositories.SubjectRepository;
+import quebec.salonbleu.assnat.client.repositories.SubjectSpringRepository;
 import quebec.salonbleu.assnat.client.repositories.UpcomingLogRepository;
 import quebec.salonbleu.assnat.scrapers.AssNatLogEntryScraper;
 import quebec.salonbleu.assnat.scrapers.models.LogType;
@@ -33,7 +33,7 @@ class LogEntriesSubjectLoaderTest {
     @Mock
     private SubjectLoader subjectLoaderMock;
     @Mock
-    private SubjectRepository subjectRepositoryMock;
+    private SubjectSpringRepository subjectSpringRepositoryMock;
     @Mock
     private UpcomingLogRepository upcomingLogRepositoryMock;
     @Mock
@@ -50,7 +50,7 @@ class LogEntriesSubjectLoaderTest {
     void load(Subject subject) {
         ScrapedLogEntry firstEntryToLoad = ScrapedLogEntry.builder().date(LocalDate.of(1997, 1, 1)).relativeUrl("relativeUrl1").type(LogType.ASSEMBLY).version(LogVersion.FINAL).build();
         ScrapedLogEntry secondEntryToLoad = ScrapedLogEntry.builder().date(LocalDate.of(2010, 1, 1)).relativeUrl("relativeUrl2").type(LogType.ASSEMBLY).version(LogVersion.FINAL).build();
-        when(subjectRepositoryMock.findFirstByOrderByDateDesc()).thenReturn(Optional.ofNullable(subject));
+        when(subjectSpringRepositoryMock.findFirstByOrderByDateDesc()).thenReturn(Optional.ofNullable(subject));
         when(assNatLogEntryScraperMock.scrape()).thenReturn(List.of(
                 ScrapedLogEntry.builder().date(LocalDate.of(1980, 5, 20)).build(),
                 ScrapedLogEntry.builder().date(LocalDate.of(1996, 5, 14)).type(LogType.COMMITTEE).version(LogVersion.FINAL).build(),

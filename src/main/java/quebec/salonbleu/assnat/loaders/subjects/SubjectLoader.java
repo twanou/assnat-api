@@ -2,13 +2,13 @@ package quebec.salonbleu.assnat.loaders.subjects;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Component;
 import quebec.salonbleu.assnat.client.documents.Subject;
-import quebec.salonbleu.assnat.client.repositories.SubjectRepository;
+import quebec.salonbleu.assnat.client.repositories.SubjectSpringRepository;
 import quebec.salonbleu.assnat.loaders.subjects.mappers.SubjectDocumentTypeMapper;
 import quebec.salonbleu.assnat.scrapers.AssNatLogScraper;
 import quebec.salonbleu.assnat.scrapers.models.ScrapedLogNode;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import java.util.Optional;
 public class SubjectLoader {
 
     private final List<SubjectDocumentTypeMapper> subjectDocumentTypeMappers;
-    private final SubjectRepository subjectRepository;
+    private final SubjectSpringRepository subjectSpringRepository;
     private final AssNatLogScraper assNatLogScraper;
 
     public void load(String relativeUrl, LocalDate date, int legislature, int session) {
@@ -43,7 +43,7 @@ public class SubjectLoader {
                             .build())
                     .forEach(subjects::add);
         }
-        this.subjectRepository.saveAll(subjects);
+        this.subjectSpringRepository.saveAll(subjects);
     }
 
     private Optional<ScrapedLogNode> getLogNodeForMatchers(ScrapedLogNode rootNode, Iterable<String> matchers) {

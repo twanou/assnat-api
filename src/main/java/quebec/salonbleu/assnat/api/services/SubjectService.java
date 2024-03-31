@@ -10,7 +10,7 @@ import quebec.salonbleu.assnat.api.models.subjects.Sujet;
 import quebec.salonbleu.assnat.cache.CacheKey;
 import quebec.salonbleu.assnat.client.documents.Subject;
 import quebec.salonbleu.assnat.client.documents.UpcomingLog;
-import quebec.salonbleu.assnat.client.repositories.SubjectRepository;
+import quebec.salonbleu.assnat.client.repositories.SubjectSpringRepository;
 import quebec.salonbleu.assnat.client.repositories.UpcomingLogRepository;
 
 import java.time.LocalDate;
@@ -22,24 +22,24 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class SubjectService {
 
-    private final SubjectRepository subjectRepository;
+    private final SubjectSpringRepository subjectSpringRepository;
     private final UpcomingLogRepository upcomingLogRepository;
     private final AssignmentService assignmentService;
     private final SubjectMapper subjectMapper;
 
     public List<Sujet> getSubjectsByDeputyIds(Set<UUID> deputyIds, int pageNumber, int pageSize) {
-        List<Subject> subjects = this.subjectRepository.findSubjectsByDeputyIds(deputyIds, PageRequest.of(pageNumber, pageSize));
+        List<Subject> subjects = this.subjectSpringRepository.findSubjectsByDeputyIds(deputyIds, PageRequest.of(pageNumber, pageSize));
         return this.subjectMapper.toSujetsList(subjects, this.assignmentService.getAllAssignments());
     }
 
     public List<Sujet> getSubjects(Set<UUID> ids) {
-        List<Subject> subjects = this.subjectRepository.findAllById(ids);
+        List<Subject> subjects = this.subjectSpringRepository.findAllById(ids);
         return this.subjectMapper.toSujetsList(subjects, this.assignmentService.getAllAssignments());
     }
 
     @Cacheable(CacheKey.Constants.LAST_UPDATE)
     public LocalDate getLastUpdate() {
-        return this.subjectRepository.findFirstByOrderByDateDesc()
+        return this.subjectSpringRepository.findFirstByOrderByDateDesc()
                 .map(Subject::getDate)
                 .orElse(null);
     }
