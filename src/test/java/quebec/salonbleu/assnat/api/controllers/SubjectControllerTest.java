@@ -8,6 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import quebec.salonbleu.assnat.api.models.subjects.Sujet;
 import quebec.salonbleu.assnat.api.models.subjects.responses.SujetReponse;
 import quebec.salonbleu.assnat.api.services.SubjectService;
+import quebec.salonbleu.assnat.client.repositories.args.SubjectArgs;
 import test.utils.TestUUID;
 
 import java.time.LocalDate;
@@ -28,11 +29,17 @@ class SubjectControllerTest {
     @Test
     void getSubjectsByDeputyIds() {
         List<Sujet> sujets = List.of(Sujet.builder().build());
-        when(subjectServiceMock.getSubjectsByDeputyIds(Set.of(TestUUID.ID1, TestUUID.ID2), 0, 25)).thenReturn(sujets);
+        SubjectArgs args = SubjectArgs.builder()
+                .searchString("mots")
+                .deputyIds(Set.of(TestUUID.ID1, TestUUID.ID2))
+                .districtIds(Set.of(TestUUID.ID3, TestUUID.ID4))
+                .partyIds(Set.of(TestUUID.ID5, TestUUID.ID6))
+                .build();
+        when(subjectServiceMock.getSubjects(args, 0, 25)).thenReturn(sujets);
         when(subjectServiceMock.getLastUpdate()).thenReturn(LocalDate.now());
         when(subjectServiceMock.getNextUpdates()).thenReturn(List.of(LocalDate.now()));
 
-        SujetReponse response = this.subjectController.getSubjectsByDeputyIds(Set.of(TestUUID.ID1, TestUUID.ID2), 0, 25);
+        SujetReponse response = this.subjectController.getSubjectsByDeputyIds(args.getSearchString().get(), args.getDeputyIds(), args.getPartyIds(), args.getDistrictIds(), 0, 25);
         assertEquals(response.getSujets(), sujets);
         assertEquals(LocalDate.now(), response.getDerniereMaj());
         assertEquals(List.of(LocalDate.now()), response.getFuturesMaj());

@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import quebec.salonbleu.assnat.api.models.subjects.responses.SujetReponse;
 import quebec.salonbleu.assnat.api.services.SubjectService;
-import quebec.salonbleu.assnat.client.repositories.SubjectRepository;
+import quebec.salonbleu.assnat.client.repositories.args.SubjectArgs;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -29,17 +27,22 @@ import java.util.UUID;
 public class SubjectController {
 
     private final SubjectService subjectService;
-    private final SubjectRepository subjectRepository;
 
     @GetMapping
-    public SujetReponse getSubjectsByDeputyIds(@RequestParam(required = false) Optional<String> motsCles,
+    public SujetReponse getSubjectsByDeputyIds(@RequestParam(required = false) String motsCles,
                                                @RequestParam(required = false, defaultValue = "") @Size(max = 125) Set<UUID> deputeIds,
-                                               @RequestParam(required = false, defaultValue = "") @Size(max = 5) Set<UUID> partyIds,
-                                               @RequestParam(required = false, defaultValue = "") @Size(max = 125) Set<UUID> districtIds,
+                                               @RequestParam(required = false, defaultValue = "") @Size(max = 5) Set<UUID> partiIds,
+                                               @RequestParam(required = false, defaultValue = "") @Size(max = 125) Set<UUID> circonscriptionIds,
                                                @RequestParam @NotNull @Min(0) Integer page,
-                                               @RequestParam @NotNull @Min(5) @Max(25) Integer taille) {
+                                               @RequestParam @NotNull @Min(1) @Max(25) Integer taille) {
+        SubjectArgs args = SubjectArgs.builder()
+                .searchString(motsCles)
+                .deputyIds(deputeIds)
+                .partyIds(partiIds)
+                .districtIds(circonscriptionIds)
+                .build();
         return SujetReponse.builder()
-                .sujets(this.subjectService.getSubjectsByDeputyIds(deputeIds, page, taille))
+                .sujets(this.subjectService.getSubjects(args, page, taille))
                 .derniereMaj(this.subjectService.getLastUpdate())
                 .futuresMaj(this.subjectService.getNextUpdates())
                 .build();
@@ -47,7 +50,6 @@ public class SubjectController {
 
     @GetMapping("/{ids}")
     public SujetReponse getSubjects(@PathVariable @Size(min = 1, max = 5) Set<UUID> ids) {
-        this.subjectRepository.search("patate", List.of(UUID.fromString("04dd1ec2-d2e9-4af7-961f-8e93efb881ef"), UUID.fromString("750b1e7a-321b-4bd5-8a87-438df0713631")), List.of(), List.of());
         return SujetReponse.builder()
                 .sujets(this.subjectService.getSubjects(ids))
                 .derniereMaj(this.subjectService.getLastUpdate())
