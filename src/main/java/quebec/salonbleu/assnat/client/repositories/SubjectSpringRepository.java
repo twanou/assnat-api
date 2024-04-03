@@ -10,6 +10,3 @@ public interface SubjectSpringRepository extends MongoRepository<Subject, UUID> 
 
     Optional<Subject> findFirstByOrderByDateDesc();
 }
-
-
-
