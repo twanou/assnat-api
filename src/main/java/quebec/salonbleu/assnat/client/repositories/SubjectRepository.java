@@ -37,11 +37,11 @@ public class SubjectRepository {
         if (!args.getDeputyIds().isEmpty()) {
             elemMatchCriteria.and("deputyId").in(args.getDeputyIds());
         }
-        if (!args.getPartyIds().isEmpty()) {
-            elemMatchCriteria.and("partyId").in(args.getPartyIds());
-        }
         if (!args.getDistrictIds().isEmpty()) {
             elemMatchCriteria.and("districtId").in(args.getDistrictIds());
+        }
+        if (!args.getPartyIds().isEmpty()) {
+            elemMatchCriteria.and("partyId").in(args.getPartyIds());
         }
         query.addCriteria(Criteria.where("subjectDetails.interventions").elemMatch(elemMatchCriteria));
         query.with(pageRequest);

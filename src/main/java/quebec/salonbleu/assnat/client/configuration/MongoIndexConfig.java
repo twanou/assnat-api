@@ -21,8 +21,19 @@ public class MongoIndexConfig {
                 .ensureIndex(
                         new Index()
                                 .on("subjectDetails.interventions.deputyId", Sort.Direction.ASC)
-                                .on("date", Sort.Direction.DESC)
-                                .named("interventions_deputyId_date")
+                                .named("interventions_deputyId")
+                );
+        mongoTemplate.indexOps(Subject.class)
+                .ensureIndex(
+                        new Index()
+                                .on("subjectDetails.interventions.districtId", Sort.Direction.ASC)
+                                .named("interventions_districtId")
+                );
+        mongoTemplate.indexOps(Subject.class)
+                .ensureIndex(
+                        new Index()
+                                .on("subjectDetails.interventions.partyId", Sort.Direction.ASC)
+                                .named("interventions_partyId")
                 );
         mongoTemplate.indexOps(Subject.class)
                 .ensureIndex(
