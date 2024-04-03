@@ -52,6 +52,15 @@ class SubjectRepositoryTest {
     }
 
     @Test
+    void saveAll() {
+        List<Subject> subjects = List.of(Subject.builder().build());
+        when(subjectSpringRepositoryMock.saveAll(subjects)).thenReturn(subjects);
+
+        List<Subject> response = this.subjectRepository.saveAll(subjects);
+        assertSame(subjects, response);
+    }
+
+    @Test
     void findWithSearchString() {
         List<Subject> subjects = List.of(Subject.builder().build());
         SubjectArgs args = SubjectArgs.builder()

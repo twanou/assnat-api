@@ -31,6 +31,10 @@ public class SubjectRepository {
         return this.subjectSpringRepository.findAllById(ids);
     }
 
+    public List<Subject> saveAll(Iterable<Subject> subjects) {
+        return this.subjectSpringRepository.saveAll(subjects);
+    }
+
     public List<Subject> find(SubjectArgs args, PageRequest pageRequest) {
         Query query = this.getBaseQuery(args);
         Criteria elemMatchCriteria = new Criteria();

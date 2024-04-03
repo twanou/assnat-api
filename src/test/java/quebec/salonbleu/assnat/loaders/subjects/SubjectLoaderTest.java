@@ -7,7 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import quebec.salonbleu.assnat.client.documents.Subject;
 import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectDetails;
-import quebec.salonbleu.assnat.client.repositories.SubjectSpringRepository;
+import quebec.salonbleu.assnat.client.repositories.SubjectRepository;
 import quebec.salonbleu.assnat.loaders.subjects.mappers.SubjectDocumentTypeMapper;
 import quebec.salonbleu.assnat.scrapers.AssNatLogScraper;
 import quebec.salonbleu.assnat.scrapers.models.ScrapedLogNode;
@@ -28,7 +28,7 @@ class SubjectLoaderTest {
     @Mock
     private SubjectDocumentTypeMapper subjectDocumentTypeMapperMatchMock;
     @Mock
-    private SubjectSpringRepository subjectSpringRepositoryMock;
+    private SubjectRepository subjectRepositoryMock;
     @Mock
     private AssNatLogScraper assNatLogScraperMock;
     private SubjectLoader subjectLoader;
@@ -37,7 +37,7 @@ class SubjectLoaderTest {
     void setup() {
         when(subjectDocumentTypeMapperMatchMock.supports()).thenReturn(List.of("1", "2"));
         when(subjectDocumentTypeMapperNoMatchMock.supports()).thenReturn(List.of("1", "2", "3", "4"));
-        this.subjectLoader = new SubjectLoader(List.of(subjectDocumentTypeMapperMatchMock, subjectDocumentTypeMapperNoMatchMock), subjectSpringRepositoryMock, assNatLogScraperMock);
+        this.subjectLoader = new SubjectLoader(List.of(subjectDocumentTypeMapperMatchMock, subjectDocumentTypeMapperNoMatchMock), subjectRepositoryMock, assNatLogScraperMock);
     }
 
     @Test
@@ -62,6 +62,6 @@ class SubjectLoaderTest {
         when(assNatLogScraperMock.scrape("/relativeUrl/123456.html")).thenReturn(scrapedLogNode);
         this.subjectLoader.load("/relativeUrl/123456.html", expectedSubject.getDate(), expectedSubject.getLegislature(), expectedSubject.getSession());
         verify(subjectDocumentTypeMapperNoMatchMock, never()).map(any());
-        verify(subjectSpringRepositoryMock).saveAll(List.of(expectedSubject));
+        verify(subjectRepositoryMock).saveAll(List.of(expectedSubject));
     }
 }

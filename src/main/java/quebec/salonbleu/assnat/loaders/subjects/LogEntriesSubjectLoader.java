@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import quebec.salonbleu.assnat.cache.AssnatCacheManager;
 import quebec.salonbleu.assnat.client.documents.Subject;
 import quebec.salonbleu.assnat.client.documents.UpcomingLog;
-import quebec.salonbleu.assnat.client.repositories.SubjectSpringRepository;
+import quebec.salonbleu.assnat.client.repositories.SubjectRepository;
 import quebec.salonbleu.assnat.client.repositories.UpcomingLogRepository;
 import quebec.salonbleu.assnat.scrapers.AssNatLogEntryScraper;
 import quebec.salonbleu.assnat.scrapers.models.LogType;
@@ -24,12 +24,12 @@ public class LogEntriesSubjectLoader {
 
     private final AssNatLogEntryScraper assNatLogEntryScraper;
     private final SubjectLoader subjectLoader;
-    private final SubjectSpringRepository subjectSpringRepository;
+    private final SubjectRepository subjectRepository;
     private final UpcomingLogRepository upcomingLogRepository;
     private final AssnatCacheManager assnatCacheManager;
 
     public void load(Runnable prerequisiteTask) {
-        LocalDate latestInterventionDate = this.subjectSpringRepository.findFirstByOrderByDateDesc().map(Subject::getDate).orElse(LocalDate.MIN);
+        LocalDate latestInterventionDate = this.subjectRepository.findFirstByOrderByDateDesc().map(Subject::getDate).orElse(LocalDate.MIN);
         List<ScrapedLogEntry> logEntries = this.assNatLogEntryScraper.scrape();
 
         List<ScrapedLogEntry> filteredLogEntries = logEntries.stream()
