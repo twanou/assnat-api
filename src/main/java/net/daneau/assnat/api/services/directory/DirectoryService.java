@@ -13,7 +13,7 @@ public class DirectoryService {
     private final DistrictService districtService;
     private final PartyService partyService;
 
-    @Cacheable("cache")
+    @Cacheable("directoryCache")
     public DirectoryDTO getDirectory() {
         return DirectoryDTO.builder()
                 .deputies(this.deputyService.getDeputes())
