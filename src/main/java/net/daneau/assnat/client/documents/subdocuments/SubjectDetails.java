@@ -10,6 +10,7 @@ import java.util.List;
 public class SubjectDetails {
     SubjectType type;
     String title;
+    String anchor;
     @Builder.Default
     List<InterventionDocument> interventions = List.of();
 }

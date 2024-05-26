@@ -15,6 +15,7 @@ public class Subject {
 
     @Id
     String id;
+    String pageId;
     LocalDate date;
     int legislature;
     int session;
