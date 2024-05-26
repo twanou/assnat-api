@@ -26,38 +26,43 @@ class SubjectMapperTest {
 
     @Mock
     private SubjectTypeMapper subjectTypeMapperMock;
+    @Mock
+    private AssnatLinkBuilder assnatLinkBuilderMock;
 
     @Test
     void toSujetsList() {
+        LocalDate now = LocalDate.now();
         List<Subject> subjects = List.of(Subject.builder()
                 .id("id")
-                .date(LocalDate.now())
+                .date(now)
                 .legislature(1)
                 .session(2)
-                .subjectDetails(SubjectDetails.builder().type(SubjectType.DEPUTY_DECLARATION).build())
+                .pageId("123456")
+                .subjectDetails(SubjectDetails.builder().type(SubjectType.DEPUTY_DECLARATION).anchor("#anchor").build())
                 .build()
         );
         Map<String, Affectation> affectations = Map.of();
         SujetDetails sujetDetails = SujetDetails.builder().build();
         when(subjectTypeMapperMock.supports()).thenReturn(EnumSet.allOf(SubjectType.class));
         when(subjectTypeMapperMock.map(subjects.get(0).getSubjectDetails(), affectations)).thenReturn(sujetDetails);
-
-        SubjectMapper subjectMapper = new SubjectMapper(List.of(subjectTypeMapperMock));
+        when(assnatLinkBuilderMock.getUrl(1, 2, now, "123456", "#anchor")).thenReturn("url");
+        SubjectMapper subjectMapper = new SubjectMapper(List.of(subjectTypeMapperMock), assnatLinkBuilderMock);
         List<Sujet> sujets = subjectMapper.toSujetsList(subjects, affectations);
         assertEquals(subjects.get(0).getSession(), sujets.get(0).getSession());
         assertEquals(subjects.get(0).getLegislature(), sujets.get(0).getLegislature());
         assertEquals(subjects.get(0).getDate(), sujets.get(0).getDate());
+        assertEquals("url", sujets.get(0).getUrl());
         assertSame(sujetDetails, sujets.get(0).getDetails());
     }
 
     @Test
     void missingMapperException() {
-        assertThrows(IllegalStateException.class, () -> new SubjectMapper(List.of()));
+        assertThrows(IllegalStateException.class, () -> new SubjectMapper(List.of(), assnatLinkBuilderMock));
     }
 
     @Test
     void duplicateMapperException() {
         when(subjectTypeMapperMock.supports()).thenReturn(EnumSet.allOf(SubjectType.class));
-        assertThrows(IllegalStateException.class, () -> new SubjectMapper(List.of(subjectTypeMapperMock, subjectTypeMapperMock)));
+        assertThrows(IllegalStateException.class, () -> new SubjectMapper(List.of(subjectTypeMapperMock, subjectTypeMapperMock), assnatLinkBuilderMock));
     }
 }
