@@ -33,6 +33,7 @@ public class SubjectController {
                                                @RequestParam @NotNull @Min(5) @Max(25) Integer taille) {
         return SujetReponse.builder()
                 .sujets(this.subjectService.getSubjectsByDeputyIds(deputeIds, page, taille))
+                .derniereMaj(this.subjectService.getLastUpdate())
                 .build();
     }
 
@@ -40,6 +41,7 @@ public class SubjectController {
     public SujetReponse getSubjects(@PathVariable @Size(min = 1, max = 5) Set<UUID> ids) {
         return SujetReponse.builder()
                 .sujets(this.subjectService.getSubjects(ids))
+                .derniereMaj(this.subjectService.getLastUpdate())
                 .build();
     }
 }

@@ -70,7 +70,7 @@ class AssignmentLoaderTest {
                 .hash(1995)
                 .endDate(LocalDate.now())
                 .build());
-        order.verify(assnatCacheManagerMock).clearAllCaches();
+        order.verify(assnatCacheManagerMock).clearAssignmentCaches();
     }
 
     @Test
@@ -94,7 +94,7 @@ class AssignmentLoaderTest {
                 .partyId(landryParty.getId())
                 .districtId(landryDistrict.getId())
                 .build());
-        order.verify(assnatCacheManagerMock).clearAllCaches();
+        order.verify(assnatCacheManagerMock).clearAssignmentCaches();
         verify(assignmentRepositoryMock, atMostOnce()).save(any(Assignment.class));
     }
 
@@ -106,7 +106,7 @@ class AssignmentLoaderTest {
         when(assignmentRepositoryMock.findByEndDate(null)).thenReturn(currentAssignments);
 
         this.assignmentLoader.load();
-        verify(assnatCacheManagerMock, never()).clearAllCaches();
+        verify(assnatCacheManagerMock, never()).clearAssignmentCaches();
         verify(assignmentRepositoryMock, never()).save(any(Assignment.class));
     }
 }

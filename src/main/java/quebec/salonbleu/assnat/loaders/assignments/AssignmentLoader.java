@@ -64,7 +64,7 @@ public class AssignmentLoader {
         }
 
         if (!newScrapedDeputies.isEmpty() || !oldAssignments.isEmpty()) {
-            this.assnatCacheManager.clearAllCaches();
+            this.assnatCacheManager.clearAssignmentCaches();
         }
     }
 
