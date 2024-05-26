@@ -1,9 +1,10 @@
 package net.daneau.assnat.loaders.interventions;
 
-import net.daneau.assnat.client.documents.Intervention;
+import net.daneau.assnat.client.documents.Subject;
 import net.daneau.assnat.client.documents.subdocuments.Assignment;
-import net.daneau.assnat.client.documents.subdocuments.interventions.DeputyDeclaration;
-import net.daneau.assnat.client.repositories.InterventionRepository;
+import net.daneau.assnat.client.documents.subdocuments.Intervention;
+import net.daneau.assnat.client.documents.subdocuments.SubjectType;
+import net.daneau.assnat.client.repositories.SubjectRepository;
 import net.daneau.assnat.loaders.DeputyFinder;
 import net.daneau.assnat.scrappers.models.ScrapedLogEntry;
 import net.daneau.assnat.scrappers.models.ScrapedLogNode;
@@ -23,7 +24,7 @@ import static org.mockito.Mockito.when;
 class DeputyDeclarationLoaderTest {
 
     @Mock
-    private InterventionRepository interventionRepositoryMock;
+    private SubjectRepository subjectRepositoryMock;
     @Mock
     private DeputyFinder deputyFinderMock;
     @InjectMocks
@@ -45,21 +46,22 @@ class DeputyDeclarationLoaderTest {
 
 
         Assignment assignment = Assignment.builder().deputyId("1").partyId("2").ridingId("3").build();
-        Intervention expectedResult = Intervention.builder()
-                .interventionData(
-                        DeputyDeclaration.builder()
-                                .title(scrapedLogNode.getChildren().get(0).getTitle())
+        Subject expectedResult = Subject.builder()
+                .type(SubjectType.DEPUTY_DECLARATION)
+                .title(scrapedLogNode.getChildren().get(0).getTitle())
+                .interventions(List.of(
+                        Intervention.builder()
+                                .deputyId(assignment.getDeputyId())
+                                .partyId(assignment.getPartyId())
+                                .ridingId(assignment.getRidingId())
                                 .paragraphs(List.of("Bonjour", "oui"))
-                                .build())
+                                .build()))
                 .date(LocalDate.now())
-                .deputyId(assignment.getDeputyId())
-                .partyId(assignment.getPartyId())
-                .ridingId(assignment.getRidingId())
                 .legislature(scrapedLogEntry.getLegislature())
                 .session(scrapedLogEntry.getSession())
                 .build();
         when(deputyFinderMock.findByCompleteName("M. Lucien Bouchard")).thenReturn(assignment);
         this.deputyDeclarationLoader.load(scrapedLogEntry, scrapedLogNode);
-        verify(interventionRepositoryMock).save(expectedResult);
+        verify(subjectRepositoryMock).save(expectedResult);
     }
 }

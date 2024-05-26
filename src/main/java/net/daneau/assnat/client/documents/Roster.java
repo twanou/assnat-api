@@ -24,5 +24,5 @@ public class Roster {
     @With
     LocalDate endDate;
     @Builder.Default
-    List<Assignment> assignments = List.of();
+    public List<Assignment> assignments = List.of();
 }

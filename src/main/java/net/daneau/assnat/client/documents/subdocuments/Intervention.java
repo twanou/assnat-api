@@ -5,9 +5,12 @@ import lombok.Value;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 
+import java.util.List;
+
+
 @Value
 @Builder
-public class Assignment {
+public class Intervention {
 
     @Field(targetType = FieldType.OBJECT_ID)
     String deputyId;
@@ -15,4 +18,6 @@ public class Assignment {
     String ridingId;
     @Field(targetType = FieldType.OBJECT_ID)
     String partyId;
+    @Builder.Default
+    List<String> paragraphs = List.of();
 }
