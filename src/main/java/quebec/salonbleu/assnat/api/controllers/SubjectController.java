@@ -2,7 +2,6 @@ package quebec.salonbleu.assnat.api.controllers;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -33,8 +32,8 @@ public class SubjectController {
                                                @RequestParam(required = false, defaultValue = "") @Size(max = 125) Set<UUID> deputeIds,
                                                @RequestParam(required = false, defaultValue = "") @Size(max = 5) Set<UUID> partiIds,
                                                @RequestParam(required = false, defaultValue = "") @Size(max = 125) Set<UUID> circonscriptionIds,
-                                               @RequestParam @NotNull @Min(0) Integer page,
-                                               @RequestParam @NotNull @Min(1) @Max(25) Integer taille) {
+                                               @RequestParam(required = false, defaultValue = "0") @Min(0) Integer page,
+                                               @RequestParam(required = false, defaultValue = "25") @Min(1) @Max(25) Integer taille) {
         SubjectArgs args = SubjectArgs.builder()
                 .searchString(motsCles)
                 .deputyIds(deputeIds)
