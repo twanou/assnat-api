@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import quebec.salonbleu.assnat.api.models.subjects.responses.SujetReponse;
 import quebec.salonbleu.assnat.api.services.SubjectService;
+import quebec.salonbleu.assnat.client.repositories.args.SubjectArgs;
 
 import java.util.Set;
 import java.util.UUID;
@@ -28,11 +29,20 @@ public class SubjectController {
     private final SubjectService subjectService;
 
     @GetMapping
-    public SujetReponse getSubjectsByDeputyIds(@RequestParam @Size(min = 1, max = 125) Set<UUID> deputeIds,
+    public SujetReponse getSubjectsByDeputyIds(@RequestParam(required = false) String motsCles,
+                                               @RequestParam(required = false, defaultValue = "") @Size(max = 125) Set<UUID> deputeIds,
+                                               @RequestParam(required = false, defaultValue = "") @Size(max = 5) Set<UUID> partiIds,
+                                               @RequestParam(required = false, defaultValue = "") @Size(max = 125) Set<UUID> circonscriptionIds,
                                                @RequestParam @NotNull @Min(0) Integer page,
-                                               @RequestParam @NotNull @Min(5) @Max(25) Integer taille) {
+                                               @RequestParam @NotNull @Min(1) @Max(25) Integer taille) {
+        SubjectArgs args = SubjectArgs.builder()
+                .searchString(motsCles)
+                .deputyIds(deputeIds)
+                .partyIds(partiIds)
+                .districtIds(circonscriptionIds)
+                .build();
         return SujetReponse.builder()
-                .sujets(this.subjectService.getSubjectsByDeputyIds(deputeIds, page, taille))
+                .sujets(this.subjectService.getSubjects(args, page, taille))
                 .derniereMaj(this.subjectService.getLastUpdate())
                 .futuresMaj(this.subjectService.getNextUpdates())
                 .build();

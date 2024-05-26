@@ -12,6 +12,7 @@ import quebec.salonbleu.assnat.client.documents.Subject;
 import quebec.salonbleu.assnat.client.documents.UpcomingLog;
 import quebec.salonbleu.assnat.client.repositories.SubjectRepository;
 import quebec.salonbleu.assnat.client.repositories.UpcomingLogRepository;
+import quebec.salonbleu.assnat.client.repositories.args.SubjectArgs;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -27,8 +28,8 @@ public class SubjectService {
     private final AssignmentService assignmentService;
     private final SubjectMapper subjectMapper;
 
-    public List<Sujet> getSubjectsByDeputyIds(Set<UUID> deputyIds, int pageNumber, int pageSize) {
-        List<Subject> subjects = this.subjectRepository.findSubjectsByDeputyIds(deputyIds, PageRequest.of(pageNumber, pageSize));
+    public List<Sujet> getSubjects(SubjectArgs subjectArgs, int pageNumber, int pageSize) {
+        List<Subject> subjects = this.subjectRepository.find(subjectArgs, PageRequest.of(pageNumber, pageSize));
         return this.subjectMapper.toSujetsList(subjects, this.assignmentService.getAllAssignments());
     }
 

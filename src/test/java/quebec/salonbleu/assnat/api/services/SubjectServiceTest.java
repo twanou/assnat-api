@@ -14,6 +14,7 @@ import quebec.salonbleu.assnat.client.documents.Subject;
 import quebec.salonbleu.assnat.client.documents.UpcomingLog;
 import quebec.salonbleu.assnat.client.repositories.SubjectRepository;
 import quebec.salonbleu.assnat.client.repositories.UpcomingLogRepository;
+import quebec.salonbleu.assnat.client.repositories.args.SubjectArgs;
 import test.utils.TestUUID;
 
 import java.time.LocalDate;
@@ -44,15 +45,20 @@ class SubjectServiceTest {
 
     @Test
     void getSubjectsByDeputyIds() {
-        Set<UUID> ids = Set.of(TestUUID.ID1, TestUUID.ID2);
+        SubjectArgs args = SubjectArgs.builder()
+                .searchString("mots")
+                .deputyIds(Set.of(TestUUID.ID1, TestUUID.ID2))
+                .districtIds(Set.of(TestUUID.ID3, TestUUID.ID4))
+                .partyIds(Set.of(TestUUID.ID5, TestUUID.ID6))
+                .build();
         List<Subject> subjects = List.of(Subject.builder().build());
         List<Sujet> sujets = List.of(Sujet.builder().build());
         Map<UUID, Affectation> affectations = Map.of();
-        when(subjectRepositoryMock.findSubjectsByDeputyIds(ids, PageRequest.of(0, 25))).thenReturn(subjects);
+        when(subjectRepositoryMock.find(args, PageRequest.of(0, 25))).thenReturn(subjects);
         when(assignmentServiceMock.getAllAssignments()).thenReturn(affectations);
         when(subjectMapperMock.toSujetsList(same(subjects), same(affectations))).thenReturn(sujets);
 
-        List<Sujet> response = this.subjectService.getSubjectsByDeputyIds(ids, 0, 25);
+        List<Sujet> response = this.subjectService.getSubjects(args, 0, 25);
         assertSame(sujets, response);
     }
 

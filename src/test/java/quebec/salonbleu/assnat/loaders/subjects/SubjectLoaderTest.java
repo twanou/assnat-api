@@ -1,16 +1,16 @@
 package quebec.salonbleu.assnat.loaders.subjects;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import quebec.salonbleu.assnat.client.documents.Subject;
 import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectDetails;
 import quebec.salonbleu.assnat.client.repositories.SubjectRepository;
 import quebec.salonbleu.assnat.loaders.subjects.mappers.SubjectDocumentTypeMapper;
 import quebec.salonbleu.assnat.scrapers.AssNatLogScraper;
 import quebec.salonbleu.assnat.scrapers.models.ScrapedLogNode;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.util.List;
