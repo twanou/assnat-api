@@ -46,7 +46,7 @@ class SubjectServiceTest {
     @Test
     void getSubjectsByDeputyIds() {
         SubjectArgs args = SubjectArgs.builder()
-                .searchString("mots")
+                .keywords(Set.of("mots"))
                 .deputyIds(Set.of(TestUUID.ID1, TestUUID.ID2))
                 .districtIds(Set.of(TestUUID.ID3, TestUUID.ID4))
                 .partyIds(Set.of(TestUUID.ID5, TestUUID.ID6))
@@ -89,6 +89,6 @@ class SubjectServiceTest {
         when(upcomingLogRepositoryMock.findAll(Sort.by(Sort.Direction.ASC, "date"))).thenReturn(List.of(UpcomingLog.builder().date(LocalDate.now()).build()));
 
         List<LocalDate> response = this.subjectService.getNextUpdates();
-        assertEquals(LocalDate.now(), response.get(0));
+        assertEquals(LocalDate.now(), response.getFirst());
     }
 }

@@ -16,6 +16,7 @@ import quebec.salonbleu.assnat.client.documents.Subject;
 import quebec.salonbleu.assnat.client.repositories.args.SubjectArgs;
 import test.utils.TestUUID;
 
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -64,13 +65,13 @@ class SubjectRepositoryTest {
     void findWithSearchString() {
         List<Subject> subjects = List.of(Subject.builder().build());
         SubjectArgs args = SubjectArgs.builder()
-                .searchString("mots")
+                .keywords(new LinkedHashSet<>(List.of("mot1", "mot2", "mot3")))
                 .deputyIds(Set.of(TestUUID.ID1, TestUUID.ID2))
                 .districtIds(Set.of(TestUUID.ID3, TestUUID.ID4))
                 .partyIds(Set.of(TestUUID.ID5, TestUUID.ID6))
                 .build();
         PageRequest pageRequest = PageRequest.of(0, 25);
-        Query query = TextQuery.queryText(TextCriteria.forDefaultLanguage().matching(args.getSearchString().get())).sortByScore()
+        Query query = TextQuery.queryText(TextCriteria.forDefaultLanguage().matching("mot1 mot2 mot3")).sortByScore()
                 .addCriteria(Criteria.where("subjectDetails.interventions")
                         .elemMatch(
                                 Criteria.where("deputyId").in(args.getDeputyIds())

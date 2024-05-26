@@ -28,14 +28,14 @@ public class SubjectController {
     private final SubjectService subjectService;
 
     @GetMapping
-    public SujetReponse getSubjectsByDeputyIds(@RequestParam(required = false) String motsCles,
+    public SujetReponse getSubjectsByDeputyIds(@RequestParam(required = false, defaultValue = "") @Size(max = 25) Set<String> motsCles,
                                                @RequestParam(required = false, defaultValue = "") @Size(max = 125) Set<UUID> deputeIds,
                                                @RequestParam(required = false, defaultValue = "") @Size(max = 5) Set<UUID> partiIds,
                                                @RequestParam(required = false, defaultValue = "") @Size(max = 125) Set<UUID> circonscriptionIds,
                                                @RequestParam(required = false, defaultValue = "0") @Min(0) Integer page,
                                                @RequestParam(required = false, defaultValue = "25") @Min(1) @Max(25) Integer taille) {
         SubjectArgs args = SubjectArgs.builder()
-                .searchString(motsCles)
+                .keywords(motsCles)
                 .deputyIds(deputeIds)
                 .partyIds(partiIds)
                 .districtIds(circonscriptionIds)

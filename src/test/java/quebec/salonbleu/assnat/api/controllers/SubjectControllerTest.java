@@ -31,7 +31,7 @@ class SubjectControllerTest {
     void getSubjectsByDeputyIds() {
         List<Sujet> sujets = List.of(Sujet.builder().build());
         SubjectArgs args = SubjectArgs.builder()
-                .searchString("mots")
+                .keywords(Set.of("mots"))
                 .deputyIds(Set.of(TestUUID.ID1, TestUUID.ID2))
                 .districtIds(Set.of(TestUUID.ID3, TestUUID.ID4))
                 .partyIds(Set.of(TestUUID.ID5, TestUUID.ID6))
@@ -40,7 +40,7 @@ class SubjectControllerTest {
         when(subjectServiceMock.getLastUpdate()).thenReturn(LocalDate.now());
         when(subjectServiceMock.getNextUpdates()).thenReturn(List.of(LocalDate.now()));
 
-        SujetReponse response = this.subjectController.getSubjectsByDeputyIds(args.getSearchString().get(), args.getDeputyIds(), args.getPartyIds(), args.getDistrictIds(), 0, 25);
+        SujetReponse response = this.subjectController.getSubjectsByDeputyIds(args.getKeywords(), args.getDeputyIds(), args.getPartyIds(), args.getDistrictIds(), 0, 25);
         assertSame(response.getSujets(), sujets);
         assertEquals(LocalDate.now(), response.getDerniereMaj());
         assertEquals(List.of(LocalDate.now()), response.getFuturesMaj());

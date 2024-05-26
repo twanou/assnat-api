@@ -1,6 +1,7 @@
 package quebec.salonbleu.assnat.client.repositories;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -53,8 +54,10 @@ public class SubjectRepository {
     }
 
     private Query getBaseQuery(SubjectArgs args) {
-        return args.getSearchString()
-                .map(searchString -> (Query) TextQuery.queryText(TextCriteria.forDefaultLanguage().matching(searchString)).sortByScore())
-                .orElse((new Query().with(Sort.by(Sort.Direction.DESC, "date"))));
+        if (args.getKeywords().isEmpty()) {
+            return new Query().with(Sort.by(Sort.Direction.DESC, "date"));
+        } else {
+            return TextQuery.queryText(TextCriteria.forDefaultLanguage().matching(StringUtils.join(args.getKeywords(), " "))).sortByScore();
+        }
     }
 }
