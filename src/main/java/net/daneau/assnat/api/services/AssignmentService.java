@@ -9,10 +9,11 @@ import net.daneau.assnat.cache.CacheKey;
 import net.daneau.assnat.client.documents.Assignment;
 import net.daneau.assnat.client.repositories.AssignmentRepository;
 import net.daneau.assnat.utils.PhotoUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -28,8 +29,11 @@ public class AssignmentService {
     private final AssignmentRepository assignmentRepository;
 
     @Cacheable(CacheKey.Constants.CURRENT_ASSIGNMENTS)
-    public Collection<Affectation> getCurrentAssignments() {
-        return this.getAssignments(this.assignmentRepository.findByEndDate(null)).values();
+    public List<Affectation> getCurrentAssignments() {
+        return this.getAssignments(this.assignmentRepository.findByEndDate(null))
+                .values().stream()
+                .sorted(Comparator.comparing(affectation -> StringUtils.stripAccents(affectation.getDepute().getNom() + affectation.getDepute().getPrenom())))
+                .toList();
     }
 
     @Cacheable(CacheKey.Constants.ALL_ASSIGNMENTS)

@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
@@ -70,7 +69,7 @@ public class DeputyScraper {
         }
         log.info("Fin scraping députés");
         this.errorHandler.assertSize(rows.size(), deputies, () -> new ScrapingException("Nombre de député invalide"));
-        deputies.sort(Comparator.comparing(deputy -> Normalizer.normalize(deputy.getLastName() + deputy.getFirstName(), Normalizer.Form.NFD)));
+        deputies.sort(Comparator.comparing(deputy -> StringUtils.stripAccents(deputy.getLastName() + deputy.getFirstName())));
         return Collections.unmodifiableList(deputies);
     }
 
