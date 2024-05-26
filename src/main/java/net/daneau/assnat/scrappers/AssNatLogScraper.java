@@ -1,8 +1,5 @@
 package net.daneau.assnat.scrappers;
 
-import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlParagraph;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import net.daneau.assnat.scrappers.configuration.AssNatWebClient;
@@ -10,6 +7,9 @@ import net.daneau.assnat.scrappers.exceptions.ScrapingException;
 import net.daneau.assnat.scrappers.models.ScrapedLogNode;
 import net.daneau.assnat.scrappers.utils.ScrapeUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.htmlunit.html.HtmlAnchor;
+import org.htmlunit.html.HtmlPage;
+import org.htmlunit.html.HtmlParagraph;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Node;
 

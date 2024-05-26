@@ -1,8 +1,8 @@
 package net.daneau.assnat.scrappers.configuration;
 
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.WebClient;
 import net.daneau.assnat.scrappers.exceptions.ScrapingException;
+import org.htmlunit.Page;
+import org.htmlunit.WebClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
