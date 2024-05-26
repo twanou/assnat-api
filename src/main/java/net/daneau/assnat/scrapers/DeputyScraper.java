@@ -1,10 +1,10 @@
-package net.daneau.assnat.scrappers;
+package net.daneau.assnat.scrapers;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.daneau.assnat.scrappers.configuration.AssNatWebClient;
-import net.daneau.assnat.scrappers.exceptions.ScrapingException;
-import net.daneau.assnat.scrappers.models.ScrapedDeputy;
+import net.daneau.assnat.scrapers.configuration.AssNatWebClient;
+import net.daneau.assnat.scrapers.exceptions.ScrapingException;
+import net.daneau.assnat.scrapers.models.ScrapedDeputy;
 import net.daneau.assnat.utils.ErrorHandler;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;

@@ -6,7 +6,7 @@ import net.daneau.assnat.client.documents.subdocuments.InterventionDocument;
 import net.daneau.assnat.client.documents.subdocuments.SubjectDetails;
 import net.daneau.assnat.client.documents.subdocuments.SubjectType;
 import net.daneau.assnat.loaders.DeputyFinder;
-import net.daneau.assnat.scrappers.models.ScrapedLogNode;
+import net.daneau.assnat.scrapers.models.ScrapedLogNode;
 
 import java.util.List;
 

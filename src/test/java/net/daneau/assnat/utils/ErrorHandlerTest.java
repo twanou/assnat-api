@@ -1,7 +1,7 @@
 package net.daneau.assnat.utils;
 
 import net.daneau.assnat.loaders.exceptions.LoadingException;
-import net.daneau.assnat.scrappers.exceptions.ScrapingException;
+import net.daneau.assnat.scrapers.exceptions.ScrapingException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

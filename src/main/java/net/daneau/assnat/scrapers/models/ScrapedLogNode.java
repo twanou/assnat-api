@@ -1,4 +1,4 @@
-package net.daneau.assnat.scrappers.models;
+package net.daneau.assnat.scrapers.models;
 
 import lombok.Builder;
 import lombok.Value;
@@ -11,8 +11,8 @@ import java.util.List;
 @Jacksonized
 public class ScrapedLogNode {
 
-
     String title;
+    String anchor;
     @Builder.Default
     List<String> paragraphs = List.of();
     @Builder.Default
