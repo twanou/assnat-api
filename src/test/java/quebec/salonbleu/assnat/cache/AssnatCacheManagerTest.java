@@ -12,7 +12,6 @@ import quebec.salonbleu.assnat.loaders.events.ClearCacheEvent;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -25,26 +24,37 @@ class AssnatCacheManagerTest {
     private ApplicationEventPublisher applicationEventPublisherMock;
     @Mock
     private Cache cacheMock;
+    @Mock
+    private Cache cacheMock2;
     @InjectMocks
     private AssnatCacheManager assnatCacheManager;
 
     @Test
     void clearAssignmentCaches() {
         when(cacheManagerMock.getCache(CacheKey.ALL_ASSIGNMENTS.name())).thenReturn(cacheMock);
-        when(cacheManagerMock.getCache(CacheKey.CURRENT_ASSIGNMENTS.name())).thenReturn(cacheMock);
+        when(cacheManagerMock.getCache(CacheKey.CURRENT_ASSIGNMENTS.name())).thenReturn(cacheMock2);
 
         this.assnatCacheManager.clearAssignmentCaches();
-        verify(cacheMock, times(2)).clear();
+        verify(cacheMock).clear();
+        verify(cacheMock2).clear();
         verify(applicationEventPublisherMock).publishEvent(any(ClearCacheEvent.class));
     }
 
     @Test
-    void clearSubjectCaches() {
+    void clearLastUpdateCache() {
         when(cacheManagerMock.getCache(CacheKey.LAST_UPDATE.name())).thenReturn(cacheMock);
+
+        this.assnatCacheManager.clearLastUpdateCache();
+        verify(cacheMock).clear();
+        verify(applicationEventPublisherMock, never()).publishEvent(any());
+    }
+
+    @Test
+    void clearNextUpdateCache() {
         when(cacheManagerMock.getCache(CacheKey.NEXT_UPDATE.name())).thenReturn(cacheMock);
 
-        this.assnatCacheManager.clearSubjectCaches();
-        verify(cacheMock, times(2)).clear();
+        this.assnatCacheManager.clearNextUpdateCache();
+        verify(cacheMock).clear();
         verify(applicationEventPublisherMock, never()).publishEvent(any());
     }
 }

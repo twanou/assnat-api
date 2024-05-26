@@ -37,7 +37,6 @@ public class LogEntriesSubjectLoader {
     public void load(Runnable prerequisiteTask) {
         LocalDate latestInterventionDate = this.subjectRepository.findFirstByOrderByDateDesc().map(Subject::getDate).orElse(LocalDate.MIN);
         List<ScrapedLogEntry> logEntries = this.assNatLogEntryScraper.scrape();
-
         List<ScrapedLogEntry> filteredLogEntries = logEntries.stream()
                 .filter(entry -> entry.getDate().isAfter(latestInterventionDate))
                 .filter(entry -> LogType.ASSEMBLY.equals(entry.getType()))
@@ -46,7 +45,11 @@ public class LogEntriesSubjectLoader {
                 .toList();
 
         this.assertNoDuplicateDate(filteredLogEntries);
+        this.loadPreliminaryLogEntries(filteredLogEntries);
+        this.loadFinalLogEntries(prerequisiteTask, filteredLogEntries);
+    }
 
+    private void loadFinalLogEntries(Runnable prerequisiteTask, List<ScrapedLogEntry> filteredLogEntries) {
         List<ScrapedLogEntry> finalLogEntries = filteredLogEntries.stream()
                 .filter(entry -> LogVersion.FINAL.equals(entry.getVersion()))
                 .toList();
@@ -56,8 +59,7 @@ public class LogEntriesSubjectLoader {
             log.info("Début du chargement des journaux");
             finalLogEntries.forEach(entry ->
                     this.subjectLoader.load(entry.getRelativeUrl(), entry.getDate(), entry.getLegislature(), entry.getSession()));
-            this.loadPreliminaryLogEntries(filteredLogEntries);
-            this.assnatCacheManager.clearSubjectCaches();
+            this.assnatCacheManager.clearLastUpdateCache();
             log.info("Fin du chargement des journaux");
         }
     }
@@ -70,6 +72,7 @@ public class LogEntriesSubjectLoader {
 
         preliminaryLogEntries.forEach(entry ->
                 this.upcomingLogRepository.save(UpcomingLog.builder().date(entry.getDate()).build()));
+        this.assnatCacheManager.clearNextUpdateCache();
     }
 
     private void assertNoDuplicateDate(List<ScrapedLogEntry> logEntries) {

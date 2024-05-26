@@ -22,8 +22,12 @@ public class AssnatCacheManager {
         this.eventBus.publishEvent(new ClearCacheEvent(this));
     }
 
-    public void clearSubjectCaches() {
-        this.clear(CacheKey.LAST_UPDATE, CacheKey.NEXT_UPDATE);
+    public void clearNextUpdateCache() {
+        this.clear(CacheKey.NEXT_UPDATE);
+    }
+
+    public void clearLastUpdateCache() {
+        this.clear(CacheKey.LAST_UPDATE);
     }
 
     private void clear(CacheKey... key) {
