@@ -1,5 +1,10 @@
 package quebec.salonbleu.assnat.api.services;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import quebec.salonbleu.assnat.api.models.commons.Affectation;
 import quebec.salonbleu.assnat.api.models.commons.Circonscription;
 import quebec.salonbleu.assnat.api.models.commons.Depute;
@@ -7,15 +12,12 @@ import quebec.salonbleu.assnat.api.models.commons.Parti;
 import quebec.salonbleu.assnat.client.documents.Assignment;
 import quebec.salonbleu.assnat.client.repositories.AssignmentRepository;
 import quebec.salonbleu.assnat.utils.PhotoUtils;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import test.utils.TestUUID;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -38,40 +40,40 @@ class AssignmentServiceTest {
 
     @Test
     void getCurrentAssignments() {
-        Map<String, Depute> deputeMap = Map.of("1", Depute.builder().prenom("prenom").nom("nom").build());
-        Map<String, Circonscription> circonscriptionMap = Map.of("2", Circonscription.builder().nom("circonscription").build());
-        Map<String, Parti> partiMap = Map.of("3", Parti.builder().nom("parti").build());
+        Map<UUID, Depute> deputeMap = Map.of(TestUUID.ID1, Depute.builder().prenom("prenom").nom("nom").build());
+        Map<UUID, Circonscription> circonscriptionMap = Map.of(TestUUID.ID2, Circonscription.builder().nom("circonscription").build());
+        Map<UUID, Parti> partiMap = Map.of(TestUUID.ID3, Parti.builder().nom("parti").build());
         when(deputyServiceMock.getDeputies()).thenReturn(deputeMap);
         when(districtServiceMock.getDistricts()).thenReturn(circonscriptionMap);
         when(partyServiceMock.getParties()).thenReturn(partiMap);
         when(photoUtilsMock.getPhotoUrl("prenom", "nom", "circonscription", "parti")).thenReturn("url");
-        Assignment assignment = Assignment.builder().id("0").deputyId("1").districtId("2").partyId("3").build();
+        Assignment assignment = Assignment.builder().id(TestUUID.ID4).deputyId(TestUUID.ID1).districtId(TestUUID.ID2).partyId(TestUUID.ID3).build();
         when(assignmentRepositoryMock.findByEndDate(null)).thenReturn(List.of(assignment));
 
         Collection<Affectation> response = this.assignmentService.getCurrentAssignments();
-        assertEquals(deputeMap.get("1").getId(), response.stream().findFirst().get().getDepute().getId());
-        assertEquals(circonscriptionMap.get("2").getId(), response.stream().findFirst().get().getCirconscription().getId());
-        assertEquals(partiMap.get("3").getId(), response.stream().findFirst().get().getParti().getId());
+        assertEquals(deputeMap.get(TestUUID.ID1).getId(), response.stream().findFirst().get().getDepute().getId());
+        assertEquals(circonscriptionMap.get(TestUUID.ID2).getId(), response.stream().findFirst().get().getCirconscription().getId());
+        assertEquals(partiMap.get(TestUUID.ID3).getId(), response.stream().findFirst().get().getParti().getId());
         assertEquals("url", response.stream().findFirst().get().getPhotoUrl());
     }
 
     @Test
     void getAllAssignments() {
-        Map<String, Depute> deputeMap = Map.of("1", Depute.builder().prenom("prenom").nom("nom").build());
-        Map<String, Circonscription> circonscriptionMap = Map.of("2", Circonscription.builder().nom("circonscription").build());
-        Map<String, Parti> partiMap = Map.of("3", Parti.builder().nom("parti").build());
+        Map<UUID, Depute> deputeMap = Map.of(TestUUID.ID1, Depute.builder().prenom("prenom").nom("nom").build());
+        Map<UUID, Circonscription> circonscriptionMap = Map.of(TestUUID.ID2, Circonscription.builder().nom("circonscription").build());
+        Map<UUID, Parti> partiMap = Map.of(TestUUID.ID3, Parti.builder().nom("parti").build());
         when(deputyServiceMock.getDeputies()).thenReturn(deputeMap);
         when(districtServiceMock.getDistricts()).thenReturn(circonscriptionMap);
         when(partyServiceMock.getParties()).thenReturn(partiMap);
         when(photoUtilsMock.getPhotoUrl("prenom", "nom", "circonscription", "parti")).thenReturn("url");
-        Assignment assignment = Assignment.builder().id("0").deputyId("1").districtId("2").partyId("3").functions(List.of("depute")).build();
+        Assignment assignment = Assignment.builder().id(TestUUID.ID4).deputyId(TestUUID.ID1).districtId(TestUUID.ID2).partyId(TestUUID.ID3).functions(List.of("depute")).build();
         when(assignmentRepositoryMock.findAll()).thenReturn(List.of(assignment));
 
-        Map<String, Affectation> response = this.assignmentService.getAllAssignments();
-        assertEquals(deputeMap.get("1").getId(), response.get("0").getDepute().getId());
-        assertEquals(circonscriptionMap.get("2").getId(), response.get("0").getCirconscription().getId());
-        assertEquals(partiMap.get("3").getId(), response.get("0").getParti().getId());
-        assertEquals(assignment.getFunctions().get(0), response.get("0").getFonctions().get(0));
-        assertEquals("url", response.get("0").getPhotoUrl());
+        Map<UUID, Affectation> response = this.assignmentService.getAllAssignments();
+        assertEquals(deputeMap.get(TestUUID.ID1).getId(), response.get(TestUUID.ID4).getDepute().getId());
+        assertEquals(circonscriptionMap.get(TestUUID.ID2).getId(), response.get(TestUUID.ID4).getCirconscription().getId());
+        assertEquals(partiMap.get(TestUUID.ID3).getId(), response.get(TestUUID.ID4).getParti().getId());
+        assertEquals(assignment.getFunctions().get(0), response.get(TestUUID.ID4).getFonctions().get(0));
+        assertEquals("url", response.get(TestUUID.ID4).getPhotoUrl());
     }
 }

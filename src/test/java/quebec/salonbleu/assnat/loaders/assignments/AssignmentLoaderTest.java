@@ -1,5 +1,12 @@
 package quebec.salonbleu.assnat.loaders.assignments;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InOrder;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 import quebec.salonbleu.assnat.cache.AssnatCacheManager;
 import quebec.salonbleu.assnat.client.documents.Assignment;
 import quebec.salonbleu.assnat.client.documents.Deputy;
@@ -10,13 +17,7 @@ import quebec.salonbleu.assnat.loaders.exceptions.LoadingException;
 import quebec.salonbleu.assnat.scrapers.DeputyScraper;
 import quebec.salonbleu.assnat.scrapers.models.ScrapedDeputy;
 import quebec.salonbleu.assnat.utils.ErrorHandler;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InOrder;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
+import test.utils.TestUUID;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -54,12 +55,12 @@ class AssignmentLoaderTest {
     void load() {
         List<ScrapedDeputy> scrapedDeputies = List.of(ScrapedDeputy.builder().firstName("Bernard").lastName("Landry").party("Parti Québecois").district("Verchères").build(), ScrapedDeputy.builder().firstName("René").build());
         List<Assignment> currentAssignments = List.of(Assignment.builder().hash(1733353033).build());
-        Deputy landryDeputy = Deputy.builder().id("deputyId").firstName("Bernard").lastName("Landry").build();
-        District landryDistrict = District.builder().id("districtId").name("Verchères").build();
-        Party landryParty = Party.builder().id("partyId").name("Parti Québecois").build();
+        Deputy landryDeputy = Deputy.builder().id(TestUUID.ID1).firstName("Bernard").lastName("Landry").build();
+        District landryDistrict = District.builder().id(TestUUID.ID2).name("Verchères").build();
+        Party landryParty = Party.builder().id(TestUUID.ID3).name("Parti Québecois").build();
         when(deputyScraperMock.scrape()).thenReturn(scrapedDeputies);
         when(assignmentRepositoryMock.findByEndDate(null)).thenReturn(currentAssignments);
-        when(assignmentRepositoryMock.findByDeputyIdAndEndDate("deputyId", null)).thenReturn(Optional.of(Assignment.builder().hash(1).build()));
+        when(assignmentRepositoryMock.findByDeputyIdAndEndDate(TestUUID.ID1, null)).thenReturn(Optional.of(Assignment.builder().hash(1).build()));
         when(deputyLoaderMock.load(scrapedDeputies)).thenReturn(List.of(landryDeputy));
         when(districtLoaderMock.load(scrapedDeputies)).thenReturn(List.of(landryDistrict));
         when(partyLoaderMock.load(scrapedDeputies)).thenReturn(List.of(landryParty));
@@ -84,9 +85,9 @@ class AssignmentLoaderTest {
     @Test
     void loadWithoutCurrentAssignments() {
         List<ScrapedDeputy> scrapedDeputies = List.of(ScrapedDeputy.builder().firstName("Bernard").lastName("Landry").party("Parti Québecois").district("Verchères").build());
-        Deputy landryDeputy = Deputy.builder().id("deputyId").firstName("Bernard").lastName("Landry").build();
-        District landryDistrict = District.builder().id("districtId").name("Verchères").build();
-        Party landryParty = Party.builder().id("partyId").name("Parti Québecois").build();
+        Deputy landryDeputy = Deputy.builder().id(TestUUID.ID1).firstName("Bernard").lastName("Landry").build();
+        District landryDistrict = District.builder().id(TestUUID.ID2).name("Verchères").build();
+        Party landryParty = Party.builder().id(TestUUID.ID3).name("Parti Québecois").build();
         when(deputyScraperMock.scrape()).thenReturn(scrapedDeputies);
         when(assignmentRepositoryMock.findByEndDate(null)).thenReturn(List.of());
         when(deputyLoaderMock.load(scrapedDeputies)).thenReturn(List.of(landryDeputy));

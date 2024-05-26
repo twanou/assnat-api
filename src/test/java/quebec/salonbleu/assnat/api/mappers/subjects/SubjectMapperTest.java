@@ -1,20 +1,22 @@
 package quebec.salonbleu.assnat.api.mappers.subjects;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import quebec.salonbleu.assnat.api.models.commons.Affectation;
 import quebec.salonbleu.assnat.api.models.subjects.Sujet;
 import quebec.salonbleu.assnat.api.models.subjects.SujetDetails;
 import quebec.salonbleu.assnat.client.documents.Subject;
 import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectDetails;
 import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectType;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import test.utils.TestUUID;
 
 import java.time.LocalDate;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -33,7 +35,7 @@ class SubjectMapperTest {
     void toSujetsList() {
         LocalDate now = LocalDate.now();
         List<Subject> subjects = List.of(Subject.builder()
-                .id("id")
+                .id(TestUUID.ID1)
                 .date(now)
                 .legislature(1)
                 .session(2)
@@ -41,7 +43,7 @@ class SubjectMapperTest {
                 .subjectDetails(SubjectDetails.builder().type(SubjectType.DEPUTY_DECLARATION).anchor("#anchor").build())
                 .build()
         );
-        Map<String, Affectation> affectations = Map.of();
+        Map<UUID, Affectation> affectations = Map.of();
         SujetDetails sujetDetails = SujetDetails.builder().build();
         when(subjectTypeMapperMock.supports()).thenReturn(EnumSet.allOf(SubjectType.class));
         when(subjectTypeMapperMock.map(subjects.get(0).getSubjectDetails(), affectations)).thenReturn(sujetDetails);

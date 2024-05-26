@@ -2,16 +2,20 @@ package quebec.salonbleu.assnat.client.documents;
 
 import lombok.Builder;
 import lombok.Value;
+import lombok.With;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.UUID;
 
 @Value
 @Builder
 @Document("parties")
-public class Party {
+public class Party implements UuidDocument {
 
     @Id
-    String id;
+    @With
+    UUID id;
     String name;
     String acronym;
 }

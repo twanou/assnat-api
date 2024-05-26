@@ -1,17 +1,18 @@
 package quebec.salonbleu.assnat.loaders;
 
-import quebec.salonbleu.assnat.client.documents.Assignment;
-import quebec.salonbleu.assnat.client.documents.Deputy;
-import quebec.salonbleu.assnat.client.repositories.AssignmentRepository;
-import quebec.salonbleu.assnat.client.repositories.DeputyRepository;
-import quebec.salonbleu.assnat.loaders.exceptions.LoadingException;
-import quebec.salonbleu.assnat.utils.ErrorHandler;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import quebec.salonbleu.assnat.client.documents.Assignment;
+import quebec.salonbleu.assnat.client.documents.Deputy;
+import quebec.salonbleu.assnat.client.repositories.AssignmentRepository;
+import quebec.salonbleu.assnat.client.repositories.DeputyRepository;
+import quebec.salonbleu.assnat.loaders.exceptions.LoadingException;
+import quebec.salonbleu.assnat.utils.ErrorHandler;
+import test.utils.TestUUID;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -37,14 +38,14 @@ class DeputyFinderTest {
 
     @Test
     void findByCompleteName() {
-        Deputy deputyParizeau = Deputy.builder().id("1").title("M.").firstName("Jacques").lastName("Parizeau").build();
-        Assignment assignmentParizeau = Assignment.builder().deputyId("1").partyId("2").districtId("3").build();
+        Deputy deputyParizeau = Deputy.builder().id(TestUUID.ID1).title("M.").firstName("Jacques").lastName("Parizeau").build();
+        Assignment assignmentParizeau = Assignment.builder().deputyId(TestUUID.ID1).partyId(TestUUID.ID2).districtId(TestUUID.ID3).build();
         when(assignmentRepositoryMock.findByEndDate(null)).thenReturn(List.of(
                 assignmentParizeau,
-                Assignment.builder().deputyId("4").partyId("5").districtId("6").build()));
-        when(deputyRepositoryMock.findAllById(List.of("1", "4"))).thenReturn(List.of(
+                Assignment.builder().deputyId(TestUUID.ID4).partyId(TestUUID.ID5).districtId(TestUUID.ID6).build()));
+        when(deputyRepositoryMock.findAllById(List.of(TestUUID.ID4, TestUUID.ID1))).thenReturn(List.of(
                 deputyParizeau,
-                Deputy.builder().id("4").title("M.").firstName("René").lastName("Lévesque").build()
+                Deputy.builder().id(TestUUID.ID4).title("M.").firstName("René").lastName("Lévesque").build()
         ));
 
         Assignment assignment = this.deputyFinder.findByCompleteName("M. Jacques Parizeau");

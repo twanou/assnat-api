@@ -1,6 +1,8 @@
 package quebec.salonbleu.assnat.loaders.assignments;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Component;
 import quebec.salonbleu.assnat.cache.AssnatCacheManager;
 import quebec.salonbleu.assnat.client.documents.Assignment;
 import quebec.salonbleu.assnat.client.documents.Deputy;
@@ -11,8 +13,6 @@ import quebec.salonbleu.assnat.loaders.exceptions.LoadingException;
 import quebec.salonbleu.assnat.scrapers.DeputyScraper;
 import quebec.salonbleu.assnat.scrapers.models.ScrapedDeputy;
 import quebec.salonbleu.assnat.utils.ErrorHandler;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;

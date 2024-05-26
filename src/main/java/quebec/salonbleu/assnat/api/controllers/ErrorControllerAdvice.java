@@ -2,24 +2,15 @@ package quebec.salonbleu.assnat.api.controllers;
 
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
-import quebec.salonbleu.assnat.api.models.errors.ErreurReponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.servlet.resource.NoResourceFoundException;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import quebec.salonbleu.assnat.api.models.errors.ErreurReponse;
 
 @Slf4j
 @ControllerAdvice
-public class ErrorControllerAdvice {
-
-    @ExceptionHandler(NoResourceFoundException.class)
-    public ResponseEntity<ErreurReponse> handleNoResourceFoundException() {
-        return ResponseEntity.status(404)
-                .body(ErreurReponse.builder()
-                        .code("151176")
-                        .message("Ressource introuvable.")
-                        .build());
-    }
+public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<ErreurReponse> handleConstraintViolationException() {

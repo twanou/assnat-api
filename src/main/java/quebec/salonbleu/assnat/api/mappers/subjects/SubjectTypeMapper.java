@@ -7,10 +7,11 @@ import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectType;
 
 import java.util.EnumSet;
 import java.util.Map;
+import java.util.UUID;
 
 public interface SubjectTypeMapper {
 
-    SujetDetails map(SubjectDetails subjectDetails, Map<String, Affectation> affectations);
+    SujetDetails map(SubjectDetails subjectDetails, Map<UUID, Affectation> affectations);
 
     EnumSet<SubjectType> supports();
 }
