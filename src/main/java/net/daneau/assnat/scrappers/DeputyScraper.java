@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class DeputyScraper {
         }
         this.errorHandler.assertSize(rows.size(), deputies, () -> new ScrapingException("Nombre de député invalide"));
         deputies.sort(Comparator.comparing(deputy -> Normalizer.normalize(deputy.getLastName() + deputy.getFirstName(), Normalizer.Form.NFD)));
-        return deputies;
+        return Collections.unmodifiableList(deputies);
     }
 
     private String independenceCheck(String party) {

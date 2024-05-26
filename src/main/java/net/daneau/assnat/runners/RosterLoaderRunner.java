@@ -1,8 +1,8 @@
 package net.daneau.assnat.runners;
 
 import lombok.RequiredArgsConstructor;
-import net.daneau.assnat.loaders.LogEntryLoader;
 import net.daneau.assnat.loaders.roster.RosterLoader;
+import net.daneau.assnat.loaders.subjects.LogEntriesSubjectLoader;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -13,11 +13,11 @@ import org.springframework.stereotype.Component;
 public class RosterLoaderRunner implements CommandLineRunner {
 
     private final RosterLoader rosterLoader;
-    private final LogEntryLoader logEntryLoader;
+    private final LogEntriesSubjectLoader subjectLoader;
 
     @Override
     public void run(String... args) {
         this.rosterLoader.load();
-        this.logEntryLoader.load();
+        this.subjectLoader.load();
     }
 }

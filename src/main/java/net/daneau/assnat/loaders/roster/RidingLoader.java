@@ -7,6 +7,7 @@ import net.daneau.assnat.scrappers.models.ScrapedDeputy;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -26,10 +27,9 @@ class RidingLoader {
                         this.ridingRepository.save(
                                 Riding.builder()
                                         .name(scrapedDeputy.getRiding())
-                                        .build())
-                );
+                                        .build()));
             }
         }
-        return ridings;
+        return Collections.unmodifiableList(ridings);
     }
 }

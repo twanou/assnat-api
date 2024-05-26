@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -34,19 +33,18 @@ class PartyLoaderTest {
 
         List<Party> results = this.partyLoader.load(List.of(ScrapedDeputy.builder().party("Parti Québecois").build()));
         verify(partyRepositoryMock, never()).save(any());
-        assertSame(parties, results);
+        assertEquals(parties, results);
     }
 
     @Test
     void loadWithSave() {
         ScrapedDeputy scrapedDeputy = ScrapedDeputy.builder().party("Parti Québecois").build();
-        Party party = Party.builder().name("Parti Québecois").build();
-        List<Party> parties = new ArrayList<>(List.of(Party.builder().name("Parti Libéral").build()));
-        when(partyRepositoryMock.findAll()).thenReturn(parties);
-        when(partyRepositoryMock.save(party)).thenReturn(party);
+        Party newParty = Party.builder().name("Parti Québecois").build();
+        Party partyInDB = Party.builder().name("Parti Libéral").build();
+        when(partyRepositoryMock.findAll()).thenReturn(new ArrayList<>(List.of(partyInDB)));
+        when(partyRepositoryMock.save(newParty)).thenReturn(newParty);
 
         List<Party> results = this.partyLoader.load(List.of(scrapedDeputy));
-        assertSame(parties, results);
-        assertEquals(party, parties.get(1));
+        assertEquals(List.of(partyInDB, newParty), results);
     }
 }

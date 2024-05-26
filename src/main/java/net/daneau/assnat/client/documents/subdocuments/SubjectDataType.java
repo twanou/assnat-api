@@ -1,5 +1,5 @@
 package net.daneau.assnat.client.documents.subdocuments;
 
-public enum SubjectType {
+public enum SubjectDataType {
     DEPUTY_DECLARATION
 }

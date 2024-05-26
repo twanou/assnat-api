@@ -7,6 +7,7 @@ import net.daneau.assnat.scrappers.models.ScrapedDeputy;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -26,10 +27,9 @@ class PartyLoader {
                         this.partyRepository.save(
                                 Party.builder()
                                         .name(scrapedDeputy.getParty())
-                                        .build())
-                );
+                                        .build()));
             }
         }
-        return parties;
+        return Collections.unmodifiableList(parties);
     }
 }
