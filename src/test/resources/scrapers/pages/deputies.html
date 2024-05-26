@@ -1,0 +1,3369 @@
+
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+
+	<!-- Enonces d'inclusion de fichiers JS et CSS -->
+	
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<meta http-equiv="content-language" content="fr" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<link type="text/css" href="/styles/ResetCSS.min.css" rel="stylesheet" media="screen"  />
+<link type="text/css" href="/styles/AssNat.min.css" rel="stylesheet" media="screen"  />
+<link type="text/css" href="/styles/Reguliere.css" title="Reguliere"  rel="alternate stylesheet" media="screen" />
+<link type="text/css" href="/styles/Moyenne.css" title="Moyenne" rel="alternate stylesheet" media="screen" />
+<link type="text/css" href="/styles/Grande.css" title="Grande" rel="alternate stylesheet" media="screen" />
+<link type="text/css" href="/styles/infoBulle.min.css" rel="stylesheet" media="screen" />
+<link type="text/css" href="/styles/jScrollPane.min.css" rel="stylesheet" media="screen" />
+<link type="text/css" href="/styles/jquery.treeview.min.css" rel="stylesheet" media="screen" />
+<link type="text/css" href="/styles/jquery.skinned-select.min.css" rel="stylesheet" media="screen"  />
+<link type="text/css" href="/styles/jquery.datePicker.min.css" rel="stylesheet" media="screen"  />
+<link type="text/css" href="/styles/Calendrier.min.css" rel="stylesheet" media="screen"  />
+<link href="/Images/favicon.ico" rel="shortcut icon" />
+
+<!-- Feuilles de styles specifiques IE -->
+
+<!--[if lte IE 6]>
+    <link type="text/css" href="/styles/CorrectionsIE6.min.css" rel="stylesheet" media="screen"  />
+<![endif]-->
+
+<!--[if IE 7]>
+    <link type="text/css" href="/styles/CorrectionsIE7.min.css" rel="stylesheet" media="screen"  />
+<![endif]-->
+
+<!--[if IE 8]>
+    <link type="text/css" href="/styles/CorrectionsIE8.min.css" rel="stylesheet" media="screen"  />
+<![endif]-->
+<link type="text/css" href="/styles/Impression.min.css" rel="stylesheet" media="print"  />
+
+<link type="text/css" href="/styles/Tableau.min.css" rel="stylesheet" media="screen"  />
+
+<script type="text/javascript" src="/scripts/jquery.js?version=1.2.6"></script>
+
+<script type="text/javascript" src="/scripts/jquery-ui.js?version=1.5.2"></script>
+
+<!-- Google Tag Manager -->
+<script>(function (w, d, s, l, i) {
+        w[l] = w[l] || []; w[l].push({
+            'gtm.start':
+                new Date().getTime(), event: 'gtm.js'
+        }); var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+})(window, document, 'script', 'dataLayer', 'GTM-5X47H2N');</script> 
+<!-- End Google Tag Manager -->
+
+
+<script type="text/javascript"  >
+//<![CDATA[
+// Libellé du calendrier
+$.dpText = {
+	TEXT_PREV_YEAR		:	'Année précédente',
+	TEXT_PREV_MONTH		:	'Mois précédent',
+	TEXT_NEXT_YEAR		:	'Année suivante',
+	TEXT_NEXT_MONTH		:	'Mois suivant',
+	TEXT_CLOSE			:	'[x] Fermer',
+	TEXT_CHOOSE_DATE	:	'Choisir une date'
+}
+
+var _contenuLoading = '<img style="width: 16px;height: 16px;" src="/Images/lightbox/loading.gif" />&nbsp; Chargement en cours...';
+
+var _nbAnneeArchiveActivite = '3';
+// Voir Calendrier.js pour _dtSetStartDate
+var _dtSetEndDate = '2023-06-09';
+var intNombreAnneeArchiveActivite = 3;
+var langueCourante = 'fr';
+
+_initCalendrierTypeActiviteJSON = eval([{"NomTypeActivite":"Autres activités","Categorie":"D","Name":null,"Description":null},{"NomTypeActivite":"Conférences et points de presse","Categorie":"C","Name":null,"Description":null},{"NomTypeActivite":"Séances de l'Assemblée","Categorie":"A","Name":null,"Description":null},{"NomTypeActivite":"Séances des commissions","Categorie":"B","Name":null,"Description":null}]);name 
+_urlGetCalendrierDataJSON = '/WebMethod/Calendrier.aspx/GetCalendrier?langue=fr';
+_documentURL = "https://www.assnat.qc.ca/Media/Process.aspx?process=Thumbnail&token=ZyMoxNwUn8ikQ+TRKYwPCjWrKwg+vIv9rjij7p3xLGTZDmLVSmJLoqe/vG7/YWzz&MediaId=";
+_imageThumbnailURL = "https://www.assnat.qc.ca/Media/Process.aspx?process=AlbumThumbnail&amp;token=ZyMoxNwUn8ikQ+TRKYwPCjWrKwg+vIv9rjij7p3xLGTZDmLVSmJLoqe/vG7/YWzz&amp;asset=";
+_imageOriginaleURL = "https://www.assnat.qc.ca/Media/Process.aspx?process=Original&amp;token=ZyMoxNwUn8ikQ+TRKYwPCjWrKwg+vIv9rjij7p3xLGTZDmLVSmJLoqe/vG7/YWzz&amp;asset=";
+_imageThumbnailDrapeauURL = "https://www.assnat.qc.ca/Media/Process.aspx?process=ThumbnailDrapeau&amp;token=ZyMoxNwUn8ikQ+TRKYwPCjWrKwg+vIv9rjij7p3xLGTZDmLVSmJLoqe/vG7/YWzz&amp;asset=";
+_lienContenuURL = "/fr/deputes/index";
+_extensionPagesDuSite = "html";
+_lienPatronUrlCommuniquePresse = '/fr/actualites-salle-presse/communiques/';
+_lienPatronUrlTranscription = '/fr/actualites-salle-presse/conferences-points-presse/';
+_lienPatronUrlEnDirect = '/fr/video-audio/index';
+_lienJournalDebat ='/fr/travaux-parlementaires/{0}.html';
+_lienJournalDebatCom ='/fr/travaux-parlementaires/commissions/{0}/journal-debats/index';
+_lienJournalDebatChmbr ='/fr/travaux-parlementaires/{0}';
+_listeObjetMetierPatronUrl = "DocumentGenerique:/fr/document/{0}.html|Commission:/fr/travaux-parlementaires/commissions/{0}/index.html|Mandat:/fr/travaux-parlementaires/mandats/{0}/index.html|Lien:/fr/lien/{0}.html|CommuniquePresse:/fr/actualites-salle-presse/communiques/{0}.html|Actualite:/fr/actualites-salle-presse/nouvelle/{0}.html|ConferencePointPresse:/fr/actualites-salle-presse/conferences-points-presse/{0}.html|Consultation:/fr/travaux-parlementaires/consultations/{0}.html|SeanceAssemblee:/fr/travaux-parlementaires/assemblee-nationale/{0}/index.html|ProjetLoi:/fr/travaux-parlementaires/projets-loi/projet-loi-{0}.html|VideoAudio:/fr/video-audio/{0}.html|Journal:/fr/travaux-parlementaires/{0}.html|SyndicationRSS:/fr/rss/{0}.html|Petition:/fr/exprimez-votre-opinion/petition/{0}/index.html|TermeEncyclopedique:/fr/patrimoine/lexique/{0}.html|SectionDelegation:/fr/diplomatie/{0}/{1}/index.html|Vote:/fr/travaux-parlementaires/registre-des-votes/{0}/index.html|Depute:/fr/deputes/{0}/index.html|Texte:/fr/{0}.html|Individu:/fr/patrimoine/anciens-parlementaires/{0}.html|";
+_lienAideSoutienTechnique = '/fr/aide/aide-recherche.html#javascript';
+
+var _urlGetCalendrierObtenirActiviteEnOndes = '/WebMethod/Calendrier.aspx/ObtenirActiviteEnOndes';
+var intervalleRafraichissementWebDiffusion = '60';
+var urlPageVideoAudio = '/fr/video-audio/index.html?activite={0}';
+var libelleDateDebutDu = 'Du';
+var libelleDateDebutVers = 'Vers';
+var libelleDateFinJusqua = 'jusqu\'à';
+var libelleDateFinAu = 'au';
+var libelleHeureFinA = 'à'
+var libelleDebutApresPeriodeCourante = 'début : après la période des affaires courantes de l\'Assemblée';
+var bulleAidePeriodeAffaireCourante = '<span class="btnInfoBulle sansControle"><a href="javascript:void(0)" class="sanssouligne"><img src="http://www.assnat.qc.ca/Images/btnInfoBulle.gif" title="Afficher l\'aide" alt="Afficher l\'aide"></a><span title="Début : après la période des affaires courantes de l\'Assemblée"></span></span>';
+var libelleActiviteReporteeDateUlterieure = 'Activité reportée à une date ultérieure';
+
+var libelleCalAPartirDe = 'À partir de';
+var libelleCalEnCours = 'En cours';
+var libelleCalDebut = 'Début';
+
+var libelleDuree = 'Durée :';
+
+    var libelleAucunVideo = "La recherche n’a donné aucun résultat.";
+    var libelleAucuneAutreActiviteEnDirect = "Aucune autre activité en direct."
+
+var libelleNombreResultat = 'Nombre de résultats&nbsp;';
+var libelleMotsCles = 'Mots clés';
+var libelleCategorie = 'Catégorie';
+var libelleSession = 'Session';
+var libelleDateOuPeriode = 'Date ou période&nbsp;: ';
+var libelleAPartirDu = 'À partir du';
+var libelleJusquAu = "Jusqu'au";
+
+
+
+var arrCalendrierLblGeneral = {
+                                "lblCalOuvrir": "Ouvrir",
+                                "lblCalFermerEntete": "Fermer"       
+                            };
+var arrCalLblJoursSemaine = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'lblFormDeputesSortants'];
+var arrCalLblMoisAnnee = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+var arrCalLblMoisAnneeAbr = ['JA', 'FE', 'MR', 'AR', 'MA', 'JN', 'JL', 'AU', 'SE', 'OC', 'NO', 'DE'];
+var lblCalAucuneActivite = "Aucune activité au calendrier aujourd'hui.";
+var lblCalDifficulteTechnique = "Le calendrier n'est pas accessible en ce moment. Veuillez réessayer dans quelques minutes.";
+var lblCalActPrivee = "Activité privée"; 
+var lblCalActSurInvitation = "Sur invitation";
+var lblCalActAnnulee = "Activité annulée"; 
+var lblCalEnDirect = "En direct";
+var lblCalTranscription = "Transcription";
+var lblCalCommunique = "Communiqué";
+var lblCalToutesActivites = "Toutes les activités";
+var lblCalVideo = "Vidéo";
+var lblCalAudio = "Audio";
+
+// Libellés du date picker
+
+    Date.dayNames = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'lblFormDeputesSortants'];
+    Date.abbrDayNames = ['DIM', 'LUN', 'MAR', 'MER', 'JEU', 'VEN', 'SAM'];
+    Date.monthNames = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+    Date.abbrMonthNames = ['JA', 'FE', 'MR', 'AR', 'MA', 'JN', 'JL', 'AU', 'SE', 'OC', 'NO', 'DE'];
+	Date.firstDayOfWeek = 7;
+
+
+// Libellés pour treeview - overrider dans les pages au besoin
+var lblOuvrirTout = 'Afficher tout le contenu';
+var lblFermerTout = 'Masquer tout le contenu';
+
+// Libelles pour paginateur
+var _lblPaginationPage = 'Page';
+var _lblPaginationDe = 'de';
+
+// URL drapeau generique 
+var _urlDrapeauGenerique = '/Images/Temp/icoDrapeaux.gif'
+
+// Message pour sites externes
+var _messageSiteExterne = "L'Assemblée n'assume aucune responsabilité quant au contenu des sites externes.";
+var _arrDomainesInternes = ['172.16.48.120','172.16.48.199','localhost','app1dev.assnat.intranet','wwwdev.assnat.qc.ca','wwwdev2.assnat.qc.ca','wwwfon.assnat.qc.ca','wwwfon2.assnat.qc.ca','wwwfor.assnat.qc.ca','wwwacc.assnat.qc.ca','wwwacc2.assnat.qc.ca','www.assnat.qc.ca','www2.assnat.qc.ca','assnat.qc.ca','WWW.bibliotheque.assnat.qc.ca','fondationbonenfant.qc.ca','sd10sri10v','www.parlementsauprimaire.com','www.paricilademocratie.com','boutique.assnat.qc.ca'];
+
+// Pour visionneuse: libelle 'Image' utilise dans slimbox2.js
+var lblVisionneuseTermeImage = "Image {x} de {y}"; 
+
+// Libelle pour le bouton Fermer de la visionneuse
+var libelleCloseLink = "Fermer";
+
+// Libellés pour fermer les bulles d'aide
+var lblBulleAideFermer = "[x] Fermer";
+
+// URL pour la page de redirection javascript
+var urlPageRedirectionJS = '/fr/redirection.html?d=';
+
+var urlBoutonCalendrier = '/Images/btnCalendrier.gif';
+
+
+var urlObtenirVisionneusePhotos = '/Gabarits/InfrastructuresAvecVisionneuse.aspx/ObtenirVisionneusePhotos';
+var lblAlbumPhotos = 'Album de photos';
+var lblAgrandir = 'Agrandir';
+
+// Le script d'effet ne fonctionne pas sous Internet Explorer, ce script distingue ie des autres fureteurs 
+ if ($.browser.msie) {
+    }
+    else {
+        document.write("<script type='text\/javascript' src='\/scripts/jquery.easing.min.js?version=1.3'><\/script>")
+    }
+//]]>
+ 
+    var valEtatDeputeAncienDeputes = "AncienDeputes";
+
+    var urlObtenirTypeTravauxParSessionLegislature = '/Gabarits/RechercheAvancee.aspx/ObtenirTypeTravauxParSessionLegislature';
+    var urlObtenirTypeTravauxParPeriode = '/Gabarits/RechercheAvancee.aspx/ObtenirTypeTravauxParPeriode';
+    var urlObtenirTypeDocumentParTypeTravaux = '/Gabarits/RechercheAvancee.aspx/ObtenirTypeDocumentParTypeTravaux';
+    var urlObtenirSousCategorieVideoParCategorieVideo = '/Gabarits/RechercheAvancee.aspx/ObtenirSousCategorieVideoParCategorieVideo';
+    
+    var idsSectionRechercheTravauxParlementaires = ['9',
+                                                        '27',
+                                                        '29',
+                                                        '31',
+                                                        '33'];
+
+    var idCategorieDocumentJournauxDebats = '13'
+
+    var msgFormatDateInvalide = "Veuillez saisir une date valide selon le format aaaa-mm-jj.";
+    var msgPeriodeInvalide = "La date de début doit précéder la date de fin.";
+    var msgPeriodeDebutFutur = "La date doit être antérieure ou égale à la date du jour.";
+
+	$(document).ready(function(){
+		$("a").each(function(i, e) {
+			var href = $(e).attr('href');
+			if(href && href.search(/^http:/) == 0){
+				$(e).attr('href', "https:" + href.substring(5));
+			}
+		})
+	});
+</script>
+
+<!-- Gestion des cookies. Documentation : http://stilbuero.de/jquery/cookie/ -->
+<script type="text/javascript" src="/scripts/jquery.cookie.min.js"></script>
+
+<!-- Corrige les problème de z-index d'Internet Explorer. Doc: http://brandonaaron.net/jquery/plugins/bgiframe/docs/ -->
+<script type="text/javascript" src="/scripts/jquery.bgiframe.min.js"></script>
+
+<!-- Permet la gestion de l'objet date. -->
+<script type="text/javascript" src="/scripts/date.min.js"></script>
+
+<!-- Génère des paneaux (Tabs) à partir d'une liste (ul li). info et doc: http://docs.jquery.com/UI/Tabs-->
+<script type="text/javascript" src="/scripts/ui.tabs.js"></script>
+
+<!-- Génère l'affichage dynamique d'un liste (ul li). info et doc: http://bassistance.de/jquery-plugins/jquery-plugin-treeview/ -->
+<script type="text/javascript" src="/scripts/jquery.treeview.pack.min.js"></script>
+
+<!-- Permet de modifier la feuille de style. info et doc:http://kelvinluck.com/article/switch-stylesheets-with-jquery -->
+<script type="text/javascript" src="/scripts/StyleSwitcher.min.js"></script>
+
+<!-- Permet de modifier l'apparence des selects. info et doc:http://www.lotsofcode.com/javascript-and-ajax/jquery-select-box-skin.htm -->
+<script type="text/javascript" src="/scripts/jquery.skinned-select.min.js"></script>
+
+<!-- Permet de créer des masques sur les formulaires info et doc:http://digitalbush.com/projects/masked-input-plugin/ -->
+<script type="text/javascript" src="/scripts/jquery.maskedinput-1.2.2.min.js"></script>
+
+<!-- Permet de générer un calendrier. docs et info : http://kelvinluck.com/assets/jquery/datePicker/v2/demo/datePickerLocalised.html -->
+<script type="text/javascript" src="/scripts/jquery.datePicker.js"></script>
+
+<!-- Permet de gérer les bulles d'aide en popup -->
+<script type="text/javascript" src="/scripts/BulleAide.min.js"></script>
+
+<!-- Permet de modifier l'apparence des scrollbars. info et doc: http://www.kelvinluck.com/assets/jquery/jScrollPane/jScrollPane.html -->
+<script type="text/javascript" src="/scripts/jScrollPane.min.js"></script>
+
+<!-- Permet d'utiliser des PNG transparent dans IE 6 et 5.5. info et doc: http://jquery.andreaseberhard.de/pngFix/ -->
+<script type="text/javascript" src="/scripts/jquery.pngFix.min.js"></script>
+
+<!-- Permet de trier et de paginer des tableaux. docs et info : http://tablesorter.com -->
+<script type="text/javascript" src="/scripts/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="/scripts/jquery.tablesorter.pager.min.js"></script>
+
+<script type="text/javascript" src="/scripts/jquery.uilock.min.js"></script>
+
+<!-- script general -->
+<script type="text/javascript" src="/scripts/AssNat.min.js"></script>
+
+<script type="text/javascript" src="/Scripts/moment.min.js"></script>
+
+<!-- evenements et gestion du calendrier -->
+<script type="text/javascript" src="/scripts/Calendrier.min.js"></script>
+
+<!-- sert uniquement pour débugger les objets JSON. -->
+<script type="text/javascript" src="/scripts/json.min.js"></script>
+
+
+
+
+
+	
+	<!-- Placeholder: permet d'ajouter des enonces specifiques dans le HEAD -->
+    
+    <script type="text/javascript" src="/scripts/Deputes.min.js"></script>
+
+
+	<!-- Feuille de style pour le layout de la page -->
+	
+	<link href="/styles/GabGauche-mHautDivA.min.css" rel="stylesheet" type="text/css" media="screen" />
+
+
+	<!-- Placeholder: remplace automatiquement selon rubrique -->
+    <title>
+	
+		    Députés - Assemblée nationale du Québec
+		
+</title>
+        
+        <meta property="og:title" content="Députés - Assemblée nationale du Québec" />
+        <meta property="og:description" content="" />
+        <meta property="og:image" content="https://www.assnat.qc.ca/Media/Process.aspx?process=Original&amp;token=ZyMoxNwUn8ikQ+TRKYwPCjWrKwg+vIv9rjij7p3xLGTZDmLVSmJLoqe/vG7/YWzz&amp;asset=ANQ.Vigie.Bll.Image_19205" />
+<meta property="og:image" content="https://www.assnat.qc.ca/Media/Process.aspx?process=Original&amp;token=ZyMoxNwUn8ikQ+TRKYwPCjWrKwg+vIv9rjij7p3xLGTZDmLVSmJLoqe/vG7/YWzz&amp;asset=ANQ.Vigie.Bll.Image_19207" />
+<meta property="og:image" content="https://www.assnat.qc.ca/Media/Process.aspx?process=Original&amp;token=ZyMoxNwUn8ikQ+TRKYwPCjWrKwg+vIv9rjij7p3xLGTZDmLVSmJLoqe/vG7/YWzz&amp;asset=ANQ.Vigie.Bll.Image_19209" />
+<meta property="og:image" content="https://www.assnat.qc.ca/Media/Process.aspx?process=Original&amp;token=ZyMoxNwUn8ikQ+TRKYwPCjWrKwg+vIv9rjij7p3xLGTZDmLVSmJLoqe/vG7/YWzz&amp;asset=ANQ.Vigie.Bll.Image_19211" />
+<meta property="og:image" content="https://www.assnat.qc.ca/Media/Process.aspx?process=Original&amp;token=ZyMoxNwUn8ikQ+TRKYwPCjWrKwg+vIv9rjij7p3xLGTZDmLVSmJLoqe/vG7/YWzz&amp;asset=ANQ.Vigie.Bll.Image_19213" />
+<meta property="og:image" content="https://www.assnat.qc.ca/Media/Process.aspx?process=Original&amp;token=ZyMoxNwUn8ikQ+TRKYwPCjWrKwg+vIv9rjij7p3xLGTZDmLVSmJLoqe/vG7/YWzz&amp;asset=ANQ.Vigie.Bll.Image_19215" />
+<meta property="og:image" content="https://www.assnat.qc.ca/Media/Process.aspx?process=Original&amp;token=ZyMoxNwUn8ikQ+TRKYwPCjWrKwg+vIv9rjij7p3xLGTZDmLVSmJLoqe/vG7/YWzz&amp;asset=ANQ.Vigie.Bll.Image_19217" />
+
+    <script type="text/javascript" src="/scripts/Recherche.min.js"></script><style type="text/css">
+	.ctl00_SousNavigationPlaceHolder_SousNavigation_Menu1_0 { background-color:white;visibility:hidden;display:none;position:absolute;left:0px;top:0px; }
+	.ctl00_SousNavigationPlaceHolder_SousNavigation_Menu1_1 { text-decoration:none; }
+	.ctl00_SousNavigationPlaceHolder_SousNavigation_Menu1_2 {  }
+
+</style></head>
+
+<!-- Placeholder: permet de specifier un tag body personnalise (default: <body>) -->
+
+	<body id="Deputes">
+
+
+	    
+<!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5X47H2N" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+    <form method="post" action="/fr/deputes/index.html" id="aspnetForm">
+<div>
+<input type="hidden" name="versionProgrammationEnCache" id="versionProgrammationEnCache" value="0" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJMTA0NDI4OTczZBgBBTRjdGwwMCRTb3VzTmF2aWdhdGlvblBsYWNlSG9sZGVyJFNvdXNOYXZpZ2F0aW9uJE1lbnUxDw9kBQlEw6lwdXTDqXNkVZKU7T5Lrow3YLoYdoR0c1mks6A=" />
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="76280586" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdANAB40TDWl5LJmxQJoUuLnOXYt4R/6bl78JeBRmWuq2D/I+8352JTwyGphPBPnXCb9sjN/FxGZruoNdA3wsEHAB6wl5jY+xV5SminhiXeqTB8CuKNQOCgS3bvMb8WoOi81Cl5UiS8SDfMzk+7xsHoyuNpNz5MEBjpxjgoPOIZ40UeyFhxaxHf779JIVyBSO+ne7kzX+K2YKPCLb36Lzj029T51nN2E6FlAlTrRGzvB8VhE+eCFOAWwKeE1BuhXOE+x9sxr/Ci/5kfmTFHeaHOzhPBWhAhs+2RhgC8IBAui1UqqcMe6fQ2WWotzcRiYtN8bQzpU4Ei+BLtYrwb9vfo//kq8MCQvlM2v2AHQXBxPqN1DDYnZjuRpeEHg62ggolwptFZKrGJW8oBPJ4lXZtZOWxf/h2Rmv0TQ/TTfp9bBz5VFkpIyFISk8hTg54HNmLB1edNqQcYcB2bIEfGTih5AMztI/VN4qiaxF+9IomHotWyMc1KfSEWWXMbtx3TwUXOxiKGy9n9isVTFjE2knc4IIiVYXVQYeuk2t68fB/iVZvrFwN3leGqujUllQ8jYiFqgOBoD7sJd6eHY4pgFsG5I45EEWPO3HXBASaLs4R746wIgLa6QFVGXy1RmwglqSYdp4N+PRSigi6sCGczwDAkECURIJ5NZP53BNnYM6FMWQmLb4jPjGVfajG+JCRSggaik1Gg5P5CuZs03OBDmmHPgouRAC3I/uMw3dl9k+4f2z+/rbfE3y1rO6N8Ou46cj3fuJUKboQmyaF76ajlX6DKgw+/XSz3SV+UOXT/brUBWbeS+A2FZfx2U+EItXEz49oAJ/PEPvGlDkIrx0hflvUyii0L7Rjf5/kiRJbaJgzIghtyxhNoJfwPQRlpHv8R0bwjLgi6hZ1q3GcvqQFSQ2yxgvBZJTMLm/mkmO6cxBhqRq6l6ad7m3Q/K6NIqRcGiPYX9Ahmvjy5iI6aoKBDSbB1z2Hik5x4/P6lovb1r7UgPimd/wSV72fbJkOKfjcHgiOQfzXGpCulwFbF/0pmtgKOLC0yiEkgLm1gEGujN4zzsU7L+Ur+b5rr5SqXBHxRmxIDgxnH5TU4ar/gNCf2OZ3Xyt2Arc0u9F0ZDa075t/i294tYLFMZi1oj6yE1HXGgE9yFkSWPcLZy1ip/JCaFwNH2hfhzO6xLpO790csB46PjjcPcK3wuO9dTWrKwhxwq/GV6wAShDyw+xIt77CTPig497rJPzd10MUe5ot76nHA10PlJPCUxxq3bxs5JDdAFuOr+pdGodLoABGCEgngoKUoDds2XZtGswJBA449OeJixkUBgk6D1rL3UkGFmwPzB7jVvvbgIZZzSD0ikFssOifcM8mUYpK2eQmNxqRovOsXlgIJ2O25G5ZEWtfQP+A0R42DGsc51N6fjCKdGDRAlfW+9sdYuF8nL6NAGMkYNf10Gf2sdY/g8G527Vnxg5SutDzJxJYIB2exbOhdaG0eRoU3CbQRRowZDocd72zf7nAam8Gj8AxhpnGAqyzsE17xxKMEps0G2TuQ/tE6sbUaKQXun4CUnjiyRIrlhpXbbgEG7iBHjNzAixsFfypE/FAVcmA4l5dQn2qKZPs3UhLZX/JMZoDGS7V9k63dCIqf5L2zcYPGaTivmXgKjo7dp5BADUoIcmlMa8GMleKmnqq1mVE8JA/v3y30+OUhKcU4js3nN0CesRVMwr80JIWR9jXxEyTFqMSBR2HI8Do+M4lmiObv8tBE3a8cxTws9cqLpmhVAeOgp6ENJ1Z12xkz2g7rSH/tpEb3hTbr2Q/MFx+g9mC6WZpP8rVuV3IqPDYPyjj7ddjmi0kMDjPENJ5WfmGg4u9AVgahLf60LJtO/NN0xetNC5tr0SgS4Y1WZlSvmv8CdNELoekPRK5WKvTfYxKHtCUOJKYGIgE9M4CYYM/Hb6xsvhLOt70k+VOO/fH/3BUF36QWRbC+dHRc8c0dqed2IeyM2gTByXJcb0Io/3KKrDXKkaZP/B8dPmxKE9bwNOF563ywEI6cQzea7j0fJ+0zP4YAnQM7nPWuxNFo3/TxeluSVXdRhGtrel4/XiswYMnDCPucrHvUJ8j5T8uE8wNLPf8DokBT2KyxyMNuNb/tJrTHnot9KHPWA0WHfGrINVn6PGRJbhq1TwDxNySMmio9bvy25uzYbOro/0MTlCMf2aSEjVJRSA7bUFztugDu65rqZ2DIOfK7grL8JaDostMMhRylb5wCsxDVJj73mVjg0fNYvNRMPvZ363w0MnRr5mxfuy4ltLnhWRmUPE6eSSIYq0E3izImfBgK037w7u3dYZNzC4ylqMGhckDuTNZUi9lWLETU5F6asIidC5+O3sSr+IlZaJ8rvwejH37em8tJqEqNlGJMY62ylnld61BHNiVQEfHekFCEWyGppiscEpES3PbKwDDwWWnM2HqzKdKMmNzzBGBXQG5QWqRo4NNvolfpIecEf+0vX1/g0LUiKu+B7ySmKdBODhhQ/6HjOUp0y6XerZ0cBFGItVJjU3akqZaxbETkssWgZPMe9ibcc1td3N4744Onl1azJFapPtD+xNuec9zRpZgsgyWYztKEpDvKNmY5lRSFTqrizEz0afbDDr6QLF8ct+RNlzk0CMovYZ0O5a1g+ZjOUMPCa1AM/VCDbGUxqaL1kkTaHMqlkNotLyF2GiiY/dwF1TiyRSElPlzQBA/Nv9KWxS+728j7LL8TdeRC1whMzLy9bXzyNMfEJz/KSckQdkQ9QnQiFcV8okr4wRa2RAytVeKzriQNaPZekErzQBlEWYzh+ge7KyWaW7py7IYfDTPbYlJMQekRbw7FvZord5qMOJWEJ2oWxMyoxWwZaaCPwCJSBfxO5dT2287TRpNKYNA3K+aTU+gm/eDmscKWJBG6kCHEp5VWKiefynx3FthdOY0+tjxbTgJ96jGtBmwXZ0GYDvaLx9d5i+Z13dUDoEHHnSwnrHqFkaG3kQT16Q+kWLxI99mWK1I09ldvNw7cdpepslHVaeMMZomtOLX2byuzoKkTZvi8rS4ykmt0P8DqWvC1+ibMtunum/WUEUFxd1T6rCoDgaD5Pt/FH6LJq+CfwGNbO8R5FngKVxtpWqwTrJ4Rm1QUdgVHY+7Fwt9d08fTuMT0JZQO4ft5eRyW/JmXFYNbJcLGpbLD5BAzXNVbcYgSqDy+Vom2Qacevej3T0XnCaqbVSccffrAQJIIhai3uC6iWsLLyNRTnxAwICjqR8M7nrHMtK8LxZsCPVOfmvBeQcENB7BBGiS+9Kj03orjMUOhiZYmPcWfzZ+DxjpxQAUyuIA6vUMAIxV8A7G+IJNHnmaaic+xfiDf/qnt7gsA3o68WAqy41er4FE91WIxpdE5U55ucXi9U9VNAF75rANptx6oZ3Mvcq52RbizO7+5WMZOSpnRJ3ZEvyDEslT8EJtNoLDSroM7YVE9boWmziD8dEnFgehqQDmoy9LQE+3fIuayRYqP2cZFHIIE9f23c14VwKLjDFNhj8hjS/41QBAOiFH5gxlAkFLKhOQbdAS3fY/fHKb6G5vgmYzkXIfJADdzoiTEalBFYc7/gbN9v28TstprEfJ/fzel09vmHwt/FkGMFNcI/0et6Vat4eA3ENqlyCmw3zkdByoLOkaj8Qu4d//ArMV3Wf9MpRqWrb4z3i97MuwUPz2uqtd7Swup0mTJgbZuZt0ZKBLSSK1wQ05j/jiAYmyF4NxnOg4J9yo00VYpg8dW6zcDUVMoCSEqSyWOQWYW6hAqEWwMBFnGfMV+LtHiS/0OYHAF1lsPXFcG7fLhuEOF/bxO2Ak5OlyArC0jX7lkQEc8M8O0a9agrAUCH2UmJ68Ycy7xXx9LvvwG8n/ykivL3ChI3ZJBRr1D90m53CZ60g7xxjtJ6EDyMRdAukpnuET6svtprrQ9ASlapqUaoSes0o74FTy5HAMIskhoeWRIT0gYRnUuGj0QPT/A7mCiN6BI2ghjh3BvT34QLbGoqD0n1X2pe3xOaNuERgLwv7xL5OCv/S3TdphNHK0izL9d8W1lSubEtKgFPDHTbjVu8F8cFr3pT+hGDyEtaqmzLYeYQylHanggETEI07ENGo7vwcVM/tZ4hiVzC28cw52ni5b4H1LAyJZI3CX6IUP5dW+0TiUHu52nZTDPW94OyM9Bj/UKAvJ6zzVPxyF530IzwLiVW8JET4c+ENbCJBaXODGXui5AZVbFYLuUdtTFRmJvEJo6+L0GPzWvos+hxHD3e9uGf4bYJMfhGfVZufjrYd+3C7Xn2rlWG+rVllA+LlwLuB3rHvj30ywePtXNdO9x0SrahHfjkVCbh3/j7TNS8j2m5/HriBIO7mBsxnxjVuxrc2gH+Tdupk6MiqDJkzA1fUFuWgsowbO8GJzqX5HtRCIHA6Yvt71ReeXlvirZMOxEh2F88CCNBUj3MlTgCkJ5aFiVhzDsEpzrvqvW8FV" />
+</div>
+		<div id="Wrap">
+	    
+			<!-- Utilitaires: impression, agrandir texte, recherche, etc -->
+			
+
+
+<script type="text/javascript">
+    var motCleDefaut = 'Rechercher';
+</script>
+
+<a name="haut"></a>
+<div id="enteteUtilitaire">
+    <div id="skip" class="skiplinks">
+        <a href="#ancreContenuPrincipal">Atteindre le contenu</a>
+        <a href="#ancreSousNavigation">Atteindre la navigation secondaire</a>               
+    </div>
+    <div class="listeUtilitaires listeUtilitaires2">
+        <ul>
+            <li class="Premier">
+                <a class="sanssouligne nePasRediriger icoMobile" href="https://m.assnat.qc.ca">
+                    <span class="styleHyperlien">Mobile</span>
+                </a>
+            </li>
+            <li>
+                <a href="/fr/accueil/mediassociaux.html" class="sanssouligne icoMediasSociauxEntete">
+                    <span class="styleHyperlien">Suivez-nous</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="listeUtilitaires">
+        <ul>
+            
+            <li><a href="/en/deputes/index.html">English</a></li>
+            
+            <li><a id="A2" href="https://www.assnat.qc.ca/carrieres">Carrières</a></li>
+            <li><a href="/fr/nous-joindre.html" id="ctl00_Utilitaires_A1">Nous joindre</a></li>
+            <li>
+                <div class="outilRecherche">
+                    <label for="ctl00_Utilitaires_motCle" class="nepasafficher">Saisir un mot clé pour faire une recherche générale</label>
+                    <input type="text" id="ctl00_Utilitaires_motCle" class="outilRechercheMotCle" />
+                    <input onclick="RechercherMotCle();return false;" type="image" src="/Images/btnRecherche_of.gif" class="btnRechercheGlobal" title="Rechercher" alt="Rechercher"/>
+                </div>
+            </li>
+            <li>
+                <a href="/fr/aide/aide-recherche.html#javascript" onclick="LancerRechercheAvancee();return false;">Recherche avancée</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    function RechercherMotCle() {
+        var mot = $('#ctl00_Utilitaires_motCle');
+        if (mot.val() != "")
+        {
+            window.location = '/fr/recherche/recherche-avancee.html?SectionRecherche=-1&MotsCles=' + encodeURIComponent(htmlEscape(mot.val()));
+        }
+    }
+
+    function LancerRechercheAvancee() {
+        var urlRechercheAvancee = '/fr/recherche/recherche-avancee.html';
+        window.location = urlRechercheAvancee + "?EstNouvelleRecherche=true";
+    }
+
+
+    $(document).ready(
+
+		function() {
+		    // Masquer le bouton Envoyer a un ami dans certaines pages
+
+		    var Recherche = '';
+		    var EnvoyerAmi = '';
+
+		    if (Recherche + EnvoyerAmi != '')
+		        $("#EnvoyerAmi").addClass("cacherUnElement");
+		}
+	);				
+		
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	        
+			<!-- Banniere: image d'entete -->
+			
+<div id="Banniere">
+	<a href="/fr/index.html" class="sanssouligne" title="Assemblée nationale du Québec - Retour à l&#39;accueil">
+    <img class="nepasafficher" width="88" height="58" title="Assemblée nationale du Québec - Retour à l'accueil" alt="Assemblée nationale du Québec - Retour à l'accueil" src='/images/transparent.gif' /></a>
+</div>
+        
+	        
+			<!-- NavigationPrincipale: menu horizontal -->
+			
+
+<div id="NavigationPrincipaleConteneur">
+    <div id="NavPrincipaleNiveau1">
+        <ul>
+            <li class="btnAccueil">
+                <a href="/fr/index.html" id="ctl00_NavigationPrincipale_hrfAcceuil">
+                    Accueil</a></li>
+            <li aria-haspopup="true" class='menuHoverParent btnDeputes'><a href="/fr/deputes/index.html" id="ctl00_NavigationPrincipale_hrfDeputes">
+                Députés</a>
+                <div class='menuHoverEnfant'>
+                    
+                            <ul>
+<li><a href="http://www.assnat.qc.ca/fr/lien/10006.html">La présidente</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/10002.html#listeDeputes">Liste des députés en fonction</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/11861.html">Les députés depuis 1764</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/10002.html#listeDeputes">Coordonnées des députés</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/10042.html">La fonction de député</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/10014.html">Fonctions parlementaires des députés</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/10020.html">Composition des commissions</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/10028.html">Membres du Bureau de l'Assemblée</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/10052.html">Indemnités et allocations</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/deputes/cerclefemmes/index.html">Cercle des femmes parlementaires</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/12661.html">Cercle des jeunes parlementaires</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/10965.html">Cercle des ex-parlementaires de l’Assemblée nationale du Québec</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/12603.html">Fondation Jean-Charles-Bonenfant </a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/12605.html">Fondation des parlementaires québécois Cultures à partager </a></li>
+</ul>
+                        
+                </div>
+            </li>
+            <li aria-haspopup="true" class='menuHoverParent btnTravaux'>
+                <a href="/fr/travaux-parlementaires/index.html" id="ctl00_NavigationPrincipale_hrfTravauxParlementaires">
+                    Travaux parlementaires</a>
+                <div class='menuHoverEnfant'>
+                    
+                            <ul>
+<li><a href="http://www.assnat.qc.ca/fr/lien/12119.html">Calendrier hebdomadaire des travaux</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/12213.html">Journal des débats</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/11867.html">Index du Journal des débats</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/10114.html#procedure">Règlement et autres règles de procédure de l'Assemblée nationale</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/10114.html#procedure">Propos non parlementaires</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/10044.html">Assister aux travaux</a></li>
+</ul>
+<ul>
+<li><strong><a href="http://www.assnat.qc.ca/fr/lien/10118.html">Travaux de l'Assemblée</a></strong> 
+<ul>
+<li><a href="http://www.assnat.qc.ca/fr/lien/10118.html">Toutes les séances</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/10198.html">Documents déposés</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/10192.html">Projets de loi</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/12215.html">Cheminement des projets de loi</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/12779.html">Registre des votes par appel nominal</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong><a href="http://www.assnat.qc.ca/fr/lien/10126.html">Travaux des commissions</a></strong> 
+<ul>
+<li><a href="http://www.assnat.qc.ca/fr/lien/10126.html">Liste des commissions</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/11185.html">Mandats en cours</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/10198.html">Documents déposés</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/10140.html">Rapports et documents de réflexion</a></li>
+</ul>
+</li>
+</ul>
+                        
+                </div>
+            </li>
+            <li aria-haspopup="true" class='menuHoverParent btnExprimez'>
+                <a href="/fr/exprimez-votre-opinion/index.html" id="ctl00_NavigationPrincipale_hrfExprimezVotreOpinion">
+                    Exprimez votre opinion!</a>
+                <div class='menuHoverEnfant'>
+                    
+                            <ul>
+<li><strong><a href="http://www.assnat.qc.ca/fr/lien/10999.html">Pétitions</a></strong> 
+<ul>
+<li><a href="http://www.assnat.qc.ca/fr/lien/11001.html">Signer une pétition électronique</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/11003.html">Consulter une pétition présentée à l'Assemblée</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/10108.html">Lancer une pétition</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/exprimez-votre-opinion/petition/cheminement-petition">Cheminement d'une pétition</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong><a href="http://www.assnat.qc.ca/tablecitoyenne">Table citoyenne</a></strong></li>
+</ul>
+<ul>
+<li><strong><a href="http://www.assnat.qc.ca/fr/lien/10901.html">Consultations publiques</a></strong> 
+<ul>
+<li><a href="http://www.assnat.qc.ca/fr/lien/10901.html#CommentParticiper">Comment participer à une consultation</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/10126.html">Liste des consultations publiques</a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/10995.html">Participer à une consultation en ligne</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong><a href="http://www.assnat.qc.ca/fr/lien/10997.html">Commenter un sujet à l'étude</a></strong></li>
+</ul>
+<ul>
+<li><strong><a href="http://www.assnat.qc.ca/fr/lien/10110.html">Présenter un projet de loi d'intérêt privé</a></strong></li>
+</ul>
+                        
+                </div>
+            </li>
+            <li aria-haspopup="true" class='menuHoverParent btnVideoAudio'>
+                <a href="/fr/video-audio/index.html" id="ctl00_NavigationPrincipale_hrfVideoAudio">
+                    Vidéo</a>
+                <div class='menuHoverEnfant'>
+                    
+                            <ul>
+<li><a href="http://www.assnat.qc.ca/fr/lien/12541.html"><strong>En direct et webdiffusions à venir</strong></a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/12543.html"><strong>Archives des travaux et activités parlementaires</strong></a> 
+<ul>
+<li><a href="http://www.assnat.qc.ca/fr/lien/12545.html">Travaux de l'Assemblée </a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/12559.html">Travaux des commissions</a> </li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/12547.html">Activités de presse </a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/12549.html">Activités spéciales et institutionnelles</a> </li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/12551.html">Députés</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><a href="http://www.assnat.qc.ca/fr/lien/12553.html"><strong>Le Canal de l'Assemblée</strong></a> </li>
+</ul>
+<ul>
+<li><a href="http://www.assnat.qc.ca/fr/lien/12555.html"><strong>Émissions et capsules promotionnelles</strong></a></li>
+</ul>
+<ul>
+<li><a href="http://www.assnat.qc.ca/fr/lien/12561.html"><strong>Espace jeunesse</strong></a> </li>
+</ul>
+<ul>
+<li><a href="http://www.assnat.qc.ca/fr/lien/11183.html"><strong>Commander un extrait</strong></a> </li>
+</ul>
+                        
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+	        
+            <!-- PlaceHolder: permet de masquer le calendrier sommaire (defaut: s'affiche) -->
+			
+				
+
+<script type="text/javascript">
+</script>
+
+<div class="calendrier calSommaire" id="Calendrier">
+    <div class="titreCalendrier" id="TitreCalendrier">
+        <ul>
+            <li class="btnCalendrier" id="btnCalendrier">
+                <a href="javascript:void(0)" id="ctl00_CalendrierSommaire_CalendrierSommaire1_LienCalendrier">
+                    Calendrier
+                    <p class="libelleOuvrirFermer">
+                    Ouvrir</p></a>
+            </li>
+        </ul>
+    </div>
+    <div class="contenuCalendrier" id="ContenuCalendrier">
+        <div class="contenuCalendrierInterne" style="display: none">
+            <div class="overlayCalendrier">
+                <p class="contenuOverlay">
+                    <img src="/Images/lightbox/loading.gif" alt="Chargement en cours"
+                        title="Chargement en cours" />
+                </p>
+            </div>
+            <div class="blocAssembleeEnDirect">
+                <ul class="listeIconesHorizontale">
+                    <li id="IconeEnDirectCalendrier" class="icoEnDirectInactif"><span id="spnEnDirectCalendrier">
+                        En direct</span></li>
+                    <li><a class="anchorCalendrierDetaille" href='/fr/calendrier-detaille.html'>
+                        Calendrier détaillé</a></li>
+                </ul>
+            </div>
+            <div class="blocNavigateurDates">
+                <div>
+                    <p id="ConteneurCalendrierPopup">
+                        <span class="calendrierPopup"></span>
+                    </p>
+                    <h2 id="TitreDateDuJour">_date_du_jour
+                    </h2>
+                </div>
+                <ul>
+                    <li class="versGauche"><a href="#" class="dateNavigateur fleche" id="dateNavGauche"><img alt="Semaine précédente" title="Semaine précédente"
+                        src='/Images/transparent.gif' width="15" height="25"/></a></li>
+                        
+                    <li><a class="dateNavigateur" id="dateNavDi" title="_dimanche" href="#">
+                        <span class="overlayJour overlayJourSommaire"></span>
+                        <span class="libelleJournee">DIM</span><br />
+                        <span class="libelleDate">6</span></a></li>
+                        
+                    <li><a class="dateNavigateur" id="dateNavLu" title="_lundi" href="#">
+                        <span class="overlayJour overlayJourSommaire"></span>
+                        <span class="libelleJournee">LUN</span><br />
+                        <span class="libelleDate">7</span></a></li>
+                        
+                    <li><a class="dateNavigateur" id="dateNavMa" title="_mardi" href="#">
+                        <span class="overlayJour overlayJourSommaire"></span>
+                        <span class="libelleJournee">MAR</span><br />
+                        <span class="libelleDate">8</span></a></li>
+                        
+                    <li><a class="dateNavigateur" id="dateNavMe" title="_mercredi" href="#">
+                        <span class="overlayJour overlayJourSommaire"></span>
+                        <span class="libelleJournee">MER</span><br />
+                        <span class="libelleDate">9</span></a></li>
+                        
+                    <li><a class="dateNavigateur" id="dateNavJe" title="_jeudi" href="#">
+                        <span class="overlayJour overlayJourSommaire"></span>
+                        <span class="libelleJournee">JEU</span><br />
+                        <span class="libelleDate">10</span></a></li>
+                        
+                    <li><a class="dateNavigateur" id="dateNavVe" title="_vendredi" href="#">
+                        <span class="overlayJour overlayJourSommaire"></span>
+                        <span class="libelleJournee">VEN</span><br />
+                        <span class="libelleDate">11</span></a></li>
+                        
+                    <li><a class="dateNavigateur" id="dateNavSa" title="_samedi" href="#">
+                        <span class="overlayJour overlayJourSommaire"></span>
+                        <span class="libelleJournee">SAM</span><br />
+                        <span class="libelleDate">12</span></a></li>
+                        
+                    <li class="versDroite"><a href="#" class="dateNavigateur fleche" id="dateNavDroite">
+                        <img alt="Semaine suivante" title="Semaine suivante"
+                        src='/Images/transparent.gif' width="15" height="25"/></a></li>
+                </ul>
+                <span class="aujourdhui"><a class="aujourdhuiLien" href=''>
+                    Aujourd'hui</a></span>
+            </div>
+            <hr />
+            <div class="blocEnCours" style="display: none">
+                <div class="blocEnCoursTitre">
+                    <h3 id="HeureEnCours" class="heure">_heure_en_cours
+                    </h3>
+                    <h3>
+                        En cours</h3>
+                </div>
+                <div class="boiteDefilante">
+                </div>
+            </div>
+            <div class="blocActivitesDuJour">
+                <h3><label for="ctl00_CalendrierSommaire_CalendrierSommaire1_selectFiltreCategorieActivite">Activités du jour</label></h3>
+                <div class="my-skinnable-select">
+                    <select name="ctl00$CalendrierSommaire$CalendrierSommaire1$selectFiltreCategorieActivite" id="ctl00_CalendrierSommaire_CalendrierSommaire1_selectFiltreCategorieActivite" class="selectFiltreCategorieActivite">
+	<option selected="selected" value="*"></option>
+
+</select>
+                </div>
+                <div class="boiteDefilante">
+                </div>
+            </div>
+            <div class="blocExpositions" style="display: none">
+                <h3>
+                    Exposition(s)</h3>
+                <div id="listeExpositions">
+                </div>
+            </div>
+            <div class="blocSurLesTours" id="BlocSurLesTours" style="display: none">
+                <h3>
+                    Drapeau(x) sur l'hôtel du Parlement</h3>
+                <div id="listeDrapeaux">
+                </div>
+            </div>
+        </div>
+        <p id="calendrierNoJs">
+            L'utilisation du calendrier requiert que Javascript soit activé dans votre navigateur.<br />
+            <a href='/fr/aide/aide-recherche.html#javascript'>
+                Pour plus de renseignements</a>
+        </p>
+    </div>
+</div>
+
+			
+
+            <!-- NavigationPrincipaleNiveau2: menu horizontal -->
+			
+
+<div id="NavigationPrincipaleNiveau2Conteneur">
+    <div id="NavPrincipaleNiveau2">
+        <ul>
+            <li class='' id="lienABC"><a href="/fr/abc-assemblee/index.html" id="ctl00_NavigationPrincipaleNiveau2_hrfABCDeLassemblee">
+                L'ABC de l'Assemblée</a></li>
+            <li class='' id="lienVisiteurs"><a href="/fr/visiteurs/index.html" id="ctl00_NavigationPrincipaleNiveau2_hrfVisiteurs">
+                Visiteurs</a></li>
+            <li class='' id="lienRestaurants"><a href="/fr/visiteurs/restaurants/index.html" id="ctl00_NavigationPrincipaleNiveau2_hrfRestaurants">
+                Restaurants</a></li>
+            <li class='' id="lienActualites"><a href="/fr/actualites-salle-presse/index.html" id="ctl00_NavigationPrincipaleNiveau2_hrfActualiteEtSalleDePresse">
+                Actualités et salle de presse</a></li>
+            <li class='' id="lienBibliotheque">
+                <a href="/fr/bibliotheque/index.html" id="ctl00_NavigationPrincipaleNiveau2_hrfBibliotheque">
+                    Bibliothèque</a></li>
+            <li class='' id="lienPublications">
+                <a href="/fr/publications/index.html" id="ctl00_NavigationPrincipaleNiveau2_hrfPublications">
+                    Publications</a></li>
+            <li class='' id="lienEducatives">
+                <a href="http://www.paricilademocratie.com" id="ctl00_NavigationPrincipaleNiveau2_hrfActivitesEducatives">
+                    Éducation</a></li>
+            <li class='' id="lienInternational">
+                <a href="/fr/diplomatie/index.html" id="ctl00_NavigationPrincipaleNiveau2_hrfInternational">
+                    Diplomatie</a></li>
+            <li class='' id="lienHistoire"><a href="/fr/patrimoine/index.html" id="ctl00_NavigationPrincipaleNiveau2_hrfHistoire">
+                Histoire</a></li>
+        </ul>
+    </div>
+</div>
+
+
+			<!-- FilAriane: affiche le fil d'ariane -->			
+			
+				
+<div id="FilAriane" class="FilAriane">
+<span id="ctl00_FilAriane_FilAriane1_SiteMapPath1"><span><a href="/fr/index.html">Accueil</a></span><span> &gt; </span><span>D&#233;put&#233;s</span></span>
+</div>
+			
+	        
+            
+            
+
+            <!-- Ancre pour le "skiplink atteindreSousNavigation" -->
+            <div id="divAncreSousNavigation" class="skipLinks">
+                <a name="ancreSousNavigation" id="ancreSousNavigation"></a>
+            </div>
+
+            <div class="ColGauche colonne">        
+				
+				<!-- PlaceHolder: permet de masquer la navigation secondaire (defaut: s'affiche) -->
+				
+                    
+<div id="SousNavigation" class="ContenuNavigation SousNavigation">
+
+
+	
+	<ul>
+		<li>
+			<h2><a href="/fr/deputes/index.html" class="selected">
+				Députés</a></h2>
+			<ul>
+				<li>
+					<a href="/fr/deputes/president-assemblee.html" class="">
+						La présidente de l’Assemblée nationale</a>
+					<ul>
+						<li>
+							<a href="/fr/deputes/president-assemblee/triple-role.html" class="">
+								Le triple rôle de la présidence</a>
+						</li>
+						<li>
+							<a href="/fr/deputes/president-assemblee/evolution-presidence.html" class="">
+								L'évolution de la présidence</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="/fr/deputes/fonctions-parlementaires-ministerielles/fonctions-parlementaires.html" class="">
+						Fonctions parlementaires et ministérielles</a>
+					<ul>
+						<li>
+							<a href="/fr/deputes/fonctions-parlementaires-ministerielles/composition-commissions.html" class="">
+								Composition des commissions</a>
+						</li>
+						<li>
+							<a href="/fr/deputes/fonctions-parlementaires-ministerielles/conseil-ministres.html" class="">
+								Conseil des ministres</a>
+						</li>
+						<li>
+							<a href="/fr/deputes/fonctions-parlementaires-ministerielles/membres-bureau-assemblee.html" class="">
+								Membres du Bureau de l'Assemblée</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="/fr/deputes/rapports-des-depenses/index.html" class="">
+						Rapports de dépenses</a>
+					<ul>
+						<li>
+							<a href="/fr/deputes/rapports-des-depenses/deputes-cabinets.html" class="">
+								Dépenses des députés, des cabinets et des services de recherche</a>
+						</li>
+						<li>
+							<a href="/fr/deputes/rapports-des-depenses/foire-aux-questions.html" class="">
+								Foire aux questions</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="/fr/deputes/statistiques-deputes.html" class="">
+						Statistiques sur les députés</a>
+				</li>
+				<li>
+					<a href="/fr/deputes/cerclefemmes/index.html" class="">
+						Cercle des femmes parlementaires</a>
+				</li>
+				<li>
+					<a href="/fr/deputes/cerclejeunes/index.html" class="">
+						Cercle des jeunes parlementaires</a>
+				</li>
+				<li>
+					<a href="/fr/deputes/fondation-jean-charles-bonenfant.html" class="">
+						Fondation Jean-Charles-Bonenfant</a>
+				</li>
+				<li>
+					<a href="/fr/deputes/fondation-cultures-a-partager.html" class="">
+						Fondation des parlementaires québécois Cultures à partager</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+
+	
+  <div class="clear"></div>
+</div>
+
+
+<script type="text/javascript">
+
+</script>        
+				
+
+				<!-- PlaceHolder: permet d'ajouter du contenu sous la navigation secondaire (defaut: vide) -->			
+				
+    
+    <div class="clear">
+    </div>
+    <div class="ContenuNavigation SousNavigation rechercheDeputes rechercheContextuelle">
+        <h2>
+            Recherche avancée dans la section Députés</h2>
+            
+            <fieldset>
+                <legend>Trouver un député</legend>
+
+                <div class="conteneurMotCle" data-champ="MotsCles">
+                    <label for="ctl00_ColGauche_RechercheDeputes_ddlChoixCirconscription" >Mots clés</label>
+			        <input name="ctl00$ColGauche$RechercheDeputes$txtMotsCles" type="text" id="ctl00_ColGauche_RechercheDeputes_txtMotsCles" />
+		        </div>
+
+                <label for="ctl00_ColGauche_RechercheDeputes_ddlChoixEtatDepute">Sélection d'un groupe</label>
+                <div class="my-skinnable-select" id="choixDepute" data-champ="EtatDepute">
+                    <select name="ctl00$ColGauche$RechercheDeputes$ddlChoixEtatDepute" id="ctl00_ColGauche_RechercheDeputes_ddlChoixEtatDepute" title="Dans le cas d’anciens députés, la recherche porte sur les ex-députés faisant partie du Parlement du Québec depuis 1792." class="choixDepute BulleInfo">
+	<option value="DeputesEnFonctions">D&#233;put&#233;s en fonction</option>
+	<option value="AncienDeputes">Anciens d&#233;put&#233;s</option>
+
+</select>
+                </div>
+
+                <label for="ctl00_ColGauche_RechercheDeputes_ddlChoixCirconscription" >Circonscription</label>
+                <div class="my-skinnable-select" data-champ="Circonscription">
+                    <select name="ctl00$ColGauche$RechercheDeputes$ddlChoixCirconscription" id="ctl00_ColGauche_RechercheDeputes_ddlChoixCirconscription">
+	<option selected="selected" value="-1">Toutes les circonscriptions</option>
+	<option value="1" title="Abitibi-Est">Abitibi-Est</option>
+	<option value="3" title="Abitibi-Ouest">Abitibi-Ouest</option>
+	<option value="5" title="Acadie">Acadie</option>
+	<option value="267" title="Anjou–Louis-Riel">Anjou–Louis-Riel</option>
+	<option value="9" title="Argenteuil">Argenteuil</option>
+	<option value="11" title="Arthabaska">Arthabaska</option>
+	<option value="13" title="Beauce-Nord">Beauce-Nord</option>
+	<option value="15" title="Beauce-Sud">Beauce-Sud</option>
+	<option value="17" title="Beauharnois">Beauharnois</option>
+	<option value="19" title="Bellechasse">Bellechasse</option>
+	<option value="21" title="Berthier">Berthier</option>
+	<option value="23" title="Bertrand">Bertrand</option>
+	<option value="25" title="Blainville">Blainville</option>
+	<option value="27" title="Bonaventure">Bonaventure</option>
+	<option value="29" title="Borduas">Borduas</option>
+	<option value="31" title="Bourassa-Sauvé">Bourassa-Sauv&#233;</option>
+	<option value="35" title="Brome-Missisquoi">Brome-Missisquoi</option>
+	<option value="295" title="Camille-Laurin">Camille-Laurin</option>
+	<option value="37" title="Chambly">Chambly</option>
+	<option value="39" title="Champlain">Champlain</option>
+	<option value="41" title="Chapleau">Chapleau</option>
+	<option value="43" title="Charlesbourg">Charlesbourg</option>
+	<option value="273" title="Charlevoix–Côte-de-Beaupré">Charlevoix–C&#244;te-de-Beaupr&#233;</option>
+	<option value="47" title="Châteauguay">Ch&#226;teauguay</option>
+	<option value="49" title="Chauveau">Chauveau</option>
+	<option value="51" title="Chicoutimi">Chicoutimi</option>
+	<option value="53" title="Chomedey">Chomedey</option>
+	<option value="55" title="Chutes-de-la-Chaudière">Chutes-de-la-Chaudi&#232;re</option>
+	<option value="275" title="Côte-du-Sud">C&#244;te-du-Sud</option>
+	<option value="59" title="D&#39;Arcy-McGee">D&#39;Arcy-McGee</option>
+	<option value="61" title="Deux-Montagnes">Deux-Montagnes</option>
+	<option value="259" title="Drummond–Bois-Francs">Drummond–Bois-Francs</option>
+	<option value="65" title="Dubuc">Dubuc</option>
+	<option value="67" title="Duplessis">Duplessis</option>
+	<option value="69" title="Fabre">Fabre</option>
+	<option value="73" title="Gaspé">Gasp&#233;</option>
+	<option value="75" title="Gatineau">Gatineau</option>
+	<option value="77" title="Gouin">Gouin</option>
+	<option value="255" title="Granby">Granby</option>
+	<option value="79" title="Groulx">Groulx</option>
+	<option value="81" title="Hochelaga-Maisonneuve">Hochelaga-Maisonneuve</option>
+	<option value="83" title="Hull">Hull</option>
+	<option value="85" title="Huntingdon">Huntingdon</option>
+	<option value="87" title="Iberville">Iberville</option>
+	<option value="89" title="Îles-de-la-Madeleine">&#206;les-de-la-Madeleine</option>
+	<option value="91" title="Jacques-Cartier">Jacques-Cartier</option>
+	<option value="93" title="Jean-Lesage">Jean-Lesage</option>
+	<option value="97" title="Jean-Talon">Jean-Talon</option>
+	<option value="95" title="Jeanne-Mance–Viger">Jeanne-Mance–Viger</option>
+	<option value="99" title="Johnson">Johnson</option>
+	<option value="101" title="Joliette">Joliette</option>
+	<option value="103" title="Jonquière">Jonqui&#232;re</option>
+	<option value="121" title="L&#39;Assomption">L&#39;Assomption</option>
+	<option value="113" title="La Peltrie">La Peltrie</option>
+	<option value="115" title="La Pinière">La Pini&#232;re</option>
+	<option value="119" title="La Prairie">La Prairie</option>
+	<option value="107" title="Labelle">Labelle</option>
+	<option value="109" title="Lac-Saint-Jean">Lac-Saint-Jean</option>
+	<option value="111" title="LaFontaine">LaFontaine</option>
+	<option value="117" title="Laporte">Laporte</option>
+	<option value="123" title="Laurier-Dorion">Laurier-Dorion</option>
+	<option value="125" title="Laval-des-Rapides">Laval-des-Rapides</option>
+	<option value="285" title="Laviolette–Saint-Maurice">Laviolette–Saint-Maurice</option>
+	<option value="287" title="Les Plaines">Les Plaines</option>
+	<option value="129" title="Lévis">L&#233;vis</option>
+	<option value="261" title="Lotbinière-Frontenac">Lotbini&#232;re-Frontenac</option>
+	<option value="133" title="Louis-Hébert">Louis-H&#233;bert</option>
+	<option value="135" title="Marguerite-Bourgeoys">Marguerite-Bourgeoys</option>
+	<option value="139" title="Marie-Victorin">Marie-Victorin</option>
+	<option value="141" title="Marquette">Marquette</option>
+	<option value="143" title="Maskinongé">Maskinong&#233;</option>
+	<option value="145" title="Masson">Masson</option>
+	<option value="279" title="Matane-Matapédia">Matane-Matap&#233;dia</option>
+	<option value="289" title="Maurice-Richard">Maurice-Richard</option>
+	<option value="253" title="Mégantic">M&#233;gantic</option>
+	<option value="153" title="Mercier">Mercier</option>
+	<option value="155" title="Mille-Îles">Mille-&#206;les</option>
+	<option value="157" title="Mirabel">Mirabel</option>
+	<option value="291" title="Mont-Royal–Outremont">Mont-Royal–Outremont</option>
+	<option value="257" title="Montarville">Montarville</option>
+	<option value="161" title="Montmorency">Montmorency</option>
+	<option value="165" title="Nelligan">Nelligan</option>
+	<option value="265" title="Nicolet-Bécancour">Nicolet-B&#233;cancour</option>
+	<option value="169" title="Notre-Dame-de-Grâce">Notre-Dame-de-Gr&#226;ce</option>
+	<option value="171" title="Orford">Orford</option>
+	<option value="175" title="Papineau">Papineau</option>
+	<option value="177" title="Pointe-aux-Trembles">Pointe-aux-Trembles</option>
+	<option value="179" title="Pontiac">Pontiac</option>
+	<option value="181" title="Portneuf">Portneuf</option>
+	<option value="293" title="Prévost">Pr&#233;vost</option>
+	<option value="185" title="René-Lévesque">Ren&#233;-L&#233;vesque</option>
+	<option value="281" title="Repentigny">Repentigny</option>
+	<option value="187" title="Richelieu">Richelieu</option>
+	<option value="189" title="Richmond">Richmond</option>
+	<option value="191" title="Rimouski">Rimouski</option>
+	<option value="277" title="Rivière-du-Loup–Témiscouata">Rivi&#232;re-du-Loup–T&#233;miscouata</option>
+	<option value="195" title="Robert-Baldwin">Robert-Baldwin</option>
+	<option value="197" title="Roberval">Roberval</option>
+	<option value="199" title="Rosemont">Rosemont</option>
+	<option value="201" title="Rousseau">Rousseau</option>
+	<option value="203" title="Rouyn-Noranda–Témiscamingue">Rouyn-Noranda–T&#233;miscamingue</option>
+	<option value="205" title="Saint-François">Saint-Fran&#231;ois</option>
+	<option value="207" title="Saint-Henri–Sainte-Anne">Saint-Henri–Sainte-Anne</option>
+	<option value="209" title="Saint-Hyacinthe">Saint-Hyacinthe</option>
+	<option value="211" title="Saint-Jean">Saint-Jean</option>
+	<option value="269" title="Saint-Jérôme">Saint-J&#233;r&#244;me</option>
+	<option value="213" title="Saint-Laurent">Saint-Laurent</option>
+	<option value="215" title="Sainte-Marie–Saint-Jacques">Sainte-Marie–Saint-Jacques</option>
+	<option value="283" title="Sainte-Rose">Sainte-Rose</option>
+	<option value="263" title="Sanguinet">Sanguinet</option>
+	<option value="221" title="Sherbrooke">Sherbrooke</option>
+	<option value="223" title="Soulanges">Soulanges</option>
+	<option value="225" title="Taillon">Taillon</option>
+	<option value="227" title="Taschereau">Taschereau</option>
+	<option value="229" title="Terrebonne">Terrebonne</option>
+	<option value="231" title="Trois-Rivières">Trois-Rivi&#232;res</option>
+	<option value="233" title="Ungava">Ungava</option>
+	<option value="235" title="Vachon">Vachon</option>
+	<option value="271" title="Vanier-Les Rivières">Vanier-Les Rivi&#232;res</option>
+	<option value="239" title="Vaudreuil">Vaudreuil</option>
+	<option value="241" title="Verchères">Verch&#232;res</option>
+	<option value="243" title="Verdun">Verdun</option>
+	<option value="245" title="Viau">Viau</option>
+	<option value="247" title="Vimont">Vimont</option>
+	<option value="249" title="Westmount–Saint-Louis">Westmount–Saint-Louis</option>
+
+</select>
+                </div>
+                <label for="ctl00_ColGauche_RechercheDeputes_ddlChoixPartiPolitique" >Allégeance politique</label>
+                <div class="my-skinnable-select" data-champ="AllegeancePolitique">
+                    <select name="ctl00$ColGauche$RechercheDeputes$ddlChoixPartiPolitique" id="ctl00_ColGauche_RechercheDeputes_ddlChoixPartiPolitique">
+	<option selected="selected" value="-1">Tous les partis</option>
+	<option value="79" title="Coalition avenir Québec">Coalition avenir Qu&#233;bec</option>
+	<option value="75" title="Indépendante">Ind&#233;pendante</option>
+	<option value="23" title="Parti libéral du Québec">Parti lib&#233;ral du Qu&#233;bec</option>
+	<option value="27" title="Parti québécois">Parti qu&#233;b&#233;cois</option>
+	<option value="33" title="Québec solidaire">Qu&#233;bec solidaire</option>
+
+</select>
+                </div>
+                <label for="ctl00_ColGauche_RechercheDeputes_ddlChoixTypeFonction" >Fonction parlementaire</label>
+                <div class="my-skinnable-select" data-champ="FonctionParlementaire">
+                    <select name="ctl00$ColGauche$RechercheDeputes$ddlChoixTypeFonction" id="ctl00_ColGauche_RechercheDeputes_ddlChoixTypeFonction" title="Fonctions parlementaires en activité." class="BulleInfo">
+	<option selected="selected" value="-1">Toutes les fonctions</option>
+	<option value="51" title="Adjoint(e) parlementaire">Adjoint(e) parlementaire</option>
+	<option value="5" title="Chef de l&#39;opposition officielle">Chef de l&#39;opposition officielle</option>
+	<option value="7" title="Chef du deuxième groupe d&#39;opposition">Chef du deuxi&#232;me groupe d&#39;opposition</option>
+	<option value="1061" title="Chef du troisième groupe d&#39;opposition">Chef du troisi&#232;me groupe d&#39;opposition</option>
+	<option value="13" title="Deuxième vice-président(e) de l&#39;Assemblée nationale">Deuxi&#232;me vice-pr&#233;sident(e) de l&#39;Assembl&#233;e nationale</option>
+	<option value="25" title="Leader parlementaire adjoint(e) de l&#39;opposition officielle">Leader parlementaire adjoint(e) de l&#39;opposition officielle</option>
+	<option value="27" title="Leader parlementaire adjoint(e) du deuxième groupe d&#39;opposition">Leader parlementaire adjoint(e) du deuxi&#232;me groupe d&#39;opposition</option>
+	<option value="23" title="Leader parlementaire adjoint(e) du gouvernement">Leader parlementaire adjoint(e) du gouvernement</option>
+	<option value="1063" title="Leader parlementaire adjoint(e) du troisième groupe d&#39;opposition">Leader parlementaire adjoint(e) du troisi&#232;me groupe d&#39;opposition</option>
+	<option value="19" title="Leader parlementaire de l&#39;opposition officielle">Leader parlementaire de l&#39;opposition officielle</option>
+	<option value="21" title="Leader parlementaire du deuxième groupe d&#39;opposition">Leader parlementaire du deuxi&#232;me groupe d&#39;opposition</option>
+	<option value="17" title="Leader parlementaire du gouvernement">Leader parlementaire du gouvernement</option>
+	<option value="1065" title="Leader parlementaire du troisième groupe d&#39;opposition">Leader parlementaire du troisi&#232;me groupe d&#39;opposition</option>
+	<option value="59" title="Membre d&#39;une commission">Membre d&#39;une commission</option>
+	<option value="63" title="Membre du Bureau de l&#39;Assemblée nationale">Membre du Bureau de l&#39;Assembl&#233;e nationale</option>
+	<option value="65" title="Membre suppléant(e) du Bureau de l&#39;Assemblée nationale">Membre suppl&#233;ant(e) du Bureau de l&#39;Assembl&#233;e nationale</option>
+	<option value="3" title="Ministre">Ministre</option>
+	<option value="89" title="Ministre responsable d&#39;une région">Ministre responsable d&#39;une r&#233;gion</option>
+	<option value="67" title="Porte-parole">Porte-parole</option>
+	<option value="1" title="Premier(ère) ministre">Premier(&#232;re) ministre</option>
+	<option value="11" title="Premier(ère) vice-président(e) de l&#39;Assemblée nationale">Premier(&#232;re) vice-pr&#233;sident(e) de l&#39;Assembl&#233;e nationale</option>
+	<option value="53" title="Président(e) d&#39;une commission">Pr&#233;sident(e) d&#39;une commission</option>
+	<option value="9" title="Président(e) de l&#39;Assemblée nationale">Pr&#233;sident(e) de l&#39;Assembl&#233;e nationale</option>
+	<option value="57" title="Président(e) de séance">Pr&#233;sident(e) de s&#233;ance</option>
+	<option value="61" title="Président(e) du Bureau de l&#39;Assemblée nationale">Pr&#233;sident(e) du Bureau de l&#39;Assembl&#233;e nationale</option>
+	<option value="47" title="Président(e) du caucus de l&#39;opposition officielle">Pr&#233;sident(e) du caucus de l&#39;opposition officielle</option>
+	<option value="45" title="Président(e) du caucus du gouvernement">Pr&#233;sident(e) du caucus du gouvernement</option>
+	<option value="1067" title="Président(e) du caucus du troisième groupe d&#39;opposition">Pr&#233;sident(e) du caucus du troisi&#232;me groupe d&#39;opposition</option>
+	<option value="121" title="Président(e) du Conseil du trésor">Pr&#233;sident(e) du Conseil du tr&#233;sor</option>
+	<option value="15" title="Troisième vice-président(e) de l&#39;Assemblée nationale">Troisi&#232;me vice-pr&#233;sident(e) de l&#39;Assembl&#233;e nationale</option>
+	<option value="107" title="Vice-premier(ère) ministre">Vice-premier(&#232;re) ministre</option>
+	<option value="55" title="Vice-président(e) d&#39;une commission">Vice-pr&#233;sident(e) d&#39;une commission</option>
+	<option value="41" title="Whip adjoint(e) de l&#39;opposition officielle">Whip adjoint(e) de l&#39;opposition officielle</option>
+	<option value="39" title="Whip adjoint(e) du gouvernement">Whip adjoint(e) du gouvernement</option>
+	<option value="37" title="Whip du deuxième groupe d&#39;opposition">Whip du deuxi&#232;me groupe d&#39;opposition</option>
+	<option value="1069" title="Whip du troisième groupe d&#39;opposition">Whip du troisi&#232;me groupe d&#39;opposition</option>
+	<option value="31" title="Whip en chef de l&#39;opposition officielle">Whip en chef de l&#39;opposition officielle</option>
+	<option value="29" title="Whip en chef du gouvernement">Whip en chef du gouvernement</option>
+
+</select>
+                </div>
+                <label for="ctl00_ColGauche_RechercheDeputes_ddlChoixCommission" >Commission parlementaire</label>
+                <div class="my-skinnable-select" data-champ="CommissionParlementaire">
+                    <select name="ctl00$ColGauche$RechercheDeputes$ddlChoixCommission" id="ctl00_ColGauche_RechercheDeputes_ddlChoixCommission">
+	<option selected="selected" value="-1">Toutes les commissions</option>
+	<option value="7" title="Administration publique">Administration publique</option>
+	<option value="37" title="Agriculture, pêcheries, énergie et ressources naturelles">Agriculture, p&#234;cheries, &#233;nergie et ressources naturelles</option>
+	<option value="13" title="Aménagement du territoire">Am&#233;nagement du territoire</option>
+	<option value="5" title="Assemblée nationale">Assembl&#233;e nationale</option>
+	<option value="39" title="Culture et éducation">Culture et &#233;ducation</option>
+	<option value="21" title="Économie et travail">&#201;conomie et travail</option>
+	<option value="23" title="Finances publiques">Finances publiques</option>
+	<option value="25" title="Institutions">Institutions</option>
+	<option value="41" title="Relations avec les citoyens">Relations avec les citoyens</option>
+	<option value="43" title="Santé et services sociaux">Sant&#233; et services sociaux</option>
+	<option value="55" title="Sous-commission de la réforme parlementaire">Sous-commission de la r&#233;forme parlementaire</option>
+	<option value="35" title="Transports et environnement">Transports et environnement</option>
+
+</select>
+                </div>
+                <label for="ctl00_ColGauche_RechercheDeputes_ddlChoixRegionAdministrative" >Région administrative</label>
+                <div class="my-skinnable-select" data-champ="RegionAdministrative">
+                    <select name="ctl00$ColGauche$RechercheDeputes$ddlChoixRegionAdministrative" id="ctl00_ColGauche_RechercheDeputes_ddlChoixRegionAdministrative">
+	<option selected="selected" value="-1">Toutes les r&#233;gions</option>
+	<option value="203|1|3" title="Abitibi-Témiscamingue">Abitibi-T&#233;miscamingue</option>
+	<option value="279|191|277|275" title="Bas-Saint-Laurent">Bas-Saint-Laurent</option>
+	<option value="273|113|49|161|227|93|43|97|271|133|181" title="Capitale-Nationale">Capitale-Nationale</option>
+	<option value="11|265|259|99" title="Centre-du-Québec">Centre-du-Qu&#233;bec</option>
+	<option value="275|19|55|129|13|15|253|261" title="Chaudière-Appalaches">Chaudi&#232;re-Appalaches</option>
+	<option value="185|67" title="Côte-Nord">C&#244;te-Nord</option>
+	<option value="253|15|189|171|205|221" title="Estrie">Estrie</option>
+	<option value="89|73|27" title="Gaspésie - Îles-de-la-Madeleine">Gasp&#233;sie - &#206;les-de-la-Madeleine</option>
+	<option value="21|121|281|101|23|201|145|229|287" title="Lanaudière">Lanaudi&#232;re</option>
+	<option value="61|157|79|25|287|9|269|293|23|107" title="Laurentides">Laurentides</option>
+	<option value="155|125|247|283|69|53" title="Laval">Laval</option>
+	<option value="39|285|231|143" title="Mauricie">Mauricie</option>
+	<option value="35|255|99|187|209|29|87|37|85|211|117|115|257|235|225|139|241|263|119|47|17|223|239" title="Montérégie">Mont&#233;r&#233;gie</option>
+	<option value="177|111|267|31|289|33|199|95|245|81|77|123|153|215|5|291|249|207|243|59|169|213|141|135|195|165|91" title="Montréal">Montr&#233;al</option>
+	<option value="233" title="Nord-du-Québec">Nord-du-Qu&#233;bec</option>
+	<option value="175|75|41|83|179" title="Outaouais">Outaouais</option>
+	<option value="197|109|65|51|103" title="Saguenay - Lac-Saint-Jean">Saguenay - Lac-Saint-Jean</option>
+
+</select>
+                </div>
+            
+		        <div align="right" class="btnRechercheContextuelle">
+                    
+			        <input onclick="RechercheDepute()" type="button" value="Rechercher" class="btnSoumettre"/>
+		        </div>
+            </fieldset>
+    </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        InitialiserRechercheDeputes();
+        GererChangementEtatDepute.call($("[data-champ='EtatDepute'] select"));
+        $("input.champMotCle, [data-champ] input, [data-champ] select]").keypress(function (e) {
+            if (e && e.keyCode == 13) {
+                RechercheDepute();
+                return false;
+            }
+        });
+    });
+
+    function RechercheDepute() {
+        var queryString = "SectionRecherche=3";
+
+        var motsCles = $('#ctl00_ColGauche_RechercheDeputes_txtMotsCles');
+        if (motsCles.val() != "")
+            queryString = queryString + "&MotsCles=" + encodeURIComponent(htmlEscape(motsCles.val()));
+
+        var etatDepute = $('#ctl00_ColGauche_RechercheDeputes_ddlChoixEtatDepute');
+        queryString = queryString + "&EtatDepute=" + etatDepute.val();
+
+        var circonscription = $('#ctl00_ColGauche_RechercheDeputes_ddlChoixCirconscription');
+        queryString = queryString + "&Circonscription=" + circonscription.val();
+
+        var typeFonction = $('#ctl00_ColGauche_RechercheDeputes_ddlChoixTypeFonction');
+        queryString = queryString + "&FonctionParlementaire=" + typeFonction.val();
+
+        var commission = $('#ctl00_ColGauche_RechercheDeputes_ddlChoixCommission');
+        queryString = queryString + "&CommissionParlementaire=" + commission.val();
+
+        var regAdm = $('#ctl00_ColGauche_RechercheDeputes_ddlChoixRegionAdministrative');
+        queryString = queryString + "&RegionAdministrative=" + regAdm.val();
+
+        var partiPolitique = $('#ctl00_ColGauche_RechercheDeputes_ddlChoixPartiPolitique');
+        queryString = queryString + "&AllegeancePolitique=" + partiPolitique.val();
+        
+        //Appel de la page de recherche.
+        window.location = '/fr/recherche/recherche-avancee.html?' + queryString;
+    }
+    
+</script>
+
+
+	            
+			</div>  
+	        
+            <div class="ColCentre colonne Contenu">
+
+				<!-- PlaceHolder: permet d'afficher une accroche (defaut: vide) -->
+				
+	            			
+				<!-- PlaceHolder: conteneur pour tout le contenu excepte la navigation -->
+				
+	            				
+					<!-- PlaceHolder: permet de masquer les utilitaires d'Assemblee (defaut: s'affiche) -->
+					
+						
+
+<div class="utilitairesAssemblee" id="utilitairesAssemblee">
+    <div id="ColIconesUtilitairesAssemblee">
+        <div id="ColOutilsUtilitairesAssemblee">
+            <ul class="utilitairesAssemblee listeSansPuces">
+                <li>
+                    <a href="javascript:ImprimerBase()">
+			            <img alt="Imprimer la page" title="Imprimer la page"
+                        src='/Images/icones/partageImprimante.gif' width="16" height="16"/></a>
+                </li>
+                <li class="styleswitch">
+                    <a href="#Reguliere" rel="Reguliere" class="styleswitch Reguliere">
+                        <img alt="Taille du texte : régulière" title="Taille du texte : régulière" src='/Images/icones/retrecir.gif' width="16" height="16"/></a>
+                    <a href="#Grande" rel="Grande" title="Taille du texte : très grande" class="styleswitch Grande">
+                        <img alt="Taille du texte : très grande" title="Taille du texte : très grande" src='/Images/icones/agrandir.gif' width="16" height="16"/></a>
+                </li>
+                <li>
+                    <a href='/fr/fils-rss.html' class="nePasRediriger">
+                        <img alt="Fils RSS" title="Fils RSS"
+                        src='/Images/icones/partageRss.gif' width="16" height="16"/></a>
+                </li>
+            </ul>
+        </div>
+  
+            
+        <div id="ColPartageUtilitairesAssemblee">
+            <div class="boutonPartager">
+                <a href="#">Partager</a>
+            </div>
+            <ul class="utilitairesAssemblee listeSansPuces" style="z-index:999;">
+                <div class="fleche"></div>
+                
+                
+                    <li>
+                        <a target="_blank" href='http://www.facebook.com/sharer/sharer.php?u=http://www.assnat.qc.ca%2ffr%2fdeputes%2findex.html' class="nePasRediriger">
+                            <img alt="Partager par Facebook" title="Partager par Facebook"
+                            src='/Images/icones/partageFacebook.gif' /></a>
+                    </li>
+                    <li>
+                        <a target="_blank" href='http://twitter.com/home?status=http://www.assnat.qc.ca%2ffr%2fdeputes%2findex.html' class="nePasRediriger">
+                            <img alt="Partager par Twitter" title="Partager par Twitter"
+                            src='/Images/icones/partageTwitter.gif' /></a>
+                    </li>
+                    <li>
+                        <a target="_blank" href='http://www.linkedin.com/cws/share?url=http://www.assnat.qc.ca%2ffr%2fdeputes%2findex.html' class="nePasRediriger">
+                            <img alt="Partager par LinkedIn" title="Partager par LinkedIn"
+                            src='/Images/icones/partageLinkedin.gif' /></a>
+                    </li>
+            </ul>
+        </div>
+        
+    </div>
+    <div id="ColLiensUtilitairesAssemblee">
+        <ul class="listeIconesHorizontale listeIconesHorizontaleUtilitaires listeSansPuces">
+            <!-- Icone "Diagramme de l'Assemblée" -->
+		    
+			    <li class="icoDiagramme">
+                    <a href="/fr/document/19787.html">Diagramme de l'Assemblée</a>
+                </li>
+		    
+
+            <li id="IndicateurEnDirectPage">
+                <span id="spnEnDirect" class="styleHyperlien">
+		            <span id="IconeEnDirect" class="icoEnDirect"> </span>		
+		            En direct sur le Web
+	            </span>
+            </li>
+            <!-- Section "Vidéo et audio" -->
+            
+        </ul>
+    </div>
+</div>        
+					
+
+                    <!-- Ancre pour le "skiplink atteindreContenu" -->
+                    <div id="divAncreContenuPrincipal" class="skipLinks">
+                        <a name="ancreContenuPrincipal" id="ancreContenuPrincipal"></a>
+                    </div>
+
+                    <!-- Note sur les titres H1: dans ce gabarit, il y a 2 emplacements possibles pour le H1. Le cas
+						 le plus usuel est généré par défaut. Si necessaire, overrider dans la page ASPX -->
+			
+					<!-- PlaceHolder: permet d'afficher le titre sur les 2 colonnes. Cas plus rare. (default: vide) -->
+					
+
+					<!-- PlaceHolder: permet d'afficher le texte en dessus des colonnes -->
+					
+					
+					<div class="conteneurColonnesImbriquees">		
+                        <div class="colonneImbriquee imbGauche">
+
+							<!-- PlaceHolder: permet d'afficher le titre sur 1 colonne. Cas usuel. (default: s'affiche) -->
+							
+    <h1>Députés</h1>
+
+
+							<!-- PlaceHolder: contenu principal de la page (defaut: vide) -->
+							
+
+	
+		
+				<p>L'Assemblée nationale est composée de 125 personnes&nbsp;: chacune est&nbsp;élue dans une circonscription électorale selon le mode de scrutin majoritaire uninominal à un tour.&nbsp;Les dernières élections ont eu lieu le <strong>3&nbsp;octobre&nbsp;2022</strong>.</p>
+<p>Depuis le 1<sup>er</sup> décembre 2022, la composition de l'Assemblée est la suivante&nbsp;:</p>
+<ul>
+<li>Coalition avenir Québec&nbsp;: 90 députés<br /><!--&nbsp;&nbsp;&nbsp;Ce parti forme le gouvernement.--></li>
+<li>Parti libéral du Québec&nbsp;: 19 députés<br /><!--&nbsp;&nbsp;&nbsp;Ce parti forme l'opposition officielle.--></li>
+<li>Québec solidaire&nbsp;:&nbsp;11 députés<br /><!--&nbsp;&nbsp;&nbsp;Ce parti forme le deuxième groupe d'opposition.--></li>
+<li>Parti québécois&nbsp;: 3 députés<br /><!--&nbsp;&nbsp;&nbsp;Ce parti forme le troisième groupe d'opposition.--></li>
+<li>Indépendant : 1 <!--                          
+<ul>
+<li>Parti conservateur du Québec : 1</li>
+<li>Autres : 4</li>
+</ul>
+--></li>
+<li>Circonscription vacante&nbsp;: 1 (Saint-Henri–Sainte-Anne)</li>
+</ul>
+<!--
+<p>Veuillez noter qu'un dépouillement judiciaire est en cours dans la circonscription électorale de Beauce-Nord.&nbsp;</p>
+-->
+<p><a href="https://assnat.qc.ca/fr/deputes/bureau-saint-henri-sainte-anne.html">Coordonnées du bureau de la circonscription de Saint-Henri–Sainte-Anne</a></p>
+<p>Pour consulter la fiche biographique d'un député, cliquer sur son nom dans la liste des députés en fonction.</p>
+<p>Pour en savoir plus sur&nbsp;:</p>
+<ul>
+<li><a href="http://www.assnat.qc.ca/fr/lien/10042.html#modedescrutin">le mode de scrutin majoritaire uninominal à un tour </a></li>
+<li><a href="http://www.assnat.qc.ca/fr/lien/10042.html">la&nbsp;fonction de député</a></li>
+</ul>
+<p><a href="http://www.assnat.qc.ca/fr/lien/11861.html">Pour consulter la liste des députés depuis 1764</a></p>							
+			
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+
+							
+						</div>
+						
+						<div class="colonneImbriquee imbDroite">
+						
+							<!-- PlaceHolder: contenu secondaire de la page (defaut: vide) -->
+							
+	
+		<h2>Cercle des ex-parlementaires de l’Assemblée nationale du Québec</h2>
+<p>Cette association regroupe les anciens députés de l’Assemblée nationale. Elle fait la promotion des institutions parlementaires du Québec et diffuse de l’information sur le parlementarisme.</p>
+<p><a href="http://www.assnat.qc.ca/fr/lien/10965.html">Consulter le site du Cercle des ex-parlementaires de l’Assemblée nationale du Québec</a>.</p>
+		
+
+						</div>
+
+					</div>
+
+					<!-- PlaceHolder: permet d'afficher du texte en dessous des colonnes -->
+					
+
+	<div class="clear"></div>
+	
+	
+	
+	    <div class="hr"><hr /></div>
+        <a name="listeDeputes"></a>
+	    
+		    <h3 class="headerCouleur">Liste des députés en fonction</h3>
+	    
+           
+	    
+        
+
+        <ul class="listeIconesHorizontale">
+            <li class="icoPDF">
+                <a href="/fr/deputes/rapport-liste-depute.html">Télécharger la liste complète des coordonnées des députés (PDF)</a>
+            </li>
+        </ul>
+        <br />
+	    
+		    <table id="ListeDeputes" class="tableTriable">
+		    <caption>Liste des députés en fonction</caption>
+	    
+           
+	    
+        
+
+            <thead>
+                <tr>
+                    <th scope="col" class="premiereColonne colonneNom header">
+                     Nom
+                    </th>
+                    <th scope="col" class="header">
+                    Circonscription
+                    </th>
+                    <th scope="col" class="header">
+                    Allégeance politique                  
+                    </th>
+    				
+				    
+					    <th scope="col">Courriel</th>
+				    	
+                </tr>
+            </thead>
+        
+           
+	    
+	        <tbody>
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/bonnardel-francois-11/index.html">Bonnardel,&nbsp;François&nbsp;</a>
+                        </td>
+                        <td>
+                            Granby
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Francois.Bonnardel.GRAN@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/charette-benoit-195/index.html">Charette,&nbsp;Benoit&nbsp;</a>
+                        </td>
+                        <td>
+                            Deux-Montagnes
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Benoit.Charette.DEMO@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/drainville-bernard-209/index.html">Drainville,&nbsp;Bernard&nbsp;</a>
+                        </td>
+                        <td>
+                            Lévis
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Bernard.Drainville.LEVI@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/berube-pascal-991/index.html">Bérubé,&nbsp;Pascal&nbsp;</a>
+                        </td>
+                        <td>
+                            Matane-Matapédia
+                        </td>
+                        <td>
+                            Parti québécois
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Pascal.Berube.MATN@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/legault-francois-4131/index.html">Legault,&nbsp;François&nbsp;</a>
+                        </td>
+                        <td>
+                            L'Assomption
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="https://www.premier-ministre.gouv.qc.ca/premier-ministre/joindre-pm/courriel/index.asp" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/tanguay-marc-11789/index.html">Tanguay,&nbsp;Marc&nbsp;</a>
+                        </td>
+                        <td>
+                            LaFontaine
+                        </td>
+                        <td>
+                            Parti libéral du Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Marc.Tanguay-LAFO@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/dube-christian-12223/index.html">Dubé,&nbsp;Christian&nbsp;</a>
+                        </td>
+                        <td>
+                            La Prairie
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Christian.Dube.LAPR@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/roberge-jean-francois-15361/index.html">Roberge,&nbsp;Jean-François&nbsp;</a>
+                        </td>
+                        <td>
+                            Chambly
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Jean-Francois.Roberge.CHMB@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/lamontagne-andre-15401/index.html">Lamontagne,&nbsp;André&nbsp;</a>
+                        </td>
+                        <td>
+                            Johnson
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Andre.Lamontagne.JOHN@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/guilbault-genevieve-16885/index.html">Guilbault,&nbsp;Geneviève&nbsp;</a>
+                        </td>
+                        <td>
+                            Louis-Hébert
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Genevieve.Guilbault.LOHE@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/poulin-samuel-17831/index.html">Poulin,&nbsp;Samuel&nbsp;</a>
+                        </td>
+                        <td>
+                            Beauce-Sud
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Samuel.Poulin.BESU@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/proulx-caroline-17837/index.html">Proulx,&nbsp;Caroline&nbsp;</a>
+                        </td>
+                        <td>
+                            Berthier
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Caroline.Proulx.BERH@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/charest-isabelle-17845/index.html">Charest,&nbsp;Isabelle&nbsp;</a>
+                        </td>
+                        <td>
+                            Brome-Missisquoi
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Isabelle.Charest.BRMI@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/lebel-sonia-17847/index.html">LeBel,&nbsp;Sonia&nbsp;</a>
+                        </td>
+                        <td>
+                            Champlain
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Sonia.LeBel.CHMP@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/julien-jonatan-17855/index.html">Julien,&nbsp;Jonatan&nbsp;</a>
+                        </td>
+                        <td>
+                            Charlesbourg
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Jonatan.Julien.CHLB@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/marissal-vincent-17867/index.html">Marissal,&nbsp;Vincent&nbsp;</a>
+                        </td>
+                        <td>
+                            Rosemont
+                        </td>
+                        <td>
+                            Québec solidaire
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Vincent.Marissal.ROSE@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/skeete-christopher-17873/index.html">Skeete,&nbsp;Christopher&nbsp;</a>
+                        </td>
+                        <td>
+                            Sainte-Rose
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Christopher.Skeete.SARO@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/chassin-youri-17881/index.html">Chassin,&nbsp;Youri&nbsp;</a>
+                        </td>
+                        <td>
+                            Saint-Jérôme
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Youri.Chassin.STJE@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/carmant-lionel-17893/index.html">Carmant,&nbsp;Lionel&nbsp;</a>
+                        </td>
+                        <td>
+                            Taillon
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Lionel.Carmant.TAIL@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/fitzgibbon-pierre-17897/index.html">Fitzgibbon,&nbsp;Pierre&nbsp;</a>
+                        </td>
+                        <td>
+                            Terrebonne
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Pierre.Fitzgibbon.TERR@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/boulet-jean-17899/index.html">Boulet,&nbsp;Jean&nbsp;</a>
+                        </td>
+                        <td>
+                            Trois-Rivières
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Jean.Boulet.TRRI@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/lamothe-denis-17901/index.html">Lamothe,&nbsp;Denis&nbsp;</a>
+                        </td>
+                        <td>
+                            Ungava
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Denis.Lamothe.UNGA@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/lafreniere-ian-17903/index.html">Lafrenière,&nbsp;Ian&nbsp;</a>
+                        </td>
+                        <td>
+                            Vachon
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Ian.Lafreniere.VACHON@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/laforest-andree-17913/index.html">Laforest,&nbsp;Andrée&nbsp;</a>
+                        </td>
+                        <td>
+                            Chicoutimi
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Andree.Laforest.CHIC@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/tremblay-francois-17917/index.html">Tremblay,&nbsp;François&nbsp;</a>
+                        </td>
+                        <td>
+                            Dubuc
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Francois.Tremblay.DUBU@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/lacombe-mathieu-17927/index.html">Lacombe,&nbsp;Mathieu&nbsp;</a>
+                        </td>
+                        <td>
+                            Papineau
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Mathieu.Lacombe.PAPI@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/girard-eric-17929/index.html">Girard,&nbsp;Eric&nbsp;</a>
+                        </td>
+                        <td>
+                            Groulx
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Eric.Girard.GROU@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/rouleau-chantal-17931/index.html">Rouleau,&nbsp;Chantal&nbsp;</a>
+                        </td>
+                        <td>
+                            Pointe-aux-Trembles
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Chantal.Rouleau.PAT@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/arseneau-joel-17947/index.html">Arseneau,&nbsp;Joël&nbsp;</a>
+                        </td>
+                        <td>
+                            Îles-de-la-Madeleine
+                        </td>
+                        <td>
+                            Parti québécois
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Joel.Arseneau.IDLM@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/fontecilla-andres-17953/index.html">Fontecilla,&nbsp;Andrés&nbsp;</a>
+                        </td>
+                        <td>
+                            Laurier-Dorion
+                        </td>
+                        <td>
+                            Québec solidaire
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Andres.Fontecilla.LADO@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/zanetti-sol-17955/index.html">Zanetti,&nbsp;Sol&nbsp;</a>
+                        </td>
+                        <td>
+                            Jean-Lesage
+                        </td>
+                        <td>
+                            Québec solidaire
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Sol.Zanetti.JELE@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/girard-eric-17957/index.html">Girard,&nbsp;Éric&nbsp;</a>
+                        </td>
+                        <td>
+                            Lac-Saint-Jean
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Eric.Girard.LSJ@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/jeannotte-chantale-17959/index.html">Jeannotte,&nbsp;Chantale&nbsp;</a>
+                        </td>
+                        <td>
+                            Labelle
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Chantale.Jeannotte.LABE@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/tardif-marie-louise-18071/index.html">Tardif,&nbsp;Marie-Louise&nbsp;</a>
+                        </td>
+                        <td>
+                            Laviolette–Saint-Maurice
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Marie-Louise.Tardif.LASM@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/thouin-louis-charles-18073/index.html">Thouin,&nbsp;Louis-Charles&nbsp;</a>
+                        </td>
+                        <td>
+                            Rousseau
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Louis-Charles.Thouin.ROUS@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/boivin-roy-karine-19255/index.html">Boivin Roy,&nbsp;Karine&nbsp;</a>
+                        </td>
+                        <td>
+                            Anjou–Louis-Riel
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Karine.BoivinRoy.ANJO@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/duranceau-france-elaine-19257/index.html">Duranceau,&nbsp;France-Élaine&nbsp;</a>
+                        </td>
+                        <td>
+                            Bertrand
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:France-Elaine.Duranceau.BERR@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/schmaltz-valerie-19259/index.html">Schmaltz,&nbsp;Valérie&nbsp;</a>
+                        </td>
+                        <td>
+                            Vimont
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Valerie.Schmaltz.VIMO@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/zaga-mendez-alejandra-19263/index.html">Zaga Mendez,&nbsp;Alejandra&nbsp;</a>
+                        </td>
+                        <td>
+                            Verdun
+                        </td>
+                        <td>
+                            Québec solidaire
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Alejandra.ZagaMendez.VERD@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/blanchette-vezina-maite-19275/index.html">Blanchette Vézina,&nbsp;Maïté&nbsp;</a>
+                        </td>
+                        <td>
+                            Rimouski
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Maite.BlanchetteVezina.RIMO@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/dery-pascale-19277/index.html">Déry,&nbsp;Pascale&nbsp;</a>
+                        </td>
+                        <td>
+                            Repentigny
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Pascale.Dery.REPE@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/st-pierre-plamondon-paul-19289/index.html">St-Pierre Plamondon,&nbsp;Paul&nbsp;</a>
+                        </td>
+                        <td>
+                            Camille-Laurin
+                        </td>
+                        <td>
+                            Parti québécois
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Paul.St-PierrePlamondon.CALA@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/biron-martine-19297/index.html">Biron,&nbsp;Martine&nbsp;</a>
+                        </td>
+                        <td>
+                            Chutes-de-la-Chaudière
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Martine.Biron.CDLC@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/rivest-mathieu-19299/index.html">Rivest,&nbsp;Mathieu&nbsp;</a>
+                        </td>
+                        <td>
+                            Côte-du-Sud
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Mathieu.Rivest.CDS@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/champagne-jourdain-kateri-19303/index.html">Champagne Jourdain,&nbsp;Kateri&nbsp;</a>
+                        </td>
+                        <td>
+                            Duplessis
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Kateri.ChampagneJourdain.DUPL@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/bouazzi-haroun-19305/index.html">Bouazzi,&nbsp;Haroun&nbsp;</a>
+                        </td>
+                        <td>
+                            Maurice-Richard
+                        </td>
+                        <td>
+                            Québec solidaire
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Haroun.Bouazzi.MAUR@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/haytayan-celine-19309/index.html">Haytayan,&nbsp;Céline&nbsp;</a>
+                        </td>
+                        <td>
+                            Laval-des-Rapides
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Celine.Haytayan.LDR@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/gagnon-yannick-19317/index.html">Gagnon,&nbsp;Yannick&nbsp;</a>
+                        </td>
+                        <td>
+                            Jonquière
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Yannick.Gagnon.JONQ@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/sainte-croix-stephane-19319/index.html">Sainte-Croix,&nbsp;Stéphane&nbsp;</a>
+                        </td>
+                        <td>
+                            Gaspé
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Stephane.Sainte-Croix.GASP@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/tremblay-suzanne-19323/index.html">Tremblay,&nbsp;Suzanne&nbsp;</a>
+                        </td>
+                        <td>
+                            Hull
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Suzanne.Tremblay.HULL@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/mallette-carole-19351/index.html">Mallette,&nbsp;Carole&nbsp;</a>
+                        </td>
+                        <td>
+                            Huntingdon
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Carole.Mallette.HUNT@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/poulet-isabelle-19311/index.html">Poulet,&nbsp;Isabelle&nbsp;</a>
+                        </td>
+                        <td>
+                            Laporte
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Isabelle.Poulet.LAPO@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/lemieux-louis-17879/index.html">Lemieux,&nbsp;Louis&nbsp;</a>
+                        </td>
+                        <td>
+                            Saint-Jean
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Louis.Lemieux.SAJE@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/blouin-catherine-19251/index.html">Blouin,&nbsp;Catherine&nbsp;</a>
+                        </td>
+                        <td>
+                            Bonaventure
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Catherine.Blouin.BONA@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/nichols-marie-claude-15439/index.html">Nichols,&nbsp;Marie-Claude&nbsp;</a>
+                        </td>
+                        <td>
+                            Vaudreuil
+                        </td>
+                        <td>
+                            Indépendante
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Marie-Claude.Nichols.VAUD@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/simard-jean-francois-5369/index.html">Simard,&nbsp;Jean-François&nbsp;</a>
+                        </td>
+                        <td>
+                            Montmorency
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Jean-Francois.Simard.MONT@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/rizqy-marwah-17883/index.html">Rizqy,&nbsp;Marwah&nbsp;</a>
+                        </td>
+                        <td>
+                            Saint-Laurent
+                        </td>
+                        <td>
+                            Parti libéral du Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Marwah.Rizqy.STLO@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/schneeberger-sebastien-5909/index.html">Schneeberger,&nbsp;Sébastien&nbsp;</a>
+                        </td>
+                        <td>
+                            Drummond–Bois-Francs
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Sebastien.Schneeberger.DRUM@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/fortin-andre-15383/index.html">Fortin,&nbsp;André&nbsp;</a>
+                        </td>
+                        <td>
+                            Pontiac
+                        </td>
+                        <td>
+                            Parti libéral du Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Andre.Fortin.PONT@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/d-amours-sylvie-15399/index.html">D'Amours,&nbsp;Sylvie&nbsp;</a>
+                        </td>
+                        <td>
+                            Mirabel
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Sylvie.DAmours.MIRA@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/bachand-andre-17859/index.html">Bachand,&nbsp;André&nbsp;</a>
+                        </td>
+                        <td>
+                            Richmond
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Andre.Bachand.RICM@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/lecours-lucie-17949/index.html">Lecours,&nbsp;Lucie&nbsp;</a>
+                        </td>
+                        <td>
+                            Les Plaines
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Lucie.Lecours.LPLA@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/provencal-luc-17829/index.html">Provençal,&nbsp;Luc&nbsp;</a>
+                        </td>
+                        <td>
+                            Beauce-Nord
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Luc.Provencal.BENO@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/maccarone-jennifer-17911/index.html">Maccarone,&nbsp;Jennifer&nbsp;</a>
+                        </td>
+                        <td>
+                            Westmount–Saint-Louis
+                        </td>
+                        <td>
+                            Parti libéral du Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Jennifer.Maccarone.WSL@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/labrie-christine-17889/index.html">Labrie,&nbsp;Christine&nbsp;</a>
+                        </td>
+                        <td>
+                            Sherbrooke
+                        </td>
+                        <td>
+                            Québec solidaire
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Christine.Labrie.SHER@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/st-louis-francois-19321/index.html">St-Louis,&nbsp;François&nbsp;</a>
+                        </td>
+                        <td>
+                            Joliette
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Francois.St-Louis.JOLI@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/kelley-gregory-17951/index.html">Kelley,&nbsp;Gregory&nbsp;</a>
+                        </td>
+                        <td>
+                            Jacques-Cartier
+                        </td>
+                        <td>
+                            Parti libéral du Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Gregory.Kelley.JACA@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/dionne-amelie-19273/index.html">Dionne,&nbsp;Amélie&nbsp;</a>
+                        </td>
+                        <td>
+                            Rivière-du-Loup–Témiscouata
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Amelie.Dionne.RDLT@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/beauchemin-frederic-19307/index.html">Beauchemin,&nbsp;Frédéric&nbsp;</a>
+                        </td>
+                        <td>
+                            Marguerite-Bourgeoys
+                        </td>
+                        <td>
+                            Parti libéral du Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Frederic.Beauchemin.MABO@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/masse-manon-15421/index.html">Massé,&nbsp;Manon&nbsp;</a>
+                        </td>
+                        <td>
+                            Sainte-Marie–Saint-Jacques
+                        </td>
+                        <td>
+                            Québec solidaire
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Manon.Masse.SMSJ@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/grandmont-etienne-19267/index.html">Grandmont,&nbsp;Etienne&nbsp;</a>
+                        </td>
+                        <td>
+                            Taschereau
+                        </td>
+                        <td>
+                            Québec solidaire
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Etienne.Grandmont.TASC@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/caire-eric-485/index.html">Caire,&nbsp;Éric&nbsp;</a>
+                        </td>
+                        <td>
+                            La Peltrie
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Eric.Caire.LAPE@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/derraji-monsef-17923/index.html">Derraji,&nbsp;Monsef&nbsp;</a>
+                        </td>
+                        <td>
+                            Nelligan
+                        </td>
+                        <td>
+                            Parti libéral du Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Monsef.Derraji.NELL@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/soucy-chantal-15417/index.html">Soucy,&nbsp;Chantal&nbsp;</a>
+                        </td>
+                        <td>
+                            Saint-Hyacinthe
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Chantal.Soucy.SAHY@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/benjamin-frantz-17909/index.html">Benjamin,&nbsp;Frantz&nbsp;</a>
+                        </td>
+                        <td>
+                            Viau
+                        </td>
+                        <td>
+                            Parti libéral du Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Frantz.Benjamin.VIAU@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/caron-linda-19313/index.html">Caron,&nbsp;Linda&nbsp;</a>
+                        </td>
+                        <td>
+                            La Pinière
+                        </td>
+                        <td>
+                            Parti libéral du Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Linda.Caron.LAPI@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/bogemans-audrey-19325/index.html">Bogemans,&nbsp;Audrey&nbsp;</a>
+                        </td>
+                        <td>
+                            Iberville
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Audrey.Bogemans.IBER@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/jolin-barrette-simon-15359/index.html">Jolin-Barrette,&nbsp;Simon&nbsp;</a>
+                        </td>
+                        <td>
+                            Borduas
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:sjb.BORD@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/nadeau-dubois-gabriel-16827/index.html">Nadeau-Dubois,&nbsp;Gabriel&nbsp;</a>
+                        </td>
+                        <td>
+                            Gouin
+                        </td>
+                        <td>
+                            Québec solidaire
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Gabriel.Nadeau-Dubois.GOUI@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/bernard-daniel-13/index.html">Bernard,&nbsp;Daniel&nbsp;</a>
+                        </td>
+                        <td>
+                            Rouyn-Noranda–Témiscamingue
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Daniel.Bernard.RNT@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/roy-suzanne-19265/index.html">Roy,&nbsp;Suzanne&nbsp;</a>
+                        </td>
+                        <td>
+                            Verchères
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Suzanne.Roy.VERC@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/dufour-virginie-19287/index.html">Dufour,&nbsp;Virginie&nbsp;</a>
+                        </td>
+                        <td>
+                            Mille-Îles
+                        </td>
+                        <td>
+                            Parti libéral du Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Virginie.Dufour.MIIL@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/picard-marilyne-17891/index.html">Picard,&nbsp;Marilyne&nbsp;</a>
+                        </td>
+                        <td>
+                            Soulanges
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Marilyne.Picard.SOUL@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/grondin-agnes-17827/index.html">Grondin,&nbsp;Agnès&nbsp;</a>
+                        </td>
+                        <td>
+                            Argenteuil
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Agnes.Grondin.ARGE@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/lemay-mathieu-15403/index.html">Lemay,&nbsp;Mathieu&nbsp;</a>
+                        </td>
+                        <td>
+                            Masson
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Mathieu.Lemay.MASS@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/martel-donald-12165/index.html">Martel,&nbsp;Donald&nbsp;</a>
+                        </td>
+                        <td>
+                            Nicolet-Bécancour
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Donald.Martel.NICO@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/boutin-joelle-18561/index.html">Boutin,&nbsp;Joëlle&nbsp;</a>
+                        </td>
+                        <td>
+                            Jean-Talon
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Joelle.Boutin.JETA@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/emond-jean-bernard-17857/index.html">Émond,&nbsp;Jean-Bernard&nbsp;</a>
+                        </td>
+                        <td>
+                            Richelieu
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Jean-Bernard.Emond.RICL@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/lecours-isabelle-17945/index.html">Lecours,&nbsp;Isabelle&nbsp;</a>
+                        </td>
+                        <td>
+                            Lotbinière-Frontenac
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Isabelle.Lecours.LOFR@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/belanger-gilles-17925/index.html">Bélanger,&nbsp;Gilles&nbsp;</a>
+                        </td>
+                        <td>
+                            Orford
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Gilles.Belanger.ORFO@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/allaire-simon-17941/index.html">Allaire,&nbsp;Simon&nbsp;</a>
+                        </td>
+                        <td>
+                            Maskinongé
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Simon.Allaire.MASK@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/lachance-stephanie-17835/index.html">Lachance,&nbsp;Stéphanie&nbsp;</a>
+                        </td>
+                        <td>
+                            Bellechasse
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Stephanie.Lachance.BELL@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/dufour-pierre-17823/index.html">Dufour,&nbsp;Pierre&nbsp;</a>
+                        </td>
+                        <td>
+                            Abitibi-Est
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Pierre.Dufour.ABES@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/prass-elisabeth-19301/index.html">Prass,&nbsp;Elisabeth&nbsp;</a>
+                        </td>
+                        <td>
+                            D'Arcy-McGee
+                        </td>
+                        <td>
+                            Parti libéral du Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Elisabeth.Prass.DMG@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/blais-suzanne-17825/index.html">Blais,&nbsp;Suzanne&nbsp;</a>
+                        </td>
+                        <td>
+                            Abitibi-Ouest
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Suzanne.Blais.ABOU@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/dorismond-shirley-19063/index.html">Dorismond,&nbsp;Shirley&nbsp;</a>
+                        </td>
+                        <td>
+                            Marie-Victorin
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Shirley.Dorismond.MAVI@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/asselin-mario-17905/index.html">Asselin,&nbsp;Mario&nbsp;</a>
+                        </td>
+                        <td>
+                            Vanier-Les Rivières
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Mario.Asselin.VANI@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/abou-khalil-alice-19315/index.html">Abou-Khalil,&nbsp;Alice&nbsp;</a>
+                        </td>
+                        <td>
+                            Fabre
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Alice.Abou-Khalil.FABR@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/bourassa-kariane-19291/index.html">Bourassa,&nbsp;Kariane&nbsp;</a>
+                        </td>
+                        <td>
+                            Charlevoix–Côte-de-Beaupré
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Kariane.Bourassa.CHCB@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/frechette-christine-19269/index.html">Fréchette,&nbsp;Christine&nbsp;</a>
+                        </td>
+                        <td>
+                            Sanguinet
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Christine.Frechette.SAGU@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/levesque-sylvain-12213/index.html">Lévesque,&nbsp;Sylvain&nbsp;</a>
+                        </td>
+                        <td>
+                            Chauveau
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Sylvain.Levesque.CHAU@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/morin-andre-albert-19253/index.html">Morin,&nbsp;André Albert&nbsp;</a>
+                        </td>
+                        <td>
+                            Acadie
+                        </td>
+                        <td>
+                            Parti libéral du Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Andre-A.Morin.ACAD@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/caron-vincent-17849/index.html">Caron,&nbsp;Vincent&nbsp;</a>
+                        </td>
+                        <td>
+                            Portneuf
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Vincent.Caron.PORT@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/belanger-sonia-19281/index.html">Bélanger,&nbsp;Sonia&nbsp;</a>
+                        </td>
+                        <td>
+                            Prévost
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Sonia.Belanger.PREV@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/ghazal-ruba-17933/index.html">Ghazal,&nbsp;Ruba&nbsp;</a>
+                        </td>
+                        <td>
+                            Mercier
+                        </td>
+                        <td>
+                            Québec solidaire
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Ruba.Ghazal.MERC@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/garceau-brigitte-b-19271/index.html">Garceau,&nbsp;Brigitte&nbsp;B.</a>
+                        </td>
+                        <td>
+                            Robert-Baldwin
+                        </td>
+                        <td>
+                            Parti libéral du Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Brigitte.Garceau.ROBA@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/montigny-yves-19279/index.html">Montigny,&nbsp;Yves&nbsp;</a>
+                        </td>
+                        <td>
+                            René-Lévesque
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Yves.Montigny.RELE@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/gendron-marie-belle-19293/index.html">Gendron,&nbsp;Marie-Belle&nbsp;</a>
+                        </td>
+                        <td>
+                            Châteauguay
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Marie-Belle.Gendron.CHAT@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/lefebvre-eric-16777/index.html">Lefebvre,&nbsp;Eric&nbsp;</a>
+                        </td>
+                        <td>
+                            Arthabaska
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Eric.Lefebvre.ARTH@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/bussiere-robert-17921/index.html">Bussière,&nbsp;Robert&nbsp;</a>
+                        </td>
+                        <td>
+                            Gatineau
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Robert.Bussiere.GATI@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/laframboise-mario-15357/index.html">Laframboise,&nbsp;Mario&nbsp;</a>
+                        </td>
+                        <td>
+                            Blainville
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Mario.Laframboise.BLAI@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/setlakwe-michelle-19285/index.html">Setlakwe,&nbsp;Michelle&nbsp;</a>
+                        </td>
+                        <td>
+                            Mont-Royal–Outremont
+                        </td>
+                        <td>
+                            Parti libéral du Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Michelle.Setlakwe.MROU@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/lakhoyan-olivier-sona-19295/index.html">Lakhoyan Olivier,&nbsp;Sona&nbsp;</a>
+                        </td>
+                        <td>
+                            Chomedey
+                        </td>
+                        <td>
+                            Parti libéral du Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Sona.LakhoyanOlivier.CHOM@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/mcgraw-desiree-19283/index.html">McGraw,&nbsp;Désirée&nbsp;</a>
+                        </td>
+                        <td>
+                            Notre-Dame-de-Grâce
+                        </td>
+                        <td>
+                            Parti libéral du Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Desiree.McGraw.NDDG@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/hebert-genevieve-17877/index.html">Hébert,&nbsp;Geneviève&nbsp;</a>
+                        </td>
+                        <td>
+                            Saint-François
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Genevieve.Hebert.SAFR@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/levesque-mathieu-17851/index.html">Lévesque,&nbsp;Mathieu&nbsp;</a>
+                        </td>
+                        <td>
+                            Chapleau
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Mathieu.Levesque.CHAP@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/reid-claude-17833/index.html">Reid,&nbsp;Claude&nbsp;</a>
+                        </td>
+                        <td>
+                            Beauharnois
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Claude.Reid.BEAU@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/guillemette-nancy-18247/index.html">Guillemette,&nbsp;Nancy&nbsp;</a>
+                        </td>
+                        <td>
+                            Roberval
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Nancy.Guillemette.ROBE@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/jacques-francois-17937/index.html">Jacques,&nbsp;François&nbsp;</a>
+                        </td>
+                        <td>
+                            Mégantic
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Francois.Jacques.MEGA@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/rotiroti-filomena-1171/index.html">Rotiroti,&nbsp;Filomena&nbsp;</a>
+                        </td>
+                        <td>
+                            Jeanne-Mance–Viger
+                        </td>
+                        <td>
+                            Parti libéral du Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Filomena.Rotiroti.JMV@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/ciccone-enrico-17943/index.html">Ciccone,&nbsp;Enrico&nbsp;</a>
+                        </td>
+                        <td>
+                            Marquette
+                        </td>
+                        <td>
+                            Parti libéral du Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Enrico.Ciccone.MARQ@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/cadet-madwa-nika-19261/index.html">Cadet,&nbsp;Madwa-Nika&nbsp;</a>
+                        </td>
+                        <td>
+                            Bourassa-Sauvé
+                        </td>
+                        <td>
+                            Parti libéral du Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Madwa-Nika.Cadet.BOSA@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/leduc-alexandre-17935/index.html">Leduc,&nbsp;Alexandre&nbsp;</a>
+                        </td>
+                        <td>
+                            Hochelaga-Maisonneuve
+                        </td>
+                        <td>
+                            Québec solidaire
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Alexandre.Leduc.HOCH@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                
+                    <tr>
+                        <td>
+                            <a href="/fr/deputes/roy-nathalie-12187/index.html">Roy,&nbsp;Nathalie&nbsp;</a>
+                        </td>
+                        <td>
+                            Montarville
+                        </td>
+                        <td>
+                            Coalition avenir Québec
+                        </td>
+					    <td>
+							<ul class="listeIconesHorizontale"><li class="icoCourriel"><a href="mailto:Nathalie.Roy.MOTA@assnat.qc.ca" class="nePasRediriger">Courriel</a></li></ul>  <!-- -->
+                        </td>
+                    </tr>
+                </tbody>
+	    
+	    
+            
+            
+       </table>     
+        
+          	
+    
+
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+    $(document).ready(trierTable);
+    
+    function trierTable()
+    {	 
+			$("#ListeDeputes").tablesorter({ widthFixed: true, textExtraction: 'complex', widgets: ['zebra'], sortList: [[0, 0]], headers: { 3: { sorter: false}} });	
+    }
+//]]>	        
+</script>
+
+
+
+					<!-- PlaceHolder: contenu en complement de la page -->
+					
+						
+				
+					
+
+				
+			</div>
+	        
+	        <!-- N'est plus utilisee a cause des utilitaire d'assemblee qui doivent spanner col centre + col droite -->
+			<div class="ColDroite colonne"></div>        
+			
+			<div class="clear" id="ClearPiedPage"></div>
+	        
+			<!-- PiedDePage: affiche le contenu du pied de page -->
+			
+
+<div id="PiedDePage" class="PiedDePage">
+    <ul>
+        <li class="Premier">
+            <a href="/fr/fils-rss.html" class="sanssouligne icoFilsRss">
+                <span class="styleHyperlien">Fils RSS</span>
+            </a>
+        </li>
+        
+        <li><a href="/fr/liens-interet.html">Liens d'intérêt</a></li>
+        <li><a href="/fr/aide/index.html">Aide</a></li>
+        <li><a href="/fr/plan-site.html">Plan du site</a></li>
+        <li><a href="/fr/lien/10214.html">Québec.ca</a></li>     
+        <li><a href="/fr/propos-site/accessibilite.html">Accessibilité</a></li>
+        <li><a href="/fr/abc-assemblee/acces-information/index.html">Accès à l'information</a></li>
+    </ul><br />
+    <ul>
+        <li class="Premier">
+            <a href="/fr/accueil/mediassociaux.html" class="sanssouligne icoMediasSociauxPied">
+                <span class="styleHyperlien">Suivez-nous</span>
+            </a>
+        </li>
+        <li><a href="/fr/propos-site/index.html">À propos du site</a> </li>
+		<li><a href="/fr/propos-site/droits-propriete-intellectuelle.html">Conditions d'utilisation</a></li>
+		<li><a href="https://m.assnat.qc.ca">Mobile</a></li>
+    </ul>
+    <br />
+    <span class="NonVisible">
+        
+    </span>
+</div>
+               
+
+<script type="text/javascript">
+    var isPiwikActiver = 'True';
+    var PiwikIdSite = '3';
+    if (isPiwikActiver == "True") {
+        var u = (("https:" == document.location.protocol) ? "https" : "http") + "://stats.assnat.qc.ca/piwik/";
+        var _paq = _paq || [];
+        _paq.push(["trackPageView"]);
+        _paq.push(["enableLinkTracking"]);
+
+        (function () {
+            _paq.push(["setTrackerUrl", u + "piwik.php"]);
+            _paq.push(["setSiteId", PiwikIdSite]);
+            var d = document, g = d.createElement("script"), s = d.getElementsByTagName("script")[0]; g.type = "text/javascript";
+            g.defer = true; g.async = true; g.src = u + "piwik.js"; s.parentNode.insertBefore(g, s);
+        })();
+    }
+</script>   
+		</div>
+	</form>
+
+    
+	            				
+    
+
+</body>
+</html>
