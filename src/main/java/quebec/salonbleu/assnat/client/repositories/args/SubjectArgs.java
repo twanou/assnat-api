@@ -10,6 +10,7 @@ import java.util.UUID;
 @Builder
 public class SubjectArgs {
 
+    String phrase;
     @Builder.Default
     Set<String> keywords = Set.of();
     @Builder.Default

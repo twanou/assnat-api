@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import quebec.salonbleu.assnat.api.mappers.subjects.SubjectMapper;
 import quebec.salonbleu.assnat.api.models.commons.Affectation;
 import quebec.salonbleu.assnat.api.models.subjects.Sujet;
+import quebec.salonbleu.assnat.api.models.subjects.requests.SujetRequete;
 import quebec.salonbleu.assnat.client.documents.Subject;
 import quebec.salonbleu.assnat.client.documents.UpcomingLog;
 import quebec.salonbleu.assnat.client.repositories.SubjectRepository;
@@ -59,20 +60,32 @@ class SubjectServiceTest {
 
     @Test
     void getSubjects() {
-        SubjectArgs args = SubjectArgs.builder()
-                .keywords(Set.of("mots"))
-                .deputyIds(Set.of(TestUUID.ID1, TestUUID.ID2))
-                .districtIds(Set.of(TestUUID.ID3, TestUUID.ID4))
-                .partyIds(Set.of(TestUUID.ID5, TestUUID.ID6))
+        SujetRequete sujetRequete = SujetRequete.builder()
+                .phrase("phrase")
+                .motsCles(Set.of("mots"))
+                .deputeIds(Set.of(TestUUID.ID1, TestUUID.ID2))
+                .circonscriptionIds(Set.of(TestUUID.ID3, TestUUID.ID4))
+                .partiIds(Set.of(TestUUID.ID5, TestUUID.ID6))
+                .page(0)
+                .taille(25)
                 .build();
+        SubjectArgs args = SubjectArgs.builder()
+                .phrase(sujetRequete.getPhrase())
+                .keywords(sujetRequete.getMotsCles())
+                .deputyIds(sujetRequete.getDeputeIds())
+                .districtIds(sujetRequete.getCirconscriptionIds())
+                .partyIds(sujetRequete.getPartiIds())
+                .build();
+
         List<Subject> subjects = List.of(Subject.builder().build());
         List<Sujet> sujets = List.of(Sujet.builder().build());
         Map<UUID, Affectation> affectations = Map.of();
         when(subjectRepositoryMock.find(args, PageRequest.of(0, 25))).thenReturn(subjects);
         when(assignmentServiceMock.getAllAssignments()).thenReturn(affectations);
         when(subjectMapperMock.toSujetsList(same(subjects), same(affectations))).thenReturn(sujets);
+        when(subjectMapperMock.toSubjectArgs(same(sujetRequete))).thenReturn(args);
 
-        List<Sujet> response = this.subjectService.getSubjects(args, 0, 25);
+        List<Sujet> response = this.subjectService.getSubjects(sujetRequete);
         assertSame(sujets, response);
     }
 

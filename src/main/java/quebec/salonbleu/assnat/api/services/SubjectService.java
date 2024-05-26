@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import quebec.salonbleu.assnat.api.mappers.subjects.SubjectMapper;
 import quebec.salonbleu.assnat.api.models.subjects.Sujet;
+import quebec.salonbleu.assnat.api.models.subjects.requests.SujetRequete;
 import quebec.salonbleu.assnat.cache.CacheKey;
 import quebec.salonbleu.assnat.client.documents.Subject;
 import quebec.salonbleu.assnat.client.documents.UpcomingLog;
@@ -33,8 +34,9 @@ public class SubjectService {
         return this.subjectMapper.toSujetsList(subjects, this.assignmentService.getAllAssignments());
     }
 
-    public List<Sujet> getSubjects(SubjectArgs subjectArgs, int pageNumber, int pageSize) {
-        List<Subject> subjects = this.subjectRepository.find(subjectArgs, PageRequest.of(pageNumber, pageSize));
+    public List<Sujet> getSubjects(SujetRequete sujetRequete) {
+        SubjectArgs subjectArgs = this.subjectMapper.toSubjectArgs(sujetRequete);
+        List<Subject> subjects = this.subjectRepository.find(subjectArgs, PageRequest.of(sujetRequete.getPage(), sujetRequete.getTaille()));
         return this.subjectMapper.toSujetsList(subjects, this.assignmentService.getAllAssignments());
     }
 

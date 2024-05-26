@@ -6,9 +6,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import quebec.salonbleu.assnat.api.models.subjects.Sujet;
+import quebec.salonbleu.assnat.api.models.subjects.requests.SujetRequete;
 import quebec.salonbleu.assnat.api.models.subjects.responses.SujetReponse;
 import quebec.salonbleu.assnat.api.services.SubjectService;
-import quebec.salonbleu.assnat.client.repositories.args.SubjectArgs;
 import test.utils.TestUUID;
 
 import java.time.LocalDate;
@@ -30,17 +30,21 @@ class SubjectControllerTest {
     @Test
     void getSubjectsByDeputyIds() {
         List<Sujet> sujets = List.of(Sujet.builder().build());
-        SubjectArgs args = SubjectArgs.builder()
-                .keywords(Set.of("mots"))
-                .deputyIds(Set.of(TestUUID.ID1, TestUUID.ID2))
-                .districtIds(Set.of(TestUUID.ID3, TestUUID.ID4))
-                .partyIds(Set.of(TestUUID.ID5, TestUUID.ID6))
+        SujetRequete sujetRequete = SujetRequete.builder()
+                .phrase("phrase")
+                .motsCles(Set.of("mots"))
+                .deputeIds(Set.of(TestUUID.ID1, TestUUID.ID2))
+                .circonscriptionIds(Set.of(TestUUID.ID3, TestUUID.ID4))
+                .partiIds(Set.of(TestUUID.ID5, TestUUID.ID6))
+                .page(0)
+                .taille(25)
                 .build();
-        when(subjectServiceMock.getSubjects(args, 0, 25)).thenReturn(sujets);
+
+        when(subjectServiceMock.getSubjects(sujetRequete)).thenReturn(sujets);
         when(subjectServiceMock.getLastUpdate()).thenReturn(LocalDate.now());
         when(subjectServiceMock.getNextUpdates()).thenReturn(List.of(LocalDate.now()));
 
-        SujetReponse response = this.subjectController.getSubjects(args.getKeywords(), args.getDeputyIds(), args.getPartyIds(), args.getDistrictIds(), 0, 25);
+        SujetReponse response = this.subjectController.getSubjects(sujetRequete);
         assertSame(response.getSujets(), sujets);
         assertEquals(LocalDate.now(), response.getDerniereMaj());
         assertEquals(List.of(LocalDate.now()), response.getFuturesMaj());

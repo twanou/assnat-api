@@ -69,10 +69,13 @@ public class SubjectRepository {
     }
 
     private Query getBaseQuery(SubjectArgs args) {
-        if (args.getKeywords().isEmpty()) {
+        if (args.getKeywords().isEmpty() && StringUtils.isBlank(args.getPhrase())) {
             return new Query().with(Sort.by(Sort.Direction.DESC, "date"));
         } else {
-            return TextQuery.queryText(TextCriteria.forDefaultLanguage().matching(StringUtils.join(args.getKeywords(), " "))).sortByScore();
+            return TextQuery.queryText(TextCriteria.forDefaultLanguage()
+                            .matchingPhrase(args.getPhrase())
+                            .matching(StringUtils.join(args.getKeywords(), " ")))
+                    .sortByScore();
         }
     }
 }

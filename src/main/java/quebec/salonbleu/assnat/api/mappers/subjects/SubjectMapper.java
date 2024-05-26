@@ -3,8 +3,10 @@ package quebec.salonbleu.assnat.api.mappers.subjects;
 import org.springframework.stereotype.Component;
 import quebec.salonbleu.assnat.api.models.commons.Affectation;
 import quebec.salonbleu.assnat.api.models.subjects.Sujet;
+import quebec.salonbleu.assnat.api.models.subjects.requests.SujetRequete;
 import quebec.salonbleu.assnat.client.documents.Subject;
 import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectType;
+import quebec.salonbleu.assnat.client.repositories.args.SubjectArgs;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -52,5 +54,15 @@ public class SubjectMapper {
             sujets.add(sujet);
         }
         return sujets;
+    }
+
+    public SubjectArgs toSubjectArgs(SujetRequete sujetRequete) {
+        return SubjectArgs.builder()
+                .phrase(sujetRequete.getPhrase())
+                .keywords(sujetRequete.getMotsCles())
+                .deputyIds(sujetRequete.getDeputeIds())
+                .partyIds(sujetRequete.getPartiIds())
+                .districtIds(sujetRequete.getCirconscriptionIds())
+                .build();
     }
 }
