@@ -30,6 +30,9 @@ public abstract class SubjectDocumentTypeMapper {
                                 Assignment assignment = this.deputyFinder.findByCompleteName(intervention.getTitle()); // nom complet, ex M. Bob Tremblay
                                 return InterventionDocument.builder()
                                         .assignmentId(assignment.getId())
+                                        .deputyId(assignment.getDeputyId())
+                                        .partyId(assignment.getPartyId())
+                                        .districtId(assignment.getDistrictId())
                                         .paragraphs(this.format(intervention.getParagraphs()))
                                         .build();
                             }).toList();

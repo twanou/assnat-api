@@ -14,6 +14,12 @@ public class InterventionDocument {
 
     @Field(targetType = FieldType.OBJECT_ID)
     String assignmentId;
+    @Field(targetType = FieldType.OBJECT_ID)
+    String deputyId;
+    @Field(targetType = FieldType.OBJECT_ID)
+    String districtId;
+    @Field(targetType = FieldType.OBJECT_ID)
+    String partyId;
     @Builder.Default
     List<String> paragraphs = List.of();
 }
