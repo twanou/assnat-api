@@ -2,9 +2,7 @@ package net.daneau.assnat.api.models.subjects;
 
 import lombok.Builder;
 import lombok.Value;
-import net.daneau.assnat.api.models.commons.Circonscription;
-import net.daneau.assnat.api.models.commons.Depute;
-import net.daneau.assnat.api.models.commons.Parti;
+import net.daneau.assnat.api.models.commons.Affectation;
 
 import java.util.List;
 
@@ -12,9 +10,7 @@ import java.util.List;
 @Builder
 public class Intervention {
 
-    Depute depute;
-    Circonscription circonscription;
-    Parti parti;
+    Affectation affectation;
     @Builder.Default
     List<String> paragraphes = List.of();
 }

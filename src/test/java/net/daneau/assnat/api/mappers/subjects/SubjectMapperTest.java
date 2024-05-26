@@ -1,6 +1,6 @@
 package net.daneau.assnat.api.mappers.subjects;
 
-import net.daneau.assnat.api.models.commons.DirectoryDTO;
+import net.daneau.assnat.api.models.commons.Affectation;
 import net.daneau.assnat.api.models.subjects.Sujet;
 import net.daneau.assnat.api.models.subjects.SujetDetails;
 import net.daneau.assnat.client.documents.Subject;
@@ -14,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDate;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -36,13 +37,13 @@ class SubjectMapperTest {
                 .subjectDetails(SubjectDetails.builder().type(SubjectType.DEPUTY_DECLARATION).build())
                 .build()
         );
-        DirectoryDTO directoryDTO = DirectoryDTO.builder().build();
+        Map<String, Affectation> affectations = Map.of();
         SujetDetails sujetDetails = SujetDetails.builder().build();
         when(subjectTypeMapperMock.supports()).thenReturn(EnumSet.allOf(SubjectType.class));
-        when(subjectTypeMapperMock.map(subjects.get(0).getSubjectDetails(), directoryDTO)).thenReturn(sujetDetails);
+        when(subjectTypeMapperMock.map(subjects.get(0).getSubjectDetails(), affectations)).thenReturn(sujetDetails);
 
         SubjectMapper subjectMapper = new SubjectMapper(List.of(subjectTypeMapperMock));
-        List<Sujet> sujets = subjectMapper.toSujetsList(subjects, directoryDTO);
+        List<Sujet> sujets = subjectMapper.toSujetsList(subjects, affectations);
         assertEquals(subjects.get(0).getSession(), sujets.get(0).getSession());
         assertEquals(subjects.get(0).getLegislature(), sujets.get(0).getLegislature());
         assertEquals(subjects.get(0).getDate(), sujets.get(0).getDate());

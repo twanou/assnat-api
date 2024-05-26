@@ -15,4 +15,5 @@ public class Deputy {
     String firstName;
     String lastName;
     String title;
+    String photo;
 }

@@ -1,6 +1,6 @@
 package net.daneau.assnat.loaders.subjects.mappers;
 
-import net.daneau.assnat.client.documents.subdocuments.Assignment;
+import net.daneau.assnat.client.documents.Assignment;
 import net.daneau.assnat.client.documents.subdocuments.InterventionDocument;
 import net.daneau.assnat.client.documents.subdocuments.SubjectDetails;
 import net.daneau.assnat.client.documents.subdocuments.SubjectType;
@@ -37,16 +37,14 @@ class SubjectDocumentTypeMapperTest {
                                 .build()))
                         .build()))
                 .build();
-        
-        Assignment assignment = Assignment.builder().deputyId("1").partyId("2").districtId("3").build();
+
+        Assignment assignment = Assignment.builder().id("0").deputyId("1").partyId("2").districtId("3").build();
         SubjectDetails expectedResult = SubjectDetails.builder()
                 .type(SubjectType.DEPUTY_DECLARATION)
                 .title(scrapedLogNode.getChildren().get(0).getTitle())
                 .interventions(List.of(
                         InterventionDocument.builder()
-                                .deputyId(assignment.getDeputyId())
-                                .partyId(assignment.getPartyId())
-                                .districtId(assignment.getDistrictId())
+                                .assignmentId(assignment.getId())
                                 .paragraphs(scrapedLogNode.getChildren().get(0).getChildren().get(0).getParagraphs())
                                 .build()))
                 .build();

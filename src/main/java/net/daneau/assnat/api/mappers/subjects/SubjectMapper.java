@@ -1,6 +1,6 @@
 package net.daneau.assnat.api.mappers.subjects;
 
-import net.daneau.assnat.api.models.commons.DirectoryDTO;
+import net.daneau.assnat.api.models.commons.Affectation;
 import net.daneau.assnat.api.models.subjects.Sujet;
 import net.daneau.assnat.client.documents.Subject;
 import net.daneau.assnat.client.documents.subdocuments.SubjectType;
@@ -35,14 +35,14 @@ public class SubjectMapper {
         }
     }
 
-    public List<Sujet> toSujetsList(Iterable<Subject> subjects, DirectoryDTO directoryDTO) {
+    public List<Sujet> toSujetsList(Iterable<Subject> subjects, Map<String, Affectation> affectations) {
         List<Sujet> sujets = new ArrayList<>();
         for (Subject subject : subjects) {
             Sujet sujet = Sujet.builder()
                     .date(subject.getDate())
                     .legislature(subject.getLegislature())
                     .session(subject.getSession())
-                    .details(this.subjectMappers.get(subject.getSubjectDetails().getType()).map(subject.getSubjectDetails(), directoryDTO))
+                    .details(this.subjectMappers.get(subject.getSubjectDetails().getType()).map(subject.getSubjectDetails(), affectations))
                     .build();
             sujets.add(sujet);
         }
