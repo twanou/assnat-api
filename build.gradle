@@ -6,7 +6,10 @@ plugins {
 
 group = 'net.daneau'
 version = '1.0.0'
-sourceCompatibility = '17'
+
+java {
+    sourceCompatibility = '21'
+}
 
 configurations {
     compileOnly {
