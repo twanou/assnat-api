@@ -1,11 +1,11 @@
 package quebec.salonbleu.assnat.loaders.services;
 
 import lombok.RequiredArgsConstructor;
-import quebec.salonbleu.assnat.loaders.assignments.AssignmentLoader;
-import quebec.salonbleu.assnat.loaders.subjects.LogEntriesSubjectLoader;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import quebec.salonbleu.assnat.loaders.assignments.AssignmentLoader;
+import quebec.salonbleu.assnat.loaders.subjects.LogEntriesSubjectLoader;
 
 import java.time.Clock;
 import java.time.Duration;
@@ -22,7 +22,7 @@ public class LoadingService {
     private long lastCheck = 0;
 
     @Async
-    public void load() {
+    public synchronized void load() {
         if (this.clock.instant().getEpochSecond() - this.lastCheck >= this.checkInterval.getSeconds()) {
             this.lastCheck = this.clock.instant().getEpochSecond();
             this.subjectLoader.load(this.assignmentLoader::load);
