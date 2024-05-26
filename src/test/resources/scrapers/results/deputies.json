@@ -5,6 +5,20 @@
     "lastName": "Beauchemin",
     "district": "Marguerite-Bourgeoys",
     "party": "Indépendant(e)",
+    "partyAcronym": "Ind.",
+    "functions": [
+      "Député de Taillon",
+      "Coalition avenir Québec",
+      "Ministre responsable des Services sociaux"
+    ]
+  },
+  {
+    "title": "M.",
+    "firstName": "Frantz",
+    "lastName": "Benjamin",
+    "district": "Viau",
+    "party": "Parti libéral du Québec",
+    "partyAcronym": "PLQ",
     "functions": [
       "Député de Taillon",
       "Coalition avenir Québec",
@@ -17,6 +31,7 @@
     "lastName": "Bonnardel",
     "district": "Granby",
     "party": "Coalition avenir Québec",
+    "partyAcronym": "CAQ",
     "functions": [
       "Député de Taillon",
       "Coalition avenir Québec",
@@ -29,6 +44,7 @@
     "lastName": "Massé",
     "district": "Sainte-Marie–Saint-Jacques",
     "party": "Québec solidaire",
+    "partyAcronym": "QS",
     "functions": [
       "Députée de Sainte-Marie–Saint-Jacques",
       "Québec solidaire",
@@ -45,6 +61,7 @@
     "lastName": "Nichols",
     "district": "Vaudreuil",
     "party": "Indépendant(e)",
+    "partyAcronym": "Ind.",
     "functions": [
       "Députée de Sainte-Marie–Saint-Jacques",
       "Québec solidaire",
@@ -53,6 +70,19 @@
       "Porte-parole du deuxième groupe d’opposition en matière de relations avec les Premières Nations et les Inuit",
       "Porte-parole du deuxième groupe d’opposition en matière de services sociaux en Déficience intellectuelle et TSA (DI-TSA)",
       "Porte-parole du deuxième groupe d’opposition pour les communautés LGBTQ+"
+    ]
+  },
+  {
+    "title": "M.",
+    "firstName": "Pascal",
+    "lastName": "Paradis",
+    "district": "Jean-Talon",
+    "party": "Parti québécois",
+    "partyAcronym": "PQ",
+    "functions": [
+      "Député de Taillon",
+      "Coalition avenir Québec",
+      "Ministre responsable des Services sociaux"
     ]
   }
 ]

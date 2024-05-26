@@ -22,8 +22,13 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.atMostOnce;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class AssignmentLoaderTest {
@@ -48,7 +53,7 @@ class AssignmentLoaderTest {
     @Test
     void load() {
         List<ScrapedDeputy> scrapedDeputies = List.of(ScrapedDeputy.builder().firstName("Bernard").lastName("Landry").party("Parti Québecois").district("Verchères").build(), ScrapedDeputy.builder().firstName("René").build());
-        List<Assignment> currentAssignments = List.of(Assignment.builder().hash(538951214).build());
+        List<Assignment> currentAssignments = List.of(Assignment.builder().hash(1733353033).build());
         Deputy landryDeputy = Deputy.builder().id("deputyId").firstName("Bernard").lastName("Landry").build();
         District landryDistrict = District.builder().id("districtId").name("Verchères").build();
         Party landryParty = Party.builder().id("partyId").name("Parti Québecois").build();
@@ -105,7 +110,7 @@ class AssignmentLoaderTest {
     @Test
     void loadNoUpdate() {
         List<ScrapedDeputy> scrapedDeputies = List.of(ScrapedDeputy.builder().firstName("René").build());
-        List<Assignment> currentAssignments = List.of(Assignment.builder().hash(538951214).build());
+        List<Assignment> currentAssignments = List.of(Assignment.builder().hash(1733353033).build());
         when(deputyScraperMock.scrape()).thenReturn(scrapedDeputies);
         when(assignmentRepositoryMock.findByEndDate(null)).thenReturn(currentAssignments);
         this.assignmentLoader.load();
