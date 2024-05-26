@@ -23,7 +23,7 @@ public class AssnatCacheManager {
     }
 
     public void clearSubjectCaches() {
-        this.clear(CacheKey.LAST_UPDATE);
+        this.clear(CacheKey.LAST_UPDATE, CacheKey.NEXT_UPDATE);
     }
 
     private void clear(CacheKey... key) {

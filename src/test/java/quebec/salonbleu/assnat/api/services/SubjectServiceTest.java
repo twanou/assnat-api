@@ -6,11 +6,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import quebec.salonbleu.assnat.api.mappers.subjects.SubjectMapper;
 import quebec.salonbleu.assnat.api.models.commons.Affectation;
 import quebec.salonbleu.assnat.api.models.subjects.Sujet;
 import quebec.salonbleu.assnat.client.documents.Subject;
+import quebec.salonbleu.assnat.client.documents.UpcomingLog;
 import quebec.salonbleu.assnat.client.repositories.SubjectRepository;
+import quebec.salonbleu.assnat.client.repositories.UpcomingLogRepository;
 import test.utils.TestUUID;
 
 import java.time.LocalDate;
@@ -30,6 +33,8 @@ class SubjectServiceTest {
 
     @Mock
     private SubjectRepository subjectRepositoryMock;
+    @Mock
+    private UpcomingLogRepository upcomingLogRepositoryMock;
     @Mock
     private AssignmentService assignmentServiceMock;
     @Mock
@@ -71,5 +76,13 @@ class SubjectServiceTest {
 
         LocalDate response = this.subjectService.getLastUpdate();
         assertEquals(LocalDate.now(), response);
+    }
+
+    @Test
+    void getNextUpdates() {
+        when(upcomingLogRepositoryMock.findAll(Sort.by(Sort.Direction.ASC, "date"))).thenReturn(List.of(UpcomingLog.builder().date(LocalDate.now()).build()));
+
+        List<LocalDate> response = this.subjectService.getNextUpdates();
+        assertEquals(LocalDate.now(), response.get(0));
     }
 }

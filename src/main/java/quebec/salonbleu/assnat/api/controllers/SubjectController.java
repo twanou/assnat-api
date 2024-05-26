@@ -34,6 +34,7 @@ public class SubjectController {
         return SujetReponse.builder()
                 .sujets(this.subjectService.getSubjectsByDeputyIds(deputeIds, page, taille))
                 .derniereMaj(this.subjectService.getLastUpdate())
+                .futuresMaj(this.subjectService.getNextUpdates())
                 .build();
     }
 
@@ -42,6 +43,7 @@ public class SubjectController {
         return SujetReponse.builder()
                 .sujets(this.subjectService.getSubjects(ids))
                 .derniereMaj(this.subjectService.getLastUpdate())
+                .futuresMaj(this.subjectService.getNextUpdates())
                 .build();
     }
 }

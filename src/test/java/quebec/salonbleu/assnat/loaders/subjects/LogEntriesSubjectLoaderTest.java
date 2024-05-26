@@ -10,7 +10,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import quebec.salonbleu.assnat.cache.AssnatCacheManager;
 import quebec.salonbleu.assnat.client.documents.Subject;
+import quebec.salonbleu.assnat.client.documents.UpcomingLog;
 import quebec.salonbleu.assnat.client.repositories.SubjectRepository;
+import quebec.salonbleu.assnat.client.repositories.UpcomingLogRepository;
 import quebec.salonbleu.assnat.scrapers.AssNatLogEntryScraper;
 import quebec.salonbleu.assnat.scrapers.models.LogType;
 import quebec.salonbleu.assnat.scrapers.models.LogVersion;
@@ -33,11 +35,13 @@ class LogEntriesSubjectLoaderTest {
     @Mock
     private SubjectRepository subjectRepositoryMock;
     @Mock
-    private Runnable runnableMock;
+    private UpcomingLogRepository upcomingLogRepositoryMock;
     @Mock
     private AssnatCacheManager assnatCacheManagerMock;
     @InjectMocks
     private LogEntriesSubjectLoader logEntriesSubjectLoader;
+    @Mock
+    private Runnable runnableMock;
 
 
     @NullSource
@@ -49,17 +53,21 @@ class LogEntriesSubjectLoaderTest {
         when(subjectRepositoryMock.findFirstByOrderByDateDesc()).thenReturn(Optional.ofNullable(subject));
         when(assNatLogEntryScraperMock.scrape()).thenReturn(List.of(
                 ScrapedLogEntry.builder().date(LocalDate.of(1980, 5, 20)).build(),
-                ScrapedLogEntry.builder().date(LocalDate.of(1996, 5, 14)).type(LogType.COMMITTEE).build(),
-                ScrapedLogEntry.builder().date(LocalDate.of(2022, 7, 18)).version(LogVersion.PRELIMINARY).build(),
+                ScrapedLogEntry.builder().date(LocalDate.of(1996, 5, 14)).type(LogType.COMMITTEE).version(LogVersion.FINAL).build(),
+                ScrapedLogEntry.builder().date(LocalDate.of(2022, 7, 18)).type(LogType.ASSEMBLY).version(LogVersion.PRELIMINARY).build(),
+                ScrapedLogEntry.builder().date(LocalDate.of(2021, 7, 18)).type(LogType.ASSEMBLY).version(LogVersion.PRELIMINARY).build(),
                 secondEntryToLoad,
                 firstEntryToLoad
         ));
 
         this.logEntriesSubjectLoader.load(runnableMock);
-        InOrder order = inOrder(runnableMock, subjectLoaderMock, assnatCacheManagerMock);
+        InOrder order = inOrder(runnableMock, subjectLoaderMock, upcomingLogRepositoryMock, assnatCacheManagerMock);
         order.verify(runnableMock).run();
         order.verify(subjectLoaderMock).load(firstEntryToLoad.getRelativeUrl(), firstEntryToLoad.getDate(), firstEntryToLoad.getLegislature(), firstEntryToLoad.getSession());
         order.verify(subjectLoaderMock).load(secondEntryToLoad.getRelativeUrl(), secondEntryToLoad.getDate(), secondEntryToLoad.getLegislature(), secondEntryToLoad.getSession());
+        order.verify(upcomingLogRepositoryMock).deleteAll();
+        order.verify(upcomingLogRepositoryMock).save(UpcomingLog.builder().date(LocalDate.of(2021, 7, 18)).build());
+        order.verify(upcomingLogRepositoryMock).save(UpcomingLog.builder().date(LocalDate.of(2022, 7, 18)).build());
         order.verify(assnatCacheManagerMock).clearSubjectCaches();
     }
 

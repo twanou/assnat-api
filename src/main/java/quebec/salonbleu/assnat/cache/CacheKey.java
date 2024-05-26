@@ -4,7 +4,8 @@ public enum CacheKey {
 
     CURRENT_ASSIGNMENTS(Constants.CURRENT_ASSIGNMENTS),
     ALL_ASSIGNMENTS(Constants.ALL_ASSIGNMENTS),
-    LAST_UPDATE(Constants.LAST_UPDATE);
+    LAST_UPDATE(Constants.LAST_UPDATE),
+    NEXT_UPDATE(Constants.NEXT_UPDATE);
 
     CacheKey(String cacheKey) {
         if (!cacheKey.equals(this.name()))
@@ -15,5 +16,6 @@ public enum CacheKey {
         public static final String CURRENT_ASSIGNMENTS = "CURRENT_ASSIGNMENTS";
         public static final String ALL_ASSIGNMENTS = "ALL_ASSIGNMENTS";
         public static final String LAST_UPDATE = "LAST_UPDATE";
+        public static final String NEXT_UPDATE = "NEXT_UPDATE";
     }
 }
