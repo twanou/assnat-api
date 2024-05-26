@@ -19,4 +19,5 @@ public class Deputy implements UuidDocument {
     String firstName;
     String lastName;
     String title;
+    String lastDistrict;
 }
