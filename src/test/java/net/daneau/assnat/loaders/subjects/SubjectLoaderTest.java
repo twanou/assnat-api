@@ -1,7 +1,7 @@
 package net.daneau.assnat.loaders.subjects;
 
 import net.daneau.assnat.client.documents.Subject;
-import net.daneau.assnat.client.documents.subdocuments.SubjectData;
+import net.daneau.assnat.client.documents.subdocuments.SubjectDetails;
 import net.daneau.assnat.client.repositories.SubjectRepository;
 import net.daneau.assnat.loaders.subjects.mappers.SubjectDocumentTypeMapper;
 import net.daneau.assnat.scrappers.AssNatLogScraper;
@@ -52,14 +52,14 @@ class SubjectLoaderTest {
                         .build()))
                 .build();
         Subject expectedSubject = Subject.builder()
-                .subjectData(SubjectData.builder().title("titre").build())
+                .subjectDetails(SubjectDetails.builder().title("titre").build())
                 .legislature(1)
                 .session(2)
-                .date(LocalDate.now())
+                .date(LocalDate.of(2023, 1, 1))
                 .build();
-        when(subjectDocumentTypeMapperMatchMock.map(scrapedLogNode.getChildren().get(0).getChildren().get(0))).thenReturn(List.of(expectedSubject.getSubjectData()));
+        when(subjectDocumentTypeMapperMatchMock.map(scrapedLogNode.getChildren().get(0).getChildren().get(0))).thenReturn(List.of(expectedSubject.getSubjectDetails()));
         when(assNatLogScraperMock.scrape("relativeUrl")).thenReturn(scrapedLogNode);
-        this.subjectLoader.load("relativeUrl", 1, 2);
+        this.subjectLoader.load("relativeUrl", expectedSubject.getDate(), expectedSubject.getLegislature(), expectedSubject.getSession());
         verify(subjectDocumentTypeMapperNoMatchMock, never()).map(any());
         verify(subjectRepositoryMock).saveAll(List.of(expectedSubject));
     }

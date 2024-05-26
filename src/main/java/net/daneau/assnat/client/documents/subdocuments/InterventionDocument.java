@@ -10,12 +10,12 @@ import java.util.List;
 
 @Value
 @Builder
-public class Intervention {
+public class InterventionDocument {
 
     @Field(targetType = FieldType.OBJECT_ID)
     String deputyId;
     @Field(targetType = FieldType.OBJECT_ID)
-    String ridingId;
+    String districtId;
     @Field(targetType = FieldType.OBJECT_ID)
     String partyId;
     @Builder.Default

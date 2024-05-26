@@ -25,7 +25,7 @@ public class SubjectLoader {
     private final SubjectRepository subjectRepository;
     private final AssNatLogScraper assNatLogScraper;
 
-    public void load(String relativeUrl, int legislature, int session) {
+    public void load(String relativeUrl, LocalDate date, int legislature, int session) {
         log.info("Chargement : " + relativeUrl);
         ScrapedLogNode logs = this.assNatLogScraper.scrape(relativeUrl);
         List<Subject> subjects = new ArrayList<>();
@@ -35,8 +35,8 @@ public class SubjectLoader {
                     .orElse(List.of())
                     .stream()
                     .map(data -> Subject.builder()
-                            .date(LocalDate.now())
-                            .subjectData(data)
+                            .date(date)
+                            .subjectDetails(data)
                             .legislature(legislature)
                             .session(session)
                             .build())

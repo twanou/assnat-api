@@ -12,7 +12,7 @@ public class Assignment {
     @Field(targetType = FieldType.OBJECT_ID)
     String deputyId;
     @Field(targetType = FieldType.OBJECT_ID)
-    String ridingId;
+    String districtId;
     @Field(targetType = FieldType.OBJECT_ID)
     String partyId;
 }

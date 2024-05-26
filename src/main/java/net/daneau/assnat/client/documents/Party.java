@@ -13,4 +13,5 @@ public class Party {
     @Id
     String id;
     String name;
+    String acronym;
 }
