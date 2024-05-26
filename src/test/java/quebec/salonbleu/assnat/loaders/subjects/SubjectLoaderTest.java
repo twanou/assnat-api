@@ -58,8 +58,9 @@ class SubjectLoaderTest {
                 .session(2)
                 .date(LocalDate.of(2023, 1, 1))
                 .build();
-        when(subjectDocumentTypeMapperMatchMock.map(scrapedLogNode.getChildren().get(0).getChildren().get(0))).thenReturn(List.of(expectedSubject.getSubjectDetails()));
+        when(subjectDocumentTypeMapperMatchMock.map(scrapedLogNode.getChildren().getFirst().getChildren().getFirst())).thenReturn(List.of(expectedSubject.getSubjectDetails()));
         when(assNatLogScraperMock.scrape("/relativeUrl/123456.html")).thenReturn(scrapedLogNode);
+
         this.subjectLoader.load("/relativeUrl/123456.html", expectedSubject.getDate(), expectedSubject.getLegislature(), expectedSubject.getSession());
         verify(subjectDocumentTypeMapperNoMatchMock, never()).map(any());
         verify(subjectRepositoryMock).saveAll(List.of(expectedSubject));

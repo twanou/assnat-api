@@ -12,6 +12,7 @@ import java.time.LocalDate;
 public class ScrapedLogEntry {
 
     LocalDate date;
+    String note;
     String relativeUrl;
     LogType type;
     LogVersion version;
