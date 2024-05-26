@@ -2,9 +2,9 @@ package net.daneau.assnat.loaders.events;
 
 import org.springframework.context.ApplicationEvent;
 
-public class AssignmentUpdateEvent extends ApplicationEvent {
+public class ClearCacheEvent extends ApplicationEvent {
 
-    public AssignmentUpdateEvent(Object source) {
+    public ClearCacheEvent(Object source) {
         super(source);
     }
 }
