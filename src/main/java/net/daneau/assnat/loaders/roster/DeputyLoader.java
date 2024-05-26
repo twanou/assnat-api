@@ -23,7 +23,7 @@ class DeputyLoader {
                     .filter(deputy -> StringUtils.equals(deputy.getFirstName(), scrapedDeputy.getFirstName()))
                     .filter(deputy -> StringUtils.equals(deputy.getLastName(), scrapedDeputy.getLastName()))
                     .toList();
-            if (deputyResults.size() == 0) {
+            if (deputyResults.isEmpty()) {
                 deputies.add(
                         this.deputyRepository.save(
                                 Deputy.builder()
