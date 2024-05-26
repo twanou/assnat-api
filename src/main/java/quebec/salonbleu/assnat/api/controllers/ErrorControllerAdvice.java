@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.async.AsyncRequestNotUsableException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import quebec.salonbleu.assnat.api.models.errors.ErreurReponse;
 
@@ -29,5 +30,10 @@ public class ErrorControllerAdvice extends ResponseEntityExceptionHandler {
                         .code("301095")
                         .message("Une erreur est survenue.")
                         .build());
+    }
+
+    @ExceptionHandler(AsyncRequestNotUsableException.class)
+    public void handleAsyncRequestNotUsableException() {
+        // Pour éviter de polluer les logs quand un client abandonne la requête.
     }
 }
