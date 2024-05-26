@@ -1,4 +1,4 @@
-package quebec.salonbleu.assnat.api.models.assignments.responses;
+package quebec.salonbleu.assnat.api.models.assignments;
 
 import lombok.Builder;
 import lombok.Value;

@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -40,7 +41,7 @@ class SubjectControllerTest {
         when(subjectServiceMock.getNextUpdates()).thenReturn(List.of(LocalDate.now()));
 
         SujetReponse response = this.subjectController.getSubjectsByDeputyIds(args.getSearchString().get(), args.getDeputyIds(), args.getPartyIds(), args.getDistrictIds(), 0, 25);
-        assertEquals(response.getSujets(), sujets);
+        assertSame(response.getSujets(), sujets);
         assertEquals(LocalDate.now(), response.getDerniereMaj());
         assertEquals(List.of(LocalDate.now()), response.getFuturesMaj());
     }

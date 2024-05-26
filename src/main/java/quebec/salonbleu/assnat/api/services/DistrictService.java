@@ -1,28 +1,30 @@
 package quebec.salonbleu.assnat.api.services;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import quebec.salonbleu.assnat.api.models.commons.Circonscription;
-import quebec.salonbleu.assnat.client.documents.District;
-import quebec.salonbleu.assnat.client.repositories.DistrictRepository;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class DistrictService {
 
-    private final DistrictRepository districtRepository;
+    private final DistrictCacheService districtCacheService;
 
     public Map<UUID, Circonscription> getDistricts() {
-        return this.districtRepository.findAll()
-                .stream()
-                .collect(Collectors.toUnmodifiableMap(District::getId,
-                        d -> Circonscription.builder()
-                                .id(d.getId())
-                                .nom(d.getName())
-                                .build()));
+        return this.districtCacheService.getDistricts();
+    }
+
+    public List<Circonscription> getDistrictsByName(String name) {
+        return this.districtCacheService.getDistricts().values().stream()
+                .filter(district ->
+                        StringUtils.containsIgnoreCase(
+                                StringUtils.stripAccents(district.getNom()),
+                                StringUtils.stripAccents(name)))
+                .toList();
     }
 }

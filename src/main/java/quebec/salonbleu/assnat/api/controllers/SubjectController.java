@@ -22,7 +22,7 @@ import java.util.UUID;
 @CrossOrigin
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("${api.subjects.path}")
+@RequestMapping("${api.subject.path}")
 public class SubjectController {
 
     private final SubjectService subjectService;

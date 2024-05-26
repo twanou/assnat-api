@@ -2,12 +2,12 @@ package quebec.salonbleu.assnat.api.services;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import quebec.salonbleu.assnat.api.models.commons.Depute;
-import quebec.salonbleu.assnat.client.documents.Deputy;
-import quebec.salonbleu.assnat.client.repositories.DeputyRepository;
 import test.utils.TestUUID;
 
 import java.util.List;
@@ -21,19 +21,26 @@ import static org.mockito.Mockito.when;
 class DeputyServiceTest {
 
     @Mock
-    private DeputyRepository deputyRepositoryMock;
+    private DeputyCacheService deputyCacheServiceMock;
     @InjectMocks
-    private DeputyService deputyServiceMock;
+    private DeputyService deputyService;
 
     @Test
-    void getDeputes() {
-        Deputy deputy = Deputy.builder().id(TestUUID.ID1).firstName("boby").lastName("nault").title("M.").build();
-        when(deputyRepositoryMock.findAll()).thenReturn(List.of(deputy));
+    void getDeputies() {
+        Depute depute = Depute.builder().id(TestUUID.ID1).prenom("boby").nom("nault").titre("M.").build();
+        when(deputyCacheServiceMock.getDeputies()).thenReturn(Map.of(TestUUID.ID1, depute));
 
-        Map<UUID, Depute> deputeMap = this.deputyServiceMock.getDeputies();
-        assertEquals(deputy.getId(), deputeMap.get(deputy.getId()).getId());
-        assertEquals(deputy.getTitle(), deputeMap.get(deputy.getId()).getTitre());
-        assertEquals(deputy.getFirstName(), deputeMap.get(deputy.getId()).getPrenom());
-        assertEquals(deputy.getLastName(), deputeMap.get(deputy.getId()).getNom());
+        Map<UUID, Depute> deputeMap = this.deputyService.getDeputies();
+        assertEquals(depute, deputeMap.get(depute.getId()));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"boby", "bô", "nault", "bObY nault"})
+    void getDeputiesByName(String value) {
+        Depute depute = Depute.builder().id(TestUUID.ID1).prenom("boby").nom("nault").titre("M.").build();
+        when(deputyCacheServiceMock.getDeputies()).thenReturn(Map.of(TestUUID.ID1, depute));
+
+        List<Depute> deputes = this.deputyService.getDeputiesByName(value);
+        assertEquals(depute, deputes.getFirst());
     }
 }

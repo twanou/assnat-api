@@ -26,6 +26,12 @@ class AssnatCacheManagerTest {
     private Cache cacheMock;
     @Mock
     private Cache cacheMock2;
+    @Mock
+    private Cache cacheMock3;
+    @Mock
+    private Cache cacheMock4;
+    @Mock
+    private Cache cacheMock5;
     @InjectMocks
     private AssnatCacheManager assnatCacheManager;
 
@@ -33,10 +39,16 @@ class AssnatCacheManagerTest {
     void clearAssignmentCaches() {
         when(cacheManagerMock.getCache(CacheKey.ALL_ASSIGNMENTS.name())).thenReturn(cacheMock);
         when(cacheManagerMock.getCache(CacheKey.CURRENT_ASSIGNMENTS.name())).thenReturn(cacheMock2);
+        when(cacheManagerMock.getCache(CacheKey.DEPUTIES.name())).thenReturn(cacheMock3);
+        when(cacheManagerMock.getCache(CacheKey.DISTRICTS.name())).thenReturn(cacheMock4);
+        when(cacheManagerMock.getCache(CacheKey.PARTIES.name())).thenReturn(cacheMock5);
 
         this.assnatCacheManager.clearAssignmentCaches();
         verify(cacheMock).clear();
         verify(cacheMock2).clear();
+        verify(cacheMock3).clear();
+        verify(cacheMock4).clear();
+        verify(cacheMock5).clear();
         verify(applicationEventPublisherMock).publishEvent(any(ClearCacheEvent.class));
     }
 

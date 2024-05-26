@@ -18,7 +18,11 @@ public class AssnatCacheManager {
     private final ApplicationEventPublisher eventBus;
 
     public void clearAssignmentCaches() {
-        this.clear(CacheKey.CURRENT_ASSIGNMENTS, CacheKey.ALL_ASSIGNMENTS);
+        this.clear(CacheKey.CURRENT_ASSIGNMENTS,
+                CacheKey.ALL_ASSIGNMENTS,
+                CacheKey.DEPUTIES,
+                CacheKey.PARTIES,
+                CacheKey.DISTRICTS);
         this.eventBus.publishEvent(new ClearCacheEvent(this));
     }
 
