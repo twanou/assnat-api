@@ -45,6 +45,20 @@ class SubjectServiceTest {
 
     @Test
     void getSubjectsByDeputyIds() {
+        Set<UUID> ids = Set.of(TestUUID.ID1, TestUUID.ID2);
+        List<Subject> subjects = List.of(Subject.builder().build());
+        List<Sujet> sujets = List.of(Sujet.builder().build());
+        Map<UUID, Affectation> affectations = Map.of();
+        when(subjectRepositoryMock.findSubjectsByDeputyIds(ids, PageRequest.of(0, 25))).thenReturn(subjects);
+        when(assignmentServiceMock.getAllAssignments()).thenReturn(affectations);
+        when(subjectMapperMock.toSujetsList(same(subjects), same(affectations))).thenReturn(sujets);
+
+        List<Sujet> response = this.subjectService.getSubjectsByDeputyIds(ids, 0, 25);
+        assertSame(sujets, response);
+    }
+
+    @Test
+    void getSubjects() {
         SubjectArgs args = SubjectArgs.builder()
                 .keywords(Set.of("mots"))
                 .deputyIds(Set.of(TestUUID.ID1, TestUUID.ID2))
@@ -63,7 +77,7 @@ class SubjectServiceTest {
     }
 
     @Test
-    void getSubjects() {
+    void getSubjectsById() {
         Set<UUID> ids = Set.of(TestUUID.ID1, TestUUID.ID2);
         List<Subject> subjects = List.of(Subject.builder().build());
         List<Sujet> sujets = List.of(Sujet.builder().build());
@@ -72,7 +86,7 @@ class SubjectServiceTest {
         when(assignmentServiceMock.getAllAssignments()).thenReturn(affectations);
         when(subjectMapperMock.toSujetsList(same(subjects), same(affectations))).thenReturn(sujets);
 
-        List<Sujet> response = this.subjectService.getSubjects(ids);
+        List<Sujet> response = this.subjectService.getSubjectsById(ids);
         assertSame(sujets, response);
     }
 

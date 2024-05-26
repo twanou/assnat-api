@@ -40,20 +40,20 @@ class SubjectControllerTest {
         when(subjectServiceMock.getLastUpdate()).thenReturn(LocalDate.now());
         when(subjectServiceMock.getNextUpdates()).thenReturn(List.of(LocalDate.now()));
 
-        SujetReponse response = this.subjectController.getSubjectsByDeputyIds(args.getKeywords(), args.getDeputyIds(), args.getPartyIds(), args.getDistrictIds(), 0, 25);
+        SujetReponse response = this.subjectController.getSubjects(args.getKeywords(), args.getDeputyIds(), args.getPartyIds(), args.getDistrictIds(), 0, 25);
         assertSame(response.getSujets(), sujets);
         assertEquals(LocalDate.now(), response.getDerniereMaj());
         assertEquals(List.of(LocalDate.now()), response.getFuturesMaj());
     }
 
     @Test
-    void getSubjects() {
+    void getSubjectsById() {
         List<Sujet> sujets = List.of(Sujet.builder().build());
-        when(subjectServiceMock.getSubjects(Set.of(TestUUID.ID1, TestUUID.ID2))).thenReturn(sujets);
+        when(subjectServiceMock.getSubjectsById(Set.of(TestUUID.ID1, TestUUID.ID2))).thenReturn(sujets);
         when(subjectServiceMock.getLastUpdate()).thenReturn(LocalDate.now());
         when(subjectServiceMock.getNextUpdates()).thenReturn(List.of(LocalDate.now()));
 
-        SujetReponse response = this.subjectController.getSubjects(Set.of(TestUUID.ID1, TestUUID.ID2));
+        SujetReponse response = this.subjectController.getSubjectsById(Set.of(TestUUID.ID1, TestUUID.ID2));
         assertEquals(sujets, response.getSujets());
         assertEquals(LocalDate.now(), response.getDerniereMaj());
         assertEquals(List.of(LocalDate.now()), response.getFuturesMaj());

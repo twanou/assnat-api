@@ -44,6 +44,15 @@ class SubjectRepositoryTest {
     }
 
     @Test
+    void findSubjectsByDeputyIds() {
+        List<Subject> subjects = List.of(Subject.builder().build());
+        when(subjectSpringRepositoryMock.findSubjectsByDeputyIds(Set.of(TestUUID.ID1, TestUUID.ID2), PageRequest.of(0, 25))).thenReturn(subjects);
+
+        List<Subject> response = this.subjectRepository.findSubjectsByDeputyIds(Set.of(TestUUID.ID1, TestUUID.ID2), PageRequest.of(0, 25));
+        assertSame(subjects, response);
+    }
+
+    @Test
     void findAllById() {
         List<Subject> subjects = List.of(Subject.builder().build());
         when(subjectSpringRepositoryMock.findAllById(List.of(TestUUID.ID1))).thenReturn(subjects);
@@ -66,17 +75,21 @@ class SubjectRepositoryTest {
         List<Subject> subjects = List.of(Subject.builder().build());
         SubjectArgs args = SubjectArgs.builder()
                 .keywords(new LinkedHashSet<>(List.of("mot1", "mot2", "mot3")))
-                .deputyIds(Set.of(TestUUID.ID1, TestUUID.ID2))
-                .districtIds(Set.of(TestUUID.ID3, TestUUID.ID4))
-                .partyIds(Set.of(TestUUID.ID5, TestUUID.ID6))
+                .deputyIds(new LinkedHashSet<>(List.of(TestUUID.ID1, TestUUID.ID2)))
+                .districtIds(new LinkedHashSet<>(List.of(TestUUID.ID3, TestUUID.ID4)))
+                .partyIds(new LinkedHashSet<>(List.of(TestUUID.ID5, TestUUID.ID6)))
                 .build();
         PageRequest pageRequest = PageRequest.of(0, 25);
         Query query = TextQuery.queryText(TextCriteria.forDefaultLanguage().matching("mot1 mot2 mot3")).sortByScore()
                 .addCriteria(Criteria.where("subjectDetails.interventions")
-                        .elemMatch(
-                                Criteria.where("deputyId").in(args.getDeputyIds())
-                                        .and("partyId").in(args.getPartyIds())
-                                        .and("districtId").in(args.getDistrictIds())))
+                        .all(
+                                new Criteria().elemMatch(Criteria.where("deputyId").is(TestUUID.ID1)).getCriteriaObject(),
+                                new Criteria().elemMatch(Criteria.where("deputyId").is(TestUUID.ID2)).getCriteriaObject(),
+                                new Criteria().elemMatch(Criteria.where("districtId").is(TestUUID.ID3)).getCriteriaObject(),
+                                new Criteria().elemMatch(Criteria.where("districtId").is(TestUUID.ID4)).getCriteriaObject(),
+                                new Criteria().elemMatch(Criteria.where("partyId").is(TestUUID.ID5)).getCriteriaObject(),
+                                new Criteria().elemMatch(Criteria.where("partyId").is(TestUUID.ID6)).getCriteriaObject()
+                        ))
                 .with(PageRequest.of(0, 25));
         when(mongoTemplateMock.find(query, Subject.class)).thenReturn(subjects);
 
@@ -95,10 +108,14 @@ class SubjectRepositoryTest {
         PageRequest pageRequest = PageRequest.of(0, 25);
         Query query = new Query()
                 .addCriteria(Criteria.where("subjectDetails.interventions")
-                        .elemMatch(
-                                Criteria.where("deputyId").in(args.getDeputyIds())
-                                        .and("partyId").in(args.getPartyIds())
-                                        .and("districtId").in(args.getDistrictIds())))
+                        .all(
+                                new Criteria().elemMatch(Criteria.where("deputyId").is(TestUUID.ID1)).getCriteriaObject(),
+                                new Criteria().elemMatch(Criteria.where("deputyId").is(TestUUID.ID2)).getCriteriaObject(),
+                                new Criteria().elemMatch(Criteria.where("districtId").is(TestUUID.ID3)).getCriteriaObject(),
+                                new Criteria().elemMatch(Criteria.where("districtId").is(TestUUID.ID4)).getCriteriaObject(),
+                                new Criteria().elemMatch(Criteria.where("partyId").is(TestUUID.ID5)).getCriteriaObject(),
+                                new Criteria().elemMatch(Criteria.where("partyId").is(TestUUID.ID6)).getCriteriaObject()
+                        ))
                 .with(Sort.by(Sort.Direction.DESC, "date"))
                 .with(PageRequest.of(0, 25));
         when(mongoTemplateMock.find(query, Subject.class)).thenReturn(subjects);
@@ -113,7 +130,6 @@ class SubjectRepositoryTest {
         SubjectArgs args = SubjectArgs.builder().build();
         PageRequest pageRequest = PageRequest.of(0, 25);
         Query query = new Query()
-                .addCriteria(Criteria.where("subjectDetails.interventions").elemMatch(new Criteria()))
                 .with(Sort.by(Sort.Direction.DESC, "date"))
                 .with(PageRequest.of(0, 25));
         when(mongoTemplateMock.find(query, Subject.class)).thenReturn(subjects);

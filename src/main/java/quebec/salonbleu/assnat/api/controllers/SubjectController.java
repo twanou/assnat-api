@@ -28,12 +28,12 @@ public class SubjectController {
     private final SubjectService subjectService;
 
     @GetMapping
-    public SujetReponse getSubjectsByDeputyIds(@RequestParam(required = false, defaultValue = "") @Size(max = 25) Set<String> motsCles,
-                                               @RequestParam(required = false, defaultValue = "") @Size(max = 125) Set<UUID> deputeIds,
-                                               @RequestParam(required = false, defaultValue = "") @Size(max = 5) Set<UUID> partiIds,
-                                               @RequestParam(required = false, defaultValue = "") @Size(max = 125) Set<UUID> circonscriptionIds,
-                                               @RequestParam(required = false, defaultValue = "0") @Min(0) Integer page,
-                                               @RequestParam(required = false, defaultValue = "25") @Min(1) @Max(25) Integer taille) {
+    public SujetReponse getSubjects(@RequestParam(required = false, defaultValue = "") @Size(max = 25) Set<String> motsCles,
+                                    @RequestParam(required = false, defaultValue = "") @Size(max = 125) Set<UUID> deputeIds,
+                                    @RequestParam(required = false, defaultValue = "") @Size(max = 5) Set<UUID> partiIds,
+                                    @RequestParam(required = false, defaultValue = "") @Size(max = 125) Set<UUID> circonscriptionIds,
+                                    @RequestParam(required = false, defaultValue = "0") @Min(0) Integer page,
+                                    @RequestParam(required = false, defaultValue = "25") @Min(1) @Max(25) Integer taille) {
         SubjectArgs args = SubjectArgs.builder()
                 .keywords(motsCles)
                 .deputyIds(deputeIds)
@@ -48,9 +48,9 @@ public class SubjectController {
     }
 
     @GetMapping("/{ids}")
-    public SujetReponse getSubjects(@PathVariable @Size(min = 1, max = 5) Set<UUID> ids) {
+    public SujetReponse getSubjectsById(@PathVariable @Size(min = 1, max = 5) Set<UUID> ids) {
         return SujetReponse.builder()
-                .sujets(this.subjectService.getSubjects(ids))
+                .sujets(this.subjectService.getSubjectsById(ids))
                 .derniereMaj(this.subjectService.getLastUpdate())
                 .futuresMaj(this.subjectService.getNextUpdates())
                 .build();

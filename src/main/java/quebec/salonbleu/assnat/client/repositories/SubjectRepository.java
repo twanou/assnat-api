@@ -2,7 +2,9 @@ package quebec.salonbleu.assnat.client.repositories;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.bson.Document;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -13,8 +15,10 @@ import org.springframework.stereotype.Component;
 import quebec.salonbleu.assnat.client.documents.Subject;
 import quebec.salonbleu.assnat.client.repositories.args.SubjectArgs;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 @Component
@@ -28,6 +32,10 @@ public class SubjectRepository {
         return this.subjectSpringRepository.findFirstByOrderByDateDesc();
     }
 
+    public List<Subject> findSubjectsByDeputyIds(Set<UUID> ids, Pageable pageable) {
+        return this.subjectSpringRepository.findSubjectsByDeputyIds(ids, pageable);
+    }
+
     public List<Subject> findAllById(Iterable<UUID> ids) {
         return this.subjectSpringRepository.findAllById(ids);
     }
@@ -38,17 +46,24 @@ public class SubjectRepository {
 
     public List<Subject> find(SubjectArgs args, PageRequest pageRequest) {
         Query query = this.getBaseQuery(args);
-        Criteria elemMatchCriteria = new Criteria();
-        if (!args.getDeputyIds().isEmpty()) {
-            elemMatchCriteria.and("deputyId").in(args.getDeputyIds());
+        List<Document> criteriaObjects = new ArrayList<>();
+
+        args.getDeputyIds().stream()
+                .map(deputyId -> new Criteria().elemMatch(Criteria.where("deputyId").is(deputyId)).getCriteriaObject())
+                .forEach(criteriaObjects::add);
+
+        args.getDistrictIds().stream()
+                .map(deputyId -> new Criteria().elemMatch(Criteria.where("districtId").is(deputyId)).getCriteriaObject())
+                .forEach(criteriaObjects::add);
+
+        args.getPartyIds().stream()
+                .map(deputyId -> new Criteria().elemMatch(Criteria.where("partyId").is(deputyId)).getCriteriaObject())
+                .forEach(criteriaObjects::add);
+
+        if (!criteriaObjects.isEmpty()) {
+            query.addCriteria(Criteria.where("subjectDetails.interventions").all(criteriaObjects));
         }
-        if (!args.getDistrictIds().isEmpty()) {
-            elemMatchCriteria.and("districtId").in(args.getDistrictIds());
-        }
-        if (!args.getPartyIds().isEmpty()) {
-            elemMatchCriteria.and("partyId").in(args.getPartyIds());
-        }
-        query.addCriteria(Criteria.where("subjectDetails.interventions").elemMatch(elemMatchCriteria));
+
         query.with(pageRequest);
         return mongoTemplate.find(query, Subject.class);
     }
