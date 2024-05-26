@@ -32,12 +32,26 @@ class SubjectServiceTest {
     private SubjectService subjectService;
 
     @Test
-    void getSubjects() {
+    void getSubjectsByDeputyIds() {
         Set<String> ids = Set.of("1", "2");
         List<Subject> subjects = List.of(Subject.builder().build());
         List<Sujet> sujets = List.of(Sujet.builder().build());
         Map<String, Affectation> affectations = Map.of();
         when(subjectRepositoryMock.findSubjectsByDeputyIds(ids)).thenReturn(subjects);
+        when(assignmentServiceMock.getAllAssignments()).thenReturn(affectations);
+        when(subjectMapperMock.toSujetsList(same(subjects), same(affectations))).thenReturn(sujets);
+
+        List<Sujet> response = this.subjectService.getSubjectsByDeputyIds(ids);
+        assertSame(sujets, response);
+    }
+
+    @Test
+    void getSubjects() {
+        Set<String> ids = Set.of("1", "2");
+        List<Subject> subjects = List.of(Subject.builder().build());
+        List<Sujet> sujets = List.of(Sujet.builder().build());
+        Map<String, Affectation> affectations = Map.of();
+        when(subjectRepositoryMock.findAllById(ids)).thenReturn(subjects);
         when(assignmentServiceMock.getAllAssignments()).thenReturn(affectations);
         when(subjectMapperMock.toSujetsList(same(subjects), same(affectations))).thenReturn(sujets);
 

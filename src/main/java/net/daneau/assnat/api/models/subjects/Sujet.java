@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @Value
 @Builder
 public class Sujet {
+    String id;
     LocalDate date;
     int legislature;
     int session;
