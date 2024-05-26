@@ -18,6 +18,6 @@ class DeputyDeclarationDocumentMapperTest {
     @Test
     void format() {
         List<String> formattedParagraphs = this.deputyDeclarationDocumentMapper.format(List.of("M. Bouchard : Bonjour", "oui", "Vice-Président : merci lulu", "bon passons à autre chose"));
-        assertEquals(List.of("Bonjour", "oui"), formattedParagraphs);
+        assertEquals(List.of("M. Bouchard : Bonjour", "oui"), formattedParagraphs);
     }
 }

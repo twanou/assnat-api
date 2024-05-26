@@ -36,7 +36,7 @@ class SubjectDocumentTypeMapperTest {
                         .children(List.of(
                                 ScrapedLogNode.builder()
                                         .title("M. Lucien Bouchard")
-                                        .paragraphs(List.of("M. Bouchard : Bonjour", "oui", "Vice-Président : merci lulu", "bon passons à autre chose"))
+                                        .paragraphs(List.of("M. Bouchard : Bonjour", "• (10 h 20) •", "Mais, lorsqu'on leur demande : Qu'allez-vous faire?", "oui", "Vice-Président : merci lulu", "bon passons à autre chose"))
                                         .build(),
                                 ScrapedLogNode.builder()
                                         .title("Document déposé")
@@ -56,7 +56,7 @@ class SubjectDocumentTypeMapperTest {
                                 .districtId(assignment.getDistrictId())
                                 .partyId(assignment.getPartyId())
                                 .deputyId(assignment.getDeputyId())
-                                .paragraphs(scrapedLogNode.getChildren().get(0).getChildren().get(0).getParagraphs())
+                                .paragraphs(List.of("Bonjour", "Mais, lorsqu'on leur demande : Qu'allez-vous faire?", "oui", "Vice-Président : merci lulu", "bon passons à autre chose"))
                                 .build()))
                 .build();
         when(deputyFinderMock.findByCompleteName("M. Lucien Bouchard")).thenReturn(assignment);
