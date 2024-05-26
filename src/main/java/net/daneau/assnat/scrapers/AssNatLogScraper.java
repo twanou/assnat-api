@@ -26,7 +26,7 @@ public class AssNatLogScraper {
 
     public ScrapedLogNode scrape(String relativeUrl) {
         HtmlPage page = this.webClient.getRelativePage(relativeUrl);
-        ArrayList<InternalLogNode> internalLogNodes = this.buildSummary(page.getByXPath("//div[@class='tableMatieresJournal']//a"));
+        ArrayList<InternalLogNode> internalLogNodes = this.buildSummary(page.getByXPath("//div[@class='tableMatieresJournal']//a[@href]"));
         this.addParagraphs(internalLogNodes, page.getByXPath("//contenu//p"));
         return this.toLogNode(internalLogNodes.get(0));
     }

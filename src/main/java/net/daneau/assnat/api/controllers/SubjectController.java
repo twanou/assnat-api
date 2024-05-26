@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
 import net.daneau.assnat.api.models.subjects.responses.SujetReponse;
 import net.daneau.assnat.api.services.SubjectService;
+import net.daneau.assnat.loaders.services.LoadingService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,11 +27,13 @@ import java.util.Set;
 public class SubjectController {
 
     private final SubjectService subjectService;
+    private final LoadingService loadingService;
 
     @GetMapping
     public SujetReponse getSubjectsByDeputyIds(@RequestParam @Size(min = 1, max = 125) Set<@NotBlank String> deputeIds,
                                                @RequestParam(required = false) @NotNull @Min(0) Integer page,
                                                @RequestParam(required = false) @NotNull @Min(5) @Max(25) Integer taille) {
+        this.loadingService.load();
         return SujetReponse.builder()
                 .sujets(this.subjectService.getSubjectsByDeputyIds(deputeIds, page, taille))
                 .build();
