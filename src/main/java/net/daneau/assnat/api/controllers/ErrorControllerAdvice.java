@@ -6,18 +6,18 @@ import net.daneau.assnat.api.models.errors.ErreurReponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 @Slf4j
 @ControllerAdvice
 public class ErrorControllerAdvice {
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErreurReponse> gottaCatchEmAll(Exception exception) {
-        log.error("Une exception est survenue : ", exception);
-        return ResponseEntity.status(500)
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ResponseEntity<ErreurReponse> handleNoResourceFoundException() {
+        return ResponseEntity.status(404)
                 .body(ErreurReponse.builder()
-                        .code("301095")
-                        .message("Une erreur est survenue.")
+                        .code("151176")
+                        .message("Ressource introuvable.")
                         .build());
     }
 
@@ -27,6 +27,16 @@ public class ErrorControllerAdvice {
                 .body(ErreurReponse.builder()
                         .code("200580")
                         .message("Erreur de validation.")
+                        .build());
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErreurReponse> handleException(Exception exception) {
+        log.error("Une exception est survenue : ", exception);
+        return ResponseEntity.status(500)
+                .body(ErreurReponse.builder()
+                        .code("301095")
+                        .message("Une erreur est survenue.")
                         .build());
     }
 }
