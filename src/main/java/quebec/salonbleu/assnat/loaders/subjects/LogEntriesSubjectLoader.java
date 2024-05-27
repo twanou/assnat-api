@@ -45,8 +45,8 @@ public class LogEntriesSubjectLoader {
                 .toList();
 
         this.assertNoDuplicateDate(filteredLogEntries);
-        this.loadPreliminaryLogEntries(filteredLogEntries);
         this.loadFinalLogEntries(prerequisiteTask, filteredLogEntries);
+        this.loadPreliminaryLogEntries(filteredLogEntries);
     }
 
     private void loadFinalLogEntries(Runnable prerequisiteTask, List<ScrapedLogEntry> filteredLogEntries) {
@@ -65,11 +65,11 @@ public class LogEntriesSubjectLoader {
     }
 
     private void loadPreliminaryLogEntries(List<ScrapedLogEntry> filteredLogEntries) {
-        this.upcomingLogRepository.deleteAll();
         List<ScrapedLogEntry> preliminaryLogEntries = filteredLogEntries.stream()
                 .filter(entry -> LogVersion.PRELIMINARY.equals(entry.getVersion()))
                 .toList();
 
+        this.upcomingLogRepository.deleteAll();
         preliminaryLogEntries.forEach(entry ->
                 this.upcomingLogRepository.save(UpcomingLog.builder().date(entry.getDate()).build()));
         this.assnatCacheManager.clearNextUpdateCache();
