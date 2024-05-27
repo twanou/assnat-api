@@ -101,9 +101,9 @@ class SubjectRepositoryTest {
     void findWithoutSearchString() {
         List<Subject> subjects = List.of(Subject.builder().build());
         SubjectArgs args = SubjectArgs.builder()
-                .deputyIds(Set.of(TestUUID.ID1, TestUUID.ID2))
-                .districtIds(Set.of(TestUUID.ID3, TestUUID.ID4))
-                .partyIds(Set.of(TestUUID.ID5, TestUUID.ID6))
+                .deputyIds(new LinkedHashSet<>(List.of(TestUUID.ID1, TestUUID.ID2)))
+                .districtIds(new LinkedHashSet<>(List.of(TestUUID.ID3, TestUUID.ID4)))
+                .partyIds(new LinkedHashSet<>(List.of(TestUUID.ID5, TestUUID.ID6)))
                 .build();
         PageRequest pageRequest = PageRequest.of(0, 25);
         Query query = new Query()

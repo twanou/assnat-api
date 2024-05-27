@@ -24,21 +24,21 @@ class PhotoUtilsTest {
 
     @Test
     void getUniqueId() {
-        String fileName = this.photoUtils.getUniqueId("René", "Lévesque", "Taillon", "Parti Québecois");
-        assertEquals("59j7uu1cagfhezvxu1jjc1lvj1wy6re2s9ctw15a2p3en865sw", fileName);
+        String fileName = this.photoUtils.getUniqueId("René", "Lévesque", "Taillon");
+        assertEquals("2bn1vn7qi5t12u0fgf2vio888ko2mido0xpan4xxrgaxybj82f", fileName);
     }
 
     @Test
     void getPhotoUrl() {
-        when(photoDirectory.exists("59j7uu1cagfhezvxu1jjc1lvj1wy6re2s9ctw15a2p3en865sw")).thenReturn(true);
-        String url = this.photoUtils.getPhotoUrl("René", "Lévesque", "Taillon", "Parti Québecois");
-        assertEquals("http://url.com/59j7uu1cagfhezvxu1jjc1lvj1wy6re2s9ctw15a2p3en865sw.jpg", url);
+        when(photoDirectory.exists("2bn1vn7qi5t12u0fgf2vio888ko2mido0xpan4xxrgaxybj82f")).thenReturn(true);
+        String url = this.photoUtils.getPhotoUrl("René", "Lévesque", "Taillon");
+        assertEquals("http://url.com/2bn1vn7qi5t12u0fgf2vio888ko2mido0xpan4xxrgaxybj82f.jpg", url);
     }
 
     @Test
     void getPhotoUrlNotFound() {
-        when(photoDirectory.exists("59j7uu1cagfhezvxu1jjc1lvj1wy6re2s9ctw15a2p3en865sw")).thenReturn(false);
-        String url = this.photoUtils.getPhotoUrl("René", "Lévesque", "Taillon", "Parti Québecois");
+        when(photoDirectory.exists("2bn1vn7qi5t12u0fgf2vio888ko2mido0xpan4xxrgaxybj82f")).thenReturn(false);
+        String url = this.photoUtils.getPhotoUrl("René", "Lévesque", "Taillon");
         assertEquals("http://url.com/photo_introuvable.jpg", url);
     }
 }

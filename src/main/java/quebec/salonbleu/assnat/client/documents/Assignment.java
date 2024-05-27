@@ -25,7 +25,6 @@ public class Assignment implements UuidDocument {
     UUID deputyId;
     UUID districtId;
     UUID partyId;
-    String photo;
     @Builder.Default
     List<String> functions = List.of();
 }

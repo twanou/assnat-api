@@ -34,12 +34,22 @@ class DeputyLoader {
                                         .firstName(scrapedDeputy.getFirstName())
                                         .lastName(scrapedDeputy.getLastName())
                                         .lastDistrict(scrapedDeputy.getDistrict())
+                                        .photo(scrapedDeputy.getPhoto())
                                         .build()));
             } else {
                 List<Deputy> refinedDeputyResults = deputyResults.stream()
                         .filter(deputy -> deputy.getLastDistrict().equals(scrapedDeputy.getDistrict()))
                         .toList();
+                
                 this.errorHandler.assertSize(1, refinedDeputyResults, () -> new LoadingException("Député nécéssite validation manuelle" + scrapedDeputy));
+
+                //maj photo
+                Deputy deputy = refinedDeputyResults.getFirst();
+                if (!StringUtils.equals(deputy.getPhoto(), scrapedDeputy.getPhoto())) {
+                    Deputy updatedDeputy = deputy.withPhoto(scrapedDeputy.getPhoto());
+                    this.deputyRepository.save(updatedDeputy);
+                    deputies.set(deputies.indexOf(deputy), updatedDeputy);
+                }
             }
         }
         return Collections.unmodifiableList(deputies);

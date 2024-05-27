@@ -36,13 +36,13 @@ class DeputyLoaderTest {
 
     @Test
     void loadWithoutSave() {
-        Deputy jacques = Deputy.builder().title("M.").firstName("Jacques").lastName("Parizeau").lastDistrict("L'assomption").build();
-        List<Deputy> deputies = List.of(jacques);
+        Deputy jacques = Deputy.builder().title("M.").firstName("Jacques").lastName("Parizeau").lastDistrict("L'assomption").photo("photo1").build();
+        List<Deputy> deputies = new ArrayList<>(List.of(jacques));
         when(deputyRepositoryMock.findAll()).thenReturn(deputies);
 
-        List<Deputy> results = this.deputyLoader.load(List.of(ScrapedDeputy.builder().firstName("Jacques").lastName("Parizeau").district("L'assomption").build()));
-        verify(deputyRepositoryMock, never()).save(any());
+        List<Deputy> results = this.deputyLoader.load(List.of(ScrapedDeputy.builder().firstName("Jacques").lastName("Parizeau").district("L'assomption").photo("photo2").build()));
         verify(errorHandlerMock).assertSize(eq(1), eq(List.of(jacques)), argThat(s -> s.get() instanceof LoadingException));
+        verify(deputyRepositoryMock).save(jacques.withPhoto("photo2"));
         assertEquals(deputies, results);
     }
 

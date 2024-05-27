@@ -56,17 +56,13 @@ public class AssignmentService {
                                 .circonscription(circonscriptions.get(assignment.getDistrictId()))
                                 .photoUrl(this.getPhotoUrl(
                                         deputes.get(assignment.getDeputyId()),
-                                        circonscriptions.get(assignment.getDistrictId()),
-                                        partis.get(assignment.getPartyId()))
+                                        circonscriptions.get(assignment.getDistrictId()))
                                 )
                                 .fonctions(assignment.getFunctions())
                                 .build()));
     }
 
-    private String getPhotoUrl(Depute depute, Circonscription circonscription, Parti parti) {
-        return this.photoUtils.getPhotoUrl(depute.getPrenom(),
-                depute.getNom(),
-                circonscription.getNom(),
-                parti.getNom());
+    private String getPhotoUrl(Depute depute, Circonscription circonscription) {
+        return this.photoUtils.getPhotoUrl(depute.getPrenom(), depute.getNom(), circonscription.getNom());
     }
 }

@@ -46,7 +46,7 @@ class AssignmentServiceTest {
         when(deputyServiceMock.getDeputies()).thenReturn(deputeMap);
         when(districtServiceMock.getDistricts()).thenReturn(circonscriptionMap);
         when(partyServiceMock.getParties()).thenReturn(partiMap);
-        when(photoUtilsMock.getPhotoUrl("prenom", "nom", "circonscription", "parti")).thenReturn("url");
+        when(photoUtilsMock.getPhotoUrl("prenom", "nom", "circonscription")).thenReturn("url");
         Assignment assignment = Assignment.builder().id(TestUUID.ID4).deputyId(TestUUID.ID1).districtId(TestUUID.ID2).partyId(TestUUID.ID3).build();
         when(assignmentRepositoryMock.findByEndDate(null)).thenReturn(List.of(assignment));
 
@@ -65,7 +65,7 @@ class AssignmentServiceTest {
         when(deputyServiceMock.getDeputies()).thenReturn(deputeMap);
         when(districtServiceMock.getDistricts()).thenReturn(circonscriptionMap);
         when(partyServiceMock.getParties()).thenReturn(partiMap);
-        when(photoUtilsMock.getPhotoUrl("prenom", "nom", "circonscription", "parti")).thenReturn("url");
+        when(photoUtilsMock.getPhotoUrl("prenom", "nom", "circonscription")).thenReturn("url");
         Assignment assignment = Assignment.builder().id(TestUUID.ID4).deputyId(TestUUID.ID1).districtId(TestUUID.ID2).partyId(TestUUID.ID3).functions(List.of("depute")).build();
         when(assignmentRepositoryMock.findAll()).thenReturn(List.of(assignment));
 

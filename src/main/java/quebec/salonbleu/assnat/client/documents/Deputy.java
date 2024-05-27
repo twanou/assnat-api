@@ -20,4 +20,6 @@ public class Deputy implements UuidDocument {
     String lastName;
     String title;
     String lastDistrict;
+    @With
+    String photo;
 }
