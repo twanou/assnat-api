@@ -1,5 +1,6 @@
 package quebec.salonbleu.assnat.api.models.subjects;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Value;
 
@@ -9,11 +10,12 @@ import java.util.UUID;
 @Value
 @Builder
 public class Sujet {
-    
+
     UUID id;
     LocalDate date;
     int legislature;
     int session;
+    @Schema(description = "Url menant à l'intervention sur le site web de l'Assemblée nationale.")
     String url;
     SujetDetails details;
 }

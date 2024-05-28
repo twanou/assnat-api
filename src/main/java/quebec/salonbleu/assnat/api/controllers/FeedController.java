@@ -1,5 +1,7 @@
 package quebec.salonbleu.assnat.api.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -17,6 +19,7 @@ import quebec.salonbleu.assnat.api.services.SubjectService;
 import java.util.Set;
 import java.util.UUID;
 
+@Tag(name = "1. Fil")
 @Validated
 @CrossOrigin
 @RestController
@@ -26,6 +29,7 @@ public class FeedController {
 
     private final SubjectService subjectService;
 
+    @Operation(summary = "Obtenir les derniers sujets en fonction des député(e)s choisi(e)s.")
     @GetMapping
     public SujetReponse getSubjectsByDeputyIds(@RequestParam @Size(min = 1, max = 125) Set<UUID> deputeIds,
                                                @RequestParam @NotNull @Min(0) Integer page,
