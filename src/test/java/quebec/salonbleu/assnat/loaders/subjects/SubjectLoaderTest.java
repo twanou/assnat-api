@@ -8,7 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import quebec.salonbleu.assnat.client.documents.Subject;
 import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectDetails;
 import quebec.salonbleu.assnat.client.repositories.SubjectRepository;
-import quebec.salonbleu.assnat.loaders.subjects.mappers.SubjectDocumentTypeMapper;
+import quebec.salonbleu.assnat.loaders.subjects.mappers.templates.TemplateA;
 import quebec.salonbleu.assnat.scrapers.AssNatLogScraper;
 import quebec.salonbleu.assnat.scrapers.models.ScrapedLogNode;
 
@@ -24,9 +24,9 @@ import static org.mockito.Mockito.when;
 class SubjectLoaderTest {
 
     @Mock
-    private SubjectDocumentTypeMapper subjectDocumentTypeMapperNoMatchMock;
+    private TemplateA subjectDocumentTypeMapperNoMatchMock;
     @Mock
-    private SubjectDocumentTypeMapper subjectDocumentTypeMapperMatchMock;
+    private TemplateA subjectDocumentTypeMapperMatchMock;
     @Mock
     private SubjectRepository subjectRepositoryMock;
     @Mock

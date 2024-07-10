@@ -80,14 +80,14 @@ class LogEntriesSubjectLoaderTest {
                 eq(Set.of(firstEntryToLoad.getDate(), secondEntryToLoad.getDate(), firstPreliminaryEntryToLoad.getDate(), secondPreliminaryEntryToLoad.getDate())),
                 ArgumentMatchers.<Supplier<LoadingException>>any()
         );
-        order.verify(upcomingLogRepositoryMock).deleteAll();
-        order.verify(upcomingLogRepositoryMock).save(UpcomingLog.builder().date(LocalDate.of(2021, 7, 18)).build());
-        order.verify(upcomingLogRepositoryMock).save(UpcomingLog.builder().date(LocalDate.of(2022, 7, 18)).build());
-        order.verify(assnatCacheManagerMock).clearNextUpdateCache();
         order.verify(runnableMock).run();
         order.verify(subjectLoaderMock).load(firstEntryToLoad.getRelativeUrl(), firstEntryToLoad.getDate(), firstEntryToLoad.getLegislature(), firstEntryToLoad.getSession());
         order.verify(subjectLoaderMock).load(secondEntryToLoad.getRelativeUrl(), secondEntryToLoad.getDate(), secondEntryToLoad.getLegislature(), secondEntryToLoad.getSession());
         order.verify(assnatCacheManagerMock).clearLastUpdateCache();
+        order.verify(upcomingLogRepositoryMock).deleteAll();
+        order.verify(upcomingLogRepositoryMock).save(UpcomingLog.builder().date(LocalDate.of(2021, 7, 18)).build());
+        order.verify(upcomingLogRepositoryMock).save(UpcomingLog.builder().date(LocalDate.of(2022, 7, 18)).build());
+        order.verify(assnatCacheManagerMock).clearNextUpdateCache();
     }
 
     private static Stream<Subject> subjects() {

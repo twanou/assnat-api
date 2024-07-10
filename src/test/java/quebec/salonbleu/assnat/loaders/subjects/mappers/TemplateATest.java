@@ -10,6 +10,7 @@ import quebec.salonbleu.assnat.client.documents.subdocuments.InterventionDocumen
 import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectDetails;
 import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectType;
 import quebec.salonbleu.assnat.loaders.DeputyFinder;
+import quebec.salonbleu.assnat.loaders.subjects.mappers.templates.TemplateA;
 import quebec.salonbleu.assnat.scrapers.models.ScrapedLogNode;
 import test.utils.TestUUID;
 
@@ -19,12 +20,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class SubjectDocumentTypeMapperTest {
+class TemplateATest {
 
     @Mock
     private DeputyFinder deputyFinderMock;
     @InjectMocks
-    private SubjectDocumentTypeMapperImpl subjectDocumentTypeMapperImpl;
+    private TemplateAImpl subjectDocumentTypeMapperImpl;
 
     @Test
     void map() {
@@ -48,8 +49,8 @@ class SubjectDocumentTypeMapperTest {
         Assignment assignment = Assignment.builder().id(TestUUID.ID4).deputyId(TestUUID.ID1).partyId(TestUUID.ID2).districtId(TestUUID.ID3).build();
         SubjectDetails expectedResult = SubjectDetails.builder()
                 .type(SubjectType.DEPUTY_DECLARATION)
-                .title(scrapedLogNode.getChildren().get(0).getTitle())
-                .anchor(scrapedLogNode.getChildren().get(0).getAnchor())
+                .title(scrapedLogNode.getChildren().getFirst().getTitle())
+                .anchor(scrapedLogNode.getChildren().getFirst().getAnchor())
                 .interventions(List.of(
                         InterventionDocument.builder()
                                 .assignmentId(assignment.getId())
@@ -61,12 +62,12 @@ class SubjectDocumentTypeMapperTest {
                 .build();
         when(deputyFinderMock.findByCompleteName("M. Lucien Bouchard")).thenReturn(assignment);
         List<SubjectDetails> subjects = this.subjectDocumentTypeMapperImpl.map(scrapedLogNode);
-        assertEquals(expectedResult, subjects.get(0));
+        assertEquals(expectedResult, subjects.getFirst());
     }
 
-    private static class SubjectDocumentTypeMapperImpl extends SubjectDocumentTypeMapper {
+    private static class TemplateAImpl extends TemplateA {
 
-        public SubjectDocumentTypeMapperImpl(DeputyFinder deputyFinder) {
+        public TemplateAImpl(DeputyFinder deputyFinder) {
             super(deputyFinder);
         }
 

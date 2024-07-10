@@ -4,12 +4,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectType;
 import quebec.salonbleu.assnat.loaders.DeputyFinder;
+import quebec.salonbleu.assnat.loaders.subjects.mappers.templates.TemplateA;
 
 import java.util.List;
 import java.util.stream.IntStream;
 
 @Component
-public class DeputyDeclarationDocumentMapper extends SubjectDocumentTypeMapper {
+public class DeputyDeclarationDocumentMapper extends TemplateA {
 
     private static final String VICE_PRESIDENT = "vice-président";
 
@@ -23,14 +24,14 @@ public class DeputyDeclarationDocumentMapper extends SubjectDocumentTypeMapper {
     }
 
     @Override
-    protected List<String> format(List<String> paragraphs) {
+    public List<String> format(List<String> paragraphs) {
         return IntStream.range(0, this.getEndRange(paragraphs)) // On ignore à partir du moment que le VP se met à parler
                 .mapToObj(paragraphs::get)
                 .toList();
     }
 
     @Override
-    protected SubjectType getSubjectType() {
+    public SubjectType getSubjectType() {
         return SubjectType.DEPUTY_DECLARATION;
     }
 

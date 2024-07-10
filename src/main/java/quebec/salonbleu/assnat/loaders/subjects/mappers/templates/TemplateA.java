@@ -1,7 +1,6 @@
-package quebec.salonbleu.assnat.loaders.subjects.mappers;
+package quebec.salonbleu.assnat.loaders.subjects.mappers.templates;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import quebec.salonbleu.assnat.client.documents.Assignment;
 import quebec.salonbleu.assnat.client.documents.subdocuments.InterventionDocument;
 import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectDetails;
@@ -10,16 +9,21 @@ import quebec.salonbleu.assnat.loaders.DeputyFinder;
 import quebec.salonbleu.assnat.scrapers.models.ScrapedLogNode;
 
 import java.util.List;
-import java.util.stream.IntStream;
 
+/**
+ * Question et réponses orales
+ * -Sujet
+ * --Nom du député(e)
+ * --Paragraphes
+ */
 @RequiredArgsConstructor
-public abstract class SubjectDocumentTypeMapper {
+public abstract class TemplateA extends Template {
 
-    protected String AFFAIRES_COURANTES = "Affaires courantes";
-    protected String DECLARATIONS_DE_DEPUTES = "Déclarations de députés";
-    protected String QUESTIONS_REPONSES = "Questions et réponses orales";
-    private final List<String> IGNORED_TITLES = List.of("Document déposé");
     private final DeputyFinder deputyFinder;
+    protected static final String AFFAIRES_COURANTES = "Affaires courantes";
+    protected static final String DECLARATIONS_DE_DEPUTES = "Déclarations de députés";
+    protected static final String QUESTIONS_REPONSES = "Questions et réponses orales";
+    private static final List<String> IGNORED_TITLES = List.of("Document déposé");
 
     public List<SubjectDetails> map(ScrapedLogNode logNode) {
         return logNode.getChildren()
@@ -48,22 +52,7 @@ public abstract class SubjectDocumentTypeMapper {
                 }).toList();
     }
 
-    public abstract List<String> supports();
-
     protected abstract List<String> format(List<String> paragraphs);
 
     protected abstract SubjectType getSubjectType();
-
-    private List<String> baseFormat(List<String> paragraphs) {
-        List<String> formattedParagraphs = IntStream.range(0, paragraphs.size())
-                .mapToObj(i -> i == 0 ? this.removeDeputyName(paragraphs.get(i)) : paragraphs.get(i))
-                .filter(s -> !(StringUtils.startsWith(s, "•") && StringUtils.endsWith(s, "•")))
-                .toList();
-        return this.format(formattedParagraphs);
-    }
-
-    private String removeDeputyName(String paragraph) {
-        String[] splitResult = StringUtils.split(paragraph, ":", 2);
-        return splitResult.length == 2 ? StringUtils.strip(splitResult[1]) : paragraph;
-    }
 }
