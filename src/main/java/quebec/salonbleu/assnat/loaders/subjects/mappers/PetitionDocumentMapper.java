@@ -26,6 +26,6 @@ public class PetitionDocumentMapper extends TemplateB {
 
     @Override
     public List<String> supports() {
-        return List.of(AFFAIRES_COURANTES, DEPOT_PETITION);
+        return List.of(AFFAIRES_COURANTES, DEPOT_PETITIONS);
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static quebec.salonbleu.assnat.loaders.subjects.mappers.templates.DocumentTypeMapper.AFFAIRES_COURANTES;
-import static quebec.salonbleu.assnat.loaders.subjects.mappers.templates.TemplateB.DEPOT_PETITION;
+import static quebec.salonbleu.assnat.loaders.subjects.mappers.templates.TemplateB.DEPOT_PETITIONS;
 
 @ExtendWith(MockitoExtension.class)
 class PetitionDocumentMapperTest {
@@ -32,6 +32,6 @@ class PetitionDocumentMapperTest {
 
     @Test
     public void supports() {
-        assertEquals(List.of(AFFAIRES_COURANTES, DEPOT_PETITION), this.petitionDocumentMapper.supports());
+        assertEquals(List.of(AFFAIRES_COURANTES, DEPOT_PETITIONS), this.petitionDocumentMapper.supports());
     }
 }

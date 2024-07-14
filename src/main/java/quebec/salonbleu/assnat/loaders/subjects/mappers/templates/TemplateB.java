@@ -19,7 +19,7 @@ import java.util.List;
 public abstract class TemplateB extends DocumentTypeMapper {
 
     private final DeputyFinder deputyFinder;
-    public static final String DEPOT_PETITION = "Dépôt de pétitions";
+    public static final String DEPOT_PETITIONS = "Dépôt de pétitions";
 
     public List<SubjectDetails> map(ScrapedLogNode logNode) {
         return logNode.getChildren().stream()
