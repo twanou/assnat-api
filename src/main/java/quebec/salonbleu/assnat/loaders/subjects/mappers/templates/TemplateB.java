@@ -16,10 +16,10 @@ import java.util.List;
  * -Paragraphes (1er paragraphe contient nom du député(e)
  */
 @RequiredArgsConstructor
-public abstract class TemplateB extends Template {
+public abstract class TemplateB extends DocumentTypeMapper {
 
-    protected String DEPOT_PETITION = "Dépôt de pétition";
     private final DeputyFinder deputyFinder;
+    public static final String DEPOT_PETITION = "Dépôt de pétitions";
 
     public List<SubjectDetails> map(ScrapedLogNode logNode) {
         return logNode.getChildren().stream()
@@ -44,7 +44,6 @@ public abstract class TemplateB extends Template {
 
     private String getDeputyLastName(String paragraph) {
         String[] splitResult = StringUtils.split(paragraph, ":", 2);
-        String name = StringUtils.strip(splitResult[0]);
-        return StringUtils.substringAfter(name, " ");
+        return StringUtils.strip(splitResult[0]);
     }
 }

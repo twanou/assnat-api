@@ -17,12 +17,12 @@ import java.util.List;
  * --Paragraphes
  */
 @RequiredArgsConstructor
-public abstract class TemplateA extends Template {
+public abstract class TemplateA extends DocumentTypeMapper {
 
     private final DeputyFinder deputyFinder;
-    protected static final String AFFAIRES_COURANTES = "Affaires courantes";
-    protected static final String DECLARATIONS_DE_DEPUTES = "Déclarations de députés";
-    protected static final String QUESTIONS_REPONSES = "Questions et réponses orales";
+
+    public static final String DECLARATIONS_DE_DEPUTES = "Déclarations de députés";
+    public static final String QUESTIONS_REPONSES = "Questions et réponses orales";
     private static final List<String> IGNORED_TITLES = List.of("Document déposé");
 
     public List<SubjectDetails> map(ScrapedLogNode logNode) {

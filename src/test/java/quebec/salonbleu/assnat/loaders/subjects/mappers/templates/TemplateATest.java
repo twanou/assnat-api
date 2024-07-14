@@ -1,4 +1,4 @@
-package quebec.salonbleu.assnat.loaders.subjects.mappers;
+package quebec.salonbleu.assnat.loaders.subjects.mappers.templates;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,7 +10,6 @@ import quebec.salonbleu.assnat.client.documents.subdocuments.InterventionDocumen
 import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectDetails;
 import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectType;
 import quebec.salonbleu.assnat.loaders.DeputyFinder;
-import quebec.salonbleu.assnat.loaders.subjects.mappers.templates.TemplateA;
 import quebec.salonbleu.assnat.scrapers.models.ScrapedLogNode;
 import test.utils.TestUUID;
 
@@ -25,15 +24,15 @@ class TemplateATest {
     @Mock
     private DeputyFinder deputyFinderMock;
     @InjectMocks
-    private TemplateAImpl subjectDocumentTypeMapperImpl;
+    private TemplateAImpl templateAImpl;
 
     @Test
     void map() {
         ScrapedLogNode scrapedLogNode = ScrapedLogNode.builder()
                 .title("Déclarations des députés")
-                .anchor("#anchor")
                 .children(List.of(ScrapedLogNode.builder()
                         .title("Souligner quelque chose d'important")
+                        .anchor("#anchor")
                         .children(List.of(
                                 ScrapedLogNode.builder()
                                         .title("M. Lucien Bouchard")
@@ -61,7 +60,7 @@ class TemplateATest {
                                 .build()))
                 .build();
         when(deputyFinderMock.findByCompleteName("M. Lucien Bouchard")).thenReturn(assignment);
-        List<SubjectDetails> subjects = this.subjectDocumentTypeMapperImpl.map(scrapedLogNode);
+        List<SubjectDetails> subjects = this.templateAImpl.map(scrapedLogNode);
         assertEquals(expectedResult, subjects.getFirst());
     }
 

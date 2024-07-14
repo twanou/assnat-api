@@ -41,15 +41,15 @@ public class DeputyFinder implements ApplicationListener<ClearCacheEvent> {
 
     //M. Paul St-Pierre Plamondon
     public Assignment findByCompleteName(String completeName) {
-        return this.findByFilter(deputy -> StringUtils.equals(formatCompleteName(deputy), completeName));
+        return this.findByFilter(deputy -> StringUtils.equals(formatCompleteName(deputy), completeName), completeName);
     }
 
     //M. St-Pierre Plamondon
     public Assignment findByLastName(String lastName) {
-        return this.findByFilter(deputy -> StringUtils.equals(formatLastName(deputy), lastName));
+        return this.findByFilter(deputy -> StringUtils.equals(formatLastName(deputy), lastName), lastName);
     }
 
-    private Assignment findByFilter(Predicate<Deputy> filter) {
+    private Assignment findByFilter(Predicate<Deputy> filter, String logInfo) {
         if (this.cache.isEmpty()) {
             this.refreshCache();
         }
@@ -58,7 +58,7 @@ public class DeputyFinder implements ApplicationListener<ClearCacheEvent> {
                 .deputies.stream()
                 .filter(filter)
                 .toList();
-        this.errorHandler.assertSize(1, results, () -> new LoadingException("Zéro ou plusieurs députés trouvé : " + results));
+        this.errorHandler.assertSize(1, results, () -> new LoadingException("Zéro ou plusieurs députés trouvé pour. Recherche : " + logInfo + ", Résultats : " + results));
         Assignment assignment = this.cache.get().assignments.get(results.getFirst().getId());
         this.errorHandler.assertNotNull(assignment, () -> new LoadingException("Aucune assignation pour ce député : " + results.getFirst()));
         return assignment;

@@ -8,7 +8,9 @@ import quebec.salonbleu.assnat.scrapers.models.ScrapedLogNode;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public abstract class Template {
+public abstract class DocumentTypeMapper {
+
+    public static final String AFFAIRES_COURANTES = "Affaires courantes";
 
     public abstract List<SubjectDetails> map(ScrapedLogNode logNode);
 

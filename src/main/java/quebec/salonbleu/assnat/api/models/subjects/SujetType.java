@@ -4,5 +4,5 @@ public enum SujetType {
 
     DECLARATION_DEPUTE,
     QUESTIONS_REPONSES,
-    PETITION
+    DEPOT_PETITION
 }
