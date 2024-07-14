@@ -1,4 +1,4 @@
-package quebec.salonbleu.assnat.loaders.subjects.mappers;
+package quebec.salonbleu.assnat.loaders.subjects.mappers.templates;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,20 +19,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class SubjectDocumentTypeMapperTest {
+class TemplateATest {
 
     @Mock
     private DeputyFinder deputyFinderMock;
     @InjectMocks
-    private SubjectDocumentTypeMapperImpl subjectDocumentTypeMapperImpl;
+    private TemplateAImpl templateAImpl;
 
     @Test
     void map() {
         ScrapedLogNode scrapedLogNode = ScrapedLogNode.builder()
                 .title("Déclarations des députés")
-                .anchor("#anchor")
                 .children(List.of(ScrapedLogNode.builder()
                         .title("Souligner quelque chose d'important")
+                        .anchor("#anchor")
                         .children(List.of(
                                 ScrapedLogNode.builder()
                                         .title("M. Lucien Bouchard")
@@ -48,8 +48,8 @@ class SubjectDocumentTypeMapperTest {
         Assignment assignment = Assignment.builder().id(TestUUID.ID4).deputyId(TestUUID.ID1).partyId(TestUUID.ID2).districtId(TestUUID.ID3).build();
         SubjectDetails expectedResult = SubjectDetails.builder()
                 .type(SubjectType.DEPUTY_DECLARATION)
-                .title(scrapedLogNode.getChildren().get(0).getTitle())
-                .anchor(scrapedLogNode.getChildren().get(0).getAnchor())
+                .title(scrapedLogNode.getChildren().getFirst().getTitle())
+                .anchor(scrapedLogNode.getChildren().getFirst().getAnchor())
                 .interventions(List.of(
                         InterventionDocument.builder()
                                 .assignmentId(assignment.getId())
@@ -60,13 +60,13 @@ class SubjectDocumentTypeMapperTest {
                                 .build()))
                 .build();
         when(deputyFinderMock.findByCompleteName("M. Lucien Bouchard")).thenReturn(assignment);
-        List<SubjectDetails> subjects = this.subjectDocumentTypeMapperImpl.map(scrapedLogNode);
-        assertEquals(expectedResult, subjects.get(0));
+        List<SubjectDetails> subjects = this.templateAImpl.map(scrapedLogNode);
+        assertEquals(expectedResult, subjects.getFirst());
     }
 
-    private static class SubjectDocumentTypeMapperImpl extends SubjectDocumentTypeMapper {
+    private static class TemplateAImpl extends TemplateA {
 
-        public SubjectDocumentTypeMapperImpl(DeputyFinder deputyFinder) {
+        public TemplateAImpl(DeputyFinder deputyFinder) {
             super(deputyFinder);
         }
 

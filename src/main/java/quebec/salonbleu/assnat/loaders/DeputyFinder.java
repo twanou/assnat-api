@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Component
@@ -31,24 +32,35 @@ public class DeputyFinder implements ApplicationListener<ClearCacheEvent> {
     private Optional<Cache> cache = Optional.empty();
 
     private static final String COMPLETE_NAME_FORMAT = "%s %s %s";
+    private static final String LAST_NAME_FORMAT = "%s %s";
 
     @Override
     public void onApplicationEvent(@Nonnull ClearCacheEvent event) {
         this.refreshCache();
     }
 
+    //M. Paul St-Pierre Plamondon
     public Assignment findByCompleteName(String completeName) {
+        return this.findByFilter(deputy -> StringUtils.equals(formatCompleteName(deputy), completeName), completeName);
+    }
+
+    //M. St-Pierre Plamondon
+    public Assignment findByLastName(String lastName) {
+        return this.findByFilter(deputy -> StringUtils.equals(formatLastName(deputy), lastName), lastName);
+    }
+
+    private Assignment findByFilter(Predicate<Deputy> filter, String logInfo) {
         if (this.cache.isEmpty()) {
             this.refreshCache();
         }
         List<Deputy> results = this.cache
                 .orElseThrow(() -> new LoadingException("La cache de députés n'a pas été initialisée."))
                 .deputies.stream()
-                .filter(deputy -> StringUtils.equals(formatCompleteName(deputy), completeName))
+                .filter(filter)
                 .toList();
-        this.errorHandler.assertSize(1, results, () -> new LoadingException("Zéro ou plusieurs députés trouvé  : " + completeName + " : " + results));
-        Assignment assignment = this.cache.get().assignments.get(results.get(0).getId());
-        this.errorHandler.assertNotNull(assignment, () -> new LoadingException("Aucune assignation pour ce député : " + results.get(0)));
+        this.errorHandler.assertSize(1, results, () -> new LoadingException("Zéro ou plusieurs députés trouvé pour. Recherche : " + logInfo + ", Résultats : " + results));
+        Assignment assignment = this.cache.get().assignments.get(results.getFirst().getId());
+        this.errorHandler.assertNotNull(assignment, () -> new LoadingException("Aucune assignation pour ce député : " + results.getFirst()));
         return assignment;
     }
 
@@ -68,6 +80,10 @@ public class DeputyFinder implements ApplicationListener<ClearCacheEvent> {
 
     private String formatCompleteName(Deputy deputy) {
         return String.format(COMPLETE_NAME_FORMAT, deputy.getTitle(), deputy.getFirstName(), deputy.getLastName());
+    }
+
+    private String formatLastName(Deputy deputy) {
+        return String.format(LAST_NAME_FORMAT, deputy.getTitle(), deputy.getLastName());
     }
 
     private record Cache(Map<UUID, Assignment> assignments,

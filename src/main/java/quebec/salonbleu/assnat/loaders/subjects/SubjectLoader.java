@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import quebec.salonbleu.assnat.client.documents.Subject;
 import quebec.salonbleu.assnat.client.repositories.SubjectRepository;
-import quebec.salonbleu.assnat.loaders.subjects.mappers.SubjectDocumentTypeMapper;
+import quebec.salonbleu.assnat.loaders.subjects.mappers.templates.DocumentTypeMapper;
 import quebec.salonbleu.assnat.scrapers.AssNatLogScraper;
 import quebec.salonbleu.assnat.scrapers.models.ScrapedLogNode;
 
@@ -21,7 +21,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SubjectLoader {
 
-    private final List<SubjectDocumentTypeMapper> subjectDocumentTypeMappers;
+    private final List<DocumentTypeMapper> subjectDocumentTypeMappers;
     private final SubjectRepository subjectRepository;
     private final AssNatLogScraper assNatLogScraper;
 
@@ -29,7 +29,7 @@ public class SubjectLoader {
         log.info("Chargement : " + relativeUrl);
         ScrapedLogNode logs = this.assNatLogScraper.scrape(relativeUrl);
         List<Subject> subjects = new ArrayList<>();
-        for (SubjectDocumentTypeMapper mapper : subjectDocumentTypeMappers) {
+        for (DocumentTypeMapper mapper : subjectDocumentTypeMappers) {
             this.getLogNodeForMatchers(logs, mapper.supports())
                     .map(mapper::map)
                     .orElse(List.of())

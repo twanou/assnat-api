@@ -3,14 +3,14 @@ package quebec.salonbleu.assnat.loaders.subjects.mappers;
 import org.springframework.stereotype.Component;
 import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectType;
 import quebec.salonbleu.assnat.loaders.DeputyFinder;
-import quebec.salonbleu.assnat.loaders.subjects.mappers.templates.TemplateA;
+import quebec.salonbleu.assnat.loaders.subjects.mappers.templates.TemplateB;
 
 import java.util.List;
 
 @Component
-public class QuestionsAnswersDocumentMapper extends TemplateA {
+public class PetitionDocumentMapper extends TemplateB {
 
-    public QuestionsAnswersDocumentMapper(DeputyFinder deputyFinder) {
+    public PetitionDocumentMapper(DeputyFinder deputyFinder) {
         super(deputyFinder);
     }
 
@@ -21,11 +21,11 @@ public class QuestionsAnswersDocumentMapper extends TemplateA {
 
     @Override
     public SubjectType getSubjectType() {
-        return SubjectType.QUESTIONS_ANSWERS;
+        return SubjectType.PETITION;
     }
 
     @Override
     public List<String> supports() {
-        return List.of(AFFAIRES_COURANTES, QUESTIONS_REPONSES);
+        return List.of(AFFAIRES_COURANTES, DEPOT_PETITIONS);
     }
 }

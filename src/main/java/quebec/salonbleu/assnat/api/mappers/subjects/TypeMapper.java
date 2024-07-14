@@ -1,8 +1,8 @@
 package quebec.salonbleu.assnat.api.mappers.subjects;
 
+import org.springframework.stereotype.Component;
 import quebec.salonbleu.assnat.api.models.subjects.SujetType;
 import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectType;
-import org.springframework.stereotype.Component;
 
 import java.util.EnumMap;
 import java.util.EnumSet;
@@ -16,7 +16,8 @@ class TypeMapper {
     TypeMapper() {
         this.typeMap = new EnumMap<>(Map.of(
                 SubjectType.DEPUTY_DECLARATION, SujetType.DECLARATION_DEPUTE,
-                SubjectType.QUESTIONS_ANSWERS, SujetType.QUESTIONS_REPONSES)
+                SubjectType.QUESTIONS_ANSWERS, SujetType.QUESTIONS_REPONSES,
+                SubjectType.PETITION, SujetType.DEPOT_PETITION)
         );
         if (!this.typeMap.keySet().containsAll(EnumSet.allOf(SubjectType.class))) {
             throw new IllegalStateException();
