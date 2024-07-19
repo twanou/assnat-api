@@ -40,6 +40,13 @@ public class MongoIndexConfig {
                 );
         mongoTemplate.indexOps(Subject.class)
                 .ensureIndex(
+                        new Index()
+                                .on("subjectDetails.type", Sort.Direction.ASC)
+                                .on("date", Sort.Direction.DESC)
+                                .named("subjectDetails_type_date")
+                );
+        mongoTemplate.indexOps(Subject.class)
+                .ensureIndex(
                         TextIndexDefinition.builder()
                                 .onFields("subjectDetails.interventions.paragraphs", "subjectDetails.title")
                                 .withDefaultLanguage("fr")
