@@ -22,9 +22,11 @@ public class SubjectMapper {
 
     private final Map<SubjectType, SubjectTypeMapper> subjectMappers;
     private final AssnatLinkBuilder assnatLinkBuilder;
+    private final TypeMapper typeMapper;
 
-    public SubjectMapper(List<SubjectTypeMapper> subjectMappersList, AssnatLinkBuilder assnatLinkBuilder) {
+    public SubjectMapper(List<SubjectTypeMapper> subjectMappersList, AssnatLinkBuilder assnatLinkBuilder, TypeMapper typeMapper) {
         this.assnatLinkBuilder = assnatLinkBuilder;
+        this.typeMapper = typeMapper;
         this.subjectMappers = Collections.unmodifiableMap(
                 subjectMappersList.stream()
                         .flatMap(m -> m.supports().stream().map(t -> new AbstractMap.SimpleEntry<>(t, m)))
@@ -63,6 +65,7 @@ public class SubjectMapper {
                 .deputyIds(sujetRequete.getDeputeIds())
                 .partyIds(sujetRequete.getPartiIds())
                 .districtIds(sujetRequete.getCirconscriptionIds())
+                .subjectTypes(sujetRequete.getSujetTypes().stream().map(t -> this.typeMapper.map(t).name()).collect(Collectors.toUnmodifiableSet()))
                 .build();
     }
 }

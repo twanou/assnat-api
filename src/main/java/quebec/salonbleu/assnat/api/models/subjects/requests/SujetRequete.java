@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Value;
 import lombok.extern.jackson.Jacksonized;
+import quebec.salonbleu.assnat.api.models.subjects.SujetType;
 
 import java.util.Set;
 import java.util.UUID;
@@ -38,6 +39,10 @@ public class SujetRequete {
     @Size(max = 125)
     @Builder.Default
     Set<UUID> circonscriptionIds = Set.of();
+
+    @NotNull
+    @Builder.Default
+    Set<SujetType> sujetTypes = Set.of();
 
     @Min(0)
     @Builder.Default

@@ -64,6 +64,10 @@ public class SubjectRepository {
             query.addCriteria(Criteria.where("subjectDetails.interventions").all(criteriaObjects));
         }
 
+        if (!args.getSubjectTypes().isEmpty()) {
+            query.addCriteria(Criteria.where("subjectDetails.type").in(args.getSubjectTypes()));
+        }
+
         query.with(pageRequest);
         return mongoTemplate.find(query, Subject.class);
     }

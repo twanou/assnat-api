@@ -9,11 +9,11 @@ import java.util.EnumSet;
 import java.util.Map;
 
 @Component
-class TypeMapper {
+public class TypeMapper {
 
     private final Map<SubjectType, SujetType> typeMap;
 
-    TypeMapper() {
+    public TypeMapper() {
         this.typeMap = new EnumMap<>(Map.of(
                 SubjectType.DEPUTY_DECLARATION, SujetType.DECLARATION_DEPUTE,
                 SubjectType.QUESTIONS_ANSWERS, SujetType.QUESTIONS_REPONSES,
@@ -24,7 +24,15 @@ class TypeMapper {
         }
     }
 
-    SujetType map(SubjectType subjectType) {
+    public SujetType map(SubjectType subjectType) {
         return this.typeMap.get(subjectType);
+    }
+
+    public SubjectType map(SujetType sujetType) {
+        return this.typeMap.entrySet().stream()
+                .filter(entry -> entry.getValue().equals(sujetType))
+                .findFirst()
+                .orElseThrow()
+                .getKey();
     }
 }

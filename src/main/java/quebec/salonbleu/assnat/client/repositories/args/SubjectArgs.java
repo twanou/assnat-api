@@ -19,4 +19,6 @@ public class SubjectArgs {
     Set<UUID> partyIds = Set.of();
     @Builder.Default
     Set<UUID> districtIds = Set.of();
+    @Builder.Default
+    Set<String> subjectTypes = Set.of();
 }
