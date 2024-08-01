@@ -51,14 +51,14 @@ public class DeputyScraper {
         List<ScrapedDeputy> deputies = new ArrayList<>();
         for (DomElement row : rows) {
             List<HtmlTableDataCell> cells = row.getByXPath(".//td");
-            HtmlPage deputyPage = this.getDeputyPage(cells.get(0));
+            HtmlPage deputyPage = this.getDeputyPage(cells.getFirst());
             List<String> functions = this.getFunctions(deputyPage);
             String party = cells.get(2).getVisibleText();
             deputies.add(
                     ScrapedDeputy.builder()
                             .title(this.getTitle(functions))
-                            .firstName(StringUtils.strip(cells.get(0).getVisibleText().split(",")[1]))
-                            .lastName(StringUtils.strip(cells.get(0).getVisibleText().split(",")[0]))
+                            .firstName(StringUtils.strip(cells.getFirst().getVisibleText().split(",")[1]))
+                            .lastName(StringUtils.strip(cells.getFirst().getVisibleText().split(",")[0]))
                             .district(StringUtils.strip(cells.get(1).getVisibleText()))
                             .party(this.independenceCheck(party) ? INDEPENDENT_PARTY : StringUtils.strip(party))
                             .partyAcronym(this.independenceCheck(party) ? INDEPENDENT_ACRONYM : this.getPartyAcronym(party))

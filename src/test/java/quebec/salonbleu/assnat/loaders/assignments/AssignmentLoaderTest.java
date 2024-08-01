@@ -60,7 +60,7 @@ class AssignmentLoaderTest {
         this.assignmentLoader.load();
         InOrder order = Mockito.inOrder(assignmentRepositoryMock, assnatCacheManagerMock);
         order.verify(assignmentRepositoryMock).save(Assignment.builder()
-                .hash(scrapedDeputies.get(0).hashCode())
+                .hash(scrapedDeputies.getFirst().hashCode())
                 .startDate(LocalDate.now())
                 .deputyId(landryDeputy.getId())
                 .partyId(landryParty.getId())
@@ -88,7 +88,7 @@ class AssignmentLoaderTest {
         this.assignmentLoader.load();
         InOrder order = Mockito.inOrder(assignmentRepositoryMock, assnatCacheManagerMock);
         order.verify(assignmentRepositoryMock).save(Assignment.builder()
-                .hash(scrapedDeputies.get(0).hashCode())
+                .hash(scrapedDeputies.getFirst().hashCode())
                 .startDate(LocalDate.now())
                 .deputyId(landryDeputy.getId())
                 .partyId(landryParty.getId())

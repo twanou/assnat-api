@@ -46,9 +46,9 @@ class GenericSubjectTypeMapperTest {
 
         SujetDetails sujetDetails = this.genericSubjectTypeMapper.map(subjectDetails, affectations);
         assertEquals(subjectDetails.getTitle(), sujetDetails.getTitre());
-        assertEquals(subjectDetails.getInterventions().get(0).getParagraphs(), sujetDetails.getInterventions().get(0).getParagraphes());
+        assertEquals(subjectDetails.getInterventions().getFirst().getParagraphs(), sujetDetails.getInterventions().getFirst().getParagraphes());
         assertEquals(SujetType.DECLARATION_DEPUTE, sujetDetails.getType());
-        assertSame(affectations.get(TestUUID.ID1), sujetDetails.getInterventions().get(0).getAffectation());
+        assertSame(affectations.get(TestUUID.ID1), sujetDetails.getInterventions().getFirst().getAffectation());
     }
 
     @Test

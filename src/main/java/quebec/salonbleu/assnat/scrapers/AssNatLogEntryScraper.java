@@ -33,13 +33,13 @@ public class AssNatLogEntryScraper {
         List<ScrapedLogEntry> logEntries = new ArrayList<>();
         for (DomElement row : rows) {
             List<HtmlTableDataCell> cells = row.getByXPath(".//td");
-            HtmlAnchor dateAnchor = cells.get(0).getFirstByXPath(".//a");
+            HtmlAnchor dateAnchor = cells.getFirst().getFirstByXPath(".//a");
             LocalDate date = LocalDate.parse(dateAnchor.getVisibleText());
             String[] session = cells.get(2).getVisibleText().split(",");
             logEntries.add(
                     ScrapedLogEntry.builder()
                             .date(date)
-                            .note(StringUtils.trimToNull(StringUtils.remove(cells.get(0).getVisibleText(), date.toString())))
+                            .note(StringUtils.trimToNull(StringUtils.remove(cells.getFirst().getVisibleText(), date.toString())))
                             .relativeUrl(dateAnchor.getHrefAttribute())
                             .type(LogType.fromName(cells.get(1).getVisibleText().split(" ")[0]))
                             .legislature(ScrapeUtils.onlyDigitsToInt(session[0]))

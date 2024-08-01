@@ -51,10 +51,10 @@ class AssignmentServiceTest {
         when(assignmentRepositoryMock.findByEndDate(null)).thenReturn(List.of(assignment));
 
         Collection<Affectation> response = this.assignmentService.getCurrentAssignments();
-        assertEquals(deputeMap.get(TestUUID.ID1).getId(), response.stream().findFirst().get().getDepute().getId());
-        assertEquals(circonscriptionMap.get(TestUUID.ID2).getId(), response.stream().findFirst().get().getCirconscription().getId());
-        assertEquals(partiMap.get(TestUUID.ID3).getId(), response.stream().findFirst().get().getParti().getId());
-        assertEquals("url", response.stream().findFirst().get().getPhotoUrl());
+        assertEquals(deputeMap.get(TestUUID.ID1).getId(), response.stream().findFirst().orElseThrow().getDepute().getId());
+        assertEquals(circonscriptionMap.get(TestUUID.ID2).getId(), response.stream().findFirst().orElseThrow().getCirconscription().getId());
+        assertEquals(partiMap.get(TestUUID.ID3).getId(), response.stream().findFirst().orElseThrow().getParti().getId());
+        assertEquals("url", response.stream().findFirst().orElseThrow().getPhotoUrl());
     }
 
     @Test
@@ -73,7 +73,7 @@ class AssignmentServiceTest {
         assertEquals(deputeMap.get(TestUUID.ID1).getId(), response.get(TestUUID.ID4).getDepute().getId());
         assertEquals(circonscriptionMap.get(TestUUID.ID2).getId(), response.get(TestUUID.ID4).getCirconscription().getId());
         assertEquals(partiMap.get(TestUUID.ID3).getId(), response.get(TestUUID.ID4).getParti().getId());
-        assertEquals(assignment.getFunctions().get(0), response.get(TestUUID.ID4).getFonctions().get(0));
+        assertEquals(assignment.getFunctions().getFirst(), response.get(TestUUID.ID4).getFonctions().getFirst());
         assertEquals("url", response.get(TestUUID.ID4).getPhotoUrl());
     }
 }
