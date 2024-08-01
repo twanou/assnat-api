@@ -25,6 +25,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
@@ -55,7 +56,7 @@ class LogEntriesSubjectLoaderTest {
     @NullSource
     @ParameterizedTest
     @MethodSource("subjects")
-    void load(Subject subject) {
+    void load(Subject subject) throws ExecutionException, InterruptedException {
         ScrapedLogEntry firstEntryToLoad = ScrapedLogEntry.builder().date(LocalDate.of(1997, 1, 1)).relativeUrl("relativeUrl1").type(LogType.ASSEMBLY).version(LogVersion.FINAL).build();
         ScrapedLogEntry secondEntryToLoad = ScrapedLogEntry.builder().date(LocalDate.of(2010, 1, 1)).relativeUrl("relativeUrl2").type(LogType.ASSEMBLY).version(LogVersion.FINAL).build();
         ScrapedLogEntry firstPreliminaryEntryToLoad = ScrapedLogEntry.builder().date(LocalDate.of(2021, 7, 18)).type(LogType.ASSEMBLY).version(LogVersion.PRELIMINARY).build();
@@ -73,21 +74,24 @@ class LogEntriesSubjectLoaderTest {
         when(subjectRepositoryMock.findFirstByOrderByDateDesc()).thenReturn(Optional.ofNullable(subject));
         when(assNatLogEntryScraperMock.scrape()).thenReturn(scrapedLogEntries);
 
-        this.logEntriesSubjectLoader.load(runnableMock);
+        this.logEntriesSubjectLoader.load(runnableMock).get();
         InOrder order = inOrder(errorHandlerMock, runnableMock, subjectLoaderMock, upcomingLogRepositoryMock, assnatCacheManagerMock);
         order.verify(errorHandlerMock).assertSize(
                 eq(4),
                 eq(Set.of(firstEntryToLoad.getDate(), secondEntryToLoad.getDate(), firstPreliminaryEntryToLoad.getDate(), secondPreliminaryEntryToLoad.getDate())),
                 ArgumentMatchers.<Supplier<LoadingException>>any()
         );
+        order.verify(upcomingLogRepositoryMock).deleteAll();
+        order.verify(upcomingLogRepositoryMock).save(UpcomingLog.builder().loadingStatus(true).date(firstEntryToLoad.getDate()).build());
+        order.verify(upcomingLogRepositoryMock).save(UpcomingLog.builder().loadingStatus(true).date(secondEntryToLoad.getDate()).build());
+        order.verify(upcomingLogRepositoryMock).save(UpcomingLog.builder().date(firstPreliminaryEntryToLoad.getDate()).build());
+        order.verify(upcomingLogRepositoryMock).save(UpcomingLog.builder().date(secondPreliminaryEntryToLoad.getDate()).build());
+        order.verify(assnatCacheManagerMock).clearUpcomingLogCaches();
         order.verify(runnableMock).run();
         order.verify(subjectLoaderMock).load(firstEntryToLoad.getRelativeUrl(), firstEntryToLoad.getDate(), firstEntryToLoad.getLegislature(), firstEntryToLoad.getSession());
         order.verify(subjectLoaderMock).load(secondEntryToLoad.getRelativeUrl(), secondEntryToLoad.getDate(), secondEntryToLoad.getLegislature(), secondEntryToLoad.getSession());
         order.verify(assnatCacheManagerMock).clearLastUpdateCache();
-        order.verify(upcomingLogRepositoryMock).deleteAll();
-        order.verify(upcomingLogRepositoryMock).save(UpcomingLog.builder().date(LocalDate.of(2021, 7, 18)).build());
-        order.verify(upcomingLogRepositoryMock).save(UpcomingLog.builder().date(LocalDate.of(2022, 7, 18)).build());
-        order.verify(assnatCacheManagerMock).clearNextUpdateCache();
+        order.verify(assnatCacheManagerMock).clearUpcomingLogCaches();
     }
 
     private static Stream<Subject> subjects() {

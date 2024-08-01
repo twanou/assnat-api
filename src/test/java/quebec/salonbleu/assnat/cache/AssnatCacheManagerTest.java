@@ -62,11 +62,13 @@ class AssnatCacheManagerTest {
     }
 
     @Test
-    void clearNextUpdateCache() {
+    void clearUpcomingLogCaches() {
         when(cacheManagerMock.getCache(CacheKey.NEXT_UPDATE.name())).thenReturn(cacheMock);
+        when(cacheManagerMock.getCache(CacheKey.CURRENTLY_LOADING.name())).thenReturn(cacheMock2);
 
-        this.assnatCacheManager.clearNextUpdateCache();
+        this.assnatCacheManager.clearUpcomingLogCaches();
         verify(cacheMock).clear();
+        verify(cacheMock2).clear();
         verify(applicationEventPublisherMock, never()).publishEvent(any());
     }
 }

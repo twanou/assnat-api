@@ -6,6 +6,7 @@ public enum CacheKey {
     ALL_ASSIGNMENTS(Constants.ALL_ASSIGNMENTS),
     LAST_UPDATE(Constants.LAST_UPDATE),
     NEXT_UPDATE(Constants.NEXT_UPDATE),
+    CURRENTLY_LOADING(Constants.CURRENTLY_LOADING),
     DEPUTIES(Constants.DEPUTIES),
     DISTRICTS(Constants.DISTRICTS),
     PARTIES(Constants.PARTIES);
@@ -21,6 +22,7 @@ public enum CacheKey {
         public static final String ALL_ASSIGNMENTS = "ALL_ASSIGNMENTS";
         public static final String LAST_UPDATE = "LAST_UPDATE";
         public static final String NEXT_UPDATE = "NEXT_UPDATE";
+        public static final String CURRENTLY_LOADING = "CURRENTLY_LOADING";
         public static final String DEPUTIES = "DEPUTIES";
         public static final String DISTRICTS = "DISTRICTS";
         public static final String PARTIES = "PARTIES";

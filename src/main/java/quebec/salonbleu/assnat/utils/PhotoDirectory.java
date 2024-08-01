@@ -21,7 +21,7 @@ public class PhotoDirectory {
                 this.photos.add(resource.getFilename().split("\\.")[0]);
             }
         } catch (Exception e) {
-            throw new IllegalStateException("Erreur lors de la lecture des photos");
+            throw new IllegalStateException("Erreur lors de la lecture des photos", e);
         }
     }
 

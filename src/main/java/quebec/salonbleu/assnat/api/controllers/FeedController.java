@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import quebec.salonbleu.assnat.api.models.subjects.responses.SujetReponse;
 import quebec.salonbleu.assnat.api.services.SubjectService;
+import quebec.salonbleu.assnat.loaders.services.LoadingService;
 
 import java.util.Set;
 import java.util.UUID;
@@ -28,16 +29,19 @@ import java.util.UUID;
 public class FeedController {
 
     private final SubjectService subjectService;
+    private final LoadingService loadingService;
 
     @Operation(summary = "Obtenir les derniers sujets en fonction des député(e)s choisi(e)s.")
     @GetMapping
     public SujetReponse getSubjectsByDeputyIds(@RequestParam @Size(min = 1, max = 125) Set<UUID> deputeIds,
                                                @RequestParam @NotNull @Min(0) Integer page,
                                                @RequestParam @NotNull @Min(5) @Max(25) Integer taille) {
+        this.loadingService.load();
         return SujetReponse.builder()
                 .sujets(this.subjectService.getSubjectsByDeputyIds(deputeIds, page, taille))
                 .derniereMaj(this.subjectService.getLastUpdate())
                 .futuresMaj(this.subjectService.getNextUpdates())
+                .chargementEnCours(this.subjectService.getCurrentlyLoading())
                 .build();
     }
 }

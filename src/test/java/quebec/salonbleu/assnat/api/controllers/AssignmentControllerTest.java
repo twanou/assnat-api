@@ -8,12 +8,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import quebec.salonbleu.assnat.api.models.assignments.AffectationReponse;
 import quebec.salonbleu.assnat.api.models.commons.Affectation;
 import quebec.salonbleu.assnat.api.services.AssignmentService;
-import quebec.salonbleu.assnat.loaders.services.LoadingService;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -21,8 +19,6 @@ class AssignmentControllerTest {
 
     @Mock
     private AssignmentService assignmentServiceMock;
-    @Mock
-    private LoadingService loadingServiceMock;
     @InjectMocks
     private AssignmentController assignmentController;
 
@@ -33,6 +29,5 @@ class AssignmentControllerTest {
 
         AffectationReponse response = this.assignmentController.getCurrentAssignments();
         assertSame(affectations, response.getAffectations());
-        verify(loadingServiceMock).load();
     }
 }

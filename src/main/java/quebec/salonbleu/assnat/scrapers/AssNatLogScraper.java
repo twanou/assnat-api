@@ -2,16 +2,16 @@ package quebec.salonbleu.assnat.scrapers;
 
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
-import quebec.salonbleu.assnat.scrapers.configuration.AssNatWebClient;
-import quebec.salonbleu.assnat.scrapers.exceptions.ScrapingException;
-import quebec.salonbleu.assnat.scrapers.models.ScrapedLogNode;
-import quebec.salonbleu.assnat.scrapers.utils.ScrapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.html.HtmlAnchor;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlParagraph;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Node;
+import quebec.salonbleu.assnat.scrapers.configuration.AssNatWebClient;
+import quebec.salonbleu.assnat.scrapers.exceptions.ScrapingException;
+import quebec.salonbleu.assnat.scrapers.models.ScrapedLogNode;
+import quebec.salonbleu.assnat.scrapers.utils.ScrapeUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,7 +28,7 @@ public class AssNatLogScraper {
         HtmlPage page = this.webClient.getRelativePage(relativeUrl);
         ArrayList<InternalLogNode> internalLogNodes = this.buildSummary(page.getByXPath("//div[@class='tableMatieresJournal']//a[@href]"));
         this.addParagraphs(internalLogNodes, page.getByXPath("//contenu//p"));
-        return this.toLogNode(internalLogNodes.get(0));
+        return this.toLogNode(internalLogNodes.getFirst());
     }
 
     private ArrayList<InternalLogNode> buildSummary(List<HtmlAnchor> anchors) {
@@ -40,13 +40,13 @@ public class AssNatLogScraper {
 
         for (HtmlAnchor anchor : anchors) {
             float anchorMargin = this.getAnchorMargin(anchor);
-            InternalLogNode parentNode = nodes.get(nodes.size() - 1);
+            InternalLogNode parentNode = nodes.getLast();
             while (anchorMargin <= parentNode.margin) {
                 parentNode = parentNode.previous;
             }
             InternalLogNode newNode = InternalLogNode.builder()
                     .title(anchor.getVisibleText().replace("\n", " "))
-                    .previous(nodes.get(nodes.size() - 1))
+                    .previous(nodes.getLast())
                     .margin(anchorMargin)
                     .href(anchor.getHrefAttribute())
                     .build();

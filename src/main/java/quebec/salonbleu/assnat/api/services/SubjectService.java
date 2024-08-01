@@ -54,7 +54,15 @@ public class SubjectService {
 
     @Cacheable(CacheKey.Constants.NEXT_UPDATE)
     public List<LocalDate> getNextUpdates() {
-        return this.upcomingLogRepository.findAll(Sort.by(Sort.Direction.ASC, "date"))
+        return this.upcomingLogRepository.findAllByLoadingStatus(false, Sort.by(Sort.Direction.ASC, "date"))
+                .stream()
+                .map(UpcomingLog::getDate)
+                .toList();
+    }
+
+    @Cacheable(CacheKey.Constants.CURRENTLY_LOADING)
+    public List<LocalDate> getCurrentlyLoading() {
+        return this.upcomingLogRepository.findAllByLoadingStatus(true, Sort.by(Sort.Direction.ASC, "date"))
                 .stream()
                 .map(UpcomingLog::getDate)
                 .toList();

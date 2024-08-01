@@ -17,5 +17,6 @@ public class UpcomingLog implements UuidDocument {
     @Id
     @With
     UUID id;
+    boolean loadingStatus;
     LocalDate date;
 }

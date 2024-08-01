@@ -113,7 +113,7 @@ class SubjectServiceTest {
 
     @Test
     void getNextUpdates() {
-        when(upcomingLogRepositoryMock.findAll(Sort.by(Sort.Direction.ASC, "date"))).thenReturn(List.of(UpcomingLog.builder().date(LocalDate.now()).build()));
+        when(upcomingLogRepositoryMock.findAllByLoadingStatus(false, Sort.by(Sort.Direction.ASC, "date"))).thenReturn(List.of(UpcomingLog.builder().date(LocalDate.now()).build()));
 
         List<LocalDate> response = this.subjectService.getNextUpdates();
         assertEquals(LocalDate.now(), response.getFirst());

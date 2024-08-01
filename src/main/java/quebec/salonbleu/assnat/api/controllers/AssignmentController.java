@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import quebec.salonbleu.assnat.api.models.assignments.AffectationReponse;
 import quebec.salonbleu.assnat.api.services.AssignmentService;
-import quebec.salonbleu.assnat.loaders.services.LoadingService;
 
 @Tag(name = "2. Affectations")
 @CrossOrigin
@@ -19,12 +18,10 @@ import quebec.salonbleu.assnat.loaders.services.LoadingService;
 public class AssignmentController {
 
     private final AssignmentService assignmentService;
-    private final LoadingService loadingService;
 
     @Operation(summary = "Obtenir les affectations des député(e)s en fonction actuellement.")
     @GetMapping
     public AffectationReponse getCurrentAssignments() {
-        this.loadingService.load();
         return AffectationReponse.builder()
                 .affectations(this.assignmentService.getCurrentAssignments())
                 .build();

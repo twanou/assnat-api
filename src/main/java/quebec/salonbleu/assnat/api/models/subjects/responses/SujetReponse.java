@@ -21,4 +21,8 @@ public class SujetReponse {
     @Schema(description = "Date des prochains journaux disponibles. (Préliminaire)")
     @Builder.Default
     List<LocalDate> futuresMaj = List.of();
+
+    @Schema(description = "Date des journaux en cours de chargement.")
+    @Builder.Default
+    List<LocalDate> chargementEnCours = List.of();
 }

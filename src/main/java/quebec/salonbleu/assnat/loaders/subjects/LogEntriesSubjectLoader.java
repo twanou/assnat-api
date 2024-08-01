@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -34,19 +35,30 @@ public class LogEntriesSubjectLoader {
     private final UpcomingLogRepository upcomingLogRepository;
     private final AssnatCacheManager assnatCacheManager;
 
-    public void load(Runnable prerequisiteTask) {
+    public CompletableFuture<Void> load(Runnable prerequisiteTask) {
         LocalDate latestInterventionDate = this.subjectRepository.findFirstByOrderByDateDesc().map(Subject::getDate).orElse(LocalDate.MIN);
         List<ScrapedLogEntry> logEntries = this.assNatLogEntryScraper.scrape();
         List<ScrapedLogEntry> filteredLogEntries = logEntries.stream()
                 .filter(entry -> entry.getDate().isAfter(latestInterventionDate))
                 .filter(entry -> LogType.ASSEMBLY.equals(entry.getType()))
                 .filter(entry -> StringUtils.isBlank(entry.getNote()))
+                .filter(entry -> LogVersion.FINAL.equals(entry.getVersion()) || LogVersion.PRELIMINARY.equals(entry.getVersion()))
                 .sorted(Comparator.comparing(ScrapedLogEntry::getDate))
                 .toList();
 
         this.assertNoDuplicateDate(filteredLogEntries);
-        this.loadFinalLogEntries(prerequisiteTask, filteredLogEntries);
-        this.loadPreliminaryLogEntries(filteredLogEntries);
+        this.loadUpcomingLogs(filteredLogEntries);
+        this.assnatCacheManager.clearUpcomingLogCaches();
+        return CompletableFuture.runAsync(() -> this.loadFinalLogEntries(prerequisiteTask, filteredLogEntries));
+    }
+
+    private void loadUpcomingLogs(List<ScrapedLogEntry> filteredLogEntries) {
+        this.upcomingLogRepository.deleteAll();
+        filteredLogEntries.forEach(entry -> this.upcomingLogRepository.save(
+                UpcomingLog.builder()
+                        .date(entry.getDate())
+                        .loadingStatus(LogVersion.FINAL.equals(entry.getVersion()))
+                        .build()));
     }
 
     private void loadFinalLogEntries(Runnable prerequisiteTask, List<ScrapedLogEntry> filteredLogEntries) {
@@ -59,20 +71,11 @@ public class LogEntriesSubjectLoader {
             log.info("Début du chargement des journaux");
             finalLogEntries.forEach(entry ->
                     this.subjectLoader.load(entry.getRelativeUrl(), entry.getDate(), entry.getLegislature(), entry.getSession()));
-            this.assnatCacheManager.clearLastUpdateCache();
             log.info("Fin du chargement des journaux");
+            this.upcomingLogRepository.deleteAllByLoadingStatus(true);
+            this.assnatCacheManager.clearLastUpdateCache();
+            this.assnatCacheManager.clearUpcomingLogCaches();
         }
-    }
-
-    private void loadPreliminaryLogEntries(List<ScrapedLogEntry> filteredLogEntries) {
-        List<ScrapedLogEntry> preliminaryLogEntries = filteredLogEntries.stream()
-                .filter(entry -> LogVersion.PRELIMINARY.equals(entry.getVersion()))
-                .toList();
-
-        this.upcomingLogRepository.deleteAll();
-        preliminaryLogEntries.forEach(entry ->
-                this.upcomingLogRepository.save(UpcomingLog.builder().date(entry.getDate()).build()));
-        this.assnatCacheManager.clearNextUpdateCache();
     }
 
     private void assertNoDuplicateDate(List<ScrapedLogEntry> logEntries) {

@@ -1,18 +1,19 @@
 package quebec.salonbleu.assnat.loaders.services;
 
-import quebec.salonbleu.assnat.loaders.assignments.AssignmentLoader;
-import quebec.salonbleu.assnat.loaders.subjects.LogEntriesSubjectLoader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import quebec.salonbleu.assnat.loaders.assignments.AssignmentLoader;
+import quebec.salonbleu.assnat.loaders.subjects.LogEntriesSubjectLoader;
 
 import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.ZoneId;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.clearInvocations;
 import static org.mockito.Mockito.doAnswer;
@@ -34,15 +35,15 @@ class LoadingServiceTest {
 
     @BeforeEach
     void setup() {
-        doAnswer((invocationOnMock) -> {
-            ((Runnable) invocationOnMock.getArguments()[0]).run();
-            return null;
-        }).when(subjectLoaderMock).load(any(Runnable.class));
         this.loadingService = new LoadingService(assignmentLoaderMock, subjectLoaderMock, clockMock, Duration.ofSeconds(3600));
     }
 
     @Test
     void load() {
+        doAnswer((invocationOnMock) -> {
+            ((Runnable) invocationOnMock.getArguments()[0]).run();
+            return null;
+        }).when(subjectLoaderMock).load(any(Runnable.class));
         when(clockMock.instant()).thenReturn(Clock.fixed(Instant.ofEpochSecond(3600), ZoneId.systemDefault()).instant());
         this.loadingService.load();
         verify(subjectLoaderMock).load(any(Runnable.class));
@@ -58,5 +59,13 @@ class LoadingServiceTest {
         this.loadingService.load();
         verify(subjectLoaderMock).load(any(Runnable.class));
         verify(assignmentLoaderMock).load();
+    }
+
+    @Test
+    void load_error() {
+        when(clockMock.instant()).thenReturn(Clock.fixed(Instant.ofEpochSecond(3600), ZoneId.systemDefault()).instant());
+        when(subjectLoaderMock.load(any(Runnable.class))).thenThrow(new RuntimeException());
+
+        assertDoesNotThrow(() -> this.loadingService.load());
     }
 }

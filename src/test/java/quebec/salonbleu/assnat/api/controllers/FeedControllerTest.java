@@ -8,6 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import quebec.salonbleu.assnat.api.models.subjects.Sujet;
 import quebec.salonbleu.assnat.api.models.subjects.responses.SujetReponse;
 import quebec.salonbleu.assnat.api.services.SubjectService;
+import quebec.salonbleu.assnat.loaders.services.LoadingService;
 import test.utils.TestUUID;
 
 import java.time.LocalDate;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -22,6 +24,8 @@ class FeedControllerTest {
 
     @Mock
     private SubjectService subjectServiceMock;
+    @Mock
+    private LoadingService loadingServiceMock;
     @InjectMocks
     private FeedController feedController;
 
@@ -36,5 +40,6 @@ class FeedControllerTest {
         assertEquals(response.getSujets(), sujets);
         assertEquals(LocalDate.now(), response.getDerniereMaj());
         assertEquals(List.of(LocalDate.now()), response.getFuturesMaj());
+        verify(loadingServiceMock).load();
     }
 }
