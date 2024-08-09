@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import quebec.salonbleu.assnat.client.documents.Assignment;
 import quebec.salonbleu.assnat.client.documents.subdocuments.InterventionDocument;
 import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectDetails;
-import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectType;
 import quebec.salonbleu.assnat.loaders.DeputyFinder;
 import quebec.salonbleu.assnat.scrapers.models.ScrapedLogNode;
 
@@ -23,6 +22,7 @@ public abstract class TemplateA extends DocumentTypeMapper {
 
     public static final String DECLARATIONS_DE_DEPUTES = "Déclarations de députés";
     public static final String QUESTIONS_REPONSES = "Questions et réponses orales";
+    public static final String MINISTERIAL_DECLARATION = "Déclarations ministérielles";
     private static final List<String> IGNORED_TITLES = List.of("Document déposé");
 
     public List<SubjectDetails> map(ScrapedLogNode logNode) {
@@ -51,8 +51,4 @@ public abstract class TemplateA extends DocumentTypeMapper {
                             .build();
                 }).toList();
     }
-
-    protected abstract List<String> format(List<String> paragraphs);
-
-    protected abstract SubjectType getSubjectType();
 }

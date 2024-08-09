@@ -3,12 +3,14 @@ package quebec.salonbleu.assnat.client.configuration;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.index.Index;
 import org.springframework.data.mongodb.core.index.TextIndexDefinition;
 import quebec.salonbleu.assnat.client.documents.Subject;
 
+@Profile("prod")
 @Configuration
 @RequiredArgsConstructor
 public class MongoIndexConfig {

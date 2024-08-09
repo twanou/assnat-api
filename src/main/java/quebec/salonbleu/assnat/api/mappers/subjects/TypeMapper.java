@@ -17,7 +17,8 @@ public class TypeMapper {
         this.typeMap = new EnumMap<>(Map.of(
                 SubjectType.DEPUTY_DECLARATION, SujetType.DECLARATION_DEPUTE,
                 SubjectType.QUESTIONS_ANSWERS, SujetType.QUESTIONS_REPONSES,
-                SubjectType.PETITION, SujetType.DEPOT_PETITION)
+                SubjectType.PETITION, SujetType.DEPOT_PETITION,
+                SubjectType.MINISTERIAL_DECLARATION, SujetType.DECLARATION_MINISTERIELLE)
         );
         if (!this.typeMap.keySet().containsAll(EnumSet.allOf(SubjectType.class))) {
             throw new IllegalStateException();

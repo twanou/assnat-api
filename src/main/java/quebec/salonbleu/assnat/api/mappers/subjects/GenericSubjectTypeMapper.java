@@ -32,7 +32,7 @@ public class GenericSubjectTypeMapper implements SubjectTypeMapper {
 
     @Override
     public EnumSet<SubjectType> supports() {
-        return EnumSet.of(SubjectType.DEPUTY_DECLARATION, SubjectType.QUESTIONS_ANSWERS, SubjectType.PETITION);
+        return EnumSet.of(SubjectType.DEPUTY_DECLARATION, SubjectType.QUESTIONS_ANSWERS, SubjectType.PETITION, SubjectType.MINISTERIAL_DECLARATION);
     }
 
     private List<Intervention> mapInterventions(List<InterventionDocument> interventionDocuments, Map<UUID, Affectation> affectations) {

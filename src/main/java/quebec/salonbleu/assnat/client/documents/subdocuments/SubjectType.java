@@ -4,5 +4,6 @@ public enum SubjectType {
 
     DEPUTY_DECLARATION,
     QUESTIONS_ANSWERS,
-    PETITION
+    PETITION,
+    MINISTERIAL_DECLARATION
 }

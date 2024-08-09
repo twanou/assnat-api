@@ -53,6 +53,6 @@ class GenericSubjectTypeMapperTest {
 
     @Test
     void supports() {
-        assertTrue(this.genericSubjectTypeMapper.supports().contains(SubjectType.DEPUTY_DECLARATION));
+        assertTrue(this.genericSubjectTypeMapper.supports().containsAll(List.of(SubjectType.DEPUTY_DECLARATION, SubjectType.QUESTIONS_ANSWERS, SubjectType.PETITION, SubjectType.MINISTERIAL_DECLARATION)));
     }
 }
