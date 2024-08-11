@@ -32,15 +32,23 @@ public class GenericSubjectTypeMapper implements SubjectTypeMapper {
 
     @Override
     public EnumSet<SubjectType> supports() {
-        return EnumSet.of(SubjectType.DEPUTY_DECLARATION, SubjectType.QUESTIONS_ANSWERS, SubjectType.PETITION, SubjectType.MINISTERIAL_DECLARATION);
+        return EnumSet.allOf(SubjectType.class);
     }
 
     private List<Intervention> mapInterventions(List<InterventionDocument> interventionDocuments, Map<UUID, Affectation> affectations) {
         return interventionDocuments.stream()
-                .map(intervention -> Intervention.builder()
-                        .affectation(affectations.get(intervention.getAssignmentId()))
-                        .paragraphes(Collections.unmodifiableList(intervention.getParagraphs()))
-                        .build())
+                .map(interventionDocument -> {
+                    Intervention.InterventionBuilder interventionBuilder = Intervention.builder();
+                    interventionDocument.getOptionalAssignmentId().ifPresentOrElse(
+                            i -> interventionBuilder
+                                    .affectation(affectations.get(interventionDocument.getAssignmentId()))
+                                    .paragraphes(Collections.unmodifiableList(interventionDocument.getParagraphs())),
+                            () -> interventionBuilder
+                                    .note(interventionDocument.getNote())
+                                    .paragraphes(Collections.unmodifiableList(interventionDocument.getParagraphs())));
+                    return interventionBuilder.build();
+                })
                 .toList();
     }
 }
+

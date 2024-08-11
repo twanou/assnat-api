@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import static com.mongodb.assertions.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -38,21 +39,35 @@ class GenericSubjectTypeMapperTest {
         SubjectDetails subjectDetails = SubjectDetails.builder()
                 .type(SubjectType.DEPUTY_DECLARATION)
                 .title("title")
-                .interventions(List.of(InterventionDocument.builder()
-                        .assignmentId(TestUUID.ID1)
-                        .paragraphs(List.of("bla bla bla", "bla bla bla"))
-                        .build()))
-                .build();
+                .interventions(List.of(
+                                InterventionDocument.builder()
+                                        .assignmentId(TestUUID.ID1)
+                                        .paragraphs(List.of("bla bla bla", "bla bla bla"))
+                                        .build(),
+                                InterventionDocument.builder()
+                                        .note("note")
+                                        .paragraphs(List.of("bla bla bla", "bla bla bla"))
+                                        .build()
+                        )
+                ).build();
 
         SujetDetails sujetDetails = this.genericSubjectTypeMapper.map(subjectDetails, affectations);
         assertEquals(subjectDetails.getTitle(), sujetDetails.getTitre());
+
         assertEquals(subjectDetails.getInterventions().getFirst().getParagraphs(), sujetDetails.getInterventions().getFirst().getParagraphes());
-        assertEquals(SujetType.DECLARATION_DEPUTE, sujetDetails.getType());
+        assertEquals(subjectDetails.getInterventions().get(1).getParagraphs(), sujetDetails.getInterventions().get(1).getParagraphes());
+
+        assertNull(sujetDetails.getInterventions().getFirst().getNote());
+        assertEquals(subjectDetails.getInterventions().get(1).getNote(), sujetDetails.getInterventions().get(1).getNote());
+
         assertSame(affectations.get(TestUUID.ID1), sujetDetails.getInterventions().getFirst().getAffectation());
+        assertNull(sujetDetails.getInterventions().get(1).getAffectation());
+
+        assertEquals(SujetType.DECLARATION_DEPUTE, sujetDetails.getType());
     }
 
     @Test
     void supports() {
-        assertTrue(this.genericSubjectTypeMapper.supports().containsAll(List.of(SubjectType.DEPUTY_DECLARATION, SubjectType.QUESTIONS_ANSWERS, SubjectType.PETITION, SubjectType.MINISTERIAL_DECLARATION)));
+        assertTrue(this.genericSubjectTypeMapper.supports().containsAll(List.of(SubjectType.DEPUTY_DECLARATION, SubjectType.QUESTIONS_ANSWERS, SubjectType.PETITION, SubjectType.MINISTERIAL_DECLARATION, SubjectType.LAW_PROJECT_PRESENTATION)));
     }
 }
