@@ -20,6 +20,12 @@ public class ErrorHandler {
         }
     }
 
+    public <X extends Throwable> void assertLessThanEquals(int lessThan, Collection<?> collection, Supplier<? extends X> exceptionSupplier) throws X {
+        if (collection.size() > lessThan) {
+            throw exceptionSupplier.get();
+        }
+    }
+
     public <X extends Throwable> void assertLessThan(int lessThan, Collection<?> collection, Supplier<? extends X> exceptionSupplier) throws X {
         if (collection.size() >= lessThan) {
             throw exceptionSupplier.get();

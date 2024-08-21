@@ -15,6 +15,7 @@ import quebec.salonbleu.assnat.utils.ErrorHandler;
 import test.utils.TestUUID;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -48,10 +49,10 @@ class DeputyFinderTest {
                 Deputy.builder().id(TestUUID.ID4).title("M.").firstName("René").lastName("Lévesque").build()
         ));
 
-        Assignment assignment = this.deputyFinder.findByCompleteName("M. Jacques Parizeau");
-        verify(errorHandlerMock).assertSize(eq(1), eq(List.of(deputyParizeau)), ArgumentMatchers.<Supplier<LoadingException>>any());
+        Optional<Assignment> assignment = this.deputyFinder.findByCompleteName("M. Jacques Parizeau");
+        verify(errorHandlerMock).assertLessThanEquals(eq(1), eq(List.of(deputyParizeau)), ArgumentMatchers.<Supplier<LoadingException>>any());
         verify(errorHandlerMock).assertNotNull(same(assignmentParizeau), ArgumentMatchers.<Supplier<LoadingException>>any());
-        assertSame(assignmentParizeau, assignment);
+        assertSame(assignmentParizeau, assignment.orElseThrow());
     }
 
     @Test

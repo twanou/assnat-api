@@ -14,6 +14,7 @@ import quebec.salonbleu.assnat.scrapers.models.ScrapedLogNode;
 import test.utils.TestUUID;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -59,7 +60,7 @@ class TemplateATest {
                                 .paragraphs(List.of("Bonjour", "Mais, lorsqu'on leur demande : Qu'allez-vous faire?", "oui", "Vice-Président : merci lulu", "bon passons à autre chose"))
                                 .build()))
                 .build();
-        when(deputyFinderMock.findByCompleteName("M. Lucien Bouchard")).thenReturn(assignment);
+        when(deputyFinderMock.findByCompleteName("M. Lucien Bouchard")).thenReturn(Optional.of(assignment));
         List<SubjectDetails> subjects = this.templateAImpl.map(scrapedLogNode);
         assertEquals(expectedResult, subjects.getFirst());
     }
@@ -101,7 +102,8 @@ class TemplateATest {
                                 .paragraphs(List.of("125 pour, 0 contre."))
                                 .build())
                 ).build();
-        when(deputyFinderMock.findByCompleteName("M. Jacques Parizeau")).thenReturn(assignment);
+        when(deputyFinderMock.findByCompleteName("M. Jacques Parizeau")).thenReturn(Optional.of(assignment));
+        
         List<SubjectDetails> subjects = this.templateAImpl.map(scrapedLogNode);
         assertEquals(expectedResult, subjects.getFirst());
     }

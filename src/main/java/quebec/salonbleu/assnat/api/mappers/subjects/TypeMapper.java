@@ -19,7 +19,8 @@ public class TypeMapper {
                 SubjectType.QUESTIONS_ANSWERS, SujetType.QUESTIONS_REPONSES,
                 SubjectType.PETITION, SujetType.DEPOT_PETITION,
                 SubjectType.MINISTERIAL_DECLARATION, SujetType.DECLARATION_MINISTERIELLE,
-                SubjectType.LAW_PROJECT_PRESENTATION, SujetType.PRESENTATION_PROJET_LOI
+                SubjectType.LAW_PROJECT_PRESENTATION, SujetType.PRESENTATION_PROJET_LOI,
+                SubjectType.MOTION_WITHOUT_NOTICE, SujetType.MOTION_SANS_PREAVIS
         ));
         if (!this.typeMap.keySet().containsAll(EnumSet.allOf(SubjectType.class))) {
             throw new IllegalStateException();
