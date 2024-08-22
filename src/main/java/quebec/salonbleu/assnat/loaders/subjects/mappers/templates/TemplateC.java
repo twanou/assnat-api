@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Catégorie
@@ -30,11 +31,13 @@ public abstract class TemplateC extends DocumentTypeMapper {
     private final DeputyFinder deputyFinder;
     public static final String MOTIONS_SANS_PREAVIS = "Motions sans préavis";
     private static final String MISE_AUX_VOIX = "Mise aux voix";
+    private static final String REJECTED_MOTION_TITLE = "Motion rejetée";
     private static final List<String> PRESIDENT = List.of("La Présidente", "Le Président");
     private static final List<String> IGNORED_TITLES = List.of("Document déposé");
 
     public List<SubjectDetails> map(ScrapedLogNode logNode) {
-        return logNode.getChildren().stream()
+        List<SubjectDetails> rejectedMotionsInTitle = this.getRejectedMotion(logNode); // parfois les coquins ils cachent des motions rejetées sous le nom de la catégorie.
+        List<SubjectDetails> motions = logNode.getChildren().stream()
                 .flatMap(subject -> {
                     List<SubjectDetails> subjectDetails = new ArrayList<>();
                     //Parfois il faut descendre d'un niveau car il y a un document déposé
@@ -47,7 +50,7 @@ public abstract class TemplateC extends DocumentTypeMapper {
                             .map(subSubject -> {
                                 List<SubjectDetails> rejectedMotions = List.of();
                                 if (MISE_AUX_VOIX.equals(subSubject.getTitle())) {
-                                    rejectedMotions = this.getRejectedMotion(subSubject);
+                                    rejectedMotions = this.getRejectedMotion(subSubject); // les coquins ils cachent les motions rejetées dans les mises aux voix
                                     subjectDetails.addAll(rejectedMotions);
                                 }
                                 Optional<Assignment> subAssignment = this.getSubAssignment(subSubject);
@@ -64,6 +67,8 @@ public abstract class TemplateC extends DocumentTypeMapper {
 
                     return subjectDetails.stream();
                 }).toList();
+
+        return Stream.concat(motions.stream(), rejectedMotionsInTitle.stream()).toList();
     }
 
     private List<SubjectDetails> getRejectedMotion(ScrapedLogNode scrapedLogNode) {
@@ -86,7 +91,7 @@ public abstract class TemplateC extends DocumentTypeMapper {
                         SubjectDetails.builder()
                                 .type(SubjectType.MOTION_WITHOUT_NOTICE)
                                 .anchor(scrapedLogNode.getAnchor())
-                                .title("Motion rejetée")
+                                .title(REJECTED_MOTION_TITLE)
                                 .interventions(List.of(this.mapAssignment(assignment.orElseThrow(), Arrays.asList(StringUtils.split("«" + motion + "»", "###")))))
                                 .build());
             }

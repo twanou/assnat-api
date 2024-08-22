@@ -238,6 +238,15 @@ class TemplateCTest {
     void map_with_rejectedMotion() {
         ScrapedLogNode scrapedLogNode = ScrapedLogNode.builder()
                 .title("Motions sans préavis")
+                .anchor("#anchor3")
+                .paragraphs(List.of(
+                        "Bon maintenant passons au député de La Peltrie",
+                        "Mme Marois : Yo les jeunes",
+                        "«Reconnaître que l'eau est mouillée;",
+                        "«Que le feu est chaud;",
+                        "«et que la neige est froide.»",
+                        "M. Caire : Pas de consentement"
+                ))
                 .children(List.of(ScrapedLogNode.builder()
                         .title("Reconnaître que le Québec est un endroit sur la terre.")
                         .anchor("#anchor")
@@ -311,7 +320,24 @@ class TemplateCTest {
                                 .paragraphs(List.of("«Reconnaître que le Québec est vraiment un pays»"))
                                 .build()
                 )).build();
+        SubjectDetails expectedRejectedMotion3 = SubjectDetails.builder()
+                .type(SubjectType.MOTION_WITHOUT_NOTICE)
+                .title("Motion rejetée")
+                .anchor(scrapedLogNode.getAnchor())
+                .interventions(List.of(
+                        InterventionDocument.builder()
+                                .assignmentId(assignment.getId())
+                                .districtId(assignment.getDistrictId())
+                                .partyId(assignment.getPartyId())
+                                .deputyId(assignment.getDeputyId())
+                                .paragraphs(List.of(
+                                        "«Reconnaître que l'eau est mouillée;",
+                                        "«Que le feu est chaud;",
+                                        "«et que la neige est froide.»"
+                                )).build()
+                )).build();
         when(deputyFinderMock.findByLastName("M. Landry")).thenReturn(Optional.of(assignment));
+        when(deputyFinderMock.findByLastName("Mme Marois")).thenReturn(Optional.of(assignment));
         when(deputyFinderMock.findByLastName("M. St-Pierre-Plamondon")).thenReturn(Optional.of(assignment));
         when(deputyFinderMock.findByLastNameAndDistrict("M. Bérubé", "Matane-Matapédia")).thenReturn(Optional.of(assignment));
 
@@ -319,6 +345,7 @@ class TemplateCTest {
         assertEquals(expectedResult, subjects.getFirst());
         assertEquals(expectedRejectedMotion1, subjects.get(1));
         assertEquals(expectedRejectedMotion2, subjects.get(2));
+        assertEquals(expectedRejectedMotion3, subjects.get(3));
     }
 
     private static class TemplateCImpl extends TemplateC {
