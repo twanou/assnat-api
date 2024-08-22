@@ -14,12 +14,14 @@ import quebec.salonbleu.assnat.scrapers.models.ScrapedLogNode;
 import test.utils.TestUUID;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class TemplateBTest {
+
     @Mock
     private DeputyFinder deputyFinderMock;
     @InjectMocks
@@ -50,7 +52,8 @@ class TemplateBTest {
                                 .paragraphs(List.of("Bonjour", "Je dépose cette pétition"))
                                 .build()))
                 .build();
-        when(deputyFinderMock.findByLastName("M. Drainville")).thenReturn(assignment);
+        when(deputyFinderMock.findByLastName("M. Drainville")).thenReturn(Optional.of(assignment));
+        
         List<SubjectDetails> subjects = this.templateBImpl.map(scrapedLogNode);
         assertEquals(expectedResult, subjects.getFirst());
     }

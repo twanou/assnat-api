@@ -15,6 +15,7 @@ import quebec.salonbleu.assnat.utils.ErrorHandler;
 import test.utils.TestUUID;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -48,10 +49,46 @@ class DeputyFinderTest {
                 Deputy.builder().id(TestUUID.ID4).title("M.").firstName("René").lastName("Lévesque").build()
         ));
 
-        Assignment assignment = this.deputyFinder.findByCompleteName("M. Jacques Parizeau");
-        verify(errorHandlerMock).assertSize(eq(1), eq(List.of(deputyParizeau)), ArgumentMatchers.<Supplier<LoadingException>>any());
+        Optional<Assignment> assignment = this.deputyFinder.findByCompleteName("M. Jacques Parizeau");
+        verify(errorHandlerMock).assertLessThanEquals(eq(1), eq(List.of(deputyParizeau)), ArgumentMatchers.<Supplier<LoadingException>>any());
         verify(errorHandlerMock).assertNotNull(same(assignmentParizeau), ArgumentMatchers.<Supplier<LoadingException>>any());
-        assertSame(assignmentParizeau, assignment);
+        assertSame(assignmentParizeau, assignment.orElseThrow());
+    }
+
+    @Test
+    void findByLastName() {
+        Deputy deputyParizeau = Deputy.builder().id(TestUUID.ID1).title("M.").firstName("Jacques").lastName("Parizeau").build();
+        Assignment assignmentParizeau = Assignment.builder().deputyId(TestUUID.ID1).partyId(TestUUID.ID2).districtId(TestUUID.ID3).build();
+        when(assignmentRepositoryMock.findByEndDate(null)).thenReturn(List.of(
+                assignmentParizeau,
+                Assignment.builder().deputyId(TestUUID.ID4).partyId(TestUUID.ID5).districtId(TestUUID.ID6).build()));
+        when(deputyRepositoryMock.findAllById(List.of(TestUUID.ID4, TestUUID.ID1))).thenReturn(List.of(
+                deputyParizeau,
+                Deputy.builder().id(TestUUID.ID4).title("M.").firstName("René").lastName("Lévesque").build()
+        ));
+
+        Optional<Assignment> assignment = this.deputyFinder.findByLastName("M. Parizeau");
+        verify(errorHandlerMock).assertLessThanEquals(eq(1), eq(List.of(deputyParizeau)), ArgumentMatchers.<Supplier<LoadingException>>any());
+        verify(errorHandlerMock).assertNotNull(same(assignmentParizeau), ArgumentMatchers.<Supplier<LoadingException>>any());
+        assertSame(assignmentParizeau, assignment.orElseThrow());
+    }
+
+    @Test
+    void findByLastNameAndDistrict() {
+        Deputy deputyParizeau = Deputy.builder().id(TestUUID.ID1).title("M.").firstName("Jacques").lastName("Parizeau").lastDistrict("L'Assomption").build();
+        Assignment assignmentParizeau = Assignment.builder().deputyId(TestUUID.ID1).partyId(TestUUID.ID2).districtId(TestUUID.ID3).build();
+        when(assignmentRepositoryMock.findByEndDate(null)).thenReturn(List.of(
+                assignmentParizeau,
+                Assignment.builder().deputyId(TestUUID.ID4).partyId(TestUUID.ID5).districtId(TestUUID.ID6).build()));
+        when(deputyRepositoryMock.findAllById(List.of(TestUUID.ID4, TestUUID.ID1))).thenReturn(List.of(
+                deputyParizeau,
+                Deputy.builder().id(TestUUID.ID4).title("M.").firstName("René").lastName("Lévesque").build()
+        ));
+
+        Optional<Assignment> assignment = this.deputyFinder.findByLastNameAndDistrict("M. Parizeau", "L'Assomption");
+        verify(errorHandlerMock).assertLessThanEquals(eq(1), eq(List.of(deputyParizeau)), ArgumentMatchers.<Supplier<LoadingException>>any());
+        verify(errorHandlerMock).assertNotNull(same(assignmentParizeau), ArgumentMatchers.<Supplier<LoadingException>>any());
+        assertSame(assignmentParizeau, assignment.orElseThrow());
     }
 
     @Test

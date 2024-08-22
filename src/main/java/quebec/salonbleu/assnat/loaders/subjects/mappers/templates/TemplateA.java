@@ -11,10 +11,11 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Question et réponses orales
+ * Catégorie
  * -Sujet
  * --Nom du député(e)
- * --Paragraphes
+ * |--Paragraphes
+ * --Mise aux voix (optionnel)
  */
 @RequiredArgsConstructor
 public abstract class TemplateA extends DocumentTypeMapper {
@@ -35,21 +36,10 @@ public abstract class TemplateA extends DocumentTypeMapper {
                     List<InterventionDocument> interventionDocuments = subject.getChildren()
                             .stream()
                             .filter(intervention -> !IGNORED_TITLES.contains(intervention.getTitle()))
-                            .map(intervention -> {
-                                Optional<Assignment> assignment = this.getAssignment(intervention.getTitle());
-                                InterventionDocument.InterventionDocumentBuilder interventionBuilder = InterventionDocument.builder();
-                                assignment.ifPresentOrElse(
-                                        a -> interventionBuilder
-                                                .assignmentId(a.getId())
-                                                .deputyId(a.getDeputyId())
-                                                .partyId(a.getPartyId())
-                                                .districtId(a.getDistrictId())
-                                                .paragraphs(this.baseFormat(intervention.getParagraphs())),
-                                        () -> interventionBuilder
-                                                .paragraphs(intervention.getParagraphs())
-                                                .note(intervention.getTitle()));
-                                return interventionBuilder.build();
-                            }).toList();
+                            .map(intervention -> this.getAssignment(intervention.getTitle())
+                                    .map(a -> this.mapAssignment(a, intervention.getParagraphs()))
+                                    .orElse(this.mapLogNode(intervention)))
+                            .toList();
 
                     return SubjectDetails.builder()
                             .type(this.getSubjectType())
@@ -60,9 +50,10 @@ public abstract class TemplateA extends DocumentTypeMapper {
                 }).toList();
     }
 
+    //this.mapAssignment(this.getAssignment(intervention.getTitle()), intervention.getParagraphs()))
     private Optional<Assignment> getAssignment(String title) {
         if (!MISE_AUX_VOIX.equals(title)) {
-            return Optional.of(this.deputyFinder.findByCompleteName(title)); // nom complet, ex M. Bob Tremblay
+            return this.deputyFinder.findByCompleteName(title); // nom complet, ex M. Bob Tremblay
         }
         return Optional.empty();
     }

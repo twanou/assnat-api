@@ -1,6 +1,8 @@
 package quebec.salonbleu.assnat.loaders.subjects.mappers.templates;
 
 import org.apache.commons.lang3.StringUtils;
+import quebec.salonbleu.assnat.client.documents.Assignment;
+import quebec.salonbleu.assnat.client.documents.subdocuments.InterventionDocument;
 import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectDetails;
 import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectType;
 import quebec.salonbleu.assnat.scrapers.models.ScrapedLogNode;
@@ -26,6 +28,35 @@ public abstract class DocumentTypeMapper {
                 .filter(s -> !(StringUtils.startsWith(s, "•") && StringUtils.endsWith(s, "•")))
                 .toList();
         return this.format(formattedParagraphs);
+    }
+
+    protected InterventionDocument mapAssignment(Assignment assignment, List<String> paragraphs) {
+        return InterventionDocument.builder()
+                .assignmentId(assignment.getId())
+                .deputyId(assignment.getDeputyId())
+                .partyId(assignment.getPartyId())
+                .districtId(assignment.getDistrictId())
+                .paragraphs(this.baseFormat(paragraphs))
+                .build();
+    }
+
+    protected InterventionDocument mapParagraphs(List<String> paragraphs) {
+        return InterventionDocument.builder()
+                .paragraphs(this.baseFormat(paragraphs))
+                .note(this.getDeputyLastName(paragraphs.getFirst()))
+                .build();
+    }
+
+    protected InterventionDocument mapLogNode(ScrapedLogNode scrapedLogNode) {
+        return InterventionDocument.builder()
+                .paragraphs(scrapedLogNode.getParagraphs())
+                .note(scrapedLogNode.getTitle())
+                .build();
+    }
+
+    protected String getDeputyLastName(String paragraph) {
+        String[] splitResult = StringUtils.split(paragraph, ":", 2);
+        return StringUtils.strip(splitResult[0]);
     }
 
     private String removeDeputyName(String paragraph) {

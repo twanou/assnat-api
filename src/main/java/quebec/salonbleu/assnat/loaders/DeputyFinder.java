@@ -3,6 +3,7 @@ package quebec.salonbleu.assnat.loaders;
 
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class DeputyFinder implements ApplicationListener<ClearCacheEvent> {
@@ -40,16 +42,21 @@ public class DeputyFinder implements ApplicationListener<ClearCacheEvent> {
     }
 
     //M. Paul St-Pierre Plamondon
-    public Assignment findByCompleteName(String completeName) {
-        return this.findByFilter(deputy -> StringUtils.equals(formatCompleteName(deputy), completeName), completeName);
+    public Optional<Assignment> findByCompleteName(String completeName) {
+        return this.findByFilter(deputy -> StringUtils.equalsIgnoreCase(formatCompleteName(deputy), completeName), completeName);
     }
 
     //M. St-Pierre Plamondon
-    public Assignment findByLastName(String lastName) {
-        return this.findByFilter(deputy -> StringUtils.equals(formatLastName(deputy), lastName), lastName);
+    public Optional<Assignment> findByLastName(String lastName) {
+        return this.findByFilter(deputy -> StringUtils.equalsIgnoreCase(formatLastName(deputy), lastName), lastName);
     }
 
-    private Assignment findByFilter(Predicate<Deputy> filter, String logInfo) {
+    //M. Plamondon (Camille-Laurin)
+    public Optional<Assignment> findByLastNameAndDistrict(String lastName, String district) {
+        return this.findByFilter(deputy -> StringUtils.equalsIgnoreCase(formatLastName(deputy), lastName) && StringUtils.equalsIgnoreCase(deputy.getLastDistrict(), district), lastName + " " + district);
+    }
+
+    private Optional<Assignment> findByFilter(Predicate<Deputy> filter, String logInfo) {
         if (this.cache.isEmpty()) {
             this.refreshCache();
         }
@@ -58,10 +65,22 @@ public class DeputyFinder implements ApplicationListener<ClearCacheEvent> {
                 .deputies.stream()
                 .filter(filter)
                 .toList();
-        this.errorHandler.assertSize(1, results, () -> new LoadingException("Zéro ou plusieurs députés trouvé pour. Recherche : " + logInfo + ", Résultats : " + results));
+
+        this.errorHandler.assertLessThanEquals(1, results, () -> {
+            log.error("Plusieurs députés trouvés : " + logInfo + ", Résultats : " + results);
+            throw new LoadingException("Plusieurs députés trouvés : " + logInfo + ", Résultats : " + results);
+        });
+
+        if (results.isEmpty()) {
+            return Optional.empty();
+        }
+
         Assignment assignment = this.cache.get().assignments.get(results.getFirst().getId());
-        this.errorHandler.assertNotNull(assignment, () -> new LoadingException("Aucune assignation pour ce député : " + results.getFirst()));
-        return assignment;
+        this.errorHandler.assertNotNull(assignment, () -> {
+            log.error("Aucune assignation pour ce député : " + results.getFirst());
+            return new LoadingException("Aucune assignation pour ce député : " + results.getFirst());
+        });
+        return Optional.of(assignment);
     }
 
     private void refreshCache() {

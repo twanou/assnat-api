@@ -35,7 +35,6 @@ class SubjectTypeServiceTest {
 
         Arrays.stream(SujetType.values())
                 .forEach(type -> {
-
                     Optional<TypeDescription> typeDescription = typeDescriptions.stream().filter(t -> t.getType().equals(type)).findFirst();
                     assertTrue(typeDescription.isPresent());
                     assertEquals("Description", typeDescription.get().getDescription());
