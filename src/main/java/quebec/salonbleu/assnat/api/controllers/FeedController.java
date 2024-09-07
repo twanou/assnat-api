@@ -32,7 +32,7 @@ public class FeedController {
     private final SubjectService subjectService;
     private final LoadingService loadingService;
 
-    @Operation(summary = "Obtenir les derniers sujets en fonction des député(e)s choisi(e)s.")
+    @Operation(summary = "Obtenir les derniers sujets selon les député(e)s ou les catégories.")
     @GetMapping
     public SujetReponse getSubjectsByDeputyIdsOrSubjectTypes(@RequestParam(required = false, defaultValue = "") @Size(max = 125) Set<UUID> deputeIds,
                                                              @RequestParam(required = false, defaultValue = "") Set<SujetType> sujetTypes,
