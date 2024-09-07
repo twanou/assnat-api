@@ -32,8 +32,8 @@ public class SubjectRepository {
         return this.subjectSpringRepository.findFirstByOrderByDateDesc();
     }
 
-    public List<Subject> findSubjectsByDeputyIds(Set<UUID> ids, Pageable pageable) {
-        return this.subjectSpringRepository.findSubjectsByDeputyIds(ids, pageable);
+    public List<Subject> findSubjectsByDeputyIdsOrSubjectTypes(Set<UUID> ids, Set<String> subjectTypes, Pageable pageable) {
+        return this.subjectSpringRepository.findSubjectsByDeputyIdsOrSubjectTypes(ids, subjectTypes, pageable);
     }
 
     public List<Subject> findAllById(Iterable<UUID> ids) {

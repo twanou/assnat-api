@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import quebec.salonbleu.assnat.api.mappers.subjects.SubjectMapper;
 import quebec.salonbleu.assnat.api.models.commons.Affectation;
 import quebec.salonbleu.assnat.api.models.subjects.Sujet;
+import quebec.salonbleu.assnat.api.models.subjects.SujetType;
 import quebec.salonbleu.assnat.api.models.subjects.requests.SujetRequete;
 import quebec.salonbleu.assnat.client.documents.Subject;
 import quebec.salonbleu.assnat.client.documents.UpcomingLog;
@@ -47,14 +48,17 @@ class SubjectServiceTest {
     @Test
     void getSubjectsByDeputyIds() {
         Set<UUID> ids = Set.of(TestUUID.ID1, TestUUID.ID2);
+        Set<SujetType> sujetTypes = Set.of(SujetType.QUESTIONS_REPONSES);
+        Set<String> mappedSubjectTypes = Set.of(SujetType.QUESTIONS_REPONSES.name());
         List<Subject> subjects = List.of(Subject.builder().build());
         List<Sujet> sujets = List.of(Sujet.builder().build());
         Map<UUID, Affectation> affectations = Map.of();
-        when(subjectRepositoryMock.findSubjectsByDeputyIds(ids, PageRequest.of(0, 25))).thenReturn(subjects);
+        when(subjectRepositoryMock.findSubjectsByDeputyIdsOrSubjectTypes(ids, mappedSubjectTypes, PageRequest.of(0, 25))).thenReturn(subjects);
         when(assignmentServiceMock.getAllAssignments()).thenReturn(affectations);
         when(subjectMapperMock.toSujetsList(same(subjects), same(affectations))).thenReturn(sujets);
+        when(subjectMapperMock.toSubjectTypes(sujetTypes)).thenReturn(mappedSubjectTypes);
 
-        List<Sujet> response = this.subjectService.getSubjectsByDeputyIds(ids, 0, 25);
+        List<Sujet> response = this.subjectService.getSubjectsByDeputyIdsOrSubjectTypes(ids, sujetTypes, 0, 25);
         assertSame(sujets, response);
     }
 

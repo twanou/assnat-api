@@ -47,9 +47,9 @@ class SubjectRepositoryTest {
     @Test
     void findSubjectsByDeputyIds() {
         List<Subject> subjects = List.of(Subject.builder().build());
-        when(subjectSpringRepositoryMock.findSubjectsByDeputyIds(Set.of(TestUUID.ID1, TestUUID.ID2), PageRequest.of(0, 25))).thenReturn(subjects);
+        when(subjectSpringRepositoryMock.findSubjectsByDeputyIdsOrSubjectTypes(Set.of(TestUUID.ID1, TestUUID.ID2), Set.of("patate", "tofu"), PageRequest.of(0, 25))).thenReturn(subjects);
 
-        List<Subject> response = this.subjectRepository.findSubjectsByDeputyIds(Set.of(TestUUID.ID1, TestUUID.ID2), PageRequest.of(0, 25));
+        List<Subject> response = this.subjectRepository.findSubjectsByDeputyIdsOrSubjectTypes(Set.of(TestUUID.ID1, TestUUID.ID2), Set.of("patate", "tofu"), PageRequest.of(0, 25));
         assertSame(subjects, response);
     }
 

@@ -14,6 +14,6 @@ public interface SubjectSpringRepository extends MongoRepository<Subject, UUID> 
 
     Optional<Subject> findFirstByOrderByDateDesc();
 
-    @Query(value = "{'subjectDetails.interventions':{ $elemMatch: { 'deputyId': { $in: ?0}}}}", sort = "{ date : -1 }")
-    List<Subject> findSubjectsByDeputyIds(Set<UUID> ids, Pageable pageable);
+    @Query(value = "{ $or: [{'subjectDetails.interventions':{ $elemMatch: { 'deputyId': { $in: ?0}}}}, {'subjectDetails.type': {$in: ?1}}]}", sort = "{ date : -1 }")
+    List<Subject> findSubjectsByDeputyIdsOrSubjectTypes(Set<UUID> ids, Set<String> types, Pageable pageable);
 }

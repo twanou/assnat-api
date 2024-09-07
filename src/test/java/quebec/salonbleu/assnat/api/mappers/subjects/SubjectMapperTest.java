@@ -25,6 +25,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -86,6 +87,18 @@ class SubjectMapperTest {
         assertEquals(sujetRequete.getDeputeIds(), subjectArgs.getDeputyIds());
         assertEquals(sujetRequete.getCirconscriptionIds(), subjectArgs.getDistrictIds());
         assertEquals(Set.of(SubjectType.DEPUTY_DECLARATION.name()), subjectArgs.getSubjectTypes());
+    }
+
+    @Test
+    void toSubjectTypes() {
+        when(subjectTypeMapperMock.supports()).thenReturn(EnumSet.allOf(SubjectType.class));
+        when(typeMapperMock.map(SujetType.DECLARATION_DEPUTE)).thenReturn(SubjectType.DEPUTY_DECLARATION);
+        when(typeMapperMock.map(SujetType.QUESTIONS_REPONSES)).thenReturn(SubjectType.QUESTIONS_ANSWERS);
+        SubjectMapper subjectMapper = new SubjectMapper(List.of(subjectTypeMapperMock), assnatLinkBuilderMock, typeMapperMock);
+
+        Set<String> subjectTypes = subjectMapper.toSubjectTypes(Set.of(SujetType.DECLARATION_DEPUTE, SujetType.QUESTIONS_REPONSES));
+        assertTrue(subjectTypes.contains(SubjectType.DEPUTY_DECLARATION.name()));
+        assertTrue(subjectTypes.contains(SubjectType.QUESTIONS_ANSWERS.name()));
     }
 
     @Test

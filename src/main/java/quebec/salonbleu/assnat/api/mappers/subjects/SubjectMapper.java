@@ -3,6 +3,7 @@ package quebec.salonbleu.assnat.api.mappers.subjects;
 import org.springframework.stereotype.Component;
 import quebec.salonbleu.assnat.api.models.commons.Affectation;
 import quebec.salonbleu.assnat.api.models.subjects.Sujet;
+import quebec.salonbleu.assnat.api.models.subjects.SujetType;
 import quebec.salonbleu.assnat.api.models.subjects.requests.SujetRequete;
 import quebec.salonbleu.assnat.client.documents.Subject;
 import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectType;
@@ -14,6 +15,7 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -65,7 +67,11 @@ public class SubjectMapper {
                 .deputyIds(sujetRequete.getDeputeIds())
                 .partyIds(sujetRequete.getPartiIds())
                 .districtIds(sujetRequete.getCirconscriptionIds())
-                .subjectTypes(sujetRequete.getSujetTypes().stream().map(t -> this.typeMapper.map(t).name()).collect(Collectors.toUnmodifiableSet()))
+                .subjectTypes(this.toSubjectTypes(sujetRequete.getSujetTypes()))
                 .build();
+    }
+
+    public Set<String> toSubjectTypes(Set<SujetType> sujetTypes) {
+        return sujetTypes.stream().map(t -> this.typeMapper.map(t).name()).collect(Collectors.toUnmodifiableSet());
     }
 }
