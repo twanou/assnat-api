@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -34,10 +33,10 @@ public class FeedController {
 
     @Operation(summary = "Obtenir les derniers sujets selon les député(e)s ou les catégories.")
     @GetMapping
-    public SujetReponse getSubjectsByDeputyIdsOrSubjectTypes(@RequestParam(required = false, defaultValue = "") @Size(max = 125) Set<UUID> deputeIds,
-                                                             @RequestParam(required = false, defaultValue = "") Set<SujetType> sujetTypes,
-                                                             @RequestParam @NotNull @Min(0) Integer page,
-                                                             @RequestParam @NotNull @Min(5) @Max(25) Integer taille) {
+    public SujetReponse getSubjectsByDeputyIdsOrSubjectTypes(@RequestParam(defaultValue = "") @Size(max = 125) Set<UUID> deputeIds,
+                                                             @RequestParam(defaultValue = "") Set<SujetType> sujetTypes,
+                                                             @RequestParam(defaultValue = "0") @Min(0) int page,
+                                                             @RequestParam(defaultValue = "25") @Min(5) @Max(25) int taille) {
         this.loadingService.load();
         return SujetReponse.builder()
                 .sujets(this.subjectService.getSubjectsByDeputyIdsOrSubjectTypes(deputeIds, sujetTypes, page, taille))
