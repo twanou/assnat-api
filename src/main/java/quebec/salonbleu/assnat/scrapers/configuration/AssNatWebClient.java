@@ -1,10 +1,10 @@
 package quebec.salonbleu.assnat.scrapers.configuration;
 
-import quebec.salonbleu.assnat.scrapers.exceptions.ScrapingException;
 import org.htmlunit.Page;
 import org.htmlunit.WebClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import quebec.salonbleu.assnat.scrapers.exceptions.ScrapingException;
 
 import java.io.IOException;
 
@@ -20,6 +20,7 @@ public class AssNatWebClient {
         this.webClient.getOptions().setCssEnabled(false);
         this.webClient.getOptions().setJavaScriptEnabled(false);
         this.webClient.getOptions().setDownloadImages(false);
+        this.webClient.getOptions().setTimeout(5000);
     }
 
     public <P extends Page> P getRelativePage(String relativeUrl) {
