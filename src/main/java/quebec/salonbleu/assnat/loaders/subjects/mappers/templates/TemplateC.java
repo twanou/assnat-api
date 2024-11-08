@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -76,25 +77,27 @@ public abstract class TemplateC extends DocumentTypeMapper {
         String fullText = StringUtils.join(scrapedLogNode.getParagraphs(), "###");
         String[] motions = StringUtils.substringsBetween(fullText, "«", "»");
         if (motions != null) {
-            for (String motion : motions) {
-                String fullParagraphsBeforeMotion = StringUtils.substringBetween(fullText, "###", "###«" + motion);
-                String[] paragraphsBeforeMotion = StringUtils.split(fullParagraphsBeforeMotion, "###");
+            Arrays.stream(motions)
+                    .filter(motion -> motion.length() > 30) // Pour ignorer les petites phrases entre guillemet qui ne sont pas des motions
+                    .forEach(motion -> {
+                        String fullParagraphsBeforeMotion = StringUtils.substringBetween(fullText, "###", "###«" + motion);
+                        String[] paragraphsBeforeMotion = StringUtils.split(fullParagraphsBeforeMotion, "###");
 
-                Optional<Assignment> assignment = Optional.empty();
-                int index = paragraphsBeforeMotion.length - 1;
-                while (assignment.isEmpty() && index >= 0) {
-                    assignment = this.getAssignment(paragraphsBeforeMotion[index]);
-                    --index;
-                }
+                        Optional<Assignment> assignment = Optional.empty();
+                        int index = paragraphsBeforeMotion.length - 1;
+                        while (assignment.isEmpty() && index >= 0) {
+                            assignment = this.getAssignment(paragraphsBeforeMotion[index]);
+                            --index;
+                        }
 
-                subjectDetails.add(
-                        SubjectDetails.builder()
-                                .type(SubjectType.MOTION_WITHOUT_NOTICE)
-                                .anchor(scrapedLogNode.getAnchor())
-                                .title(REJECTED_MOTION_TITLE)
-                                .interventions(List.of(this.mapAssignment(assignment.orElseThrow(), Arrays.asList(StringUtils.split("«" + motion + "»", "###")))))
-                                .build());
-            }
+                        subjectDetails.add(
+                                SubjectDetails.builder()
+                                        .type(SubjectType.MOTION_WITHOUT_NOTICE)
+                                        .anchor(scrapedLogNode.getAnchor())
+                                        .title(REJECTED_MOTION_TITLE)
+                                        .interventions(List.of(this.mapAssignment(assignment.orElseThrow(), Arrays.asList(StringUtils.split("«" + motion + "»", "###")))))
+                                        .build());
+                    });
         }
         return Collections.unmodifiableList(subjectDetails);
     }
@@ -132,7 +135,10 @@ public abstract class TemplateC extends DocumentTypeMapper {
     }
 
     private List<String> cleanParagraphs(List<String> paragraphs, List<SubjectDetails> rejectedMotions) {
-        int indexToDeleteFrom = paragraphs.indexOf(rejectedMotions.getFirst().getInterventions().getFirst().getParagraphs().getFirst());
+        int indexToDeleteFrom = IntStream.range(0, paragraphs.size())
+                .filter(i -> paragraphs.get(i).contains(rejectedMotions.getFirst().getInterventions().getFirst().getParagraphs().getFirst()))
+                .findFirst()
+                .orElseThrow();
         return Collections.unmodifiableList(paragraphs.subList(0, indexToDeleteFrom - 1)); //-1 pour ignorer aussi le député qui présente la motion.
     }
 }
