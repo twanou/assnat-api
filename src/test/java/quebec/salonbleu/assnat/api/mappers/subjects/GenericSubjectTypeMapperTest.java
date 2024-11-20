@@ -32,7 +32,7 @@ class GenericSubjectTypeMapperTest {
     private GenericSubjectTypeMapper genericSubjectTypeMapper;
 
     @Test
-    void map() {
+    void completeMap() {
         when(typeMapper.map(SubjectType.DEPUTY_DECLARATION)).thenReturn(SujetType.DECLARATION_DEPUTE);
         Map<UUID, Affectation> affectations = Map.of(TestUUID.ID1, Affectation.builder().build());
 
@@ -51,7 +51,7 @@ class GenericSubjectTypeMapperTest {
                         )
                 ).build();
 
-        SujetDetails sujetDetails = this.genericSubjectTypeMapper.map(subjectDetails, affectations);
+        SujetDetails sujetDetails = this.genericSubjectTypeMapper.completeMap(subjectDetails, affectations);
         assertEquals(subjectDetails.getTitle(), sujetDetails.getTitre());
 
         assertEquals(subjectDetails.getInterventions().getFirst().getParagraphs(), sujetDetails.getInterventions().getFirst().getParagraphes());
@@ -63,6 +63,34 @@ class GenericSubjectTypeMapperTest {
         assertSame(affectations.get(TestUUID.ID1), sujetDetails.getInterventions().getFirst().getAffectation());
         assertNull(sujetDetails.getInterventions().get(1).getAffectation());
 
+        assertEquals(SujetType.DECLARATION_DEPUTE, sujetDetails.getType());
+    }
+
+    @Test
+    void partialMap() {
+        when(typeMapper.map(SubjectType.DEPUTY_DECLARATION)).thenReturn(SujetType.DECLARATION_DEPUTE);
+        Map<UUID, Affectation> affectations = Map.of(TestUUID.ID1, Affectation.builder().build());
+
+        SubjectDetails subjectDetails = SubjectDetails.builder()
+                .type(SubjectType.DEPUTY_DECLARATION)
+                .title("title")
+                .interventions(List.of(
+                                InterventionDocument.builder()
+                                        .assignmentId(TestUUID.ID1)
+                                        .paragraphs(List.of("bla bla bla", "bla bla bla"))
+                                        .build(),
+                                InterventionDocument.builder()
+                                        .note("note")
+                                        .paragraphs(List.of("bla bla bla", "bla bla bla"))
+                                        .build()
+                        )
+                ).build();
+
+        SujetDetails sujetDetails = this.genericSubjectTypeMapper.partialMap(subjectDetails, affectations);
+        assertEquals(subjectDetails.getTitle(), sujetDetails.getTitre());
+        assertEquals(1, sujetDetails.getInterventions().size());
+        assertEquals(0, sujetDetails.getInterventions().getFirst().getParagraphes().size());
+        assertSame(affectations.get(TestUUID.ID1), sujetDetails.getInterventions().getFirst().getAffectation());
         assertEquals(SujetType.DECLARATION_DEPUTE, sujetDetails.getType());
     }
 

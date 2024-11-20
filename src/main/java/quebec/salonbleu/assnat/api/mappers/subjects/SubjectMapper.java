@@ -44,7 +44,7 @@ public class SubjectMapper {
         }
     }
 
-    public List<Sujet> toSujetsList(Iterable<Subject> subjects, Map<UUID, Affectation> affectations) {
+    public List<Sujet> toCompleteSujetsList(Iterable<Subject> subjects, Map<UUID, Affectation> affectations) {
         List<Sujet> sujets = new ArrayList<>();
         for (Subject subject : subjects) {
             Sujet sujet = Sujet.builder()
@@ -53,11 +53,24 @@ public class SubjectMapper {
                     .legislature(subject.getLegislature())
                     .session(subject.getSession())
                     .url(this.assnatLinkBuilder.getUrl(subject.getLegislature(), subject.getSession(), subject.getDate(), subject.getPageId(), subject.getSubjectDetails().getAnchor()))
-                    .details(this.subjectMappers.get(subject.getSubjectDetails().getType()).map(subject.getSubjectDetails(), affectations))
+                    .details(this.subjectMappers.get(subject.getSubjectDetails().getType()).completeMap(subject.getSubjectDetails(), affectations))
                     .build();
             sujets.add(sujet);
         }
-        return sujets;
+        return Collections.unmodifiableList(sujets);
+    }
+
+    public List<Sujet> toPartialSujetsList(Iterable<Subject> subjects, Map<UUID, Affectation> affectations) {
+        List<Sujet> sujets = new ArrayList<>();
+        for (Subject subject : subjects) {
+            Sujet sujet = Sujet.builder()
+                    .id(subject.getId())
+                    .date(subject.getDate())
+                    .details(this.subjectMappers.get(subject.getSubjectDetails().getType()).partialMap(subject.getSubjectDetails(), affectations))
+                    .build();
+            sujets.add(sujet);
+        }
+        return Collections.unmodifiableList(sujets);
     }
 
     public SubjectArgs toSubjectArgs(SujetRequete sujetRequete) {

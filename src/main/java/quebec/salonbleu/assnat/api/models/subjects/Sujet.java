@@ -13,8 +13,8 @@ public class Sujet {
 
     UUID id;
     LocalDate date;
-    int legislature;
-    int session;
+    Integer legislature;
+    Integer session;
     @Schema(description = "Url menant à l'intervention sur le site web de l'Assemblée nationale.")
     String url;
     SujetDetails details;

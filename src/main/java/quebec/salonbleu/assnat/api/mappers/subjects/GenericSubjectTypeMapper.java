@@ -22,11 +22,20 @@ public class GenericSubjectTypeMapper implements SubjectTypeMapper {
     private final TypeMapper typeMapper;
 
     @Override
-    public SujetDetails map(SubjectDetails subjectDetails, Map<UUID, Affectation> affectations) {
+    public SujetDetails completeMap(SubjectDetails subjectDetails, Map<UUID, Affectation> affectations) {
         return SujetDetails.builder()
                 .titre(subjectDetails.getTitle())
                 .type(this.typeMapper.map(subjectDetails.getType()))
-                .interventions(Collections.unmodifiableList(this.mapInterventions(subjectDetails.getInterventions(), affectations)))
+                .interventions(Collections.unmodifiableList(this.mapCompleteInterventions(subjectDetails.getInterventions(), affectations)))
+                .build();
+    }
+
+    @Override
+    public SujetDetails partialMap(SubjectDetails subjectDetails, Map<UUID, Affectation> affectations) {
+        return SujetDetails.builder()
+                .titre(subjectDetails.getTitle())
+                .type(this.typeMapper.map(subjectDetails.getType()))
+                .interventions(Collections.unmodifiableList(this.mapPartialInterventions(subjectDetails.getInterventions(), affectations)))
                 .build();
     }
 
@@ -35,7 +44,7 @@ public class GenericSubjectTypeMapper implements SubjectTypeMapper {
         return EnumSet.allOf(SubjectType.class);
     }
 
-    private List<Intervention> mapInterventions(List<InterventionDocument> interventionDocuments, Map<UUID, Affectation> affectations) {
+    private List<Intervention> mapCompleteInterventions(List<InterventionDocument> interventionDocuments, Map<UUID, Affectation> affectations) {
         return interventionDocuments.stream()
                 .map(interventionDocument -> {
                     Intervention.InterventionBuilder interventionBuilder = Intervention.builder();
@@ -46,6 +55,21 @@ public class GenericSubjectTypeMapper implements SubjectTypeMapper {
                             () -> interventionBuilder
                                     .note(interventionDocument.getNote())
                                     .paragraphes(Collections.unmodifiableList(interventionDocument.getParagraphs())));
+                    return interventionBuilder.build();
+                })
+                .toList();
+    }
+
+    private List<Intervention> mapPartialInterventions(List<InterventionDocument> interventionDocuments, Map<UUID, Affectation> affectations) {
+        return interventionDocuments.stream()
+                .limit(1)
+                .map(interventionDocument -> {
+                    Intervention.InterventionBuilder interventionBuilder = Intervention.builder();
+                    interventionDocument.getOptionalAssignmentId().ifPresentOrElse(
+                            i -> interventionBuilder
+                                    .affectation(affectations.get(interventionDocument.getAssignmentId())),
+                            () -> interventionBuilder
+                                    .note(interventionDocument.getNote()));
                     return interventionBuilder.build();
                 })
                 .toList();

@@ -55,7 +55,7 @@ class SubjectServiceTest {
         Map<UUID, Affectation> affectations = Map.of();
         when(subjectRepositoryMock.findSubjectsByDeputyIdsOrSubjectTypes(ids, mappedSubjectTypes, PageRequest.of(0, 25))).thenReturn(subjects);
         when(assignmentServiceMock.getAllAssignments()).thenReturn(affectations);
-        when(subjectMapperMock.toSujetsList(same(subjects), same(affectations))).thenReturn(sujets);
+        when(subjectMapperMock.toCompleteSujetsList(same(subjects), same(affectations))).thenReturn(sujets);
         when(subjectMapperMock.toSubjectTypes(sujetTypes)).thenReturn(mappedSubjectTypes);
 
         List<Sujet> response = this.subjectService.getSubjectsByDeputyIdsOrSubjectTypes(ids, sujetTypes, 0, 25);
@@ -86,7 +86,7 @@ class SubjectServiceTest {
         Map<UUID, Affectation> affectations = Map.of();
         when(subjectRepositoryMock.find(args, PageRequest.of(0, 25))).thenReturn(subjects);
         when(assignmentServiceMock.getAllAssignments()).thenReturn(affectations);
-        when(subjectMapperMock.toSujetsList(same(subjects), same(affectations))).thenReturn(sujets);
+        when(subjectMapperMock.toCompleteSujetsList(same(subjects), same(affectations))).thenReturn(sujets);
         when(subjectMapperMock.toSubjectArgs(same(sujetRequete))).thenReturn(args);
 
         List<Sujet> response = this.subjectService.getSubjects(sujetRequete);
@@ -94,16 +94,30 @@ class SubjectServiceTest {
     }
 
     @Test
-    void getSubjectsById() {
+    void getCompleteSubjectsById() {
         Set<UUID> ids = Set.of(TestUUID.ID1, TestUUID.ID2);
         List<Subject> subjects = List.of(Subject.builder().build());
         List<Sujet> sujets = List.of(Sujet.builder().build());
         Map<UUID, Affectation> affectations = Map.of();
         when(subjectRepositoryMock.findAllById(ids)).thenReturn(subjects);
         when(assignmentServiceMock.getAllAssignments()).thenReturn(affectations);
-        when(subjectMapperMock.toSujetsList(same(subjects), same(affectations))).thenReturn(sujets);
+        when(subjectMapperMock.toCompleteSujetsList(same(subjects), same(affectations))).thenReturn(sujets);
 
-        List<Sujet> response = this.subjectService.getSubjectsById(ids);
+        List<Sujet> response = this.subjectService.getCompleteSubjectsById(ids);
+        assertSame(sujets, response);
+    }
+    
+    @Test
+    void getPartialSubjectsById() {
+        Set<UUID> ids = Set.of(TestUUID.ID1, TestUUID.ID2);
+        List<Subject> subjects = List.of(Subject.builder().build());
+        List<Sujet> sujets = List.of(Sujet.builder().build());
+        Map<UUID, Affectation> affectations = Map.of();
+        when(subjectRepositoryMock.findAllById(ids)).thenReturn(subjects);
+        when(assignmentServiceMock.getAllAssignments()).thenReturn(affectations);
+        when(subjectMapperMock.toPartialSujetsList(same(subjects), same(affectations))).thenReturn(sujets);
+
+        List<Sujet> response = this.subjectService.getPartialSubjectsById(ids);
         assertSame(sujets, response);
     }
 

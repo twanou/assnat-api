@@ -33,18 +33,23 @@ public class SubjectService {
     public List<Sujet> getSubjectsByDeputyIdsOrSubjectTypes(Set<UUID> deputyIds, Set<SujetType> sujetTypes, int pageNumber, int pageSize) {
         Set<String> subjectTypes = this.subjectMapper.toSubjectTypes(sujetTypes);
         List<Subject> subjects = this.subjectRepository.findSubjectsByDeputyIdsOrSubjectTypes(deputyIds, subjectTypes, PageRequest.of(pageNumber, pageSize));
-        return this.subjectMapper.toSujetsList(subjects, this.assignmentService.getAllAssignments());
+        return this.subjectMapper.toCompleteSujetsList(subjects, this.assignmentService.getAllAssignments());
     }
 
     public List<Sujet> getSubjects(SujetRequete sujetRequete) {
         SubjectArgs subjectArgs = this.subjectMapper.toSubjectArgs(sujetRequete);
         List<Subject> subjects = this.subjectRepository.find(subjectArgs, PageRequest.of(sujetRequete.getPage(), sujetRequete.getTaille()));
-        return this.subjectMapper.toSujetsList(subjects, this.assignmentService.getAllAssignments());
+        return this.subjectMapper.toCompleteSujetsList(subjects, this.assignmentService.getAllAssignments());
     }
 
-    public List<Sujet> getSubjectsById(Set<UUID> ids) {
+    public List<Sujet> getCompleteSubjectsById(Set<UUID> ids) {
         List<Subject> subjects = this.subjectRepository.findAllById(ids);
-        return this.subjectMapper.toSujetsList(subjects, this.assignmentService.getAllAssignments());
+        return this.subjectMapper.toCompleteSujetsList(subjects, this.assignmentService.getAllAssignments());
+    }
+
+    public List<Sujet> getPartialSubjectsById(Set<UUID> ids) {
+        List<Subject> subjects = this.subjectRepository.findAllById(ids);
+        return this.subjectMapper.toPartialSujetsList(subjects, this.assignmentService.getAllAssignments());
     }
 
     @Cacheable(CacheKey.Constants.LAST_UPDATE)

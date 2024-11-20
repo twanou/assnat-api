@@ -56,7 +56,7 @@ class SubjectRepositoryTest {
     @Test
     void findAllById() {
         List<Subject> subjects = List.of(Subject.builder().build());
-        when(subjectSpringRepositoryMock.findAllById(List.of(TestUUID.ID1))).thenReturn(subjects);
+        when(subjectSpringRepositoryMock.findByIdInOrderByDateDesc(List.of(TestUUID.ID1))).thenReturn(subjects);
 
         List<Subject> response = this.subjectRepository.findAllById(List.of(TestUUID.ID1));
         assertSame(subjects, response);

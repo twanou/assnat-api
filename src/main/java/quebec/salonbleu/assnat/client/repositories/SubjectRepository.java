@@ -16,6 +16,7 @@ import quebec.salonbleu.assnat.client.documents.Subject;
 import quebec.salonbleu.assnat.client.repositories.args.SubjectArgs;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -36,8 +37,8 @@ public class SubjectRepository {
         return this.subjectSpringRepository.findSubjectsByDeputyIdsOrSubjectTypes(ids, subjectTypes, pageable);
     }
 
-    public List<Subject> findAllById(Iterable<UUID> ids) {
-        return this.subjectSpringRepository.findAllById(ids);
+    public List<Subject> findAllById(Collection<UUID> ids) {
+        return this.subjectSpringRepository.findByIdInOrderByDateDesc(ids);
     }
 
     public List<Subject> saveAll(Iterable<Subject> subjects) {

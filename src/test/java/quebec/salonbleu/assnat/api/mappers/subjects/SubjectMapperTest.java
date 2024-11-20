@@ -23,6 +23,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -39,7 +40,7 @@ class SubjectMapperTest {
     private TypeMapper typeMapperMock;
 
     @Test
-    void toSujetsList() {
+    void toCompleteSujetsList() {
         LocalDate now = LocalDate.now();
         List<Subject> subjects = List.of(Subject.builder()
                 .id(TestUUID.ID1)
@@ -53,17 +54,44 @@ class SubjectMapperTest {
         Map<UUID, Affectation> affectations = Map.of();
         SujetDetails sujetDetails = SujetDetails.builder().build();
         when(subjectTypeMapperMock.supports()).thenReturn(EnumSet.allOf(SubjectType.class));
-        when(subjectTypeMapperMock.map(subjects.getFirst().getSubjectDetails(), affectations)).thenReturn(sujetDetails);
+        when(subjectTypeMapperMock.completeMap(subjects.getFirst().getSubjectDetails(), affectations)).thenReturn(sujetDetails);
         when(assnatLinkBuilderMock.getUrl(1, 2, now, "123456", "#anchor")).thenReturn("url");
         SubjectMapper subjectMapper = new SubjectMapper(List.of(subjectTypeMapperMock), assnatLinkBuilderMock, typeMapperMock);
 
-        List<Sujet> sujets = subjectMapper.toSujetsList(subjects, affectations);
+        List<Sujet> sujets = subjectMapper.toCompleteSujetsList(subjects, affectations);
         assertEquals(subjects.getFirst().getSession(), sujets.getFirst().getSession());
         assertEquals(subjects.getFirst().getId(), sujets.getFirst().getId());
         assertEquals(subjects.getFirst().getLegislature(), sujets.getFirst().getLegislature());
         assertEquals(subjects.getFirst().getDate(), sujets.getFirst().getDate());
         assertEquals("url", sujets.getFirst().getUrl());
         assertSame(sujetDetails, sujets.getFirst().getDetails());
+    }
+
+    @Test
+    void toPartialSujetsList() {
+        LocalDate now = LocalDate.now();
+        List<Subject> subjects = List.of(Subject.builder()
+                .id(TestUUID.ID1)
+                .date(now)
+                .legislature(1)
+                .session(2)
+                .pageId("123456")
+                .subjectDetails(SubjectDetails.builder().type(SubjectType.DEPUTY_DECLARATION).anchor("#anchor").build())
+                .build()
+        );
+        Map<UUID, Affectation> affectations = Map.of();
+        SujetDetails sujetDetails = SujetDetails.builder().build();
+        when(subjectTypeMapperMock.supports()).thenReturn(EnumSet.allOf(SubjectType.class));
+        when(subjectTypeMapperMock.partialMap(subjects.getFirst().getSubjectDetails(), affectations)).thenReturn(sujetDetails);
+        SubjectMapper subjectMapper = new SubjectMapper(List.of(subjectTypeMapperMock), assnatLinkBuilderMock, typeMapperMock);
+
+        List<Sujet> sujets = subjectMapper.toPartialSujetsList(subjects, affectations);
+        assertEquals(subjects.getFirst().getId(), sujets.getFirst().getId());
+        assertEquals(subjects.getFirst().getDate(), sujets.getFirst().getDate());
+        assertSame(sujetDetails, sujets.getFirst().getDetails());
+        assertNull(sujets.getFirst().getUrl());
+        assertNull(sujets.getFirst().getLegislature());
+        assertNull(sujets.getFirst().getSession());
     }
 
     @Test

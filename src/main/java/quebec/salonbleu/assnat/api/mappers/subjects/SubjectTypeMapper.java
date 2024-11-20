@@ -11,7 +11,9 @@ import java.util.UUID;
 
 public interface SubjectTypeMapper {
 
-    SujetDetails map(SubjectDetails subjectDetails, Map<UUID, Affectation> affectations);
+    SujetDetails completeMap(SubjectDetails subjectDetails, Map<UUID, Affectation> affectations);
+
+    SujetDetails partialMap(SubjectDetails subjectDetails, Map<UUID, Affectation> affectations);
 
     EnumSet<SubjectType> supports();
 }
