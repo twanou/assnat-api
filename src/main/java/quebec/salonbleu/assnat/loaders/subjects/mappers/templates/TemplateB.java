@@ -7,6 +7,8 @@ import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectDetails;
 import quebec.salonbleu.assnat.loaders.DeputyFinder;
 import quebec.salonbleu.assnat.scrapers.models.ScrapedLogNode;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -21,17 +23,19 @@ public abstract class TemplateB extends DocumentTypeMapper {
     public static final String DEPOT_PETITIONS = "Dépôt de pétitions";
 
     public List<SubjectDetails> map(ScrapedLogNode logNode) {
-        return logNode.getChildren().stream()
-                .map(subject -> {
-                    Assignment assignment = this.deputyFinder.findByLastName(this.getDeputyLastName(subject.getParagraphs().getFirst())).orElseThrow();
-                    InterventionDocument interventionDocument = this.mapAssignment(assignment, subject.getParagraphs());
-
-                    return SubjectDetails.builder()
-                            .type(this.getSubjectType())
-                            .title(subject.getTitle())
-                            .anchor(subject.getAnchor())
-                            .interventions(List.of(interventionDocument))
-                            .build();
-                }).toList();
+        List<SubjectDetails> subjectDetails = new ArrayList<>();
+        Assignment previousAssignment = null;
+        for (ScrapedLogNode subject : logNode.getChildren()) {
+            Assignment assignment = this.deputyFinder.findByLastName(this.getDeputyLastName(subject.getParagraphs().getFirst())).orElse(previousAssignment);
+            previousAssignment = assignment;
+            InterventionDocument interventionDocument = this.mapAssignment(assignment, subject.getParagraphs());
+            subjectDetails.add(SubjectDetails.builder()
+                    .type(this.getSubjectType())
+                    .title(subject.getTitle())
+                    .anchor(subject.getAnchor())
+                    .interventions(List.of(interventionDocument))
+                    .build());
+        }
+        return Collections.unmodifiableList(subjectDetails);
     }
 }
