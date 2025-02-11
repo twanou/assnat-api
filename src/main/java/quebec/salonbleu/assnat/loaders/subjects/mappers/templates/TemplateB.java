@@ -26,7 +26,7 @@ public abstract class TemplateB extends DocumentTypeMapper {
         List<SubjectDetails> subjectDetails = new ArrayList<>();
         Assignment previousAssignment = null;
         for (ScrapedLogNode subject : logNode.getChildren()) {
-            Assignment assignment = this.deputyFinder.findByLastName(this.getDeputyLastName(subject.getParagraphs().getFirst())).orElse(previousAssignment);
+            Assignment assignment = this.findByLastName(this.deputyFinder, this.getDeputyLastName(subject.getParagraphs().getFirst())).orElse(previousAssignment);
             previousAssignment = assignment;
             InterventionDocument interventionDocument = this.mapAssignment(assignment, subject.getParagraphs());
             subjectDetails.add(SubjectDetails.builder()

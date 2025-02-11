@@ -105,26 +105,16 @@ public abstract class TemplateC extends DocumentTypeMapper {
     private Optional<Assignment> getAssignment(String paragraph) {
         String lastName = this.getDeputyLastName(paragraph);
         if (!PRESIDENT.contains(lastName)) {
-            return this.findByLastName(lastName);
+            return this.findByLastName(this.deputyFinder, lastName);
         }
         return Optional.empty();
     }
 
     private Optional<Assignment> getSubAssignment(ScrapedLogNode scrapedLogNode) {
         if (!MISE_AUX_VOIX.equals(scrapedLogNode.getTitle()) && !PRESIDENT.contains(scrapedLogNode.getTitle())) {
-            return this.findByLastName(this.getDeputyLastName(scrapedLogNode.getParagraphs().getFirst()));
+            return this.findByLastName(this.deputyFinder, this.getDeputyLastName(scrapedLogNode.getParagraphs().getFirst()));
         }
         return Optional.empty();
-    }
-
-    private Optional<Assignment> findByLastName(String paragraphPrefix) {
-        String district = StringUtils.substringBetween(paragraphPrefix, "(", ")");
-        if (district != null) {
-            String lastName = StringUtils.strip(StringUtils.substringBefore(paragraphPrefix, "("));
-            return this.deputyFinder.findByLastNameAndDistrict(lastName, district);
-        } else {
-            return this.deputyFinder.findByLastName(this.getDeputyLastName(paragraphPrefix));
-        }
     }
 
     private InterventionDocument mapParagraphs(String title, List<String> paragraphs, List<SubjectDetails> rejectedMotions) {

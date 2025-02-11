@@ -5,9 +5,11 @@ import quebec.salonbleu.assnat.client.documents.Assignment;
 import quebec.salonbleu.assnat.client.documents.subdocuments.InterventionDocument;
 import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectDetails;
 import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectType;
+import quebec.salonbleu.assnat.loaders.DeputyFinder;
 import quebec.salonbleu.assnat.scrapers.models.ScrapedLogNode;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 public abstract class DocumentTypeMapper {
@@ -57,6 +59,16 @@ public abstract class DocumentTypeMapper {
     protected String getDeputyLastName(String paragraph) {
         String[] splitResult = StringUtils.split(paragraph, ":", 2);
         return StringUtils.strip(splitResult[0]);
+    }
+
+    protected Optional<Assignment> findByLastName(DeputyFinder deputyFinder, String paragraphPrefix) {
+        String district = StringUtils.substringBetween(paragraphPrefix, "(", ")");
+        if (district != null) {
+            String lastName = StringUtils.strip(StringUtils.substringBefore(paragraphPrefix, "("));
+            return deputyFinder.findByLastNameAndDistrict(lastName, district);
+        } else {
+            return deputyFinder.findByLastName(this.getDeputyLastName(paragraphPrefix));
+        }
     }
 
     private String removeDeputyName(String paragraph) {
