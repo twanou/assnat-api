@@ -104,11 +104,14 @@ public class DeputyScraper {
 
     private String getPhotoBase64(HtmlPage deputyPage) {
         HtmlImage htmlImage = deputyPage.getFirstByXPath("//img[@class='photoDepute']");
-        try {
-            InputStream deputyImageStream = htmlImage.getWebResponse(true).getContentAsStream();
-            return Base64.getEncoder().encodeToString(IOUtils.toByteArray(deputyImageStream));
-        } catch (Exception e) {
-            throw new ScrapingException("Impossible d'extraire la photo", e);
+        if (htmlImage != null) { // Les nouveaux députés n'ont pas toujours une photo...
+            try {
+                InputStream deputyImageStream = htmlImage.getWebResponse(true).getContentAsStream();
+                return Base64.getEncoder().encodeToString(IOUtils.toByteArray(deputyImageStream));
+            } catch (Exception e) {
+                throw new ScrapingException("Impossible d'extraire la photo", e);
+            }
         }
+        return "";
     }
 }
