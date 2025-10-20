@@ -65,7 +65,7 @@ public class AssNatLogScraper {
                 parent = current;
                 current = summaryNodeIterator.hasNext() ? summaryNodeIterator.next() : InternalLogNode.builder().build();
             } else {
-                parent.paragraphs.add(paragraph.getVisibleText());
+                parent.paragraphs.add(StringUtils.strip(paragraph.getVisibleText()));
             }
         }
 
