@@ -20,35 +20,35 @@ public class MongoIndexConfig {
     @PostConstruct
     public void initIndexes() {
         mongoTemplate.indexOps(Subject.class)
-                .ensureIndex(
+                .createIndex(
                         new Index()
                                 .on("subjectDetails.interventions.deputyId", Sort.Direction.ASC)
                                 .on("date", Sort.Direction.DESC)
                                 .named("interventions_deputyId_date")
                 );
         mongoTemplate.indexOps(Subject.class)
-                .ensureIndex(
+                .createIndex(
                         new Index()
                                 .on("subjectDetails.interventions.districtId", Sort.Direction.ASC)
                                 .on("date", Sort.Direction.DESC)
                                 .named("interventions_districtId_date")
                 );
         mongoTemplate.indexOps(Subject.class)
-                .ensureIndex(
+                .createIndex(
                         new Index()
                                 .on("subjectDetails.interventions.partyId", Sort.Direction.ASC)
                                 .on("date", Sort.Direction.DESC)
                                 .named("interventions_partyId_date")
                 );
         mongoTemplate.indexOps(Subject.class)
-                .ensureIndex(
+                .createIndex(
                         new Index()
                                 .on("subjectDetails.type", Sort.Direction.ASC)
                                 .on("date", Sort.Direction.DESC)
                                 .named("subjectDetails_type_date")
                 );
         mongoTemplate.indexOps(Subject.class)
-                .ensureIndex(
+                .createIndex(
                         TextIndexDefinition.builder()
                                 .onFields("subjectDetails.interventions.paragraphs", "subjectDetails.title")
                                 .withDefaultLanguage("fr")

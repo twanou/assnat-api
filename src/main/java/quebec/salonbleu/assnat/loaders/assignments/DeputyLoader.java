@@ -1,7 +1,7 @@
 package quebec.salonbleu.assnat.loaders.assignments;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.springframework.stereotype.Component;
 import quebec.salonbleu.assnat.client.documents.Deputy;
 import quebec.salonbleu.assnat.client.repositories.DeputyRepository;
@@ -23,8 +23,8 @@ class DeputyLoader {
         List<Deputy> deputies = this.deputyRepository.findAll();
         for (ScrapedDeputy scrapedDeputy : scrapedDeputies) {
             final List<Deputy> deputyResults = deputies.stream()
-                    .filter(deputy -> StringUtils.equals(deputy.getFirstName(), scrapedDeputy.getFirstName()))
-                    .filter(deputy -> StringUtils.equals(deputy.getLastName(), scrapedDeputy.getLastName()))
+                    .filter(deputy -> Strings.CS.equals(deputy.getFirstName(), scrapedDeputy.getFirstName()))
+                    .filter(deputy -> Strings.CS.equals(deputy.getLastName(), scrapedDeputy.getLastName()))
                     .toList();
             if (deputyResults.isEmpty()) {
                 deputies.add(
@@ -40,12 +40,12 @@ class DeputyLoader {
                 List<Deputy> refinedDeputyResults = deputyResults.stream()
                         .filter(deputy -> deputy.getLastDistrict().equals(scrapedDeputy.getDistrict()))
                         .toList();
-                
+
                 this.errorHandler.assertSize(1, refinedDeputyResults, () -> new LoadingException("Député nécéssite validation manuelle" + scrapedDeputy));
 
                 //maj photo
                 Deputy deputy = refinedDeputyResults.getFirst();
-                if (!StringUtils.equals(deputy.getPhoto(), scrapedDeputy.getPhoto())) {
+                if (!Strings.CS.equals(deputy.getPhoto(), scrapedDeputy.getPhoto())) {
                     Deputy updatedDeputy = deputy.withPhoto(scrapedDeputy.getPhoto());
                     this.deputyRepository.save(updatedDeputy);
                     deputies.set(deputies.indexOf(deputy), updatedDeputy);

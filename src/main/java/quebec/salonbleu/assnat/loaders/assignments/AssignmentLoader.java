@@ -1,7 +1,7 @@
 package quebec.salonbleu.assnat.loaders.assignments;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.springframework.stereotype.Component;
 import quebec.salonbleu.assnat.cache.AssnatCacheManager;
 import quebec.salonbleu.assnat.client.documents.Assignment;
@@ -83,23 +83,23 @@ public class AssignmentLoader {
 
     private Deputy getDeputy(ScrapedDeputy scrapedDeputy, List<Deputy> deputies) {
         return deputies.stream()
-                .filter(d -> StringUtils.equals(d.getFirstName(), scrapedDeputy.getFirstName()))
-                .filter(d -> StringUtils.equals(d.getLastName(), scrapedDeputy.getLastName()))
-                .filter(d -> StringUtils.equals(d.getLastDistrict(), scrapedDeputy.getDistrict()))
+                .filter(d -> Strings.CS.equals(d.getFirstName(), scrapedDeputy.getFirstName()))
+                .filter(d -> Strings.CS.equals(d.getLastName(), scrapedDeputy.getLastName()))
+                .filter(d -> Strings.CS.equals(d.getLastDistrict(), scrapedDeputy.getDistrict()))
                 .findFirst()
                 .orElseThrow();
     }
 
     private District getDistrict(ScrapedDeputy scrapedDeputy, List<District> districts) {
         return districts.stream()
-                .filter(r -> StringUtils.equals(r.getName(), scrapedDeputy.getDistrict()))
+                .filter(r -> Strings.CS.equals(r.getName(), scrapedDeputy.getDistrict()))
                 .findFirst()
                 .orElseThrow();
     }
 
     private Party getParty(ScrapedDeputy scrapedDeputy, List<Party> parties) {
         return parties.stream()
-                .filter(p -> StringUtils.equals(p.getName(), scrapedDeputy.getParty()))
+                .filter(p -> Strings.CS.equals(p.getName(), scrapedDeputy.getParty()))
                 .findFirst()
                 .orElseThrow();
     }

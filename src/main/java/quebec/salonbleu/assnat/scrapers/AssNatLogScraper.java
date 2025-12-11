@@ -3,6 +3,7 @@ package quebec.salonbleu.assnat.scrapers;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.htmlunit.html.HtmlAnchor;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlParagraph;
@@ -54,6 +55,7 @@ public class AssNatLogScraper {
             nodes.add(newNode);
         }
         return nodes;
+
     }
 
     private void addParagraphs(List<InternalLogNode> internalLogNodes, List<HtmlParagraph> paragraphs) {
@@ -87,7 +89,7 @@ public class AssNatLogScraper {
     }
 
     private boolean isAnchorMatch(String href, List<HtmlAnchor> anchors) {
-        return anchors.stream().anyMatch(anchor -> StringUtils.contains(href, anchor.getNameAttribute()));
+        return anchors.stream().anyMatch(anchor -> Strings.CS.contains(href, anchor.getNameAttribute()));
     }
 
     private float getAnchorMargin(HtmlAnchor anchor) {

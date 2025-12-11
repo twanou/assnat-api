@@ -26,7 +26,7 @@ public class GenericSubjectTypeMapper implements SubjectTypeMapper {
         return SujetDetails.builder()
                 .titre(subjectDetails.getTitle())
                 .type(this.typeMapper.map(subjectDetails.getType()))
-                .interventions(Collections.unmodifiableList(this.mapCompleteInterventions(subjectDetails.getInterventions(), affectations)))
+                .interventions(this.mapCompleteInterventions(subjectDetails.getInterventions(), affectations))
                 .build();
     }
 
@@ -35,7 +35,7 @@ public class GenericSubjectTypeMapper implements SubjectTypeMapper {
         return SujetDetails.builder()
                 .titre(subjectDetails.getTitle())
                 .type(this.typeMapper.map(subjectDetails.getType()))
-                .interventions(Collections.unmodifiableList(this.mapPartialInterventions(subjectDetails.getInterventions(), affectations)))
+                .interventions(this.mapPartialInterventions(subjectDetails.getInterventions(), affectations))
                 .build();
     }
 

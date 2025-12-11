@@ -2,6 +2,7 @@ package quebec.salonbleu.assnat.api.services;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.springframework.stereotype.Service;
 import quebec.salonbleu.assnat.api.models.commons.Circonscription;
 
@@ -22,7 +23,7 @@ public class DistrictService {
     public List<Circonscription> getDistrictsByName(String name) {
         return this.districtCacheService.getDistricts().values().stream()
                 .filter(district ->
-                        StringUtils.containsIgnoreCase(
+                        Strings.CI.contains(
                                 StringUtils.stripAccents(district.getNom()),
                                 StringUtils.stripAccents(name)))
                 .toList();

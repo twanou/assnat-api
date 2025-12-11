@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlAnchor;
@@ -74,7 +75,7 @@ public class DeputyScraper {
     }
 
     private boolean independenceCheck(String party) {
-        return StringUtils.containsIgnoreCase(party, INDEPENDENT);
+        return Strings.CI.contains(party, INDEPENDENT);
     }
 
     private String getPartyAcronym(String party) {

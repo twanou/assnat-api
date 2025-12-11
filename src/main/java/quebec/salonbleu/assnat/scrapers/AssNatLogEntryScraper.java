@@ -2,6 +2,7 @@ package quebec.salonbleu.assnat.scrapers;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.HtmlAnchor;
 import org.htmlunit.html.HtmlPage;
@@ -39,7 +40,7 @@ public class AssNatLogEntryScraper {
             logEntries.add(
                     ScrapedLogEntry.builder()
                             .date(date)
-                            .note(StringUtils.trimToNull(StringUtils.remove(cells.getFirst().getVisibleText(), date.toString())))
+                            .note(StringUtils.trimToNull(Strings.CS.remove(cells.getFirst().getVisibleText(), date.toString())))
                             .relativeUrl(dateAnchor.getHrefAttribute())
                             .type(LogType.fromName(cells.get(1).getVisibleText().split(" ")[0]))
                             .legislature(ScrapeUtils.onlyDigitsToInt(session[0]))

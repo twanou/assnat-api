@@ -1,7 +1,7 @@
 package quebec.salonbleu.assnat.scrapers.models;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 import java.util.Arrays;
 
@@ -14,7 +14,7 @@ public enum LogVersion {
 
     public static LogVersion fromText(String text) {
         return Arrays.stream(LogVersion.values())
-                .filter(v -> StringUtils.equalsIgnoreCase(v.text, text))
+                .filter(v -> Strings.CI.equals(v.text, text))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Aucun enum trouvé correspondant à " + text));
     }

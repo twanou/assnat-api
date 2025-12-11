@@ -2,7 +2,7 @@ package quebec.salonbleu.assnat.loaders.subjects;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.springframework.stereotype.Component;
 import quebec.salonbleu.assnat.client.documents.Subject;
 import quebec.salonbleu.assnat.client.repositories.SubjectRepository;
@@ -26,7 +26,7 @@ public class SubjectLoader {
     private final AssNatLogScraper assNatLogScraper;
 
     public void load(String relativeUrl, LocalDate date, int legislature, int session) {
-        log.info("Chargement : " + relativeUrl);
+        log.info("Chargement : {}", relativeUrl);
         ScrapedLogNode logs = this.assNatLogScraper.scrape(relativeUrl);
         List<Subject> subjects = new ArrayList<>();
         for (DocumentTypeMapper mapper : subjectDocumentTypeMappers) {
@@ -52,7 +52,7 @@ public class SubjectLoader {
         while (currentNode != null && matcherIterator.hasNext()) {
             String matcher = matcherIterator.next();
             currentNode = currentNode.getChildren().stream()
-                    .filter(node -> StringUtils.equals(node.getTitle(), matcher))
+                    .filter(node -> Strings.CS.equals(node.getTitle(), matcher))
                     .findFirst()
                     .orElse(null);
         }

@@ -1,6 +1,6 @@
 package quebec.salonbleu.assnat.loaders.subjects.mappers;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.springframework.stereotype.Component;
 import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectType;
 import quebec.salonbleu.assnat.loaders.DeputyFinder;
@@ -37,7 +37,7 @@ public class DeputyDeclarationDocumentMapper extends TemplateA {
 
     private int getEndRange(List<String> paragraphs) {
         for (int i = 0; i < paragraphs.size(); i++) {
-            if (StringUtils.containsIgnoreCase(paragraphs.get(i), VICE_PRESIDENT)) {
+            if (Strings.CI.contains(paragraphs.get(i), VICE_PRESIDENT)) {
                 return i;
             }
         }

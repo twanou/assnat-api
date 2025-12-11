@@ -14,7 +14,7 @@ public class ScrapeUtils {
     private static final Pattern FLOAT_PATTERN = Pattern.compile("[+-]?([0-9]*[.])?[0-9]+");
 
     public static int onlyDigitsToInt(String str) {
-        return Integer.parseInt(RegExUtils.removeAll(str, NOT_DIGITS));
+        return Integer.parseInt(RegExUtils.removeAll((CharSequence) str, NOT_DIGITS));
     }
 
     public static float extractFloat(String str) {

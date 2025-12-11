@@ -1,6 +1,7 @@
 package quebec.salonbleu.assnat.loaders.subjects.mappers.templates;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import quebec.salonbleu.assnat.client.documents.Assignment;
 import quebec.salonbleu.assnat.client.documents.subdocuments.InterventionDocument;
 import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectDetails;
@@ -27,7 +28,7 @@ public abstract class DocumentTypeMapper {
     protected List<String> baseFormat(List<String> paragraphs) {
         List<String> formattedParagraphs = IntStream.range(0, paragraphs.size())
                 .mapToObj(i -> i == 0 ? this.removeDeputyName(paragraphs.get(i)) : paragraphs.get(i))
-                .filter(s -> !(StringUtils.startsWith(s, "•") && StringUtils.endsWith(s, "•")))
+                .filter(s -> !(Strings.CS.startsWith(s, "•") && Strings.CS.endsWith(s, "•")))
                 .toList();
         return this.format(formattedParagraphs);
     }

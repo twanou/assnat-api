@@ -1,6 +1,5 @@
 package quebec.salonbleu.assnat.cache;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.context.ApplicationEventPublisher;
@@ -11,11 +10,15 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 @Component
-@RequiredArgsConstructor
 public class AssnatCacheManager {
 
     private final CacheManager cacheManager;
     private final ApplicationEventPublisher eventBus;
+
+    public AssnatCacheManager(CacheManager cacheManager, ApplicationEventPublisher eventBus) {
+        this.cacheManager = cacheManager;
+        this.eventBus = eventBus;
+    }
 
     public void clearAssignmentCaches() {
         this.clear(CacheKey.CURRENT_ASSIGNMENTS,
