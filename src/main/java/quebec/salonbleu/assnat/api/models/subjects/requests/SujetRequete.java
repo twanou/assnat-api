@@ -9,6 +9,7 @@ import lombok.Builder;
 import lombok.Value;
 import lombok.extern.jackson.Jacksonized;
 import quebec.salonbleu.assnat.api.models.subjects.SujetType;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.Set;
 import java.util.UUID;
@@ -16,6 +17,7 @@ import java.util.UUID;
 @Value
 @Builder
 @Jacksonized
+@JsonDeserialize(builder = SujetRequete.SujetRequeteBuilder.class) // Je devrais pas avoir à faire ça mais bon...
 public class SujetRequete {
 
     String phrase;
