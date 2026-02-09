@@ -1,6 +1,7 @@
 package quebec.salonbleu.assnat.loaders.subjects.mappers.templates;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.Strings;
 import quebec.salonbleu.assnat.client.documents.Assignment;
 import quebec.salonbleu.assnat.client.documents.subdocuments.InterventionDocument;
 import quebec.salonbleu.assnat.client.documents.subdocuments.SubjectDetails;
@@ -36,7 +37,7 @@ public abstract class TemplateA extends DocumentTypeMapper {
                     List<InterventionDocument> interventionDocuments = subject.getChildren()
                             .stream()
                             .filter(intervention -> !IGNORED_TITLES.contains(intervention.getTitle()))
-                            .map(intervention -> this.getAssignment(intervention.getTitle())
+                            .map(intervention -> this.getAssignment(intervention)
                                     .map(a -> this.mapAssignment(a, intervention.getParagraphs()))
                                     .orElse(this.mapLogNode(intervention)))
                             .toList();
@@ -50,10 +51,13 @@ public abstract class TemplateA extends DocumentTypeMapper {
                 }).toList();
     }
 
-    //this.mapAssignment(this.getAssignment(intervention.getTitle()), intervention.getParagraphs()))
-    private Optional<Assignment> getAssignment(String title) {
-        if (!MISE_AUX_VOIX.equals(title)) {
-            return this.deputyFinder.findByCompleteName(title); // nom complet, ex M. Bob Tremblay
+    private Optional<Assignment> getAssignment(ScrapedLogNode intervention) {
+        String deputyName = this.getDeputyLastName(intervention.getParagraphs().getFirst());
+        if (Strings.CI.contains(deputyName, "(")) {
+            return this.findByLastName(deputyFinder, deputyName);
+        }
+        if (!MISE_AUX_VOIX.equals(intervention.getTitle())) {
+            return this.deputyFinder.findByCompleteName(intervention.getTitle()); // nom complet, ex M. Bob Tremblay
         }
         return Optional.empty();
     }

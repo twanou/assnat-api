@@ -32,19 +32,29 @@ class TemplateATest {
         ScrapedLogNode scrapedLogNode = ScrapedLogNode.builder()
                 .title("Déclarations des députés")
                 .children(List.of(ScrapedLogNode.builder()
-                        .title("Souligner quelque chose d'important")
-                        .anchor("#anchor")
-                        .children(List.of(
-                                ScrapedLogNode.builder()
-                                        .title("M. Lucien Bouchard")
-                                        .paragraphs(List.of("M. Bouchard : Bonjour", "• (10 h 20) •", "Mais, lorsqu'on leur demande : Qu'allez-vous faire?", "oui", "Vice-Président : merci lulu", "bon passons à autre chose"))
-                                        .build(),
-                                ScrapedLogNode.builder()
-                                        .title("Document déposé")
-                                        .build()
-                        ))
-                        .build()))
-                .build();
+                                .title("Souligner quelque chose d'important")
+                                .anchor("#anchor")
+                                .children(List.of(
+                                        ScrapedLogNode.builder()
+                                                .title("M. Lucien Bouchard")
+                                                .paragraphs(List.of("M. Bouchard : Bonjour", "• (10 h 20) •", "Mais, lorsqu'on leur demande : Qu'allez-vous faire?", "oui", "Vice-Président : merci lulu", "bon passons à autre chose"))
+                                                .build(),
+                                        ScrapedLogNode.builder()
+                                                .title("Document déposé")
+                                                .build()
+                                ))
+                                .build(),
+                        ScrapedLogNode.builder()
+                                .title("Souligner quelque chose d'important 2")
+                                .anchor("#anchor2")
+                                .children(List.of(
+                                        ScrapedLogNode.builder()
+                                                .title("M. Camille Laurin")
+                                                .paragraphs(List.of("M. Laurin (Bourget) : Bonjour", "• (10 h 20) •", "Mais, lorsqu'on leur demande : Qu'allez-vous faire?", "oui", "Vice-Président : merci Camille", "bon passons à autre chose"))
+                                                .build(),
+                                        ScrapedLogNode.builder()
+                                                .title("Document déposé")
+                                                .build())).build())).build();
 
         Assignment assignment = Assignment.builder().id(TestUUID.ID4).deputyId(TestUUID.ID1).partyId(TestUUID.ID2).districtId(TestUUID.ID3).build();
         SubjectDetails expectedResult = SubjectDetails.builder()
@@ -60,9 +70,24 @@ class TemplateATest {
                                 .paragraphs(List.of("Bonjour", "Mais, lorsqu'on leur demande : Qu'allez-vous faire?", "oui", "Vice-Président : merci lulu", "bon passons à autre chose"))
                                 .build()))
                 .build();
+        SubjectDetails expectedResult2 = SubjectDetails.builder()
+                .type(SubjectType.DEPUTY_DECLARATION)
+                .title(scrapedLogNode.getChildren().get(1).getTitle())
+                .anchor(scrapedLogNode.getChildren().get(1).getAnchor())
+                .interventions(List.of(
+                        InterventionDocument.builder()
+                                .assignmentId(assignment.getId())
+                                .districtId(assignment.getDistrictId())
+                                .partyId(assignment.getPartyId())
+                                .deputyId(assignment.getDeputyId())
+                                .paragraphs(List.of("Bonjour", "Mais, lorsqu'on leur demande : Qu'allez-vous faire?", "oui", "Vice-Président : merci Camille", "bon passons à autre chose"))
+                                .build()))
+                .build();
         when(deputyFinderMock.findByCompleteName("M. Lucien Bouchard")).thenReturn(Optional.of(assignment));
+        when(deputyFinderMock.findByLastNameAndDistrict("M. Laurin", "Bourget")).thenReturn(Optional.of(assignment));
         List<SubjectDetails> subjects = this.templateAImpl.map(scrapedLogNode);
         assertEquals(expectedResult, subjects.getFirst());
+        assertEquals(expectedResult2, subjects.get(1));
     }
 
     @Test
@@ -103,7 +128,7 @@ class TemplateATest {
                                 .build())
                 ).build();
         when(deputyFinderMock.findByCompleteName("M. Jacques Parizeau")).thenReturn(Optional.of(assignment));
-        
+
         List<SubjectDetails> subjects = this.templateAImpl.map(scrapedLogNode);
         assertEquals(expectedResult, subjects.getFirst());
     }
