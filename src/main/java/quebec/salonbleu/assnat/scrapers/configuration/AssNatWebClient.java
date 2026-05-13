@@ -18,6 +18,7 @@ public class AssNatWebClient {
         this.baseUrl = baseUrl;
         this.webClient = new WebClient();
         this.webClient.getOptions().setCssEnabled(false);
+        this.webClient.getOptions().setUseInsecureSSL(true);
         this.webClient.getOptions().setJavaScriptEnabled(false);
         this.webClient.getOptions().setDownloadImages(false);
         this.webClient.getOptions().setTimeout(5000);
