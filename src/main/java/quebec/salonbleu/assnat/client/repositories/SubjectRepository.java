@@ -54,11 +54,11 @@ public class SubjectRepository {
                 .forEach(criteriaObjects::add);
 
         args.getDistrictIds().stream()
-                .map(deputyId -> new Criteria().elemMatch(Criteria.where("districtId").is(deputyId)).getCriteriaObject())
+                .map(districtId -> new Criteria().elemMatch(Criteria.where("districtId").is(districtId)).getCriteriaObject())
                 .forEach(criteriaObjects::add);
 
         args.getPartyIds().stream()
-                .map(deputyId -> new Criteria().elemMatch(Criteria.where("partyId").is(deputyId)).getCriteriaObject())
+                .map(partyId -> new Criteria().elemMatch(Criteria.where("partyId").is(partyId)).getCriteriaObject())
                 .forEach(criteriaObjects::add);
 
         if (!criteriaObjects.isEmpty()) {
