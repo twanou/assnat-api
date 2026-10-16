@@ -1,17 +1,16 @@
 package quebec.salonbleu.assnat.scrapers;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import quebec.salonbleu.assnat.scrapers.configuration.AssNatWebClient;
-import quebec.salonbleu.assnat.scrapers.models.ScrapedLogNode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+import quebec.salonbleu.assnat.scrapers.configuration.AssNatWebClient;
+import quebec.salonbleu.assnat.scrapers.models.ScrapedLogNode;
 import test.utils.TestUtils;
+import tools.jackson.core.type.TypeReference;
 
 import java.io.File;
-import java.io.IOException;
 
 import static org.mockito.Mockito.verify;
 
@@ -30,7 +29,7 @@ class AssNatLogScraperTest {
     }
 
     @Test
-    void scrape() throws IOException {
+    void scrape() {
         ScrapedLogNode scrapedLog = this.assNatLogScraper.scrape(LOG_PAGE);
         verify(assNatWebClientSpy).getRelativePage(LOG_PAGE);
         TestUtils.assertFileEquals(JSON_EXPECTED_RESULTS, scrapedLog, new TypeReference<>() {

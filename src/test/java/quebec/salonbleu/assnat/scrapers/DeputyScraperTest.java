@@ -1,6 +1,5 @@
 package quebec.salonbleu.assnat.scrapers;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,9 +12,9 @@ import quebec.salonbleu.assnat.scrapers.exceptions.ScrapingException;
 import quebec.salonbleu.assnat.scrapers.models.ScrapedDeputy;
 import quebec.salonbleu.assnat.utils.ErrorHandler;
 import test.utils.TestUtils;
+import tools.jackson.core.type.TypeReference;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -42,7 +41,7 @@ class DeputyScraperTest {
     }
 
     @Test
-    void scrape() throws IOException {
+    void scrape() {
         doAnswer(invocation -> {
             Object[] args = invocation.getArguments();
             args[0] = new File((String) args[0]).getAbsolutePath();

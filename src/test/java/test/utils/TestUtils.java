@@ -1,26 +1,20 @@
 package test.utils;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
 
 import java.io.File;
-import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class TestUtils {
 
-    private static final ObjectMapper objectMapper;
+    private static final ObjectMapper OBJECT_MAPPER = JsonMapper.builder().build();
 
-    static {
-        objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
-    }
-
-    public static <T> void assertFileEquals(String resultFilePath, T response, TypeReference<T> typeReference) throws IOException {
-        T expectedResults = objectMapper.readValue(new File(resultFilePath), typeReference);
+    public static <T> void assertFileEquals(String resultFilePath, T response, TypeReference<T> typeReference) {
+        T expectedResults = OBJECT_MAPPER.readValue(new File(resultFilePath), typeReference);
         assertEquals(expectedResults, response);
     }
 }

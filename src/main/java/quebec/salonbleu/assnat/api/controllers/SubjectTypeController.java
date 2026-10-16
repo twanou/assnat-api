@@ -19,7 +19,7 @@ public class SubjectTypeController {
 
     private final SubjectTypeService subjectTypeService;
 
-    @Operation(summary = "Obtenir les partis correspondants à partir d'un nom partiel.")
+    @Operation(summary = "Obtenir les types de sujets correspondants à partir d'un nom partiel.")
     @GetMapping
     public SujetTypeReponse getSubjectTypes() {
         return SujetTypeReponse.builder()
